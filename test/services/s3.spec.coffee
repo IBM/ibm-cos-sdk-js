@@ -1284,16 +1284,12 @@ describe 'AWS.S3', ->
       willCompute 'putBucketCors', computeChecksums: true
       willCompute 'putBucketLifecycle', computeChecksums: true
       willCompute 'putBucketLifecycleConfiguration', computeChecksums: true
-      willCompute 'putBucketTagging', computeChecksums: true
-      willCompute 'putBucketReplication', computeChecksums: true
 
     it 'computes checksums if computeChecksums is off and operation requires it', ->
       willCompute 'deleteObjects', computeChecksums: false
       willCompute 'putBucketCors', computeChecksums: false
       willCompute 'putBucketLifecycle', computeChecksums: false
       willCompute 'putBucketLifecycleConfiguration', computeChecksums: false
-      willCompute 'putBucketTagging', computeChecksums: false
-      willCompute 'putBucketReplication', computeChecksums: false
 
     it 'does not compute checksums if computeChecksums is off', ->
       willCompute 'putObject', computeChecksums: false, hash: null
@@ -1484,8 +1480,12 @@ describe 'AWS.S3', ->
         done()
 
     it 'errors if ContentLength is passed as parameter', ->
-      expect(-> s3.getSignedUrl('putObject', Bucket: 'bucket', Key: 'key', ContentLength: 5)).to.
-        throw(/ContentLength is not supported in pre-signed URLs/)
+
+      expect(-> s3.getSignedUrl('putObject',
+        Bucket: 'bucket'
+        Key: 'key'
+        ContentLength: 5
+      )).to.throw(/ContentLength is not supported in pre-signed URLs/)
 
   describe 'createPresignedPost', ->
     it 'should include a url and a hash of form fields', (done) ->

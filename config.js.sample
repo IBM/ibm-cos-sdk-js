@@ -1,0 +1,33 @@
+module.exports = {
+    // Endpoint of the COS instance
+    endpoint: 'http://',
+
+    // AWS credentials. Not used if IAM credentials are set.
+    accessKey: '',
+    secretAccessKey: '',
+
+    // IAM credentials
+    apiKeyId: '',
+    serviceInstanceId: '',
+
+    // Only set this if you need to override the IAM authentication endpoint
+    // ibmAuthEndpoint: '',
+
+    // Optional IAM token manager to test with
+    // tokenManager: (function() {
+    //     var token = {
+    //         'tokenType': 'bearer',
+    //         'accessToken': '',
+    //         'refreshToken': '',
+    //         'expiration': ''
+    //     }
+    //     return {
+    //         getToken: function() {
+    //             return token
+    //         },
+    //         refreshToken: function() {
+    //             return Promise.resolve(token);
+    //         }
+    //     }
+    // })()
+}

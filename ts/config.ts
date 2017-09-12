@@ -21,8 +21,8 @@ AWS.config = new AWS.Config({
 
 // Lock api versions
 AWS.config.apiVersions = {
-    acm: "2015-12-08",
-    lambda: "2015-03-31"
+    s3: "2006-03-01",
+    sts: "2011-06-15"
 };
 
 // update credentials
@@ -98,8 +98,7 @@ AWS.config.update({
 // Test constructing with a CredentialProviderChain
 var options = {
     credentialProvider: new AWS.CredentialProviderChain([
-        () => new AWS.EC2MetadataCredentials()
+        () => new AWS.TemporaryCredentials()
     ])
 };
 var s3 = new AWS.S3(options);
-var ses = new AWS.SES(options);

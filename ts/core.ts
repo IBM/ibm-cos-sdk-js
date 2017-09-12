@@ -1,17 +1,11 @@
 import * as core from '../global';
 
 // Validate members exposed through global
-if (core.CognitoIdentityCredentials) {
-
-} else if (core.Config) {
+if (core.Config) {
 
 } else if (core.CredentialProviderChain) {
 
 } else if (core.Credentials) {
-
-} else if (core.EC2MetadataCredentials) {
-
-} else if (core.ECSCredentials) {
 
 } else if (core.Endpoint) {
 

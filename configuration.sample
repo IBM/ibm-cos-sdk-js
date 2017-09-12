@@ -2,11 +2,5 @@
   "region": "us-east-1",
   "s3": {
     "params": { "Bucket": "test-s3-bucket" }
-  },
-  "dynamodb": {
-    "params": { "TableName": "aws-sdk-js-integration-test" }
-  },
-  "devicefarm": {
-    "region": "us-west-2"
   }
 }

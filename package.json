@@ -1,21 +1,18 @@
 {
-  "name": "aws-sdk",
-  "description": "AWS SDK for JavaScript",
-  "version": "2.23.0",
+  "name": "ibm-cos-sdk",
+  "description": "IBM SDK for JavaScript",
+  "version": "1.0.0",
   "author": {
-    "name": "Amazon Web Services",
+    "name": "IBM",
     "email": "",
-    "url": "http://aws.amazon.com/"
+    "url": "https://www.ibm.com/cloud/"
   },
-  "homepage": "https://github.com/aws/aws-sdk-js",
-  "contributors": [
-    "Loren Segal <lsegal@amazon.com>",
-    "Trevor Rowe <trevrowe@amazon.com>"
-  ],
+  "homepage": "https://github.com/ibm/ibm-cos-sdk-js",
+  "contributors": [],
   "devDependencies": {
-    "@types/node": "^6.0.46",
+    "@types/node": "^6.0.88",
     "browserify": "13.1.0",
-    "chai": "*",
+    "chai": "^4.1.2",
     "coffee-script": "1.6.3",
     "coffeeify": "*",
     "coveralls": "2.x",
@@ -23,22 +20,27 @@
     "eslint": "1.x",
     "insert-module-globals": "^7.0.0",
     "istanbul": "*",
-    "jasmine": "^2.5.3",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.4.1",
+    "jasmine": "^2.8.0",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "mocha": "*",
+    "mocha": "^3.4.0",
+    "mock-fs": "^4.3.0",
     "repl.history": "*",
     "semver": "*",
+    "should": "^11.2.1",
     "typescript": "2.0.8",
     "uglify-js": "2.x"
   },
   "dependencies": {
     "buffer": "4.9.1",
     "crypto-browserify": "1.0.9",
+    "es6-promise": "^4.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
+    "request": "^2.81.0",
+    "request-promise-any": "^1.0.4",
     "sax": "1.1.5",
     "url": "0.10.3",
     "uuid": "3.0.0",
@@ -65,53 +67,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/aws/aws-sdk-js"
+    "url": "https://github.com/ibm/ibm-cos-sdk-js"
   },
   "bugs": {
-    "url": "http://github.com/aws/aws-sdk-js/issues",
+    "url": "http://github.com/ibm/ibm-cos-sdk-js/issues",
     "mail": ""
   },
   "license": "Apache-2.0",
   "keywords": [
     "api",
-    "amazon",
-    "aws",
-    "ec2",
-    "simpledb",
     "s3",
-    "sqs",
-    "ses",
-    "sns",
-    "route53",
-    "rds",
-    "elasticache",
-    "cloudfront",
-    "fps",
-    "cloudformation",
-    "cloudwatch",
-    "dynamodb",
-    "iam",
-    "swf",
-    "autoscaling",
-    "cloudsearch",
-    "elb",
-    "loadbalancing",
-    "emr",
-    "mapreduce",
-    "importexport",
-    "storagegateway",
-    "workflow",
-    "ebs",
-    "vpc",
-    "beanstalk",
-    "glacier",
-    "kinesis",
-    "cloudtrail",
-    "waf"
+    "iam"
   ],
   "scripts": {
     "test": "npm -s run-script lint && npm -s run-script unit && npm -s run-script buildertest && npm -s run-script browsertest && ([ -f configuration ] && npm -s run-script integration || true)",
-    "unit": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly",
+    "unit": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3",
     "unit-s3": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'` -- test/s3 --reporter json",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/json test/dynamodb test/cloudfront test/model test/protocol test/query test/services test/signers test/xml",
     "browsertest": "rake browser:test && karma start",
@@ -122,6 +92,7 @@
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
     "tstest": "tsc -p ./ts",
-    "add-change": "node ./scripts/changelog/add-change.js"
+    "add-change": "node ./scripts/changelog/add-change.js",
+    "cos-test": "mocha --recursive --reporter spec cos/test/**/*.coffee"
   }
 }

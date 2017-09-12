@@ -30,36 +30,6 @@ module.exports = function() {
     });
   });
 
-  this.When(/^I put a transition lifecycle configuration on the bucket with prefix "([^"]*)"$/, function(prefix, callback) {
-    var params = {
-      Bucket: this.bucket,
-      LifecycleConfiguration: {
-        Rules: [{
-          Prefix: prefix,
-          Status: 'Enabled',
-          Transition: {Days: 0, StorageClass: 'GLACIER'}
-        }]
-      }
-    };
-    this.request('s3', 'putBucketLifecycle', params, callback);
-  });
-
-  this.When(/^I get the transition lifecycle configuration on the bucket$/, function(callback) {
-    this.eventually(callback, function(next) {
-      this.request('s3', 'getBucketLifecycle', {Bucket: this.bucket}, next);
-    });
-  });
-
-  this.Then(/^the lifecycle configuration should have transition days of (\d+)$/, function(days, callback) {
-    this.assert.equal(this.data.Rules[0].Transition.Days, 0);
-    callback();
-  });
-
-  this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(value, callback) {
-    this.assert.equal(this.data.Rules[0].Transition.StorageClass, value);
-    callback();
-  });
-
   this.When(/^I put a bucket CORS configuration$/, function(callback) {
     var params = {
       Bucket: this.bucket,
@@ -102,29 +72,6 @@ module.exports = function() {
 
   this.Then(/^the MaxAgeSeconds value should equal (\d+)$/, function(value, callback) {
     this.assert.equal(this.data.CORSRules[0].MaxAgeSeconds, parseInt(value));
-    callback();
-  });
-
-  this.When(/^I put a bucket tag with key "([^"]*)" and value "([^"]*)"$/, function(key, value, callback) {
-    var params = {
-      Bucket: this.bucket,
-      Tagging: {
-        TagSet: [
-          {Key: key, Value: value}
-        ]
-      }
-    };
-
-    this.request('s3', 'putBucketTagging', params, callback);
-  });
-
-  this.When(/^I get the bucket tagging$/, function(callback) {
-    this.request('s3', 'getBucketTagging', {Bucket: this.bucket}, callback);
-  });
-
-  this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
-    this.assert.equal(this.data.TagSet[0].Key, key);
-    this.assert.equal(this.data.TagSet[0].Value, value);
     callback();
   });
 
