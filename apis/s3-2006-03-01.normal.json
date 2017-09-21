@@ -292,6 +292,14 @@
         "method": "GET",
         "requestUri": "/"
       },
+      "input": {
+        "members": {
+          "IBMServiceInstanceId": {
+            "location": "header",
+            "locationName": "Ibm-Service-Instance-Id"
+          }
+        }
+      },
       "output": {
         "shape": "ListBucketsOutput"
       },
@@ -682,6 +690,17 @@
         },
         "InvocationRole": {
           "shape": "CloudFunctionInvocationRole"
+        }
+      }
+    },
+    "Code": {
+      "type": "string"
+    },
+    "CommonPrefix": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix"
         }
       }
     },
@@ -1190,6 +1209,10 @@
           "documentation": "Allows grantee to write the ACL for the applicable bucket.",
           "location": "header",
           "locationName": "x-amz-grant-write-acp"
+        },
+        "IBMServiceInstanceId": {
+          "location": "header",
+          "locationName": "Ibm-Service-Instance-Id"
         }
       },
       "payload": "CreateBucketConfiguration"
@@ -2408,6 +2431,22 @@
     "IfUnmodifiedSince": {
       "type": "timestamp"
     },
+    "Initiated":{
+      "type":"timestamp"
+    },
+    "Initiator": {
+      "type": "structure",
+      "members": {
+        "ID": {
+          "shape": "ID",
+          "documentation": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
+        },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "Name of the Principal."
+        }
+      }
+    },
     "IsEnabled": {
       "type": "boolean"
     },
@@ -2425,6 +2464,9 @@
     },
     "KeyPrefixEquals": {
       "type": "string"
+    },
+    "LastModified": {
+      "type": "timestamp"
     },
     "ListBucketsOutput": {
       "type": "structure",
@@ -3546,6 +3588,13 @@
         "PENDING",
         "FAILED",
         "REPLICA"
+      ]
+    },
+    "RequestCharged": {
+      "type": "string",
+      "documentation": "If present, indicates that the requester was successfully charged for the request.",
+      "enum": [
+        "requester"
       ]
     },
     "ResponseCacheControl": {

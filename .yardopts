@@ -1,10 +1,11 @@
 -m markdown
 --markup-provider rdiscount
 --exclude lib/aws.js
+--exclude lib/iam/token_manager.js
 --no-api private
 --api experimental
 --no-highlight
---title "AWS SDK for JavaScript"
+--title "ibm-cos-sdk Documentation"
 --template-path doc-src/templates
 --plugin sitemap
 -o doc/latest
@@ -17,4 +18,3 @@ lib/core.js
 lib/**/*.js
 -
 README.md
-UPGRADING.md
