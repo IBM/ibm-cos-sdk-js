@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<title>
+  Class: AWS.Request
+  
+    &mdash; ibm-cos-sdk Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/highlight.github.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "AWS.Request";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/highlight.pack.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+  hljs.initHighlightingOnLoad();
+</script>
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span></span>
+     &raquo; 
+    <span class="title">Request</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame"></iframe>
+
+      <div id="content">
+        <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+        <h1>Class: AWS.Request
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">AWS.Request</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/request.js</dd>
+  </dl>
+  
+</div>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h2>Asynchronous Requests</h2>
+
+<p>All requests made through the SDK are asynchronous and use a
+callback interface. Each service method that kicks off a request
+returns an <code>AWS.Request</code> object that you can use to register
+callbacks.</p>
+
+<p>For example, the following service method returns the request
+object as "request", which can be used to register callbacks:</p>
+
+<pre class="code javascript"><code class="javascript">// request is an AWS.Request object
+var request = ec2.describeInstances();
+
+// register callbacks on request to retrieve response data
+request.on('success', function(response) {
+  console.log(response.data);
+});
+</code></pre>
+
+<p>When a request is ready to be sent, the <span class='object_link'><a href="#send-property" title="AWS.Request.send (property)">send()</a></span> method should
+be called:</p>
+
+<pre class="code javascript"><code class="javascript">request.send();
+</code></pre>
+
+<h2>Removing Default Listeners for Events</h2>
+
+<p>Request objects are built with default listeners for the various events,
+depending on the service type. In some cases, you may want to remove
+some built-in listeners to customize behaviour. Doing this requires
+access to the built-in listener functions, which are exposed through
+the <span class='object_link'><a href="EventListeners/Core.html" title="AWS.EventListeners.Core (module)">AWS.EventListeners.Core</a></span> namespace. For instance, you may
+want to customize the HTTP handler used when sending a request. In this
+case, you can remove the built-in listener associated with the 'send'
+event, the <span class='object_link'><a href="EventListeners/Core.html#SEND-property" title="AWS.EventListeners.Core.SEND (property)">AWS.EventListeners.Core.SEND</a></span> listener and add your own.</p>
+
+<h2>Multiple Callbacks and Chaining</h2>
+
+<p>You can register multiple callbacks on any request object. The
+callbacks can be registered for different events, or all for the
+same event. In addition, you can chain callback registration, for
+example:</p>
+
+<pre class="code javascript"><code class="javascript">request.
+  on('success', function(response) {
+    console.log("Success!");
+  }).
+  on('error', function(response) {
+    console.log("Error!");
+  }).
+  on('complete', function(response) {
+    console.log("Always!");
+  }).
+  send();
+</code></pre>
+
+<p>The above example will print either "Success! Always!", or "Error! Always!",
+depending on whether the request succeeded or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Response.html" title="AWS.Response (class)">AWS.Response</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+<h2>Constructor Summary
+  <small><a href="#" class="summary_toggle">collapse</a></small>
+</h2>
+
+<ul class="summary">
+  
+    <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#constructor-property" title="AWS.Request">new <strong>AWS.Request</strong>(service, operation, params) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a request for an operation on a given service with a set of input parameters.</p>
+</div></span>
+  
+</li>
+
+  
+</ul>
+
+  <h2>Request Building Events
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#validate-event" title="AWS.Request~validate (event)">'validate'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (request)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when a request is being validated.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#build-event" title="AWS.Request~build (event)">'build'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (request)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the request payload is being built.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#sign-event" title="AWS.Request~sign (event)">'sign'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (request)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the request is being signed.</p>
+</div></span>
+      
+    </li>
+    
+  </ul>
+
+  <h2>Request Sending Events
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#send-event" title="AWS.Request~send (event)">'send'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the request is ready to be sent.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#retry-event" title="AWS.Request~retry (event)">'retry'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when a request failed and might need to be retried or redirected.</p>
+</div></span>
+      
+    </li>
+    
+  </ul>
+
+  <h2>Data Parsing Events
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#extractError-event" title="AWS.Request~extractError (event)">'extractError'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered on all non-2xx requests so that listeners can extract error details from the response body.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#extractData-event" title="AWS.Request~extractData (event)">'extractData'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered in successful requests to allow listeners to de-serialize the response body into <code>response.data</code>.</p>
+</div></span>
+      
+    </li>
+    
+  </ul>
+
+  <h2>Completion Events
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#success-event" title="AWS.Request~success (event)">'success'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the request completed successfully.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#error-event" title="AWS.Request~error (event)">'error'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (error, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when an error occurs at any point during the request.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#complete-event" title="AWS.Request~complete (event)">'complete'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered whenever a request cycle completes.</p>
+</div></span>
+      
+    </li>
+    
+  </ul>
+
+  <h2>HTTP Events
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpHeaders-event" title="AWS.Request~httpHeaders (event)">'httpHeaders'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (statusCode, headers, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when headers are sent by the remote server.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpData-event" title="AWS.Request~httpData (event)">'httpData'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (chunk, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when data is sent by the remote server.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpUploadProgress-event" title="AWS.Request~httpUploadProgress (event)">'httpUploadProgress'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (progress, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the HTTP request has uploaded more data.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpDownloadProgress-event" title="AWS.Request~httpDownloadProgress (event)">'httpDownloadProgress'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (progress, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the HTTP request has downloaded more data.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpError-event" title="AWS.Request~httpError (event)">'httpError'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (error, response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the HTTP request failed.</p>
+</div></span>
+      
+    </li>
+    
+    <li class="public ">
+      <span class="summary_signature"><strong><span class='object_link'><a href="#httpDone-event" title="AWS.Request~httpDone (event)">'httpDone'</a></span></strong></span>
+      <span class="note title event"><strong>function</strong> (response)</span>
+
+      
+        <span class="summary_desc"><div class='inline'><p>Triggered when the server is finished sending data.</p>
+</div></span>
+      
+    </li>
+    
+  </ul>
+
+
+  <h2>HTTP Properties
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#httpRequest-property" title="httpRequest"><strong>httpRequest</strong> &#x21d2; AWS.HttpRequest </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+    <span class="note title readonly">readonly</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The raw HTTP request object containing request headers and body information sent by the service.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+  <h2>Operation Properties
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#startTime-property" title="startTime"><strong>startTime</strong> &#x21d2; Date </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+    <span class="note title readonly">readonly</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time that the request started.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  <h2>Sending a Request
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#abort-property" title="abort"><strong>abort</strong>() &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Aborts a request, emitting the error and complete events.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#createReadStream-property" title="createReadStream"><strong>createReadStream</strong>() &#x21d2; Stream </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts the request object into a readable stream that can be read from or piped into a writable stream.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eachItem-property" title="eachItem"><strong>eachItem</strong>(callback) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Enumerates over individual items of a request, paging the responses if necessary.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eachPage-property" title="eachPage"><strong>eachPage</strong>(callback) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Iterates over each page of results given a pageable request, calling the provided callback with each page of data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#isPageable-property" title="isPageable"><strong>isPageable</strong>() &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the operation can return multiple pages of response data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#promise-property" title="promise"><strong>promise</strong>() &#x21d2; Promise </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a 'thenable' promise.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send-property" title="send"><strong>send</strong>(callback = null) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends the request object.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="constructor-property">
+  
+    new <strong>AWS.Request</strong>(service, operation, params) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a request for an operation on a given service with
+a set of input parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Service.html" title="AWS.Service (class)">Service</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the service to perform the operation on</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the operation to perform on the service</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parameters to send to the operation.
+See the operation's documentation for the format of the
+parameters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+  
+</div>
+
+  <div id="event_details" class="method_details">
+    <h2>Event Details</h2>
+    
+      <div class="method_details first">
+      <h3 class="signature first" id="validate-event">
+    <strong>'validate'</strong> &mdash; <strong>function</strong> (request)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when a request is being validated. Listeners
+should throw an error if the request should not be sent.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Ensuring that a certain parameter is set before sending a request</p>
+</div></p>
+      
+      <pre class="example code"><code>var req = s3.putObject(params);
+req.on(&#39;validate&#39;, function() {
+  if (!req.params.Body.match(/^Hello\s/)) {
+    throw new Error(&#39;Body must start with &quot;Hello &quot;&#39;);
+  }
+});
+req.send(function(err, data) { ... });</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>request</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object being sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="EventListeners/Core.html#VALIDATE_CREDENTIALS-property" title="AWS.EventListeners.Core.VALIDATE_CREDENTIALS (property)">EventListeners.Core.VALIDATE_CREDENTIALS</a></span></li>
+    
+      <li><span class='object_link'><a href="EventListeners/Core.html#VALIDATE_REGION-property" title="AWS.EventListeners.Core.VALIDATE_REGION (property)">EventListeners.Core.VALIDATE_REGION</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="build-event">
+    <strong>'build'</strong> &mdash; <strong>function</strong> (request)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the request payload is being built. Listeners
+should fill the necessary information to send the request
+over HTTP.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Add a custom HTTP header to a request</p>
+</div></p>
+      
+      <pre class="example code"><code>var req = s3.putObject(params);
+req.on(&#39;build&#39;, function() {
+  req.httpRequest.headers[&#39;Custom-Header&#39;] = &#39;value&#39;;
+});
+req.send(function(err, data) { ... });</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>request</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object being sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="sign-event">
+    <strong>'sign'</strong> &mdash; <strong>function</strong> (request)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the request is being signed. Listeners should
+add the correct authentication headers and/or adjust the body,
+depending on the authentication mechanism being used.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>request</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object being sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="send-event">
+    <strong>'send'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the request is ready to be sent. Listeners
+should call the underlying transport layer to initiate
+the sending of the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="EventListeners/Core.html#SEND-property" title="AWS.EventListeners.Core.SEND (property)">EventListeners.Core.SEND</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="retry-event">
+    <strong>'retry'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when a request failed and might need to be retried or redirected.
+If the response is retryable, the listener should set the
+<code>response.error.retryable</code> property to <code>true</code>, and optionally set
+<code>response.error.retryCount</code> to the millisecond delay for the next attempt.
+In the case of a redirect, <code>response.error.redirect</code> should be set to
+<code>true</code> with <code>retryCount</code> set to an optional delay on the next request.</p>
+
+<p>If a listener decides that a request should not be retried,
+it should set both <code>retryable</code> and <code>redirect</code> to false.</p>
+
+<p>Note that a retryable error will be retried at most
+<span class='object_link'><a href="Config.html#maxRetries-property" title="AWS.Config.maxRetries (property)">Config.maxRetries</a></span> times (based on the service object's config).
+Similarly, a request that is redirected will only redirect at most
+<span class='object_link'><a href="Config.html#maxRedirects-property" title="AWS.Config.maxRedirects (property)">Config.maxRedirects</a></span> times.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Adding a custom retry for a 404 response</p>
+</div></p>
+      
+      <pre class="example code"><code>request.on(&#39;retry&#39;, function(response) {
+  // this resource is not yet available, wait 10 seconds to get it again
+  if (response.httpResponse.statusCode === 404 &amp;&amp; response.error) {
+    response.error.retryable = true;   // retry this error
+    response.error.retryCount = 10000; // wait 10 seconds
+  }
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="extractError-event">
+    <strong>'extractError'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered on all non-2xx requests so that listeners can extract
+error details from the response body. Listeners to this event
+should set the <code>response.error</code> property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="extractData-event">
+    <strong>'extractData'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered in successful requests to allow listeners to
+de-serialize the response body into <code>response.data</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="success-event">
+    <strong>'success'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the request completed successfully.
+<code>response.data</code> will contain the response data and
+<code>response.error</code> will be null.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="error-event">
+    <strong>'error'</strong> &mdash; <strong>function</strong> (error, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when an error occurs at any point during the
+request. <code>response.error</code> will contain details about the error
+that occurred. <code>response.data</code> will be null.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object containing details about
+the error that occurred.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="complete-event">
+    <strong>'complete'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered whenever a request cycle completes. <code>response.error</code>
+should be checked, since the request may have failed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpHeaders-event">
+    <strong>'httpHeaders'</strong> &mdash; <strong>function</strong> (statusCode, headers, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when headers are sent by the remote server</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>statusCode</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the HTTP response code</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>headers</span>
+      
+      
+        <span class='type'>(<tt>map&lt;String,String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response headers</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpData-event">
+    <strong>'httpData'</strong> &mdash; <strong>function</strong> (chunk, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when data is sent by the remote server</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>chunk</span>
+      
+      
+        <span class='type'>(<tt>Buffer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the buffer data containing the next data chunk
+from the server</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="EventListeners/Core.html#HTTP_DATA-property" title="AWS.EventListeners.Core.HTTP_DATA (property)">EventListeners.Core.HTTP_DATA</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpUploadProgress-event">
+    <strong>'httpUploadProgress'</strong> &mdash; <strong>function</strong> (progress, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This event will not be emitted in Node.js 0.8.x.</p>
+</div>
+  </div>
+
+<p>Triggered when the HTTP request has uploaded more data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>progress</span>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An object containing the <code>loaded</code> and <code>total</code> bytes
+of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpDownloadProgress-event">
+    <strong>'httpDownloadProgress'</strong> &mdash; <strong>function</strong> (progress, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This event will not be emitted in Node.js 0.8.x.</p>
+</div>
+  </div>
+
+<p>Triggered when the HTTP request has downloaded more data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>progress</span>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An object containing the <code>loaded</code> and <code>total</code> bytes
+of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpError-event">
+    <strong>'httpError'</strong> &mdash; <strong>function</strong> (error, response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the HTTP request failed</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object that was thrown</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+      <h3 class="signature " id="httpDone-event">
+    <strong>'httpDone'</strong> &mdash; <strong>function</strong> (response)
+    </h3>
+<div class="docstring">
+  <div class="discussion">
+    <p>Triggered when the server is finished sending data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object that was sent</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>response</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+  </div>
+
+
+  <div id="prop_details" class="method_details">
+    <h2>Property Details</h2>
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="httpRequest-property">
+  
+    <strong>httpRequest</strong> &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="HttpRequest.html" title="AWS.HttpRequest (class)">HttpRequest</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the raw HTTP request object
+containing request headers and body information
+sent by the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="HttpRequest.html" title="AWS.HttpRequest (class)">HttpRequest</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the raw HTTP request object
+containing request headers and body information
+sent by the service.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="startTime-property">
+  
+    <strong>startTime</strong> &#x21d2; <tt>Date</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the time that the request started</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Date</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the time that the request started</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+
+  <div id="method_details" class="method_details">
+    <h2>Method Details</h2>
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="abort-property">
+  
+    <strong>abort</strong>() &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This feature is not supported in the browser environment of the SDK.</p>
+</div>
+  </div>
+
+<p>Aborts a request, emitting the error and complete events.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Aborting a request after sending</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;bucket&#39;, Key: &#39;key&#39;,
+  Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+};
+var request = s3.putObject(params);
+request.send(function (err, data) {
+  if (err) console.log(&quot;Error:&quot;, err.code, err.message);
+  else console.log(data);
+});
+
+// abort request in 1 second
+setTimeout(request.abort.bind(request), 1000);
+
+// prints &quot;Error: RequestAbortedError Request aborted by user&quot;</code></pre>
+    
+  </div>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the same request object, for chaining.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>v1.4.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="createReadStream-property">
+  
+    <strong>createReadStream</strong>() &#x21d2; <tt>Stream</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>The data read from a readable stream contains only
+the raw HTTP body contents.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This feature is not supported in the browser environment of the SDK.</p>
+</div>
+  </div>
+
+<p>Converts the request object into a readable stream that
+can be read from or piped into a writable stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Manually reading from a stream</p>
+</div></p>
+      
+      <pre class="example code"><code>request.createReadStream().on(&#39;data&#39;, function(data) {
+  console.log(&quot;Got data:&quot;, data.toString());
+});</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Piping a request body into a file</p>
+</div></p>
+      
+      <pre class="example code"><code>var out = fs.createWriteStream(&#39;/path/to/outfile.jpg&#39;);
+s3.service.getObject(params).createReadStream().pipe(out);</code></pre>
+    
+  </div>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Stream</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the readable stream object that can be piped
+or read from (by registering 'data' event listeners).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eachItem-property">
+  
+    <strong>eachItem</strong>(callback) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note experimental private">
+  This function is part of an <strong>experimental API</strong>.
+  You can use this function, but it may be removed or be changed in the future.
+</p>
+<p>Enumerates over individual items of a request, paging the responses if
+necessary.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>v1.4.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eachPage-property">
+  
+    <strong>eachPage</strong>(callback) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This operation can generate multiple requests to a service.</p>
+</div>
+  </div>
+
+<p>Iterates over each page of results given a pageable request, calling
+the provided callback with each page of data. After all pages have been
+retrieved, the callback is called with <code>null</code> data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Iterating over multiple pages of objects in an S3 bucket</p>
+</div></p>
+      
+      <pre class="example code"><code>var pages = 1;
+s3.listObjects().eachPage(function(err, data) {
+  if (err) return;
+  console.log(&quot;Page&quot;, pages++);
+  console.log(data);
+});</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Iterating over multiple pages with an asynchronous callback</p>
+</div></p>
+      
+      <pre class="example code"><code>s3.listObjects(params).eachPage(function(err, data, done) {
+  doSomethingAsyncAndOrExpensive(function() {
+    // The next page of results isn&#39;t fetched until done is called
+    done();
+  });
+});</code></pre>
+    
+  </div>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data, [doneCallback]) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called with each page of resulting data from the request. If the
+optional <code>doneCallback</code> is provided in the function, it must be called
+when the callback is complete.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an error object, if an error occurred.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a single page of response data. If there is no
+more data, this object will be <code>null</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>doneCallback</span>
+      
+      
+        <span class='type'>(<tt>Function</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an optional done callback. If this
+argument is defined in the function declaration, it should be called
+when the next page is ready to be retrieved. This is useful for
+controlling serial pagination across asynchronous operations.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the callback returns <code>false</code>, pagination will
+stop.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+    </li>
+  </ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#eachItem-property" title="AWS.Request.eachItem (property)">eachItem()</a></span></li>
+    
+      <li><span class='object_link'><a href="Response.html#nextPage-property" title="AWS.Response.nextPage (property)">AWS.Response.nextPage()</a></span></li>
+    
+  </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>v1.4.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="isPageable-property">
+  
+    <strong>isPageable</strong>() &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the operation can return multiple pages of
+response data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the operation can return multiple pages of
+response data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>AWS.Response.eachPage</li>
+    
+  </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>v1.4.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="promise-property">
+  
+    <strong>promise</strong>() &#x21d2; <tt>Promise</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a 'thenable' promise.</p>
+
+<p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
+The first callback will be called if the promise is fulfilled, and the second
+callback will be called if the promise is rejected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Sending a request using promises.</p>
+</div></p>
+      
+      <pre class="example code"><code>var request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
+var result = request.promise();
+result.then(function(data) { ... }, function(error) { ... });</code></pre>
+    
+  </div>
+
+  <p class="tag_title">Callbacks:</p>
+  <ul class="callback">
+    
+      
+      <li class="callback_item">
+        <span class="signature"><strong>function</strong>(data) { ... } </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Called if the promise is fulfilled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from the request.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+      </li>
+    
+      
+      <li class="callback_item">
+        <span class="signature"><strong>function</strong>(error) { ... } </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Called if the promise is rejected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+      </li>
+    
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Promise</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A promise that represents the state of the request.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="send-property">
+  
+    <strong>send</strong>(callback = null) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    <p>Sends the request object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Sending a request with a callback</p>
+</div></p>
+      
+      <pre class="example code"><code>request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
+request.send(function(err, data) { console.log(err, data); });</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Sending a request with no callback (using event handlers)</p>
+</div></p>
+      
+      <pre class="example code"><code>request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
+request.on(&#39;complete&#39;, function(response) { ... }); // register a callback
+request.send();</code></pre>
+    
+  </div>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>If a callback is supplied, it is called when a response is returned
+from the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the request object being sent.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+
+</div>
+
+
+
+</div>
+</div>
+    
+  </div>
+
+
+      </div>
+
+      <div id="footer">
+  Generated on Wed Sep 20 23:24:56 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.1).
+</div>
+
+<!-- BEGIN-SECTION -->
+<script type="text/javascript" src="https://media.amazonwebservices.com/amznUrchin.js"></script>
+<!-- SiteCatalyst code version: H.25.2. Copyright 1996-2012 Adobe, Inc. All Rights Reserved.
+More info available at http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript" src="https://media.amazonwebservices.com/js/sitecatalyst/s_code.min.js">
+</script>
+<script language="JavaScript" type="text/javascript">
+  <!--
+  s.prop66='AWS SDK for JavaScript';
+  s.eVar66='D=c66';
+  s.prop65='API Reference';
+  s.eVar65='D=c65';
+  var s_code=s.t();if(s_code)document.write(s_code)
+  //-->
+</script>
+<script language="JavaScript" type="text/javascript">
+  <!--if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+  //-->
+</script>
+<noscript>
+  <img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="">
+</noscript>
+<!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.25.2. -->
+<!-- END-SECTION -->
+
+    </div>
+  </body>
+</html>

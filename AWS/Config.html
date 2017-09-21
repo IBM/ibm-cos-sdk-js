@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<title>
+  Class: AWS.Config
+  
+    &mdash; ibm-cos-sdk Documentation
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/highlight.github.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "AWS.Config";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/highlight.pack.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+  hljs.initHighlightingOnLoad();
+</script>
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span></span>
+     &raquo; 
+    <span class="title">Config</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <iframe id="search_frame"></iframe>
+
+      <div id="content">
+        <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+        <h1>Class: AWS.Config
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">AWS.Config</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/config.js</dd>
+  </dl>
+  
+</div>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The main configuration class used by all service objects to set
+the region, credentials, and other options for requests.</p>
+
+<p>By default, credentials and region settings are left unconfigured.
+This should be configured by the application before using any
+AWS service APIs.</p>
+
+<p>In order to set global configuration options, properties should
+be assigned to the global <span class='object_link'><a href="../AWS.html#config-property" title="AWS.config (property)">AWS.config</a></span> object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../AWS.html#config-property" title="AWS.config (property)">AWS.config</a></span></li>
+    
+  </ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Config/keys.html" title="AWS.Config.keys (module)">keys</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+<h2>Constructor Summary
+  <small><a href="#" class="summary_toggle">collapse</a></small>
+</h2>
+
+<ul class="summary">
+  
+    <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#constructor-property" title="AWS.Config">new <strong>AWS.Config</strong>(options) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new configuration object.</p>
+</div></span>
+  
+</li>
+
+  
+</ul>
+
+
+  <h2>General Configuration Options
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#computeChecksums-property" title="computeChecksums"><strong>computeChecksums</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to compute checksums for payload bodies when the service accepts it (currently supported in S3 only).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convertResponseTypes-property" title="convertResponseTypes"><strong>convertResponseTypes</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether types are converted when parsing response data.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#correctClockSkew-property" title="correctClockSkew"><strong>correctClockSkew</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to apply a clock skew correction and retry requests that fail because of an skewed client clock.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#credentials-property" title="credentials"><strong>credentials</strong> &#x21d2; AWS.Credentials </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The AWS credentials to sign requests with.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#httpOptions-property" title="httpOptions"><strong>httpOptions</strong> &#x21d2; map </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of options to pass to the low-level HTTP request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-property" title="logger"><strong>logger</strong> &#x21d2; #write, #log </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>An object that responds to .write() (like a stream) or .log() (like the console object) in order to log information about requests.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maxRedirects-property" title="maxRedirects"><strong>maxRedirects</strong> &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum amount of redirects to follow for a service request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maxRetries-property" title="maxRetries"><strong>maxRetries</strong> &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The maximum amount of retries to perform for a service request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paramValidation-property" title="paramValidation"><strong>paramValidation</strong> &#x21d2; Boolean|map </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether input parameters should be validated against the operation description before sending the request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#region-property" title="region"><strong>region</strong> &#x21d2; AWS.Credentials </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The region to send service requests to.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#retryDelayOptions-property" title="retryDelayOptions"><strong>retryDelayOptions</strong> &#x21d2; map </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of options to configure the retry delay on retryable errors.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#s3BucketEndpoint-property" title="s3BucketEndpoint"><strong>s3BucketEndpoint</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the provided endpoint addresses an individual bucket (false if it addresses the root API endpoint).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#s3DisableBodySigning-property" title="s3DisableBodySigning"><strong>s3DisableBodySigning</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to disable S3 body signing when using signature version <code>v4</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#s3ForcePathStyle-property" title="s3ForcePathStyle"><strong>s3ForcePathStyle</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to force path style URLs for S3 objects.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signatureCache-property" title="signatureCache"><strong>signatureCache</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the signature to sign requests with (overriding the API configuration) is cached.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#signatureVersion-property" title="signatureVersion"><strong>signatureVersion</strong> &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The signature version to sign requests with (overriding the API configuration).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sslEnabled-property" title="sslEnabled"><strong>sslEnabled</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether SSL is enabled for requests.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#systemClockOffset-property" title="systemClockOffset"><strong>systemClockOffset</strong> &#x21d2; Number </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>An offset value in milliseconds to apply to all signing times.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#useAccelerateEndpoint-property" title="useAccelerateEndpoint"><strong>useAccelerateEndpoint</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether to use the Accelerate endpoint with the S3 service.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+  <h2>Service-Specific Config Options
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#s3-property" title="s3"><strong>s3</strong> &#x21d2; AWS.Config, map </a>
+    
+
+    
+  </span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Service-specific configuration options for <span class='object_link'><a href="S3.html" title="AWS.S3 (class)">AWS.S3</a></span>.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  <h2>Managing Credentials
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getCredentials-property" title="getCredentials"><strong>getCredentials</strong>(callback) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Loads credentials from the configuration object.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+  <h2>Loading and Setting Configuration Options
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getPromisesDependency-property" title="getPromisesDependency"><strong>getPromisesDependency</strong>() &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the promise dependency set by <code>AWS.config.setPromisesDependency</code>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadFromPath-property" title="loadFromPath"><strong>loadFromPath</strong>(path) &#x21d2; AWS.Config </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Loads configuration data from a JSON file into this config object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setPromisesDependency-property" title="setPromisesDependency"><strong>setPromisesDependency</strong>(dep) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the promise dependency the SDK will use wherever Promises are returned.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-property" title="update"><strong>update</strong>(options, allowUnknownKeys = false) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Updates the current configuration object with new options.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="constructor-property">
+  
+    new <strong>AWS.Config</strong>(options) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new configuration object. This is the object that passes
+option data along to service requests, including credentials, security,
+region information, and some service specific settings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Creating a new configuration object with credentials and region</p>
+</div></p>
+      
+      <pre class="example code"><code>var config = new AWS.Config({
+  accessKeyId: &#39;AKID&#39;, secretAccessKey: &#39;SECRET&#39;, region: &#39;us-west-2&#39;
+});</code></pre>
+    
+  </div>
+
+
+  
+    
+    
+    <p class="tag_title">Options Hash (<tt>options</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">accessKeyId</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>your AWS access key ID.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">secretAccessKey</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>your AWS secret access key.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">sessionToken</span>
+          <span class="type">(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the optional AWS
+session token to sign requests with.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">credentials</span>
+          <span class="type">(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the AWS credentials
+to sign requests with. You can either specify this object, or
+specify the accessKeyId and secretAccessKey options directly.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">credentialProvider</span>
+          <span class="type">(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="CredentialProviderChain.html" title="AWS.CredentialProviderChain (class)">CredentialProviderChain</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the
+provider chain used to resolve credentials if no static <code>credentials</code>
+property is set.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">region</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the region to send service requests to.
+See <span class='object_link'><a href="#region-property" title="AWS.Config.region (property)">region</a></span> for more information.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">maxRetries</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the maximum amount of retries to
+attempt with a request. See <span class='object_link'><a href="#maxRetries-property" title="AWS.Config.maxRetries (property)">maxRetries</a></span> for more information.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">maxRedirects</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the maximum amount of redirects to
+follow with a request. See <span class='object_link'><a href="#maxRedirects-property" title="AWS.Config.maxRedirects (property)">maxRedirects</a></span> for more information.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">sslEnabled</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether to enable SSL for
+requests.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">paramValidation</span>
+          <span class="type">(<tt>Boolean|map</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether input parameters
+should be validated against the operation description before sending
+the request. Defaults to true. Pass a map to enable any of the
+following specific validation features:</p>
+
+<ul>
+<li><strong>min</strong> [Boolean] &mdash; Validates that a value meets the min
+constraint. This is enabled by default when paramValidation is set
+to <code>true</code>.</li>
+<li><strong>max</strong> [Boolean] &mdash; Validates that a value meets the max
+constraint.</li>
+<li><strong>pattern</strong> [Boolean] &mdash; Validates that a string value matches a
+regular expression.</li>
+<li><strong>enum</strong> [Boolean] &mdash; Validates that a string value matches one
+of the allowable enum values.</li>
+</ul>
+
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">computeChecksums</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether to compute checksums
+for payload bodies when the service accepts it (currently supported
+in S3 only)</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">convertResponseTypes</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether types are converted
+when parsing response data. Currently only supported for JSON based
+services. Turning this off may improve performance on large response
+payloads. Defaults to <code>true</code>.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">correctClockSkew</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether to apply a clock skew
+correction and retry requests that fail because of an skewed client
+clock. Defaults to <code>false</code>.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">s3ForcePathStyle</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether to force path
+style URLs for S3 objects.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">s3BucketEndpoint</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether the provided endpoint
+addresses an individual bucket (false if it addresses the root API
+endpoint). Note that setting this configuration option requires an
+<code>endpoint</code> to be provided explicitly to the service constructor.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">s3DisableBodySigning</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether S3 body signing
+should be disabled when using signature version <code>v4</code>. Body signing
+can only be disabled when using https. Defaults to <code>true</code>.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">retryDelayOptions</span>
+          <span class="type">(<tt>map</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>A set of options to configure
+the retry delay on retryable errors. Currently supported options are:</p>
+
+<ul>
+<li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
+exponential backoff for operation retries. Defaults to 100 ms.</li>
+<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
+and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
+ignored if this option is supplied.</li>
+</ul>
+
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">httpOptions</span>
+          <span class="type">(<tt>map</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>A set of options to pass to the low-level
+HTTP request. Currently supported options are:</p>
+
+<ul>
+<li><strong>proxy</strong> [String] &mdash; the URL to proxy requests through</li>
+<li><strong>agent</strong> [http.Agent, https.Agent] &mdash; the Agent object to perform
+HTTP requests with. Used for connection pooling. Defaults to the global
+agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
+SSL connections, a special Agent object is used in order to enable
+peer certificate verification. This feature is only available in the
+Node.js environment.</li>
+<li><strong>timeout</strong> [Integer] &mdash; Sets the socket to timeout after timeout
+milliseconds of inactivity on the socket. Defaults to two minutes
+(120000).</li>
+<li><strong>xhrAsync</strong> [Boolean] &mdash; Whether the SDK will send asynchronous
+HTTP requests. Used in the browser environment only. Set to false to
+send requests synchronously. Defaults to true (async on).</li>
+<li><strong>xhrWithCredentials</strong> [Boolean] &mdash; Sets the "withCredentials"
+property of an XMLHttpRequest object. Used in the browser environment
+only. Defaults to false.</li>
+</ul>
+
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">apiVersion</span>
+          <span class="type">(<tt>String</tt>, <tt>Date</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>a String in YYYY-MM-DD format
+(or a date) that represents the latest possible API version that can be
+used in all services (unless overridden by <code>apiVersions</code>). Specify
+'latest' to use the latest possible version.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">apiVersions</span>
+          <span class="type">(<tt>map&lt;String, String|Date&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>a map of service
+identifiers (the lowercase service class name) with the API version to
+use when instantiating a service. Specify 'latest' for each individual
+that can use the latest available version.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">logger</span>
+          <span class="type">(<tt>#write</tt>, <tt>#log</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>an object that responds to .write()
+(like a stream) or .log() (like the console object) in order to log
+information about requests</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">systemClockOffset</span>
+          <span class="type">(<tt>Number</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>an offset value in milliseconds
+to apply to all signing times. Use this to compensate for clock skew
+when your system may be out of sync with the service time. Note that
+this configuration option can only be applied to the global <code>AWS.config</code>
+object and cannot be overridden in service-specific configuration.
+Defaults to 0 milliseconds.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">signatureVersion</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>the signature version to sign
+requests with (overriding the API configuration). Possible values are:
+'v2', 'v3', 'v4'.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">signatureCache</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>whether the signature to sign
+requests with (overriding the API configuration) is cached. Only applies
+to the signature version 'v4'. Defaults to <code>true</code>.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div>
+</div>
+  
+</div>
+
+
+  <div id="prop_details" class="method_details">
+    <h2>Property Details</h2>
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="computeChecksums-property">
+  
+    <strong>computeChecksums</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether to compute checksums for payload bodies when
+the service accepts it (currently supported in S3 only).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to compute checksums for payload bodies when
+the service accepts it (currently supported in S3 only).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convertResponseTypes-property">
+  
+    <strong>convertResponseTypes</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether types are converted when parsing response data.
+Currently only supported for JSON based services. Turning this off may
+improve performance on large response payloads. Defaults to <code>true</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether types are converted when parsing response data.
+Currently only supported for JSON based services. Turning this off may
+improve performance on large response payloads. Defaults to <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="correctClockSkew-property">
+  
+    <strong>correctClockSkew</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether to apply a clock skew correction and retry
+requests that fail because of an skewed client clock. Defaults to
+<code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to apply a clock skew correction and retry
+requests that fail because of an skewed client clock. Defaults to
+<code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="credentials-property">
+  
+    <strong>credentials</strong> &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the AWS credentials to sign requests with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the AWS credentials to sign requests with.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="httpOptions-property">
+  
+    <strong>httpOptions</strong> &#x21d2; <tt>map</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns A set of options to pass to the low-level HTTP request.
+Currently supported options are:</p>
+
+<ul>
+<li><strong>proxy</strong> [String] &mdash; the URL to proxy requests through</li>
+<li><strong>agent</strong> [http.Agent, https.Agent] &mdash; the Agent object to perform
+HTTP requests with. Used for connection pooling. Defaults to the global
+agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
+SSL connections, a special Agent object is used in order to enable
+peer certificate verification. This feature is only supported in the
+Node.js environment.</li>
+<li><strong>timeout</strong> [Integer] &mdash; The number of milliseconds to wait before
+giving up on a connection attempt. Defaults to two minutes (120000).</li>
+<li><strong>xhrAsync</strong> [Boolean] &mdash; Whether the SDK will send asynchronous
+HTTP requests. Used in the browser environment only. Set to false to
+send requests synchronously. Defaults to true (async on).</li>
+<li><strong>xhrWithCredentials</strong> [Boolean] &mdash; Sets the "withCredentials"
+property of an XMLHttpRequest object. Used in the browser environment
+only. Defaults to false.</li>
+</ul>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of options to pass to the low-level HTTP request.
+Currently supported options are:</p>
+
+<ul>
+<li><strong>proxy</strong> [String] &mdash; the URL to proxy requests through</li>
+<li><strong>agent</strong> [http.Agent, https.Agent] &mdash; the Agent object to perform
+HTTP requests with. Used for connection pooling. Defaults to the global
+agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
+SSL connections, a special Agent object is used in order to enable
+peer certificate verification. This feature is only supported in the
+Node.js environment.</li>
+<li><strong>timeout</strong> [Integer] &mdash; The number of milliseconds to wait before
+giving up on a connection attempt. Defaults to two minutes (120000).</li>
+<li><strong>xhrAsync</strong> [Boolean] &mdash; Whether the SDK will send asynchronous
+HTTP requests. Used in the browser environment only. Set to false to
+send requests synchronously. Defaults to true (async on).</li>
+<li><strong>xhrWithCredentials</strong> [Boolean] &mdash; Sets the "withCredentials"
+property of an XMLHttpRequest object. Used in the browser environment
+only. Defaults to false.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="logger-property">
+  
+    <strong>logger</strong> &#x21d2; <tt>#write</tt>, <tt>#log</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns an object that responds to .write() (like a stream)
+or .log() (like the console object) in order to log information about
+requests</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>#write</tt>, <tt>#log</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an object that responds to .write() (like a stream)
+or .log() (like the console object) in order to log information about
+requests</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maxRedirects-property">
+  
+    <strong>maxRedirects</strong> &#x21d2; <tt>Integer</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the maximum amount of redirects to follow for a
+service request. Defaults to 10.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the maximum amount of redirects to follow for a
+service request. Defaults to 10.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maxRetries-property">
+  
+    <strong>maxRetries</strong> &#x21d2; <tt>Integer</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the maximum amount of retries to perform for a
+service request. By default this value is calculated by the specific
+service object that the request is being made to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the maximum amount of retries to perform for a
+service request. By default this value is calculated by the specific
+service object that the request is being made to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="paramValidation-property">
+  
+    <strong>paramValidation</strong> &#x21d2; <tt>Boolean|map</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether input parameters should be validated against
+the operation description before sending the request. Defaults to true.
+Pass a map to enable any of the following specific validation features:</p>
+
+<ul>
+<li><strong>min</strong> [Boolean] &mdash; Validates that a value meets the min
+constraint. This is enabled by default when paramValidation is set
+to <code>true</code>.</li>
+<li><strong>max</strong> [Boolean] &mdash; Validates that a value meets the max
+constraint.</li>
+<li><strong>pattern</strong> [Boolean] &mdash; Validates that a string value matches a
+regular expression.</li>
+<li><strong>enum</strong> [Boolean] &mdash; Validates that a string value matches one
+of the allowable enum values.</li>
+</ul>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean|map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether input parameters should be validated against
+the operation description before sending the request. Defaults to true.
+Pass a map to enable any of the following specific validation features:</p>
+
+<ul>
+<li><strong>min</strong> [Boolean] &mdash; Validates that a value meets the min
+constraint. This is enabled by default when paramValidation is set
+to <code>true</code>.</li>
+<li><strong>max</strong> [Boolean] &mdash; Validates that a value meets the max
+constraint.</li>
+<li><strong>pattern</strong> [Boolean] &mdash; Validates that a string value matches a
+regular expression.</li>
+<li><strong>enum</strong> [Boolean] &mdash; Validates that a string value matches one
+of the allowable enum values.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="region-property">
+  
+    <strong>region</strong> &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The region to send service requests to.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Set the global region setting to us-west-2</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.update({region: &#39;us-west-2&#39;});</code></pre>
+    
+  </div>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The region to send service requests to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="http://docs.amazonwebservices.com/general/latest/gr/rande.html" target="_parent" title="A list of available endpoints for each AWS service">A list of available endpoints for each AWS service</a></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="retryDelayOptions-property">
+  
+    <strong>retryDelayOptions</strong> &#x21d2; <tt>map</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This works with all services except DynamoDB.</p>
+</div>
+  </div>
+
+<p>Returns A set of options to configure the retry delay on retryable errors.
+Currently supported options are:</p>
+
+<ul>
+<li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
+exponential backoff for operation retries. Defaults to 100 ms.</li>
+<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
+and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
+ignored if this option is supplied.</li>
+</ul>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Set the base retry delay for all services to 300 ms</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.update({retryDelayOptions: {base: 300}});
+// Delays with maxRetries = 3: 300, 600, 1200</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Set a custom backoff function to provide delay values on retries</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount) {
+  // returns delay in ms
+}}});</code></pre>
+    
+  </div>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of options to configure the retry delay on retryable errors.
+Currently supported options are:</p>
+
+<ul>
+<li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
+exponential backoff for operation retries. Defaults to 100 ms.</li>
+<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
+and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
+ignored if this option is supplied.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="s3-property">
+  
+    <strong>s3</strong> &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Config (class)">Config</a></span></tt>, <tt>map</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Service-specific configuration options for <span class='object_link'><a href="S3.html" title="AWS.S3 (class)">AWS.S3</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Bind parameters to all newly created S3 objects</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.s3 = { params: { /* ... */ } };</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Override default endpoint URI for all newly created S3 objects</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.s3 = { endpoint: &#39;https://{service}.{region}.amazonaws.com&#39; };</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Use IPv6/IPv4 dualstack endpoint for all newly created S3 objects</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.s3 = { useDualstack: true };</code></pre>
+    
+  </div>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Config (class)">Config</a></span></tt>, <tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Service-specific configuration options for <span class='object_link'><a href="S3.html" title="AWS.S3 (class)">AWS.S3</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="s3BucketEndpoint-property">
+  
+    <strong>s3BucketEndpoint</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Setting this configuration option requires an <code>endpoint</code> to be
+provided explicitly to the service constructor.</p>
+</div>
+  </div>
+
+<p>Returns whether the provided endpoint addresses an individual
+bucket (false if it addresses the root API endpoint).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the provided endpoint addresses an individual
+bucket (false if it addresses the root API endpoint).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="s3DisableBodySigning-property">
+  
+    <strong>s3DisableBodySigning</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether to disable S3 body signing when using signature version <code>v4</code>.
+Body signing can only be disabled when using https. Defaults to <code>true</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to disable S3 body signing when using signature version <code>v4</code>.
+Body signing can only be disabled when using https. Defaults to <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="s3ForcePathStyle-property">
+  
+    <strong>s3ForcePathStyle</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether to force path style URLs for S3 objects</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether to force path style URLs for S3 objects</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="signatureCache-property">
+  
+    <strong>signatureCache</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether the signature to sign requests with (overriding
+the API configuration) is cached. Only applies to the signature version 'v4'.
+Defaults to <code>true</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether the signature to sign requests with (overriding
+the API configuration) is cached. Only applies to the signature version 'v4'.
+Defaults to <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="signatureVersion-property">
+  
+    <strong>signatureVersion</strong> &#x21d2; <tt>String</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the signature version to sign requests with (overriding
+the API configuration). Possible values are: 'v2', 'v3', 'v4'.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the signature version to sign requests with (overriding
+the API configuration). Possible values are: 'v2', 'v3', 'v4'.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sslEnabled-property">
+  
+    <strong>sslEnabled</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns whether SSL is enabled for requests</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether SSL is enabled for requests</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="systemClockOffset-property">
+  
+    <strong>systemClockOffset</strong> &#x21d2; <tt>Number</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns an offset value in milliseconds to apply to all signing
+times. Use this to compensate for clock skew when your system may be
+out of sync with the service time. Note that this configuration option
+can only be applied to the global <code>AWS.config</code> object and cannot be
+overridden in service-specific configuration. Defaults to 0 milliseconds.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an offset value in milliseconds to apply to all signing
+times. Use this to compensate for clock skew when your system may be
+out of sync with the service time. Note that this configuration option
+can only be applied to the global <code>AWS.config</code> object and cannot be
+overridden in service-specific configuration. Defaults to 0 milliseconds.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="useAccelerateEndpoint-property">
+  
+    <strong>useAccelerateEndpoint</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This configuration option is only compatible with S3 while accessing
+dns-compatible buckets.</p>
+</div>
+  </div>
+
+<p>Returns Whether to use the Accelerate endpoint with the S3 service.
+Defaults to <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to use the Accelerate endpoint with the S3 service.
+Defaults to <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+
+  <div id="method_details" class="method_details">
+    <h2>Method Details</h2>
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="getCredentials-property">
+  
+    <strong>getCredentials</strong>(callback) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If you configure the SDK with static or environment credentials,
+the credential data should already be present in <span class='object_link'><a href="#credentials-property" title="AWS.Config.credentials (property)">credentials</a></span> attribute.
+This method is primarily necessary to load credentials from asynchronous
+sources, or sources that can refresh credentials periodically.</p>
+</div>
+  </div>
+
+<p>Loads credentials from the configuration object. This is used internally
+by the SDK to ensure that refreshable <span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span> objects are properly
+refreshed and loaded when sending a request. If you want to ensure that
+your credentials are loaded prior to a request, you can use this method
+directly to provide accurate credential data stored in the object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Getting your access key</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.getCredentials(function(err) {
+  if (err) console.log(err.stack); // credentials not loaded
+  else console.log(&quot;Access Key:&quot;, AWS.config.credentials.accessKeyId);
+})</code></pre>
+    
+  </div>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when the <span class='object_link'><a href="#credentials-property" title="AWS.Config.credentials (property)">credentials</a></span> have been properly set on the configuration
+object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if this is set, credentials were not successfuly
+loaded and this error provides information why.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#credentials-property" title="AWS.Config.credentials (property)">credentials</a></span></li>
+    
+      <li><span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getPromisesDependency-property">
+  
+    <strong>getPromisesDependency</strong>() &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the promise dependency set by <code>AWS.config.setPromisesDependency</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loadFromPath-property">
+  
+    <strong>loadFromPath</strong>(path) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Config (class)">Config</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Loading configuration will reset all existing configuration
+on the object.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>This feature is not supported in the browser environment of the SDK.</p>
+</div>
+  </div>
+
+<p>Loads configuration data from a JSON file into this config object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the path relative to your process's current
+working directory to load configuration from.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Config (class)">Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the same configuration object</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="setPromisesDependency-property">
+  
+    <strong>setPromisesDependency</strong>(dep) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the promise dependency the SDK will use wherever Promises are returned.
+Passing <code>null</code> will force the SDK to use native Promises if they are available.
+If native Promises are not available, passing <code>null</code> will have no effect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dep</span>
+      
+      
+        <span class='type'>(<tt>Constructor</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A reference to a Promise constructor</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-property">
+  
+    <strong>update</strong>(options, allowUnknownKeys = false) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="docstring">
+  <div class="discussion">
+    <p>Updates the current configuration object with new options.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Update maxRetries property of a configuration object</p>
+</div></p>
+      
+      <pre class="example code"><code>config.update({maxRetries: 10});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a map of option keys and values.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>allowUnknownKeys</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>whether unknown keys can be set on
+the configuration object. Defaults to <code>false</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#constructor-property" title="AWS.Config.constructor (property)">constructor()</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+
+</div>
+</div>
+    
+  </div>
+
+
+      </div>
+
+      <div id="footer">
+  Generated on Wed Sep 20 23:24:56 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.1).
+</div>
+
+<!-- BEGIN-SECTION -->
+<script type="text/javascript" src="https://media.amazonwebservices.com/amznUrchin.js"></script>
+<!-- SiteCatalyst code version: H.25.2. Copyright 1996-2012 Adobe, Inc. All Rights Reserved.
+More info available at http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript" src="https://media.amazonwebservices.com/js/sitecatalyst/s_code.min.js">
+</script>
+<script language="JavaScript" type="text/javascript">
+  <!--
+  s.prop66='AWS SDK for JavaScript';
+  s.eVar66='D=c66';
+  s.prop65='API Reference';
+  s.eVar65='D=c65';
+  var s_code=s.t();if(s_code)document.write(s_code)
+  //-->
+</script>
+<script language="JavaScript" type="text/javascript">
+  <!--if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+  //-->
+</script>
+<noscript>
+  <img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="">
+</noscript>
+<!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.25.2. -->
+<!-- END-SECTION -->
+
+    </div>
+  </body>
+</html>
