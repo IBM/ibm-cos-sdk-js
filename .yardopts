@@ -18,3 +18,4 @@ lib/core.js
 lib/**/*.js
 -
 README.md
+CHANGELOG.md

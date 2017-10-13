@@ -10,3 +10,8 @@
 ### Bug Fixes
 * Fix custom auth callback w/ IAM
 
+## 1.0.2
+### Features
+* Browser build support
+* Docs updates
+

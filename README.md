@@ -1,6 +1,6 @@
 # IBM Cloud Object Storage SDK for Node.js
 
-For release notes, see the [CHANGELOG](CHANGELOG.md).
+For release notes, see the [CHANGELOG](file.CHANGELOG.html).
 
 ## Installing
 

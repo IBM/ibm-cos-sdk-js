@@ -5,7 +5,7 @@ namespace :docs do
 
   desc "Build API documentation"
   task :api => [:directory] do
-    ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/'
+    ENV['SITEMAP_BASEURL'] = 'https://ibm-public-cos.github.io/crs-docs/node/'
 
     rm_rf "doc/latest"
     args = ENV['ARGS'] ? ENV['ARGS'] : []
@@ -14,7 +14,7 @@ namespace :docs do
 
   desc "Build guide documentation"
   task :guide => :directory do
-    ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/'
+    ENV['SITEMAP_BASEURL'] = 'https://ibm-public-cos.github.io/crs-docs/node/'
 
     rm_rf "doc/guide"
     args = %w(-q --yardopts .yardopts_guide)
