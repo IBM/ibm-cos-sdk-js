@@ -2,123 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/_index.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/_index.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/apiLoader/services.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/apiLoader/services.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config/keys.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Config/keys.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Config.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CredentialProviderChain.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/CredentialProviderChain.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Credentials.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Credentials.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Endpoint.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Endpoint.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EnvironmentCredentials.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EnvironmentCredentials.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EventListeners/Core.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EventListeners/Core.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EventListeners.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EventListeners.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/FileSystemCredentials.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/FileSystemCredentials.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/HttpClient.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpClient.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/HttpRequest.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpRequest.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/HttpResponse.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpResponse.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MetadataService.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/MetadataService.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Request.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Request.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Response.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Response.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3/ManagedUpload.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/S3/ManagedUpload.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/S3.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Service.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Service.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SharedIniFileCredentials.html</loc>
-    <lastmod>2017-09-20T23:24:56-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/SharedIniFileCredentials.html</loc>
+    <lastmod>2017-10-12T23:07:13-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/class_list.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/class_list.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/file.README.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/file.CHANGELOG.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/file_list.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/file.README.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/file_list.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/index.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/frames.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/method_list.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/index.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/property_list.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/method_list.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
   <url>
-    <loc>http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/top-level-namespace.html</loc>
-    <lastmod>2017-09-20T23:24:55-05:00</lastmod>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/property_list.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://ibm-public-cos.github.io/crs-docs/node/top-level-namespace.html</loc>
+    <lastmod>2017-10-12T23:07:12-05:00</lastmod>
   </url>
 </urlset>

@@ -350,7 +350,7 @@ var s3 = new AWS.S3();
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a copy of an object that is already stored in Amazon S3.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a copy of an object that is already stored in IBM COS.</p>
 </div></span>
   
 </li>
@@ -625,7 +625,7 @@ var s3 = new AWS.S3();
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Retrieves objects from Amazon S3.</p>
+    <span class="summary_desc"><div class='inline'><p>Retrieves objects from IBM COS.</p>
 </div></span>
   
 </li>
@@ -1579,16 +1579,6 @@ for service requests.</p>
 
 
 
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload">AbortMultipartUpload</a></li>
-</ul>
-</div>
-
-
-
   </div>
 </div>
 <div class="tags">
@@ -1748,14 +1738,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Completes a multipart upload by assembling previously uploaded parts.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload">CompleteMultipartUpload</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -1957,15 +1939,7 @@ subsequent event callback registration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a copy of an object that is already stored in Amazon S3.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/CopyObject">CopyObject</a></li>
-</ul>
-</div>
-
+    <p>Creates a copy of an object that is already stored in IBM COS.</p>
 
 
   </div>
@@ -2092,12 +2066,12 @@ s3.copyObject(params, function(err, data) {
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for IBM COS to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
 <li><code>CopySourceSSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use when decrypting the source object (e.g., AES256).</li>
-<li><code>CopySourceSSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.</li>
-<li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>CopySourceSSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for IBM COS to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.</li>
+<li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 </ul>
 
 </div>
@@ -2243,14 +2217,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Creates a new bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/CreateBucket">CreateBucket</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -2273,7 +2239,8 @@ subsequent event callback registration.</p>
   GrantRead: &#39;STRING_VALUE&#39;,
   GrantReadACP: &#39;STRING_VALUE&#39;,
   GrantWrite: &#39;STRING_VALUE&#39;,
-  GrantWriteACP: &#39;STRING_VALUE&#39;
+  GrantWriteACP: &#39;STRING_VALUE&#39;,
+  IBMServiceInstanceId: &#39;STRING_VALUE&#39;
 };
 s3.createBucket(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -2333,6 +2300,7 @@ s3.createBucket(params, function(err, data) {
 <li><code>GrantReadACP</code> &mdash; (<code>String</code>)  Allows grantee to read the bucket ACL.</li>
 <li><code>GrantWrite</code> &mdash; (<code>String</code>)  Allows grantee to create, overwrite, and delete any object in the bucket.</li>
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  Allows grantee to write the ACL for the applicable bucket.</li>
+<li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)  The storage account who will be the owner of the bucket.</li>
 </ul>
 
 </div>
@@ -2459,17 +2427,7 @@ subsequent event callback registration.</p>
     <p>Initiates a multipart upload and returns an upload ID.</p>
 
 
-<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>
-
-
-
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload">CreateMultipartUpload</a></li>
-</ul>
-</div>
+<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.</p>
 
 
 
@@ -2575,8 +2533,8 @@ s3.createMultipartUpload(params, function(err, data) {
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
 </ul>
 
@@ -2837,14 +2795,6 @@ s3.createPresignedPost(params, function(err, data) {
   <div class="discussion">
     <p>Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/DeleteBucket">DeleteBucket</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -3002,14 +2952,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Deletes the cors configuration information set for the bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/DeleteBucketCors">DeleteBucketCors</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -3165,15 +3107,7 @@ subsequent event callback registration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/DeleteObject">DeleteObject</a></li>
-</ul>
-</div>
-
+    <p>Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.</p>
 
 
   </div>
@@ -3344,14 +3278,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/DeleteObjects">DeleteObjects</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -3558,14 +3484,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Gets the access control policy for the bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/GetBucketAcl">GetBucketAcl</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -3769,14 +3687,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Returns the cors configuration for the bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/GetBucketCors">GetBucketCors</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -3948,14 +3858,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the region the bucket resides in.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/GetBucketLocation">GetBucketLocation</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -4134,15 +4036,7 @@ subsequent event callback registration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves objects from Amazon S3.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/GetObject">GetObject</a></li>
-</ul>
-</div>
-
+    <p>Retrieves objects from IBM COS.</p>
 
 
   </div>
@@ -4213,8 +4107,8 @@ s3.getObject(params, function(err, data) {
 <li><code>ResponseExpires</code> &mdash; (<code>Date</code>)  Sets the Expires header of the response.</li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.</li>
 </ul>
 
@@ -4377,14 +4271,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns the access control list (ACL) of an object.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/GetObjectAcl">GetObjectAcl</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -4780,14 +4666,6 @@ signed URL.</p>
   <div class="discussion">
     <p>This operation is useful to determine if a bucket exists and you have permission to access it.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/HeadBucket">HeadBucket</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -4971,14 +4849,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/HeadObject">HeadObject</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -5036,8 +4906,8 @@ s3.headObject(params, function(err, data) {
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.</li>
 </ul>
 
@@ -5225,14 +5095,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Returns a list of all buckets owned by the authenticated sender of the request.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/ListBuckets">ListBuckets</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -5245,7 +5107,8 @@ subsequent event callback registration.</p>
         <p class="example_title"><div class='inline'><p>Calling the listBuckets operation</p>
 </div></p>
       
-      <pre class="example code"><code>s3.listBuckets(function(err, data) {
+      <pre class="example code"><code>var params = &#39;STRING_VALUE&#39;;
+s3.listBuckets(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
   else     console.log(data);           // successful response
 });</code></pre>
@@ -5264,6 +5127,13 @@ subsequent event callback registration.</p>
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
       
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)  The owning storage account. All buckets owned by this storage account are returned.</li>
+</ul>
+
+</div>
       
     </li>
   
@@ -5399,14 +5269,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>This operation lists in-progress multipart uploads.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/ListMultipartUploads">ListMultipartUploads</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -5452,7 +5314,7 @@ s3.listMultipartUploads(params, function(err, data) {
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
 <li><code>Delimiter</code> &mdash; (<code>String</code>)  Character you use to group keys.</li>
-<li><code>EncodingType</code> &mdash; (<code>String</code>)  Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  Requests IBM COS to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that IBM COS encode the keys in the response.
  Possible values include:
 
 <ul>
@@ -5583,7 +5445,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>Prefix</code> &mdash; (<code>String</code>)</li>
 </ul>
 </li>
-<li><code>EncodingType</code> &mdash; (<code>String</code>)  Encoding type used by Amazon S3 to encode object keys in the response.
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  Encoding type used by IBM COS to encode object keys in the response.
  Possible values include:
 
 <ul>
@@ -5640,14 +5502,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/ListObjects">ListObjects</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -5692,7 +5546,7 @@ s3.listObjects(params, function(err, data) {
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
 <li><code>Delimiter</code> &mdash; (<code>String</code>)  A delimiter is a character you use to group keys.</li>
-<li><code>EncodingType</code> &mdash; (<code>String</code>)  Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  Requests IBM COS to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that IBM COS encode the keys in the response.
  Possible values include:
 
 <ul>
@@ -5776,9 +5630,9 @@ the request. Set to <code>null</code> if a request error occurs.
 The <code>data</code> object has the following properties:</p>
 
 <ul>
-<li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)  A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.</li>
+<li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)  A flag that indicates whether or not IBM COS returned all of the results that satisfied the search criteria.</li>
 <li><code>Marker</code> &mdash; (<code>String</code>)</li>
-<li><code>NextMarker</code> &mdash; (<code>String</code>)  When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.</li>
+<li><code>NextMarker</code> &mdash; (<code>String</code>)  When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. IBM COS lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.</li>
 <li><code>Contents</code> &mdash; (<code>Array&lt;map&gt;</code>)
 
 <ul>
@@ -5814,7 +5668,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>Prefix</code> &mdash; (<code>String</code>)</li>
 </ul>
 </li>
-<li><code>EncodingType</code> &mdash; (<code>String</code>)  Encoding type used by Amazon S3 to encode object keys in the response.
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  Encoding type used by IBM COS to encode object keys in the response.
  Possible values include:
 
 <ul>
@@ -5870,14 +5724,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Lists the parts that have been uploaded for a specific multipart upload.</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/ListParts">ListParts</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -6089,14 +5935,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the permissions on a bucket using access control lists (ACL).</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/PutBucketAcl">PutBucketAcl</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -6343,14 +6181,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Sets the cors configuration for a bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/PutBucketCors">PutBucketCors</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -6549,14 +6379,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Adds an object to a bucket.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/PutObject">PutObject</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -6666,8 +6488,8 @@ s3.putObject(params, function(err, data) {
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
 </ul>
 
@@ -6806,14 +6628,6 @@ subsequent event callback registration.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket</p>
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/PutObjectAcl">PutObjectAcl</a></li>
-</ul>
-</div>
-
 
 
   </div>
@@ -7183,8 +6997,8 @@ s3.upload(params, options, function(err, data) {
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
 </ul>
 
@@ -7308,17 +7122,7 @@ s3.upload(params, options, function(err, data) {
     <p>Uploads a part in a multipart upload.</p>
 
 
-<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.</p>
-
-
-
-
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/UploadPart">UploadPart</a></li>
-</ul>
-</div>
+<p><b>Note:</b> After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.</p>
 
 
 
@@ -7375,8 +7179,8 @@ s3.uploadPart(params, function(err, data) {
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of part being uploaded. This is a positive integer between 1 and 10,000.</li>
 <li><code>UploadId</code> &mdash; (<code>String</code>)  Upload ID identifying the multipart upload whose part is being uploaded.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 </ul>
 
 </div>
@@ -7513,14 +7317,6 @@ subsequent event callback registration.</p>
   <div class="discussion">
     <p>Uploads a part by copying data from an existing object as data source.</p>
 
-<div class="tags">
-<p class="tag_title">Service Reference:</p>
-<ul class="see">
-<li><a href="/goto/WebAPI/s3-2006-03-01/UploadPartCopy">UploadPartCopy</a></li>
-</ul>
-</div>
-
-
 
   </div>
 </div>
@@ -7584,11 +7380,11 @@ s3.uploadPartCopy(params, function(err, data) {
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of part being copied. This is a positive integer between 1 and 10,000.</li>
 <li><code>UploadId</code> &mdash; (<code>String</code>)  Upload ID identifying the multipart upload whose part is being copied.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>CopySourceSSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use when decrypting the source object (e.g., AES256).</li>
 <li><code>CopySourceSSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.</li>
-<li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 </ul>
 
 </div>
@@ -8266,8 +8062,8 @@ s3.waitFor(&#39;objectExists&#39;, params, function(err, data) {
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.</li>
 </ul>
 
@@ -8477,8 +8273,8 @@ s3.waitFor(&#39;objectNotExists&#39;, params, function(err, data) {
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
-<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
-<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
+<li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>PartNumber</code> &mdash; (<code>Integer</code>)  Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' HEAD request for the part specified. Useful querying about the size of the part and the number of parts in this object.</li>
 </ul>
 
@@ -8639,7 +8435,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Wed Sep 20 23:24:55 2017 by
+  Generated on Thu Oct 12 23:07:12 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
