@@ -31,11 +31,11 @@ declare class S3 extends S3Customizations {
    */
   completeMultipartUpload(callback?: (err: AWSError, data: S3.Types.CompleteMultipartUploadOutput) => void): Request<S3.Types.CompleteMultipartUploadOutput, AWSError>;
   /**
-   * Creates a copy of an object that is already stored in Amazon S3.
+   * Creates a copy of an object that is already stored in IBM COS.
    */
   copyObject(params: S3.Types.CopyObjectRequest, callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
   /**
-   * Creates a copy of an object that is already stored in Amazon S3.
+   * Creates a copy of an object that is already stored in IBM COS.
    */
   copyObject(callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
   /**
@@ -47,11 +47,11 @@ declare class S3 extends S3Customizations {
    */
   createBucket(callback?: (err: AWSError, data: S3.Types.CreateBucketOutput) => void): Request<S3.Types.CreateBucketOutput, AWSError>;
   /**
-   * Initiates a multipart upload and returns an upload ID.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
+   * Initiates a multipart upload and returns an upload ID.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.
    */
   createMultipartUpload(params: S3.Types.CreateMultipartUploadRequest, callback?: (err: AWSError, data: S3.Types.CreateMultipartUploadOutput) => void): Request<S3.Types.CreateMultipartUploadOutput, AWSError>;
   /**
-   * Initiates a multipart upload and returns an upload ID.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
+   * Initiates a multipart upload and returns an upload ID.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.
    */
   createMultipartUpload(callback?: (err: AWSError, data: S3.Types.CreateMultipartUploadOutput) => void): Request<S3.Types.CreateMultipartUploadOutput, AWSError>;
   /**
@@ -71,11 +71,11 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.
+   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
-   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.
+   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
@@ -111,11 +111,11 @@ declare class S3 extends S3Customizations {
    */
   getBucketLocation(callback?: (err: AWSError, data: S3.Types.GetBucketLocationOutput) => void): Request<S3.Types.GetBucketLocationOutput, AWSError>;
   /**
-   * Retrieves objects from Amazon S3.
+   * Retrieves objects from IBM COS.
    */
   getObject(params: S3.Types.GetObjectRequest, callback?: (err: AWSError, data: S3.Types.GetObjectOutput) => void): Request<S3.Types.GetObjectOutput, AWSError>;
   /**
-   * Retrieves objects from Amazon S3.
+   * Retrieves objects from IBM COS.
    */
   getObject(callback?: (err: AWSError, data: S3.Types.GetObjectOutput) => void): Request<S3.Types.GetObjectOutput, AWSError>;
   /**
@@ -129,11 +129,11 @@ declare class S3 extends S3Customizations {
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
-  headBucket(params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  headBucket(params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
-  headBucket(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  headBucket(callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
    */
@@ -142,6 +142,10 @@ declare class S3 extends S3Customizations {
    * The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
    */
   headObject(callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
+  /**
+   * Returns a list of all buckets owned by the authenticated sender of the request.
+   */
+  listBuckets(params: S3.Types.ListBucketsInput, callback?: (err: AWSError, data: S3.Types.ListBucketsOutput) => void): Request<S3.Types.ListBucketsOutput, AWSError>;
   /**
    * Returns a list of all buckets owned by the authenticated sender of the request.
    */
@@ -203,11 +207,11 @@ declare class S3 extends S3Customizations {
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
   /**
-   * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
+   * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.
    */
   uploadPart(params: S3.Types.UploadPartRequest, callback?: (err: AWSError, data: S3.Types.UploadPartOutput) => void): Request<S3.Types.UploadPartOutput, AWSError>;
   /**
-   * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
+   * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.
    */
   uploadPart(callback?: (err: AWSError, data: S3.Types.UploadPartOutput) => void): Request<S3.Types.UploadPartOutput, AWSError>;
   /**
@@ -221,19 +225,19 @@ declare class S3 extends S3Customizations {
   /**
    * Waits for the bucketExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * Waits for the bucketExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketExists", callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketExists", callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * Waits for the bucketNotExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketNotExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketNotExists", params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * Waits for the bucketNotExists state by periodically calling the underlying S3.headBucketoperation every 5 seconds (at most 20 times).
    */
-  waitFor(state: "bucketNotExists", callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  waitFor(state: "bucketNotExists", callback?: (err: AWSError, data: S3.Types.HeadBucketOutput) => void): Request<S3.Types.HeadBucketOutput, AWSError>;
   /**
    * Waits for the objectExists state by periodically calling the underlying S3.headObjectoperation every 5 seconds (at most 20 times).
    */
@@ -329,6 +333,14 @@ declare namespace S3 {
   }
   export type CORSRules = CORSRule[];
   export type CacheControl = string;
+  export type CloudFunction = string;
+  export interface CloudFunctionConfiguration {
+    Id?: NotificationId;
+    Event?: Event;
+    Events?: EventList;
+    CloudFunction?: CloudFunction;
+    InvocationRole?: CloudFunctionInvocationRole;
+  }
   export type Code = string;
   export interface CommonPrefix {
     Prefix?: Prefix;
@@ -512,11 +524,11 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+     * Specifies the customer-provided encryption key for IBM COS to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -528,11 +540,11 @@ declare namespace S3 {
      */
     CopySourceSSECustomerAlgorithm?: CopySourceSSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
+     * Specifies the customer-provided encryption key for IBM COS to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
      */
     CopySourceSSECustomerKey?: CopySourceSSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     CopySourceSSECustomerKeyMD5?: CopySourceSSECustomerKeyMD5;
   }
@@ -596,6 +608,12 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable bucket.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * The storage account who will be the owner of the bucket.
+     */
+    IBMServiceInstanceId?: IBMServiceInstanceId;
+    IBMSSEKPEncryptionAlgorithm?: IBMSSEKPEncryptionAlgorithm;
+    IBMSSEKPCustomerRootKeyCrn?: IBMSSEKPCustomerRootKeyCrn;
   }
   export interface CreateMultipartUploadOutput {
     /**
@@ -699,11 +717,11 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -794,7 +812,7 @@ declare namespace S3 {
   export type Delimiter = string;
   export interface Destination {
     /**
-     * Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+     * Name of the bucket where you want IBM COS to store replicas of the object identified by the rule.
      */
     Bucket: BucketName;
     /**
@@ -830,7 +848,7 @@ declare namespace S3 {
   export type FetchOwner = boolean;
   export interface FilterRule {
     /**
-     * Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
+     * Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported.
      */
     Name?: FilterRuleName;
     Value?: FilterRuleValue;
@@ -855,10 +873,10 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface GetBucketLocationOutput {
-      LocationConstraint?: BucketLocationConstraint;
+    LocationConstraint?: BucketLocationConstraint;
   }
   export interface GetBucketLocationRequest {
-      Bucket: BucketName;
+    Bucket: BucketName;
   }
   export interface GetObjectAclOutput {
     Owner?: Owner;
@@ -1019,23 +1037,17 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
      * Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
      */
     PartNumber?: PartNumber;
-  }
-  export interface GlacierJobParameters {
-    /**
-     * Glacier retrieval tier at which the restore will be processed.
-     */
-    Tier: Tier;
   }
   export interface Grant {
     Grantee?: Grantee;
@@ -1187,11 +1199,11 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -1199,9 +1211,17 @@ declare namespace S3 {
      */
     PartNumber?: PartNumber;
   }
+  export interface HeadBucketOutput {
+    IBMSSEKPEnabled?: IBMSSEKPEnabled;
+    IBMSSEKPCustomerRootKeyCrn?: IBMSSEKPCustomerRootKeyCrn;
+  }
   export type HostName = string;
   export type HttpErrorCodeReturnedEquals = string;
   export type HttpRedirectCode = string;
+  export type IBMServiceInstanceId = string;
+  export type IBMSSEKPCustomerRootKeyCrn = string;
+  export type IBMSSEKPEnabled = boolean;
+  export type IBMSSEKPEncryptionAlgorithm = string;
   export type ID = string;
   export type IfMatch = string;
   export type IfModifiedSince = Date;
@@ -1225,6 +1245,9 @@ declare namespace S3 {
   export type KeyMarker = string;
   export type KeyPrefixEquals = string;
   export type LastModified = Date;
+  export interface ListBucketsInput {
+    IBMServiceInstanceId?: undefined;
+  }
   export interface ListBucketsOutput {
     Buckets?: Buckets;
     Owner?: Owner;
@@ -1266,7 +1289,7 @@ declare namespace S3 {
     Uploads?: MultipartUploadList;
     CommonPrefixes?: CommonPrefixList;
     /**
-     * Encoding type used by Amazon S3 to encode object keys in the response.
+     * Encoding type used by IBM COS to encode object keys in the response.
      */
     EncodingType?: EncodingType;
   }
@@ -1295,13 +1318,15 @@ declare namespace S3 {
     UploadIdMarker?: UploadIdMarker;
   }
   export interface ListObjectsOutput {
+    IBMSSEKPEnabled?: IBMSSEKPEnabled;
+    IBMSSEKPCustomerRootKeyCrn?: IBMSSEKPCustomerRootKeyCrn;
     /**
-     * A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+     * A flag that indicates whether or not IBM COS returned all of the results that satisfied the search criteria.
      */
     IsTruncated?: IsTruncated;
     Marker?: Marker;
     /**
-     * When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
+     * When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. IBM COS lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
      */
     NextMarker?: NextMarker;
     Contents?: ObjectList;
@@ -1311,7 +1336,7 @@ declare namespace S3 {
     MaxKeys?: MaxKeys;
     CommonPrefixes?: CommonPrefixList;
     /**
-     * Encoding type used by Amazon S3 to encode object keys in the response.
+     * Encoding type used by IBM COS to encode object keys in the response.
      */
     EncodingType?: EncodingType;
   }
@@ -1442,6 +1467,12 @@ declare namespace S3 {
   export type NextToken = string;
   export type NextUploadIdMarker = string;
   export type NextVersionIdMarker = string;
+  export interface NoncurrentVersionExpiration {
+    /**
+     * Specifies the number of days an object is noncurrent before IBM COS can perform the associated action.
+     */
+    NoncurrentDays?: Days;
+  }
   export interface Object {
     Key?: ObjectKey;
     LastModified?: LastModified;
@@ -1564,6 +1595,7 @@ declare namespace S3 {
     ContentMD5?: ContentMD5;
   }
   export interface PutObjectAclOutput {
+    RequestCharged?: RequestCharged;
   }
   export interface PutObjectAclRequest {
     /**
@@ -1711,11 +1743,11 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -1723,7 +1755,6 @@ declare namespace S3 {
      */
     SSEKMSKeyId?: SSEKMSKeyId;
   }
-  export type QueueArn = string;
   export type Quiet = boolean;
   export type Range = string;
   export interface Redirect {
@@ -1750,6 +1781,35 @@ declare namespace S3 {
   }
   export type ReplaceKeyPrefixWith = string;
   export type ReplaceKeyWith = string;
+  export interface ReplicationConfiguration {
+    /**
+     * Name of an IAM role for IBM COS to assume when replicating the objects.
+     */
+    Role: Role;
+    /**
+     * Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.
+     */
+    Rules: ReplicationRules;
+  }
+  export interface ReplicationRule {
+    /**
+     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     */
+    ID?: ID;
+    /**
+     * Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.
+     */
+    Prefix: Prefix;
+    /**
+     * The rule is ignored if status is not Enabled.
+     */
+    Status: ReplicationRuleStatus;
+    Destination: Destination;
+  }
+  export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
+  export type ReplicationRules = ReplicationRule[];
+  export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|string;
+  export type RequestCharged = "requester"|string;
   export type ResponseCacheControl = string;
   export type ResponseContentDisposition = string;
   export type ResponseContentEncoding = string;
@@ -1757,6 +1817,15 @@ declare namespace S3 {
   export type ResponseContentType = string;
   export type ResponseExpires = Date;
   export type Restore = string;
+  export interface RestoreObjectOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface RestoreObjectRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    VersionId?: ObjectVersionId;
+    RestoreRequest?: RestoreRequest;
+  }
   export interface RestoreRequest {
     /**
      * Lifetime of the active copy in days
@@ -1772,12 +1841,33 @@ declare namespace S3 {
     /**
      * A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.
      */
-    Condition?: Condition;z
+    Condition?: Condition;
     /**
      * Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.
      */
     Redirect: Redirect;
   }
+  export type RoutingRules = RoutingRule[];
+  export interface Rule {
+    Expiration?: LifecycleExpiration;
+    /**
+     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     */
+    ID?: ID;
+    /**
+     * Prefix identifying one or more objects to which the rule applies.
+     */
+    Prefix: Prefix;
+    /**
+     * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
+     */
+    Status: ExpirationStatus;
+    Transition?: Transition;
+    NoncurrentVersionTransition?: NoncurrentVersionTransition;
+    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
+    AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
+  }
+  export type Rules = Rule[];
   export interface S3KeyFilter {
     FilterRules?: FilterRuleList;
   }
@@ -1789,6 +1879,23 @@ declare namespace S3 {
   export type Size = number;
   export type StartAfter = string;
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
+  export interface StorageClassAnalysis {
+    /**
+     * A container used to describe how data related to the storage class analysis should be exported.
+     */
+    DataExport?: StorageClassAnalysisDataExport;
+  }
+  export interface StorageClassAnalysisDataExport {
+    /**
+     * The version of the output schema to use when exporting data. Must be V_1.
+     */
+    OutputSchemaVersion: StorageClassAnalysisSchemaVersion;
+    /**
+     * The place to store the data for an analysis.
+     */
+    Destination: AnalyticsExportDestination;
+  }
+  export type StorageClassAnalysisSchemaVersion = "V_1"|string;
   export type Suffix = string;
   export interface Tag {
     /**
@@ -1800,6 +1907,7 @@ declare namespace S3 {
      */
     Value: Value;
   }
+  export type TagCount = number;
   export type TargetBucket = string;
   export interface TargetGrant {
     Grantee?: Grantee;
@@ -1812,7 +1920,7 @@ declare namespace S3 {
   export type TargetPrefix = string;
   export type Tier = "Standard"|"Bulk"|"Expedited"|string;
   export type Token = string;
-  export type TopicArn = string;
+  export type TopicConfigurationList = TopicConfiguration[];
   export interface Transition {
     /**
      * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
@@ -1895,11 +2003,11 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
@@ -1911,7 +2019,7 @@ declare namespace S3 {
      */
     CopySourceSSECustomerKey?: CopySourceSSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     CopySourceSSECustomerKeyMD5?: CopySourceSSECustomerKeyMD5;
   }
@@ -1971,15 +2079,16 @@ declare namespace S3 {
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
     /**
-     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
+     * Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
      */
     SSECustomerKey?: SSECustomerKey;
     /**
-     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
+     * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
   }
   export type Value = string;
+  export type VersionIdMarker = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

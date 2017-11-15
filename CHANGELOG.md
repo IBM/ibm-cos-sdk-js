@@ -15,3 +15,7 @@
 * Browser build support
 * Docs updates
 
+## 1.1.0
+### Features
+* Added Key Protect support
+

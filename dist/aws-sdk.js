@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v1.0.2
+// AWS SDK for JavaScript v1.1.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -19,8 +19,8 @@ module.exports={
     "endpointPrefix": "s3",
     "globalEndpoint": "s3.amazonaws.com",
     "protocol": "rest-xml",
-    "serviceAbbreviation": "Amazon S3",
-    "serviceFullName": "Amazon Simple Storage Service",
+    "serviceAbbreviation": "IBM COS",
+    "serviceFullName": "IBM Cloud Object Storage",
     "signatureVersion": "s3",
     "timestampFormat": "rfc822",
     "uid": "s3-2006-03-01"
@@ -371,6 +371,14 @@ module.exports={
           "IBMServiceInstanceId": {
             "location": "header",
             "locationName": "Ibm-Service-Instance-Id"
+          },
+          "IBMSSEKPEncryptionAlgorithm": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-encryption-algorithm"
+          },
+          "IBMSSEKPCustomerRootKeyCrn": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-customer-root-key-crn"
           }
         },
         "payload": "CreateBucketConfiguration"
@@ -711,10 +719,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Owner": {
-            "shape": "S29"
+            "shape": "S2c"
           },
           "Grants": {
-            "shape": "S2c",
+            "shape": "S2f",
             "locationName": "AccessControlList"
           }
         }
@@ -741,7 +749,7 @@ module.exports={
         "type": "structure",
         "members": {
           "CORSRules": {
-            "shape": "S2l",
+            "shape": "S2o",
             "locationName": "CORSRule"
           }
         }
@@ -998,10 +1006,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Owner": {
-            "shape": "S29"
+            "shape": "S2c"
           },
           "Grants": {
-            "shape": "S2c",
+            "shape": "S2f",
             "locationName": "AccessControlList"
           }
         }
@@ -1021,6 +1029,20 @@ module.exports={
           "Bucket": {
             "location": "uri",
             "locationName": "Bucket"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IBMSSEKPEnabled": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-enabled",
+            "type": "boolean"
+          },
+          "IBMSSEKPCustomerRootKeyCrn": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-customer-root-key-crn"
           }
         }
       }
@@ -1193,6 +1215,7 @@ module.exports={
         "method": "GET"
       },
       "input": {
+        "type": "structure",
         "members": {
           "IBMServiceInstanceId": {
             "location": "header",
@@ -1217,7 +1240,7 @@ module.exports={
             }
           },
           "Owner": {
-            "shape": "S29"
+            "shape": "S2c"
           }
         }
       },
@@ -1294,17 +1317,17 @@ module.exports={
                 },
                 "StorageClass": {},
                 "Owner": {
-                  "shape": "S29"
+                  "shape": "S2c"
                 },
                 "Initiator": {
-                  "shape": "S44"
+                  "shape": "S4a"
                 }
               }
             },
             "flattened": true
           },
           "CommonPrefixes": {
-            "shape": "S45"
+            "shape": "S4b"
           },
           "EncodingType": {}
         }
@@ -1351,6 +1374,15 @@ module.exports={
       "output": {
         "type": "structure",
         "members": {
+          "IBMSSEKPEnabled": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-enabled",
+            "type": "boolean"
+          },
+          "IBMSSEKPCustomerRootKeyCrn": {
+            "location": "header",
+            "locationName": "ibm-sse-kp-customer-root-key-crn"
+          },
           "IsTruncated": {
             "type": "boolean"
           },
@@ -1371,7 +1403,7 @@ module.exports={
                 },
                 "StorageClass": {},
                 "Owner": {
-                  "shape": "S29"
+                  "shape": "S2c"
                 }
               }
             },
@@ -1384,7 +1416,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S45"
+            "shape": "S4b"
           },
           "EncodingType": {}
         }
@@ -1476,10 +1508,10 @@ module.exports={
             "flattened": true
           },
           "Initiator": {
-            "shape": "S44"
+            "shape": "S4a"
           },
           "Owner": {
-            "shape": "S29"
+            "shape": "S2c"
           },
           "StorageClass": {}
         }
@@ -1501,7 +1533,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S4o",
+            "shape": "S4u",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -1566,7 +1598,7 @@ module.exports={
             ],
             "members": {
               "CORSRules": {
-                "shape": "S2l",
+                "shape": "S2o",
                 "locationName": "CORSRule"
               }
             }
@@ -1743,7 +1775,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S4o",
+            "shape": "S4u",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -2027,14 +2059,14 @@ module.exports={
       "type": "blob",
       "sensitive": true
     },
-    "S29": {
+    "S2c": {
       "type": "structure",
       "members": {
         "DisplayName": {},
         "ID": {}
       }
     },
-    "S2c": {
+    "S2f": {
       "type": "list",
       "member": {
         "locationName": "Grant",
@@ -2064,7 +2096,7 @@ module.exports={
         }
       }
     },
-    "S2l": {
+    "S2o": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -2104,14 +2136,14 @@ module.exports={
       },
       "flattened": true
     },
-    "S44": {
+    "S4a": {
       "type": "structure",
       "members": {
         "ID": {},
         "DisplayName": {}
       }
     },
-    "S45": {
+    "S4b": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -2121,15 +2153,15 @@ module.exports={
       },
       "flattened": true
     },
-    "S4o": {
+    "S4u": {
       "type": "structure",
       "members": {
         "Grants": {
-          "shape": "S2c",
+          "shape": "S2f",
           "locationName": "AccessControlList"
         },
         "Owner": {
-          "shape": "S29"
+          "shape": "S2c"
         }
       }
     }
@@ -2558,7 +2590,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '1.0.2',
+  VERSION: '1.1.0',
 
 
   Signers: {},
@@ -2624,24 +2656,24 @@ var TokenManager = require('./iam/token_manager');
 
 AWS.Credentials = AWS.util.inherit({
 
-    constructor: function Credentials() {
+  constructor: function Credentials() {
     AWS.util.hideProperties(this, ['secretAccessKey', 'apiKeyId']);
 
     this.expired = false;
     this.expireTime = null;
     if (arguments.length === 1 && typeof arguments[0] === 'object') {
       var creds = arguments[0].credentials || arguments[0];
-      if (creds.apiKeyId || creds.authCallback) {
-          this.apiKeyId = creds.apiKeyId;
-          this.serviceInstanceId = creds.serviceInstanceId;
-          this.tokenManager = new TokenManager(creds);
-      } else if (creds.tokenManager) {
-          this.tokenManager = creds.tokenManager;
-          this.serviceInstanceId = creds.serviceInstanceId;
+      if (creds.tokenManager) {
+        this.tokenManager = creds.tokenManager;
+        this.serviceInstanceId = creds.serviceInstanceId;
+      } else if (creds.apiKeyId || creds.authCallback) {
+        this.apiKeyId = creds.apiKeyId;
+        this.serviceInstanceId = creds.serviceInstanceId;
+        this.tokenManager = new TokenManager(creds);
       } else {
-          this.accessKeyId = creds.accessKeyId;
-          this.secretAccessKey = creds.secretAccessKey;
-          this.sessionToken = creds.sessionToken;
+        this.accessKeyId = creds.accessKeyId;
+        this.secretAccessKey = creds.secretAccessKey;
+        this.sessionToken = creds.sessionToken;
       }
     } else {
       this.accessKeyId = arguments[0];
@@ -3462,7 +3494,7 @@ var AWS = require('../../lib/core');
 var util = AWS.util;
 
 
-function Token (token) {
+function Token(token) {
     if (!token.accessToken) {
         throw new Error('Token constructor must have an access token provided.')
     }
@@ -3478,12 +3510,12 @@ function Token (token) {
 }
 
 
-Token.prototype.isExpired = function (gracePeriod) {
+Token.prototype.isExpired = function(gracePeriod) {
     return (!this.expiration || (Date.now() > +this.expiration - gracePeriod));
 }
 
 
-function TokenManager () {
+function TokenManager() {
     var config = {}
     var authCallback
 
@@ -3529,7 +3561,19 @@ TokenManager.prototype.getToken = function() {
 
 
 
+
+
 TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
+    if (typeof callback == 'undefined') {
+        if (typeof forceRenew == 'function') {
+            callback = forceRenew;
+            forceRenew = undefined;
+        } else if (typeof forceRenew == 'undefined' && typeof options == 'function') {
+            callback = options;
+            options == undefined;
+        }
+    }
+
     var sdkPromise = AWS.config.getPromisesDependency() || (typeof Promise === 'function' && Promise);
 
     var config = Object.assign({}, this.config, options);
@@ -3537,7 +3581,7 @@ TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
 
     var rejectOrCallbackError = function(message) {
         var err = new Error(message);
-        this._callbacks.forEach(function (cb) {
+        this._callbacks.forEach(function(cb) {
             cb(err)
         });
         if (sdkPromise !== undefined) {
@@ -3592,42 +3636,69 @@ TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
             this._callbacks = [callback];
         } else {
             this._callbacks.push(callback);
-            return;
+            return this._tokenRequest;
         }
     }
 
+    var callbacks = function() {
+        var args = arguments;
+        util.arrayEach(this._callbacks, function(cb) {
+            cb.apply(this, args);
+        }.bind(this));
+    }.bind(this);
+
     if (typeof config.authCallback === 'function') {
-        if (sdkPromise) {
-            this._tokenRequest = new sdkPromise(function(resolve, reject) {
+        var authFn = function(resolve, reject) {
+            var callback = function(token) {
                 try {
-                    var fn = config.authCallback(function (token) {
-                        util.each(this._callbacks, function (cb) {
-                            cb(token);
-                        });
-                        resolve(createToken(token));
-                    }.bind(this));
-
-                    if (fn.then) {
-                        util.each(this._callbacks, function (cb) {
-                            cb(token);
-                        });
-                        this._callbacks = [];
-                        resolve(fn.then(createToken));
+                    var t = this.createToken(token);
+                    callbacks(null, token);
+                    if (resolve) {
+                        this._tokenRequest = undefined;
+                        return resolve(t);
                     }
-                } catch (err) {
-                    reject(err);
+                } catch (createTokenErr) {
+                    callbacks(createTokenErr);
+                    if (reject) {
+                        this._tokenRequest = undefined;
+                        return reject(createTokenErr);
+                    }
                 }
-            }.bind(this));
-        } else {
-            config.authCallback(function (token) {
-                util.each(this._callbacks, function (cb) {
-                    cb(token);
-                });
-                return createToken(token);
-            }.bind(this));
-        }
+            }.bind(this);
+            var postCallback = config.authCallback(callback);
+            if (postCallback && postCallback.then) {
+                postCallback.then(function(token) {
+                    try {
+                        var t = this.createToken(token);
+                        callbacks(null, token);
+                        if (resolve) {
+                            this._tokenRequest = undefined;
+                            return resolve(t);
+                        }
+                    } catch (createTokenErr) {
+                        callbacks(createTokenErr);
+                        if (reject) {
+                            this._tokenRequest = undefined;
+                            return reject(createTokenErr);
+                        }
+                    }
+                }.bind(this))
+                .catch(function(err) {
+                    callbacks(err);
+                    if (reject) {
+                        this._tokenRequest = undefined;
+                        return reject(err);
+                    }
+                }.bind(this));
+            }
+        }.bind(this)
 
-        return this._tokenRequest;
+        if (sdkPromise) {
+            this._request = new Promise(authFn);
+            return this._request;
+        } else {
+            return authFn();
+        }
     }
 
     var tokenRequestConfig = {
@@ -3641,9 +3712,7 @@ TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
     var sendRefreshTokenRequest = function(resolve, reject) {
         request(tokenRequestConfig, function(requestErr, response) {
             if (requestErr) {
-                if (callback) {
-                    callback(requestErr);
-                }
+                callbacks(null, token);
                 if (reject) {
                     this._tokenRequest = undefined;
                     return reject(requestErr);
@@ -3652,23 +3721,33 @@ TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
             }
             try {
                 var token = response.body;
-                var newToken = this.createToken({
-                    tokenType: token.token_type && token.token_type.toLowerCase(),
-                    accessToken: token.access_token || token.uaa_token,
-                    refreshToken: token.refresh_token,
-                    expiration: token.expiration * 1000 // Expiration is returned in seconds; convert to
-                });
-                if (callback) {
-                    callback(null, newToken);
+                try {
+                    var newToken = this.createToken({
+                        tokenType: token.token_type && token.token_type.toLowerCase(),
+                        accessToken: token.access_token || token.uaa_token,
+                        refreshToken: token.refresh_token,
+                        expiration: token.expiration * 1000 // Expiration is returned in seconds; convert to epoch here.
+                    });
+                } catch (e) {
+                    var err = new Error({
+                        message: 'Expected valid token in IAM authentication request. Received: ' + token,
+                        response: response,
+                        originalError: e
+                    });
+                    callbacks(err);
+                    if (reject) {
+                        this._tokenRequest = undefined;
+                        return reject(err);
+                    }
+                    return;
                 }
+                callbacks(null, newToken);
                 if (resolve) {
                     this._tokenRequest = undefined;
                     return resolve(newToken);
                 }
             } catch (createTokenErr) {
-                if (callback) {
-                    callback(createTokenErr);
-                }
+                callbacks(createTokenErr);
                 if (reject) {
                     this._tokenRequest = undefined;
                     return reject(createTokenErr);
@@ -3686,7 +3765,7 @@ TokenManager.prototype.refreshToken = function(options, forceRenew, callback) {
 };
 
 
-TokenManager.prototype.createToken = function (tokenConfig) {
+TokenManager.prototype.createToken = function(tokenConfig) {
     this.token = new Token(tokenConfig)
 
     return this.token

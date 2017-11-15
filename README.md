@@ -1,9 +1,31 @@
-# IBM Cloud Object Storage SDK for Node.js
+# IBM Cloud Object Storage - Node.js SDK
 
-For release notes, see the [CHANGELOG](file.CHANGELOG.html).
+This package allows Node.js developers to write software that interacts with [IBM
+Cloud Object Storage](https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html). It is a fork of [the ``AWS SDK for Java`` library](https://github.com/aws/aws-sdk-java).
+## Documentation
 
-## Installing
+* [Core documentation for IBM COS](https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html)
+* [Python API reference documentation](https://ibm.github.io/ibm-cos-sdk-js)
+* [REST API reference documentation](https://console.bluemix.net/docs/services/cloud-object-storage/api-reference/about-compatibility-api.html)
 
+For release notes, see the [CHANGELOG](CHANGELOG.md).
+
+* [Example code](#example-code)
+* [Getting help](#getting-help)
+
+## Quick start
+
+You'll need:
+  * An instance of COS.
+  * An API key from [IBM Cloud Identity and Access Management](console.bluemix.net/docs/iam/users_roles.html) with at least `Writer` permissions.
+  * The ID of the instance of COS that you are working with.
+  * Token acquisition endpoint
+  * Service endpoint
+  * **Node 4.0++**.
+
+These values can be found in the Bluemix UI by [generating a 'service credential'](console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html).
+
+## Getting the SDK
 The preferred way to install the IBM COS SDK for Node.js is to use the
 [npm](http://npmjs.org) package manager for Node.js. Simply type the following
 into a terminal window:
@@ -12,21 +34,68 @@ into a terminal window:
 npm install ibm-cos-sdk
 ```
 
-## Getting Started
-
-#### Sign up for IBM Cloud ####
-
-Before you begin, you need a IBM Cloud account and an instance of COS.
-
-#### Minimum requirements ####
-
-To run the SDK you will need **Node 4.x+**.
-
-#### Install the SDK ####
+## Example code
 
 ```javascript
 var AWS = require('ibm-cos-sdk');
-```
+var util = require('util');
+
+var config = {
+    endpoint: '<endpoint>',
+    apiKeyId: '<api-key>',
+    ibmAuthEndpoint: 'https://iam.ng.bluemix.net/oidc/token',
+    serviceInstanceId: '<resource-instance-id>',
+};
+
+var cos = new AWS.S3(config);
+
+function doCreateBucket() {
+    console.log('Creating bucket');
+    return cos.createBucket({
+        Bucket: 'my-bucket',
+        CreateBucketConfiguration: {
+          LocationConstraint: 'us-standard'
+        },
+    }).promise();
+}
+
+function doCreateObject() {
+    console.log('Creating object');
+    return cos.putObject({
+        Bucket: 'my-bucket',
+        Key: 'foo',
+        Body: 'bar'
+    }).promise();
+}
+
+function doDeleteObject() {
+    console.log('Deleting object');
+    return cos.deleteObject({
+        Bucket: 'my-bucket',
+        Key: 'foo'
+    }).promise();
+}
+
+function doDeleteBucket() {
+    console.log('Deleting bucket');
+    return cos.deleteBucket({
+        Bucket: 'my-bucket'
+    }).promise();
+}
+
+doCreateBucket()
+    .then(doCreateObject)
+    .then(doDeleteObject)
+    .then(doDeleteBucket)
+    .then(function() {
+        console.log('Finished!');
+    })
+    .catch(function(err) {
+        console.error('An error occurred:');
+        console.error(util.inspect(err));
+    });
+    ```
+
 
 ## Getting Help
 Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:

@@ -253,6 +253,9 @@
       "input": {
         "shape": "HeadBucketRequest"
       },
+      "output": {
+        "shape": "HeadBucketOutput"
+      },
       "errors": [
         {
           "shape": "NoSuchBucket"
@@ -288,13 +291,7 @@
         "requestUri": "/"
       },
       "input": {
-        "members": {
-          "IBMServiceInstanceId": {
-            "location": "header",
-            "locationName": "Ibm-Service-Instance-Id",
-            "documentation": "The owning storage account. All buckets owned by this storage account are returned."
-          }
-        }
+        "shape": "ListBucketsInput"
       },
       "output": {
         "shape": "ListBucketsOutput"
@@ -1207,9 +1204,20 @@
           "locationName": "x-amz-grant-write-acp"
         },
         "IBMServiceInstanceId": {
+          "shape": "IBMServiceInstanceId",
           "location": "header",
           "locationName": "Ibm-Service-Instance-Id",
           "documentation": "The storage account who will be the owner of the bucket."
+        },
+        "IBMSSEKPEncryptionAlgorithm":{
+          "shape": "IBMSSEKPEncryptionAlgorithm",
+          "location":"header",
+          "locationName":"ibm-sse-kp-encryption-algorithm"
+        },
+        "IBMSSEKPCustomerRootKeyCrn":{
+          "shape": "IBMSSEKPCustomerRootKeyCrn",
+          "location":"header",
+          "locationName":"ibm-sse-kp-customer-root-key-crn"
         }
       },
       "payload": "CreateBucketConfiguration"
@@ -2404,6 +2412,21 @@
         }
       }
     },
+    "HeadBucketOutput": {
+      "type": "structure",
+      "members": {
+        "IBMSSEKPEnabled":{
+          "shape": "IBMSSEKPEnabled",
+          "location": "header",
+          "locationName": "ibm-sse-kp-enabled"
+        },
+        "IBMSSEKPCustomerRootKeyCrn":{
+          "shape": "IBMSSEKPCustomerRootKeyCrn",
+          "location": "header",
+          "locationName": "ibm-sse-kp-customer-root-key-crn"
+        }
+      }
+    },
     "HostName": {
       "type": "string"
     },
@@ -2411,6 +2434,18 @@
       "type": "string"
     },
     "HttpRedirectCode": {
+      "type": "string"
+    },
+    "IBMServiceInstanceId": {
+      "type": "string"
+    },
+    "IBMSSEKPCustomerRootKeyCrn": {
+      "type": "string"
+    },
+    "IBMSSEKPEnabled": {
+      "type": "boolean"
+    },
+    "IBMSSEKPEncryptionAlgorithm": {
       "type": "string"
     },
     "ID": {
@@ -2464,6 +2499,15 @@
     },
     "LastModified": {
       "type": "timestamp"
+    },
+    "ListBucketsInput": {
+      "type": "structure",
+      "members": {
+        "IBMServiceInstanceId": {
+          "location": "header",
+          "locationName": "Ibm-Service-Instance-Id"
+        }
+      }
     },
     "ListBucketsOutput": {
       "type": "structure",
@@ -2578,6 +2622,16 @@
     "ListObjectsOutput": {
       "type": "structure",
       "members": {
+        "IBMSSEKPEnabled": {
+          "shape": "IBMSSEKPEnabled",
+          "location": "header",
+          "locationName": "ibm-sse-kp-enabled"
+        },
+        "IBMSSEKPCustomerRootKeyCrn": {
+          "shape": "IBMSSEKPCustomerRootKeyCrn",
+          "location": "header",
+          "locationName": "ibm-sse-kp-customer-root-key-crn"
+        },
         "IsTruncated": {
           "shape": "IsTruncated",
           "documentation": "A flag that indicates whether or not IBM COS returned all of the results that satisfied the search criteria."
