@@ -66,11 +66,41 @@
 
       <div id="content">
         <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
-        <div id='filecontents'><h1>IBM Cloud Object Storage SDK for Node.js</h1>
+        <div id='filecontents'><h1>IBM Cloud Object Storage - Node.js SDK</h1>
 
-<p>For release notes, see the <a href="file.CHANGELOG.html">CHANGELOG</a>.</p>
+<p>This package allows Node.js developers to write software that interacts with <a href="https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html">IBM
+Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sdk-java">the <code>AWS SDK for Java</code> library</a>.</p>
 
-<h2>Installing</h2>
+<h2>Documentation</h2>
+
+<ul>
+<li><a href="https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html">Core documentation for IBM COS</a></li>
+<li><a href="https://ibm.github.io/ibm-cos-sdk-js">Python API reference documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/cloud-object-storage/api-reference/about-compatibility-api.html">REST API reference documentation</a></li>
+</ul>
+
+
+<p>For release notes, see the <a href="CHANGELOG.md">CHANGELOG</a>.</p>
+
+<ul>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#getting-help">Getting help</a></li>
+</ul>
+
+
+<h2>Quick start</h2>
+
+<p>You'll need:
+  * An instance of COS.
+  * An API key from <a href="console.bluemix.net/docs/iam/users_roles.html">IBM Cloud Identity and Access Management</a> with at least <code>Writer</code> permissions.
+  * The ID of the instance of COS that you are working with.
+  * Token acquisition endpoint
+  * Service endpoint
+  * <strong>Node 4.0++</strong>.</p>
+
+<p>These values can be found in the Bluemix UI by <a href="console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html">generating a 'service credential'</a>.</p>
+
+<h2>Getting the SDK</h2>
 
 <p>The preferred way to install the IBM COS SDK for Node.js is to use the
 <a href="http://npmjs.org">npm</a> package manager for Node.js. Simply type the following
@@ -79,20 +109,67 @@ into a terminal window:</p>
 <pre class="code sh"><code class="sh">npm install ibm-cos-sdk
 </code></pre>
 
-<h2>Getting Started</h2>
+<h2>Example code</h2>
 
-<h4>Sign up for IBM Cloud</h4>
+<p>```javascript
+var AWS = require('ibm-cos-sdk');
+var util = require('util');</p>
 
-<p>Before you begin, you need a IBM Cloud account and an instance of COS.</p>
+<p>var config = {
+    endpoint: '<endpoint>',
+    apiKeyId: '<api-key>',
+    ibmAuthEndpoint: '<a href="https://iam.ng.bluemix.net/oidc/token">https://iam.ng.bluemix.net/oidc/token</a>',
+    serviceInstanceId: '<resource-instance-id>',
+};</p>
 
-<h4>Minimum requirements</h4>
+<p>var cos = new AWS.S3(config);</p>
 
-<p>To run the SDK you will need <strong>Node 4.x+</strong>.</p>
+<p>function doCreateBucket() {
+    console.log('Creating bucket');
+    return cos.createBucket({
+        Bucket: 'my-bucket',
+        CreateBucketConfiguration: {
+          LocationConstraint: 'us-standard'
+        },
+    }).promise();
+}</p>
 
-<h4>Install the SDK</h4>
+<p>function doCreateObject() {
+    console.log('Creating object');
+    return cos.putObject({
+        Bucket: 'my-bucket',
+        Key: 'foo',
+        Body: 'bar'
+    }).promise();
+}</p>
 
-<pre class="code javascript"><code class="javascript">var AWS = require('ibm-cos-sdk');
-</code></pre>
+<p>function doDeleteObject() {
+    console.log('Deleting object');
+    return cos.deleteObject({
+        Bucket: 'my-bucket',
+        Key: 'foo'
+    }).promise();
+}</p>
+
+<p>function doDeleteBucket() {
+    console.log('Deleting bucket');
+    return cos.deleteBucket({
+        Bucket: 'my-bucket'
+    }).promise();
+}</p>
+
+<p>doCreateBucket()
+    .then(doCreateObject)
+    .then(doDeleteObject)
+    .then(doDeleteBucket)
+    .then(function() {
+        console.log('Finished!');
+    })
+    .catch(function(err) {
+        console.error('An error occurred:');
+        console.error(util.inspect(err));
+    });
+    ```</p>
 
 <h2>Getting Help</h2>
 
@@ -114,7 +191,7 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Thu Oct 12 23:07:12 2017 by
+  Generated on Tue Nov 14 21:05:50 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>

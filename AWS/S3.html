@@ -2240,6 +2240,8 @@ subsequent event callback registration.</p>
   GrantReadACP: &#39;STRING_VALUE&#39;,
   GrantWrite: &#39;STRING_VALUE&#39;,
   GrantWriteACP: &#39;STRING_VALUE&#39;,
+  IBMSSEKPCustomerRootKeyCrn: &#39;STRING_VALUE&#39;,
+  IBMSSEKPEncryptionAlgorithm: &#39;STRING_VALUE&#39;,
   IBMServiceInstanceId: &#39;STRING_VALUE&#39;
 };
 s3.createBucket(params, function(err, data) {
@@ -2301,6 +2303,8 @@ s3.createBucket(params, function(err, data) {
 <li><code>GrantWrite</code> &mdash; (<code>String</code>)  Allows grantee to create, overwrite, and delete any object in the bucket.</li>
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  Allows grantee to write the ACL for the applicable bucket.</li>
 <li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)  The storage account who will be the owner of the bucket.</li>
+<li><code>IBMSSEKPEncryptionAlgorithm</code> &mdash; (<code>String</code>)</li>
+<li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
 </ul>
 
 </div>
@@ -4774,7 +4778,14 @@ Set to <code>null</code> if the request is successful.</p>
       
         &mdash;
         <div class='inline'><p>the de-serialized data returned from
-the request. Set to <code>null</code> if a request error occurs.</p>
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IBMSSEKPEnabled</code> &mdash; (<code>Boolean</code>)</li>
+<li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
+</ul>
+
 </div>
       
     </li>
@@ -5107,7 +5118,9 @@ subsequent event callback registration.</p>
         <p class="example_title"><div class='inline'><p>Calling the listBuckets operation</p>
 </div></p>
       
-      <pre class="example code"><code>var params = &#39;STRING_VALUE&#39;;
+      <pre class="example code"><code>var params = {
+  IBMServiceInstanceId: &#39;STRING_VALUE&#39;
+};
 s3.listBuckets(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
   else     console.log(data);           // successful response
@@ -5130,7 +5143,7 @@ s3.listBuckets(params, function(err, data) {
       
         &mdash;
         <div class='inline'><ul>
-<li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)  The owning storage account. All buckets owned by this storage account are returned.</li>
+<li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)</li>
 </ul>
 
 </div>
@@ -5630,6 +5643,8 @@ the request. Set to <code>null</code> if a request error occurs.
 The <code>data</code> object has the following properties:</p>
 
 <ul>
+<li><code>IBMSSEKPEnabled</code> &mdash; (<code>Boolean</code>)</li>
+<li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
 <li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)  A flag that indicates whether or not IBM COS returned all of the results that satisfied the search criteria.</li>
 <li><code>Marker</code> &mdash; (<code>String</code>)</li>
 <li><code>NextMarker</code> &mdash; (<code>String</code>)  When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. IBM COS lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.</li>
@@ -7807,7 +7822,14 @@ Set to <code>null</code> if the request is successful.</p>
       
         &mdash;
         <div class='inline'><p>the de-serialized data returned from
-the request. Set to <code>null</code> if a request error occurs.</p>
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IBMSSEKPEnabled</code> &mdash; (<code>Boolean</code>)</li>
+<li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
+</ul>
+
 </div>
       
     </li>
@@ -7965,7 +7987,14 @@ Set to <code>null</code> if the request is successful.</p>
       
         &mdash;
         <div class='inline'><p>the de-serialized data returned from
-the request. Set to <code>null</code> if a request error occurs.</p>
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IBMSSEKPEnabled</code> &mdash; (<code>Boolean</code>)</li>
+<li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
+</ul>
+
 </div>
       
     </li>
@@ -8435,7 +8464,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Thu Oct 12 23:07:12 2017 by
+  Generated on Tue Nov 14 21:05:50 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
