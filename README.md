@@ -94,7 +94,7 @@ doCreateBucket()
         console.error('An error occurred:');
         console.error(util.inspect(err));
     });
-    ```
+```
 
 
 ## Getting Help
