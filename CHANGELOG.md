@@ -19,3 +19,7 @@
 ### Features
 * Added Key Protect support
 
+## 1.1.1
+### Bug Fixes
+* Fix IAM Token expiration/refresh issue
+
