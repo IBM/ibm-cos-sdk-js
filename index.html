@@ -69,13 +69,13 @@
         <div id='filecontents'><h1>IBM Cloud Object Storage - Node.js SDK</h1>
 
 <p>This package allows Node.js developers to write software that interacts with <a href="https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html">IBM
-Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sdk-java">the <code>AWS SDK for Java</code> library</a>.</p>
+Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sdk-js">the <code>AWS SDK for Javascript</code> library</a>.</p>
 
 <h2>Documentation</h2>
 
 <ul>
 <li><a href="https://console.bluemix.net/docs/services/cloud-object-storage/getting-started.html">Core documentation for IBM COS</a></li>
-<li><a href="https://ibm.github.io/ibm-cos-sdk-js">Python API reference documentation</a></li>
+<li><a href="https://ibm.github.io/ibm-cos-sdk-js">Node.js API reference documentation</a></li>
 <li><a href="https://console.bluemix.net/docs/services/cloud-object-storage/api-reference/about-compatibility-api.html">REST API reference documentation</a></li>
 </ul>
 
@@ -92,13 +92,13 @@ Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sd
 
 <p>You'll need:
   * An instance of COS.
-  * An API key from <a href="console.bluemix.net/docs/iam/users_roles.html">IBM Cloud Identity and Access Management</a> with at least <code>Writer</code> permissions.
+  * An API key from <a href="https://console.bluemix.net/docs/iam/users_roles.html">IBM Cloud Identity and Access Management</a> with at least <code>Writer</code> permissions.
   * The ID of the instance of COS that you are working with.
   * Token acquisition endpoint
   * Service endpoint
   * <strong>Node 4.0++</strong>.</p>
 
-<p>These values can be found in the Bluemix UI by <a href="console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html">generating a 'service credential'</a>.</p>
+<p>These values can be found in the Bluemix UI by <a href="https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html">generating a 'service credential'</a>.</p>
 
 <h2>Getting the SDK</h2>
 
@@ -111,20 +111,19 @@ into a terminal window:</p>
 
 <h2>Example code</h2>
 
-<p>```javascript
-var AWS = require('ibm-cos-sdk');
-var util = require('util');</p>
+<pre class="code javascript"><code class="javascript">var AWS = require('ibm-cos-sdk');
+var util = require('util');
 
-<p>var config = {
-    endpoint: '<endpoint>',
-    apiKeyId: '<api-key>',
-    ibmAuthEndpoint: '<a href="https://iam.ng.bluemix.net/oidc/token">https://iam.ng.bluemix.net/oidc/token</a>',
-    serviceInstanceId: '<resource-instance-id>',
-};</p>
+var config = {
+    endpoint: '&lt;endpoint&gt;',
+    apiKeyId: '&lt;api-key&gt;',
+    ibmAuthEndpoint: 'https://iam.ng.bluemix.net/oidc/token',
+    serviceInstanceId: '&lt;resource-instance-id&gt;',
+};
 
-<p>var cos = new AWS.S3(config);</p>
+var cos = new AWS.S3(config);
 
-<p>function doCreateBucket() {
+function doCreateBucket() {
     console.log('Creating bucket');
     return cos.createBucket({
         Bucket: 'my-bucket',
@@ -132,33 +131,33 @@ var util = require('util');</p>
           LocationConstraint: 'us-standard'
         },
     }).promise();
-}</p>
+}
 
-<p>function doCreateObject() {
+function doCreateObject() {
     console.log('Creating object');
     return cos.putObject({
         Bucket: 'my-bucket',
         Key: 'foo',
         Body: 'bar'
     }).promise();
-}</p>
+}
 
-<p>function doDeleteObject() {
+function doDeleteObject() {
     console.log('Deleting object');
     return cos.deleteObject({
         Bucket: 'my-bucket',
         Key: 'foo'
     }).promise();
-}</p>
+}
 
-<p>function doDeleteBucket() {
+function doDeleteBucket() {
     console.log('Deleting bucket');
     return cos.deleteBucket({
         Bucket: 'my-bucket'
     }).promise();
-}</p>
+}
 
-<p>doCreateBucket()
+doCreateBucket()
     .then(doCreateObject)
     .then(doDeleteObject)
     .then(doDeleteBucket)
@@ -169,16 +168,17 @@ var util = require('util');</p>
         console.error('An error occurred:');
         console.error(util.inspect(err));
     });
-    ```</p>
+</code></pre>
 
 <h2>Getting Help</h2>
 
 <p>Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:</p>
 
 <ul>
-<li>Ask a question on <code>Stack Overflow &lt;https://stackoverflow.com/&gt;</code>__ and tag it with <code>ibm</code> and <code>object-storage</code>.</li>
-<li>Open a support ticket with <code>IBM Bluemix Support &lt;https://support.ng.bluemix.net/gethelp/&gt;</code>__</li>
-<li>If it turns out that you may have found a bug, please <code>open an issue &lt;https://github.com/ibm/ibm-cos-sdk-js/issues/new&gt;</code>__</li>
+<li>Read a quick start guide in <a href="https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#node-js">Bluemix Docs</a>.</li>
+<li>Ask a question on <a href="https://stackoverflow.com/">Stack Overflow</a> and tag it with <code>ibm</code> and <code>object-storage</code>.</li>
+<li>Open a support ticket with <a href="https://support.ng.bluemix.net/gethelp/">IBM Bluemix Support</a></li>
+<li>If it turns out that you may have found a bug, please <a href="https://github.com/ibm/ibm-cos-sdk-js/issues/new">open an issue</a>.</li>
 </ul>
 
 
@@ -191,7 +191,7 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Fri Dec  8 15:22:12 2017 by
+  Generated on Mon Jan 22 13:54:19 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
