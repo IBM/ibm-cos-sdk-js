@@ -23,3 +23,8 @@
 ### Bug Fixes
 * Fix IAM Token expiration/refresh issue
 
+## 1.1.2
+### Features
+* IAM Resiliency support
+* Documentation updates
+
