@@ -500,7 +500,7 @@ var s3 = new AWS.S3();
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object.</p>
+    <span class="summary_desc"><div class='inline'><p>If object versioning is not enabled, deletes an object.</p>
 </div></span>
   
 </li>
@@ -3111,7 +3111,7 @@ subsequent event callback registration.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.</p>
+    <p>If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.</p>
 
 
   </div>
@@ -3231,8 +3231,8 @@ the request. Set to <code>null</code> if a request error occurs.
 The <code>data</code> object has the following properties:</p>
 
 <ul>
-<li><code>DeleteMarker</code> &mdash; (<code>Boolean</code>)  Specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.</li>
-<li><code>VersionId</code> &mdash; (<code>String</code>)  Returns the version ID of the delete marker created as a result of the DELETE operation.</li>
+<li><code>DeleteMarker</code> &mdash; (<code>Boolean</code>)  If versioning is enabled, specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  If versioning is enabled, returns the version ID of the delete marker created as a result of the DELETE operation.</li>
 </ul>
 
 </div>
@@ -8464,7 +8464,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Jan 22 13:54:19 2018 by
+  Generated on Mon Feb 26 10:46:07 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
