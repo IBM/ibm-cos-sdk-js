@@ -22,9 +22,7 @@ if (core.Config) {
 } else if (core.MetadataService) {
 
 } else if (core.Request) {
-    
+
 } else if (core.Response) {
 
-} else if (core.SAMLCredentials) {
-    
 }

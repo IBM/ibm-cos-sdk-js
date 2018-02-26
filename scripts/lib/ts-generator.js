@@ -86,31 +86,6 @@ TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames(api
     });
 };
 
-TSGenerator.prototype.updateDynamoDBDocumentClient = function updateDynamoDBDocumentClient() {
-    // read in document client customization
-    var docClientCustomCode = fs.readFileSync(path.join(this._sdkRootDir, 'lib', 'dynamodb', 'document_client.d.ts')).toString();
-    var lines = docClientCustomCode.split('\n');
-    var namespaceIndexStart = -1;
-    var namespaceIndexEnd = -1;
-    for (var i = 0, iLen = lines.length; i < iLen; i++) {
-        var line = lines[i];
-        // find exported namespace
-        if (line.indexOf('//<!--auto-generated start-->') >= 0) {
-            namespaceIndexStart = i;
-        }
-        if (line.indexOf('//<!--auto-generated end-->') >= 0) {
-            namespaceIndexEnd = i;
-            break;
-        }
-    }
-    if (namespaceIndexStart >= 0 && namespaceIndexEnd >= 0) {
-        // insert doc client interfaces
-        lines.splice(namespaceIndexStart + 1, (namespaceIndexEnd - namespaceIndexStart - 1), this.generateDocumentClientInterfaces(1));
-        var code = lines.join('\n');
-        this.writeTypingsFile('document_client', path.join(this._sdkRootDir, 'lib', 'dynamodb'), code);
-    }
-};
-
 /**
  * Generates the file containing DocumentClient interfaces.
  */

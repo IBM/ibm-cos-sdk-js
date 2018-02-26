@@ -20,11 +20,16 @@
 * Added Key Protect support
 
 ## 1.1.1
-### Bug Fixes
+### Features
+* Bug Fixes
 * Fix IAM Token expiration/refresh issue
 
 ## 1.1.2
 ### Features
 * IAM Resiliency support
 * Documentation updates
+
+## 1.1.3
+### Features
+* Bug Fixes
 

@@ -71,11 +71,11 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
+   * If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
-   * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
+   * If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
@@ -334,13 +334,6 @@ declare namespace S3 {
   export type CORSRules = CORSRule[];
   export type CacheControl = string;
   export type CloudFunction = string;
-  export interface CloudFunctionConfiguration {
-    Id?: NotificationId;
-    Event?: Event;
-    Events?: EventList;
-    CloudFunction?: CloudFunction;
-    InvocationRole?: CloudFunctionInvocationRole;
-  }
   export type Code = string;
   export interface CommonPrefix {
     Prefix?: Prefix;
@@ -770,11 +763,11 @@ declare namespace S3 {
   export type DeleteMarkers = DeleteMarkerEntry[];
   export interface DeleteObjectOutput {
     /**
-     * Specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.
+     * If versioning is enabled, specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.
      */
     DeleteMarker?: DeleteMarker;
     /**
-     * Returns the version ID of the delete marker created as a result of the DELETE operation.
+     * If versioning is enabled, returns the version ID of the delete marker created as a result of the DELETE operation.
      */
     VersionId?: ObjectVersionId;
   }
@@ -1831,10 +1824,6 @@ declare namespace S3 {
      * Lifetime of the active copy in days
      */
     Days: Days;
-    /**
-     * Glacier related prameters pertaining to this job.
-     */
-    GlacierJobParameters?: GlacierJobParameters;
   }
   export type Role = string;
   export interface RoutingRule {
@@ -1849,7 +1838,6 @@ declare namespace S3 {
   }
   export type RoutingRules = RoutingRule[];
   export interface Rule {
-    Expiration?: LifecycleExpiration;
     /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
      */
@@ -1863,8 +1851,6 @@ declare namespace S3 {
      */
     Status: ExpirationStatus;
     Transition?: Transition;
-    NoncurrentVersionTransition?: NoncurrentVersionTransition;
-    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export type Rules = Rule[];
@@ -1879,23 +1865,6 @@ declare namespace S3 {
   export type Size = number;
   export type StartAfter = string;
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
-  export interface StorageClassAnalysis {
-    /**
-     * A container used to describe how data related to the storage class analysis should be exported.
-     */
-    DataExport?: StorageClassAnalysisDataExport;
-  }
-  export interface StorageClassAnalysisDataExport {
-    /**
-     * The version of the output schema to use when exporting data. Must be V_1.
-     */
-    OutputSchemaVersion: StorageClassAnalysisSchemaVersion;
-    /**
-     * The place to store the data for an analysis.
-     */
-    Destination: AnalyticsExportDestination;
-  }
-  export type StorageClassAnalysisSchemaVersion = "V_1"|string;
   export type Suffix = string;
   export interface Tag {
     /**
@@ -1920,7 +1889,6 @@ declare namespace S3 {
   export type TargetPrefix = string;
   export type Tier = "Standard"|"Bulk"|"Expedited"|string;
   export type Token = string;
-  export type TopicConfigurationList = TopicConfiguration[];
   export interface Transition {
     /**
      * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.

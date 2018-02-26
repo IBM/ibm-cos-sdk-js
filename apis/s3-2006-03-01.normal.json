@@ -141,7 +141,7 @@
         "shape": "DeleteObjectOutput"
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectDELETE.html",
-      "documentation": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects."
+      "documentation": "If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects."
     },
     "DeleteObjects": {
       "name": "DeleteObjects",
@@ -663,28 +663,6 @@
     },
     "CloudFunction": {
       "type": "string"
-    },
-    "CloudFunctionConfiguration": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "shape": "NotificationId"
-        },
-        "Event": {
-          "shape": "Event",
-          "deprecated": true
-        },
-        "Events": {
-          "shape": "EventList",
-          "locationName": "Event"
-        },
-        "CloudFunction": {
-          "shape": "CloudFunction"
-        },
-        "InvocationRole": {
-          "shape": "CloudFunctionInvocationRole"
-        }
-      }
     },
     "Code": {
       "type": "string"
@@ -1500,13 +1478,13 @@
       "members": {
         "DeleteMarker": {
           "shape": "DeleteMarker",
-          "documentation": "Specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.",
+          "documentation": "If versioning is enabled, specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker.",
           "location": "header",
           "locationName": "x-amz-delete-marker"
         },
         "VersionId": {
           "shape": "ObjectVersionId",
-          "documentation": "Returns the version ID of the delete marker created as a result of the DELETE operation.",
+          "documentation": "If versioning is enabled, returns the version ID of the delete marker created as a result of the DELETE operation.",
           "location": "header",
           "locationName": "x-amz-version-id"
         }
@@ -3693,10 +3671,6 @@
         "Days": {
           "shape": "Days",
           "documentation": "Lifetime of the active copy in days"
-        },
-        "GlacierJobParameters": {
-          "shape": "GlacierJobParameters",
-          "documentation": "Glacier related prameters pertaining to this job."
         }
       }
     },
@@ -3733,9 +3707,6 @@
         "Status"
       ],
       "members": {
-        "Expiration": {
-          "shape": "LifecycleExpiration"
-        },
         "ID": {
           "shape": "ID",
           "documentation": "Unique identifier for the rule. The value cannot be longer than 255 characters."
@@ -3750,12 +3721,6 @@
         },
         "Transition": {
           "shape": "Transition"
-        },
-        "NoncurrentVersionTransition": {
-          "shape": "NoncurrentVersionTransition"
-        },
-        "NoncurrentVersionExpiration": {
-          "shape": "NoncurrentVersionExpiration"
         },
         "AbortIncompleteMultipartUpload": {
           "shape": "AbortIncompleteMultipartUpload"
@@ -3812,38 +3777,6 @@
         "STANDARD",
         "REDUCED_REDUNDANCY",
         "STANDARD_IA"
-      ]
-    },
-    "StorageClassAnalysis": {
-      "type": "structure",
-      "members": {
-        "DataExport": {
-          "shape": "StorageClassAnalysisDataExport",
-          "documentation": "A container used to describe how data related to the storage class analysis should be exported."
-        }
-      }
-    },
-    "StorageClassAnalysisDataExport": {
-      "type": "structure",
-      "required": [
-        "OutputSchemaVersion",
-        "Destination"
-      ],
-      "members": {
-        "OutputSchemaVersion": {
-          "shape": "StorageClassAnalysisSchemaVersion",
-          "documentation": "The version of the output schema to use when exporting data. Must be V_1."
-        },
-        "Destination": {
-          "shape": "AnalyticsExportDestination",
-          "documentation": "The place to store the data for an analysis."
-        }
-      }
-    },
-    "StorageClassAnalysisSchemaVersion": {
-      "type": "string",
-      "enum": [
-        "V_1"
       ]
     },
     "Suffix": {
@@ -3904,13 +3837,6 @@
     },
     "Token": {
       "type": "string"
-    },
-    "TopicConfigurationList": {
-      "type": "list",
-      "member": {
-        "shape": "TopicConfiguration"
-      },
-      "flattened": true
     },
     "Transition": {
       "type": "structure",

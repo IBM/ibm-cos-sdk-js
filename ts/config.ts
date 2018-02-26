@@ -21,8 +21,7 @@ AWS.config = new AWS.Config({
 
 // Lock api versions
 AWS.config.apiVersions = {
-    s3: "2006-03-01",
-    sts: "2011-06-15"
+    s3: "2006-03-01"
 };
 
 // update credentials
@@ -92,13 +91,13 @@ var config = AWS.config.loadFromPath('/to/path');
 
 // test update allowing unknown keys
 AWS.config.update({
-   fake: 'fake' 
+   fake: 'fake'
 }, true);
 
 // Test constructing with a CredentialProviderChain
 var options = {
     credentialProvider: new AWS.CredentialProviderChain([
-        () => new AWS.TemporaryCredentials()
+        () => new AWS.FileSystemCredentials('fake')
     ])
 };
 var s3 = new AWS.S3(options);
