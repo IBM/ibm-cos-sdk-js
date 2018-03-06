@@ -33,3 +33,7 @@
 ### Features
 * Bug Fixes
 
+## 1.1.4
+### Features
+* Documentation updates
+
