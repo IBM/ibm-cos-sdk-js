@@ -37,3 +37,8 @@
 ### Features
 * Documentation updates
 
+## 1.2.0
+### Features
+* JSON cut and paste support
+* Documentation updates
+

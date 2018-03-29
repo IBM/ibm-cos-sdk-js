@@ -3,6 +3,7 @@ export {Credentials} from './credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
 export {EnvironmentCredentials} from './credentials/environment_credentials';
 export {FileSystemCredentials} from './credentials/file_system_credentials';
+export {SharedJSONFileCredentials} from './credentials/shared_json_file_credentials';
 export {SharedIniFileCredentials} from './credentials/shared_ini_file_credentials';
 export {Endpoint} from './endpoint';
 export {EventListeners} from './event_listeners';
