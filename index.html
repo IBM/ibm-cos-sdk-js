@@ -109,6 +109,10 @@ into a terminal window:</p>
 <pre class="code sh"><code class="sh">npm install ibm-cos-sdk
 </code></pre>
 
+<h2>Using a Service Credential (New)</h2>
+
+<p>Starting in release 1.2.0 you can source credentials directly from a <a href="https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html">Service Credential</a> JSON document generated in the IBM Cloud console saved to <code>~/.bluemix/cos_credentials</code>. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain <a href="https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html">HMAC keys</a> the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.</p>
+
 <h2>Deprecation Notice</h2>
 
 <p>Deprecation Notice for IBM Cloud Object Storage Java and Python SDK Versions 1.x</p>
@@ -209,7 +213,7 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Mar  6 07:56:31 2018 by
+  Generated on Thu Mar 29 16:34:28 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
