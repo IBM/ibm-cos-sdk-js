@@ -36,7 +36,7 @@ npm install ibm-cos-sdk
 
 ## Using a Service Credential (New)
 
-Starting in release 1.2.0 you can source credentials directly from a [Service Credential](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html) JSON document generated in the IBM Cloud console saved to `~/.bluemix/cos_credentials`. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain [HMAC keys](https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html) the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.
+Starting in release 1.2.0, you can source credentials directly from a [Service Credential](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html) JSON document generated in the IBM Cloud console that is saved to `~/.bluemix/cos_credentials`. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contains [HMAC keys](https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html), the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.
 
 
 ## Deprecation Notice
