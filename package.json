@@ -1,7 +1,7 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.2.1-0",
+  "version": "1.2.1",
   "author": {
     "name": "IBM",
     "email": "",
@@ -38,7 +38,6 @@
     "es6-promise": "^4.1.0",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
-    "request": "^2.81.0",
     "sax": "1.1.5",
     "url": "0.10.3",
     "uuid": "3.0.0",

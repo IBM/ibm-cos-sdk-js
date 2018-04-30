@@ -42,3 +42,7 @@
 * JSON cut and paste support
 * Documentation updates
 
+## 1.2.1
+### Features
+* 34209: Request dependency removed
+
