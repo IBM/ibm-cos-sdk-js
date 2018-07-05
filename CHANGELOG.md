@@ -48,5 +48,5 @@
 
 ## 1.2.2
 ### Features
-* 37098, 36452, 38934: Defect Fixes
+*  Bug Fixes
 
