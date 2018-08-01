@@ -50,3 +50,7 @@
 ### Features
 *  Bug Fixes
 
+## 1.2.3
+### Features
+*  Bug fixes
+
