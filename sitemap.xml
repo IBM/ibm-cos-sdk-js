@@ -3,130 +3,130 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/property_list.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/index.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/_index.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/top-level-namespace.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/frames.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/class_list.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/file_list.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/file.CHANGELOG.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/method_list.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/file.README.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EventListeners/Core.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/SharedIniFileCredentials.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/apiLoader/services.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/S3/ManagedUpload.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EnvironmentCredentials.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/FileSystemCredentials.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Response.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/EventListeners.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Config/keys.html</loc>
-    <lastmod>2018-08-03T14:14:20+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Credentials.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/S3.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/CredentialProviderChain.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/MetadataService.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Service.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Endpoint.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Config.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpClient.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/SharedJSONFileCredentials.html</loc>
-    <lastmod>2018-08-03T14:14:22+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:59-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpRequest.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/HttpResponse.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
   <url>
     <loc>https://ibm-public-cos.github.io/crs-docs/node/AWS/Request.html</loc>
-    <lastmod>2018-08-03T14:14:21+01:00</lastmod>
+    <lastmod>2018-09-04T10:34:58-05:00</lastmod>
   </url>
 </urlset>
