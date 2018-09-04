@@ -128,6 +128,18 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEcors.html",
       "documentation": "Deletes the cors configuration information set for the bucket."
     },
+    "DeleteBucketLifecycle": {
+      "name": "DeleteBucketLifecycle",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "shape": "DeleteBucketLifecycleRequest"
+      },
+      "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
+      "documentation": "Deletes the lifecycle configuration from the bucket."
+    },
     "DeleteObject": {
       "name": "DeleteObject",
       "http": {
@@ -188,6 +200,20 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETcors.html",
       "documentation": "Returns the cors configuration for the bucket."
+    },
+    "GetBucketLifecycleConfiguration": {
+      "name": "GetBucketLifecycleConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "shape": "GetBucketLifecycleConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetBucketLifecycleConfigurationOutput"
+      },
+      "documentation": "Returns the lifecycle configuration information set on the bucket."
     },
     "GetBucketLocation": {
       "name": "GetBucketLocation",
@@ -375,6 +401,17 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTcors.html",
       "documentation": "Sets the cors configuration for a bucket."
     },
+    "PutBucketLifecycleConfiguration": {
+      "name": "PutBucketLifecycleConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "shape": "PutBucketLifecycleConfigurationRequest"
+      },
+      "documentation": "Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it."
+    },
     "PutObject": {
       "name": "PutObject",
       "http": {
@@ -409,6 +446,27 @@
       ],
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html",
       "documentation": "uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket"
+    },
+    "RestoreObject": {
+      "name": "RestoreObject",
+      "http": {
+        "method": "POST",
+        "requestUri": "/{Bucket}/{Key+}?restore"
+      },
+      "input": {
+        "shape": "RestoreObjectRequest"
+      },
+      "output": {
+        "shape": "RestoreObjectOutput"
+      },
+      "errors": [
+        {
+          "shape": "ObjectAlreadyInActiveTierError"
+        }
+      ],
+      "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html",
+      "documentation": "Restores an archived copy of an object back into Amazon S3",
+      "alias": "PostObjectRestore"
     },
     "UploadPart": {
       "name": "UploadPart",
@@ -571,6 +629,18 @@
         "public-read-write",
         "authenticated-read"
       ]
+    },
+    "BucketLifecycleConfiguration": {
+      "type": "structure",
+      "required": [
+        "Rules"
+      ],
+      "members": {
+        "Rules": {
+          "shape": "LifecycleRules",
+          "locationName": "Rule"
+        }
+      }
     },
     "BucketLocationConstraint": {
       "type": "string",
@@ -1423,6 +1493,19 @@
         }
       }
     },
+    "DeleteBucketLifecycleRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
     "DeleteBucketRequest": {
       "type": "structure",
       "required": [
@@ -1786,6 +1869,28 @@
         }
       }
     },
+    "GetBucketLifecycleConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "Rules": {
+          "shape": "LifecycleRules",
+          "locationName": "Rule"
+        }
+      }
+    },
+    "GetBucketLifecycleConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
     "GetBucketLocationOutput": {
       "type": "structure",
       "members": {
@@ -2101,6 +2206,18 @@
         }
       }
     },
+    "GlacierJobParameters": {
+      "type": "structure",
+      "required": [
+        "Tier"
+      ],
+      "members": {
+        "Tier": {
+          "shape": "Tier",
+          "documentation": "Glacier retrieval tier at which the restore will be processed."
+        }
+      }
+    },
     "Grant": {
       "type": "structure",
       "members": {
@@ -2308,6 +2425,18 @@
           "documentation": "The count of parts this object has.",
           "location": "header",
           "locationName": "x-amz-mp-parts-count"
+        },
+        "Transition": {
+          "shape": "Transition",
+          "documentation": "Provides information of the transition storage class and time of transition.",
+          "location": "header",
+          "locationName": "x-ibm-transition"
+        },
+        "TemporaryCopyStorageClass": {
+          "shape": "TemporaryCopyStorageClass",
+          "documentation": "This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.",
+          "location": "header",
+          "locationName": "x-ibm-restored-copy-storage-class"
         }
       }
     },
@@ -2477,6 +2606,115 @@
     },
     "LastModified": {
       "type": "timestamp"
+    },
+    "LifecycleConfiguration": {
+      "type": "structure",
+      "required": [
+        "Rules"
+      ],
+      "members": {
+        "Rules": {
+          "shape": "Rules",
+          "locationName": "Rule"
+        }
+      }
+    },
+    "LifecycleExpiration": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "Date",
+          "documentation": "Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
+        },
+        "Days": {
+          "shape": "Days",
+          "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
+        },
+        "ExpiredObjectDeleteMarker": {
+          "shape": "ExpiredObjectDeleteMarker",
+          "documentation": "Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy."
+        }
+      }
+    },
+    "LifecycleRule": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Expiration": {
+          "shape": "LifecycleExpiration"
+        },
+        "ID": {
+          "shape": "ID",
+          "documentation": "Unique identifier for the rule. The value cannot be longer than 255 characters."
+        },
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.",
+          "deprecated": true
+        },
+        "Filter": {
+          "shape": "LifecycleRuleFilter"
+        },
+        "Status": {
+          "shape": "ExpirationStatus",
+          "documentation": "If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied."
+        },
+        "Transitions": {
+          "shape": "TransitionList",
+          "locationName": "Transition"
+        },
+        "NoncurrentVersionTransitions": {
+          "shape": "NoncurrentVersionTransitionList",
+          "locationName": "NoncurrentVersionTransition"
+        },
+        "NoncurrentVersionExpiration": {
+          "shape": "NoncurrentVersionExpiration"
+        },
+        "AbortIncompleteMultipartUpload": {
+          "shape": "AbortIncompleteMultipartUpload"
+        }
+      }
+    },
+    "LifecycleRuleAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix"
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "documentation": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      },
+      "documentation": "This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator."
+    },
+    "LifecycleRuleFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "Prefix identifying one or more objects to which the rule applies."
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "This tag must exist in the object's tag set in order for the rule to apply."
+        },
+        "And": {
+          "shape": "LifecycleRuleAndOperator"
+        }
+      },
+      "documentation": "The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified."
+    },
+    "LifecycleRules": {
+      "type": "list",
+      "member": {
+        "shape": "LifecycleRule"
+      },
+      "flattened": true
     },
     "ListBucketsInput": {
       "type": "structure",
@@ -2915,6 +3153,27 @@
       },
       "documentation": "Specifies when noncurrent object versions expire. Upon expiration, IBM COS permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that IBM COS delete noncurrent object versions at a specific period in the object's lifetime."
     },
+    "NoncurrentVersionTransition": {
+      "type": "structure",
+      "members": {
+        "NoncurrentDays": {
+          "shape": "Days",
+          "documentation": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
+        },
+        "StorageClass": {
+          "shape": "TransitionStorageClass",
+          "documentation": "The class of storage used to store the object."
+        }
+      },
+      "documentation": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA or GLACIER storage class at a specific period in the object's lifetime."
+    },
+    "NoncurrentVersionTransitionList": {
+      "type": "list",
+      "member": {
+        "shape": "NoncurrentVersionTransition"
+      },
+      "flattened": true
+    },
     "Object": {
       "type": "structure",
       "members": {
@@ -3209,6 +3468,27 @@
         }
       },
       "payload": "CORSConfiguration"
+    },
+    "PutBucketLifecycleConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "LifecycleConfiguration": {
+          "shape": "BucketLifecycleConfiguration",
+          "locationName": "LifecycleConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "LifecycleConfiguration"
     },
     "PutObjectAclOutput": {
       "type": "structure",
@@ -3671,6 +3951,10 @@
         "Days": {
           "shape": "Days",
           "documentation": "Lifetime of the active copy in days"
+        },
+        "GlacierJobParameters": {
+          "shape": "GlacierJobParameters",
+          "documentation": "Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation."
         }
       }
     },
@@ -3771,6 +4055,13 @@
     "StartAfter": {
       "type": "string"
     },
+    "TemporaryCopyStorageClass": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "GLACIER"
+      ]
+    },
     "StorageClass": {
       "type": "string",
       "enum": [
@@ -3801,6 +4092,13 @@
     },
     "TagCount": {
       "type": "integer"
+    },
+    "TagSet": {
+      "type": "list",
+      "member": {
+        "shape": "Tag",
+        "locationName": "Tag"
+      }
     },
     "TargetBucket": {
       "type": "string"
@@ -3849,6 +4147,10 @@
           "shape": "Days",
           "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
         },
+        "TemporaryCopyStorageClass": {
+          "shape": "TransitionStorageClass",
+          "documentation": "This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed."
+        },
         "StorageClass": {
           "shape": "TransitionStorageClass",
           "documentation": "The class of storage used to store the object."
@@ -3866,7 +4168,7 @@
       "type": "string",
       "enum": [
         "GLACIER",
-        "STANDARD_IA"
+        "STANDARD"
       ]
     },
     "Type": {

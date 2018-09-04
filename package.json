@@ -1,8 +1,12 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.2.4-0",
-  "author": "IBM (https://www.ibm.com/cloud/)",
+  "version": "1.3.0",
+  "author": {
+    "name": "IBM",
+    "email": "",
+    "url": "https://www.ibm.com/cloud/"
+  },
   "homepage": "https://github.com/ibm/ibm-cos-sdk-js",
   "contributors": [],
   "devDependencies": {

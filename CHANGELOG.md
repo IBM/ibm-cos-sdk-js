@@ -1,3 +1,7 @@
+## 1.3.0
+### Features
+* Archive Tier Support
+
 ## 1.2.3
 ### Features
 *  Defect Fixes
@@ -8,7 +12,7 @@
 
 ## 1.2.1
 ### Features
-* 34209: Request dependency removed
+* Request dependency removed
 
 ## 1.2.0
 ### Features

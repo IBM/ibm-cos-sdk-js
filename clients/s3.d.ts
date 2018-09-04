@@ -103,6 +103,14 @@ declare class S3 extends S3Customizations {
    */
   getBucketCors(callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
   /**
+   * Returns the lifecycle configuration information set on the bucket.
+   */
+  getBucketLifecycleConfiguration(params: S3.Types.GetBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleConfigurationOutput) => void): Request<S3.Types.GetBucketLifecycleConfigurationOutput, AWSError>;
+  /**
+   * Returns the lifecycle configuration information set on the bucket.
+   */
+  getBucketLifecycleConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleConfigurationOutput) => void): Request<S3.Types.GetBucketLifecycleConfigurationOutput, AWSError>;
+  /**
    * Returns the region the bucket resides in.
    */
   getBucketLocation(params: S3.Types.GetBucketLocationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLocationOutput) => void): Request<S3.Types.GetBucketLocationOutput, AWSError>;
@@ -190,6 +198,14 @@ declare class S3 extends S3Customizations {
    * Sets the cors configuration for a bucket.
    */
   putBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
+   */
+  putBucketLifecycleConfiguration(params: S3.Types.PutBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
+   */
+  putBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds an object to a bucket.
    */
@@ -302,6 +318,9 @@ declare namespace S3 {
     CreationDate?: CreationDate;
   }
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
+  export interface BucketLifecycleConfiguration {
+    Rules: LifecycleRules;
+  }
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
   export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE"|string;
   export type BucketName = string;
@@ -865,6 +884,12 @@ declare namespace S3 {
   export interface GetBucketCorsRequest {
     Bucket: BucketName;
   }
+  export interface GetBucketLifecycleConfigurationOutput {
+    Rules?: LifecycleRules;
+  }
+  export interface GetBucketLifecycleConfigurationRequest {
+    Bucket: BucketName;
+  }
   export interface GetBucketLocationOutput {
     LocationConstraint?: BucketLocationConstraint;
   }
@@ -1238,6 +1263,62 @@ declare namespace S3 {
   export type KeyMarker = string;
   export type KeyPrefixEquals = string;
   export type LastModified = Date;
+  export interface LifecycleConfiguration {
+    Rules: Rules;
+  }
+  export interface LifecycleExpiration {
+    /**
+     * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+     */
+    Date?: _Date;
+    /**
+     * Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+     */
+    Days?: Days;
+    /**
+     * Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
+     */
+    ExpiredObjectDeleteMarker?: ExpiredObjectDeleteMarker;
+  }
+  export interface LifecycleRule {
+    Expiration?: LifecycleExpiration;
+    /**
+     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     */
+    ID?: ID;
+    /**
+     * Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
+     */
+    Prefix?: Prefix;
+    Filter?: LifecycleRuleFilter;
+    /**
+     * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
+     */
+    Status: ExpirationStatus;
+    Transitions?: TransitionList;
+    NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
+    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
+    AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
+  }
+  export interface LifecycleRuleAndOperator {
+    Prefix?: Prefix;
+    /**
+     * All of these tags must exist in the object's tag set in order for the rule to apply.
+     */
+    Tags?: TagSet;
+  }
+  export interface LifecycleRuleFilter {
+    /**
+     * Prefix identifying one or more objects to which the rule applies.
+     */
+    Prefix?: Prefix;
+    /**
+     * This tag must exist in the object's tag set in order for the rule to apply.
+     */
+    Tag?: Tag;
+    And?: LifecycleRuleAndOperator;
+  }
+  export type LifecycleRules = LifecycleRule[];
   export interface ListBucketsInput {
     IBMServiceInstanceId?: undefined;
   }
@@ -1466,6 +1547,17 @@ declare namespace S3 {
      */
     NoncurrentDays?: Days;
   }
+  export interface NoncurrentVersionTransition {
+    /**
+     * Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see How Amazon S3 Calculates When an Object Became Noncurrent in the Amazon Simple Storage Service Developer Guide.
+     */
+    NoncurrentDays?: Days;
+    /**
+     * The class of storage used to store the object.
+     */
+    StorageClass?: TransitionStorageClass;
+  }
+  export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
   export interface Object {
     Key?: ObjectKey;
     LastModified?: LastModified;
@@ -1586,6 +1678,10 @@ declare namespace S3 {
     Bucket: BucketName;
     CORSConfiguration: CORSConfiguration;
     ContentMD5?: ContentMD5;
+  }
+  export interface PutBucketLifecycleConfigurationRequest {
+    Bucket: BucketName;
+    LifecycleConfiguration?: BucketLifecycleConfiguration;
   }
   export interface PutObjectAclOutput {
     RequestCharged?: RequestCharged;
@@ -1877,6 +1973,7 @@ declare namespace S3 {
     Value: Value;
   }
   export type TagCount = number;
+  export type TagSet = Tag[];
   export type TargetBucket = string;
   export interface TargetGrant {
     Grantee?: Grantee;

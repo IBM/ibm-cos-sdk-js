@@ -23,7 +23,7 @@ You'll need:
   * Service endpoint
   * **Node 4.0++**.
 
-These values can be found in the Bluemix UI by [generating a 'service credential'](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html).
+These values can be found in the IBM Cloud Console by [generating a 'service credential'](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html).
 
 ## Getting the SDK
 The preferred way to install the IBM COS SDK for Node.js is to use the
@@ -34,28 +34,9 @@ into a terminal window:
 npm install ibm-cos-sdk
 ```
 
-## Using a Service Credential (New)
+## Using a Service Credential
 
-Starting in release 1.2.0 you can source credentials directly from a [Service Credential](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html) JSON document generated in the IBM Cloud console saved to `~/.bluemix/cos_credentials`. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain [HMAC keys](https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html) the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.
-
-
-## Deprecation Notice
-
-Deprecation Notice for IBM Cloud Object Storage Java and Python SDK Versions 1.x
-
-As of March 31, 2018, IBM will no longer add new features to the IBM Cloud Object Storage Java SDK Versions 1.x and the IBM Cloud Object Storage Python SDK Versions 1.x.  We will continue to provide critical bug fixes to the 1.x releases through May 31, 2018.
-
-Versions 1.x for Java and Python SDK will no longer be supported after May 31, 2018.
-
-If you are using the 1.x version of the Java or Python SDK, please upgrade to the latest IBM Cloud Object Storage SDK versions 2.x.  Instructions on how to upgrade from SDK Java and Python 1.x can be found in the "Migrating from 1.x.x" section of corresponding Readme.
-
-Note: The IBM Cloud Object Storage Node.js SDK is NOT affected by this change.
-
-For questions, please open an issue:
-
-[Java](https://github.com/ibm/ibm-cos-sdk-java/issues/new)
-
-[Python](https://github.com/ibm/ibm-cos-sdk-python/issues/new)
+You can source credentials directly from a [Service Credential](https://console.bluemix.net/docs/services/cloud-object-storage/iam/service-credentials.html) JSON document generated in the IBM Cloud console saved to `~/.bluemix/cos_credentials`. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain [HMAC keys](https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html) the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.
 
 
 ## Example code
@@ -120,13 +101,17 @@ doCreateBucket()
     });
 ```
 
+## Archive Tier Support (New)
+You can automatically archive objects after a specified length of time or after a specified date.  Once archived, a temporary copy of an object can be restored for access as needed.  Restore time may take up to 15 hours.
+
+An archive policy is set at the bucket level by calling the `putBucketLifecycle` method on a client instance. A newly added or modified archive policy applies to new objects uploaded and does not affect existing objects.  For more detail, [see the documentation](https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#node).
 
 ## Getting Help
 Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:
 
-* Read a quick start guide in [Bluemix Docs](https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#node-js).
+* Read a quick start guide in [IBM Cloud Docs](https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#node-js).
 * Ask a question on [Stack Overflow](https://stackoverflow.com/) and tag it with ``ibm`` and ``object-storage``.
-* Open a support ticket with [IBM Bluemix Support](https://support.ng.bluemix.net/gethelp/)
+* Open a support ticket with [IBM Cloud Support](https://support.ng.bluemix.net/gethelp/)
 * If it turns out that you may have found a bug, please [open an issue](https://github.com/ibm/ibm-cos-sdk-js/issues/new).
 
 
