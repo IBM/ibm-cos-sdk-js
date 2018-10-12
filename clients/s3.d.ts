@@ -71,6 +71,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the lifecycle configuration from the bucket.
+   */
+  deleteBucketLifecycle(params: S3.Types.DeleteBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the lifecycle configuration from the bucket.
+   */
+  deleteBucketLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
@@ -223,6 +231,14 @@ declare class S3 extends S3Customizations {
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
   /**
+   * Restores an archived copy of an object back into Amazon S3
+   */
+  restoreObject(params: S3.Types.RestoreObjectRequest, callback?: (err: AWSError, data: S3.Types.RestoreObjectOutput) => void): Request<S3.Types.RestoreObjectOutput, AWSError>;
+  /**
+   * Restores an archived copy of an object back into Amazon S3
+   */
+  restoreObject(callback?: (err: AWSError, data: S3.Types.RestoreObjectOutput) => void): Request<S3.Types.RestoreObjectOutput, AWSError>;
+  /**
    * Uploads a part in a multipart upload.Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, IBM COS frees up the parts storage and stops charging you for the parts storage.
    */
   uploadPart(params: S3.Types.UploadPartRequest, callback?: (err: AWSError, data: S3.Types.UploadPartOutput) => void): Request<S3.Types.UploadPartOutput, AWSError>;
@@ -321,7 +337,7 @@ declare namespace S3 {
   export interface BucketLifecycleConfiguration {
     Rules: LifecycleRules;
   }
-  export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
+  export type BucketLocationConstraint = "us-standard"|"us-vault"|"us-cold"|"us-flex"|"us-east-standard"|"us-east-vault"|"us-east-cold"|"us-east-flex"|"us-south-standard"|"us-south-vault"|"us-south-cold"|"us-south-flex"|"eu-standard"|"eu-vault"|"eu-cold"|"eu-flex"|"eu-gb-standard"|"eu-gb-vault"|"eu-gb-cold"|"eu-gb-flex"|"eu-de-standard"|"eu-de-vault"|"eu-de-cold"|"eu-de-flex"|"ap-standard"|"ap-vault"|"ap-cold"|"ap-flex"|"ams03-standard"|"ams03-vault"|"ams03-cold"|"ams03-flex"|"che01-standard"|"che01-vault"|"che01-cold"|"che01-flex"|"mel01-standard"|"mel01-vault"|"mel01-cold"|"mel01-flex"|"osl01-standard"|"osl01-vault"|"osl01-cold"|"osl01-flex"|"sao01-standard"|"sao01-vault"|"sao01-cold"|"sao01-flex"|"tor01-standard"|"tor01-vault"|"tor01-cold"|"tor01-flex"|string;
   export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE"|string;
   export type BucketName = string;
   export type Buckets = Bucket[];
@@ -755,6 +771,9 @@ declare namespace S3 {
   export interface DeleteBucketCorsRequest {
     Bucket: BucketName;
   }
+  export interface DeleteBucketLifecycleRequest {
+    Bucket: BucketName;
+  }
   export interface DeleteBucketRequest {
     Bucket: BucketName;
   }
@@ -1067,6 +1086,12 @@ declare namespace S3 {
      */
     PartNumber?: PartNumber;
   }
+  export interface GlacierJobParameters {
+    /**
+     * Glacier retrieval tier at which the restore will be processed.
+     */
+    Tier: Tier;
+  }
   export interface Grant {
     Grantee?: Grantee;
     /**
@@ -1184,6 +1209,14 @@ declare namespace S3 {
      * The count of parts this object has.
      */
     PartsCount?: PartsCount;
+    /**
+     * Provides information of the transition storage class and time of transition.
+     */
+    Transition?: Transition;
+    /**
+     * This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+     */
+    TemporaryCopyStorageClass?: TemporaryCopyStorageClass;
   }
   export interface HeadObjectRequest {
     Bucket: BucketName;
@@ -1920,6 +1953,10 @@ declare namespace S3 {
      * Lifetime of the active copy in days
      */
     Days: Days;
+    /**
+     * Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation.
+     */
+    GlacierJobParameters?: GlacierJobParameters;
   }
   export type Role = string;
   export interface RoutingRule {
@@ -1960,6 +1997,7 @@ declare namespace S3 {
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;
   export type Size = number;
   export type StartAfter = string;
+  export type TemporaryCopyStorageClass = "STANDARD"|"GLACIER"|string;
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
   export type Suffix = string;
   export interface Tag {
@@ -1996,12 +2034,16 @@ declare namespace S3 {
      */
     Days?: Days;
     /**
+     * This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+     */
+    TemporaryCopyStorageClass?: TransitionStorageClass;
+    /**
      * The class of storage used to store the object.
      */
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|string;
+  export type TransitionStorageClass = "GLACIER"|"STANDARD"|string;
   export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group"|string;
   export type URI = string;
   export type UploadIdMarker = string;

@@ -1,3 +1,8 @@
+## 1.3.1
+### Features
+* COSSDK-43259: https://github.com/IBM/ibm-cos-sdk-js/issues/28
+* Documentation update
+
 ## 1.3.0
 ### Features
 * Archive Tier Support
