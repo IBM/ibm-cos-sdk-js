@@ -1,3 +1,7 @@
+## 1.3.2
+### Features
+* Defect Fixes
+
 ## 1.3.1
 ### Features
 * COSSDK-43259: https://github.com/IBM/ibm-cos-sdk-js/issues/28
