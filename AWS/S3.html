@@ -484,6 +484,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deleteBucketLifecycle-property" title="deleteBucketLifecycle"><strong>deleteBucketLifecycle</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes the lifecycle configuration from the bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#deleteObject-property" title="deleteObject"><strong>deleteObject</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -576,6 +601,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the cors configuration for the bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getBucketLifecycleConfiguration-property" title="getBucketLifecycleConfiguration"><strong>getBucketLifecycleConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the lifecycle configuration information set on the bucket.</p>
 </div></span>
   
 </li>
@@ -884,6 +934,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#putBucketLifecycleConfiguration-property" title="putBucketLifecycleConfiguration"><strong>putBucketLifecycleConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets lifecycle configuration for your bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#putObject-property" title="putObject"><strong>putObject</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -926,6 +1001,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restoreObject-property" title="restoreObject"><strong>restoreObject</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Restores an archived copy of an object back into Amazon S3.</p>
 </div></span>
   
 </li>
@@ -2233,7 +2333,7 @@ subsequent event callback registration.</p>
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   ACL: &#39;private | public-read | public-read-write | authenticated-read&#39;,
   CreateBucketConfiguration: {
-    LocationConstraint: &#39;EU | eu-west-1 | us-west-1 | us-west-2 | ap-south-1 | ap-southeast-1 | ap-southeast-2 | ap-northeast-1 | sa-east-1 | cn-north-1 | eu-central-1&#39;
+    LocationConstraint: &#39;us-standard | us-vault | us-cold | us-flex | us-east-standard | us-east-vault | us-east-cold | us-east-flex | us-south-standard | us-south-vault | us-south-cold | us-south-flex | eu-standard | eu-vault | eu-cold | eu-flex | eu-gb-standard | eu-gb-vault | eu-gb-cold | eu-gb-flex | eu-de-standard | eu-de-vault | eu-de-cold | eu-de-flex | ap-standard | ap-vault | ap-cold | ap-flex | ams03-standard | ams03-vault | ams03-cold | ams03-flex | che01-standard | che01-vault | che01-cold | che01-flex | mel01-standard | mel01-vault | mel01-cold | mel01-flex | osl01-standard | osl01-vault | osl01-cold | osl01-flex | sao01-standard | sao01-vault | sao01-cold | sao01-flex | tor01-standard | tor01-vault | tor01-cold | tor01-flex&#39;
   },
   GrantFullControl: &#39;STRING_VALUE&#39;,
   GrantRead: &#39;STRING_VALUE&#39;,
@@ -2282,17 +2382,58 @@ s3.createBucket(params, function(err, data) {
  Possible values include:
 
 <ul>
-<li><code>"EU"</code></li>
-<li><code>"eu-west-1"</code></li>
-<li><code>"us-west-1"</code></li>
-<li><code>"us-west-2"</code></li>
-<li><code>"ap-south-1"</code></li>
-<li><code>"ap-southeast-1"</code></li>
-<li><code>"ap-southeast-2"</code></li>
-<li><code>"ap-northeast-1"</code></li>
-<li><code>"sa-east-1"</code></li>
-<li><code>"cn-north-1"</code></li>
-<li><code>"eu-central-1"</code></li>
+<li><code>"us-standard"</code></li>
+<li><code>"us-vault"</code></li>
+<li><code>"us-cold"</code></li>
+<li><code>"us-flex"</code></li>
+<li><code>"us-east-standard"</code></li>
+<li><code>"us-east-vault"</code></li>
+<li><code>"us-east-cold"</code></li>
+<li><code>"us-east-flex"</code></li>
+<li><code>"us-south-standard"</code></li>
+<li><code>"us-south-vault"</code></li>
+<li><code>"us-south-cold"</code></li>
+<li><code>"us-south-flex"</code></li>
+<li><code>"eu-standard"</code></li>
+<li><code>"eu-vault"</code></li>
+<li><code>"eu-cold"</code></li>
+<li><code>"eu-flex"</code></li>
+<li><code>"eu-gb-standard"</code></li>
+<li><code>"eu-gb-vault"</code></li>
+<li><code>"eu-gb-cold"</code></li>
+<li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-de-standard"</code></li>
+<li><code>"eu-de-vault"</code></li>
+<li><code>"eu-de-cold"</code></li>
+<li><code>"eu-de-flex"</code></li>
+<li><code>"ap-standard"</code></li>
+<li><code>"ap-vault"</code></li>
+<li><code>"ap-cold"</code></li>
+<li><code>"ap-flex"</code></li>
+<li><code>"ams03-standard"</code></li>
+<li><code>"ams03-vault"</code></li>
+<li><code>"ams03-cold"</code></li>
+<li><code>"ams03-flex"</code></li>
+<li><code>"che01-standard"</code></li>
+<li><code>"che01-vault"</code></li>
+<li><code>"che01-cold"</code></li>
+<li><code>"che01-flex"</code></li>
+<li><code>"mel01-standard"</code></li>
+<li><code>"mel01-vault"</code></li>
+<li><code>"mel01-cold"</code></li>
+<li><code>"mel01-flex"</code></li>
+<li><code>"osl01-standard"</code></li>
+<li><code>"osl01-vault"</code></li>
+<li><code>"osl01-cold"</code></li>
+<li><code>"osl01-flex"</code></li>
+<li><code>"sao01-standard"</code></li>
+<li><code>"sao01-vault"</code></li>
+<li><code>"sao01-cold"</code></li>
+<li><code>"sao01-flex"</code></li>
+<li><code>"tor01-standard"</code></li>
+<li><code>"tor01-vault"</code></li>
+<li><code>"tor01-cold"</code></li>
+<li><code>"tor01-flex"</code></li>
 </ul>
 </li>
 </ul>
@@ -2972,6 +3113,163 @@ subsequent event callback registration.</p>
   Bucket: &#39;STRING_VALUE&#39; /* required */
 };
 s3.deleteBucketCors(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deleteBucketLifecycle-property">
+  
+    <strong>deleteBucketLifecycle</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes the lifecycle configuration from the bucket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deleteBucketLifecycle operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.deleteBucketLifecycle(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
   else     console.log(data);           // successful response
 });</code></pre>
@@ -3851,6 +4149,266 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getBucketLifecycleConfiguration-property">
+  
+    <strong>getBucketLifecycleConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the lifecycle configuration information set on the bucket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getBucketLifecycleConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.getBucketLifecycleConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>Rules</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Expiration</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>ExpiredObjectDeleteMarker</code> &mdash; (<code>Boolean</code>)  Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.</li>
+</ul>
+</li>
+<li><code>ID</code> &mdash; (<code>String</code>)  Unique identifier for the rule. The value cannot be longer than 255 characters.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.</li>
+<li><code>Filter</code> &mdash; (<code>map</code>)  The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  Prefix identifying one or more objects to which the rule applies.</li>
+<li><code>Tag</code> &mdash; (<code>map</code>)  This tag must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+<li><code>And</code> &mdash; (<code>map</code>)  This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+<li><code>Tags</code> &mdash; (<code>Array&lt;map&gt;</code>)  All of these tags must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Disabled"</code></li>
+</ul>
+</li>
+<li><code>Transitions</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>NoncurrentVersionTransitions</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>NoncurrentVersionExpiration</code> &mdash; (<code>map</code>)  Specifies when noncurrent object versions expire. Upon expiration, IBM COS permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that IBM COS delete noncurrent object versions at a specific period in the object's lifetime.
+
+<ul>
+<li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  Specifies the number of days an object is noncurrent before IBM COS can perform the associated action.</li>
+</ul>
+</li>
+<li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+
+<ul>
+<li><code>DaysAfterInitiation</code> &mdash; (<code>Integer</code>)  Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="getBucketLocation-property">
   
     <strong>getBucketLocation</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -3979,17 +4537,58 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
-<li><code>"EU"</code></li>
-<li><code>"eu-west-1"</code></li>
-<li><code>"us-west-1"</code></li>
-<li><code>"us-west-2"</code></li>
-<li><code>"ap-south-1"</code></li>
-<li><code>"ap-southeast-1"</code></li>
-<li><code>"ap-southeast-2"</code></li>
-<li><code>"ap-northeast-1"</code></li>
-<li><code>"sa-east-1"</code></li>
-<li><code>"cn-north-1"</code></li>
-<li><code>"eu-central-1"</code></li>
+<li><code>"us-standard"</code></li>
+<li><code>"us-vault"</code></li>
+<li><code>"us-cold"</code></li>
+<li><code>"us-flex"</code></li>
+<li><code>"us-east-standard"</code></li>
+<li><code>"us-east-vault"</code></li>
+<li><code>"us-east-cold"</code></li>
+<li><code>"us-east-flex"</code></li>
+<li><code>"us-south-standard"</code></li>
+<li><code>"us-south-vault"</code></li>
+<li><code>"us-south-cold"</code></li>
+<li><code>"us-south-flex"</code></li>
+<li><code>"eu-standard"</code></li>
+<li><code>"eu-vault"</code></li>
+<li><code>"eu-cold"</code></li>
+<li><code>"eu-flex"</code></li>
+<li><code>"eu-gb-standard"</code></li>
+<li><code>"eu-gb-vault"</code></li>
+<li><code>"eu-gb-cold"</code></li>
+<li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-de-standard"</code></li>
+<li><code>"eu-de-vault"</code></li>
+<li><code>"eu-de-cold"</code></li>
+<li><code>"eu-de-flex"</code></li>
+<li><code>"ap-standard"</code></li>
+<li><code>"ap-vault"</code></li>
+<li><code>"ap-cold"</code></li>
+<li><code>"ap-flex"</code></li>
+<li><code>"ams03-standard"</code></li>
+<li><code>"ams03-vault"</code></li>
+<li><code>"ams03-cold"</code></li>
+<li><code>"ams03-flex"</code></li>
+<li><code>"che01-standard"</code></li>
+<li><code>"che01-vault"</code></li>
+<li><code>"che01-cold"</code></li>
+<li><code>"che01-flex"</code></li>
+<li><code>"mel01-standard"</code></li>
+<li><code>"mel01-vault"</code></li>
+<li><code>"mel01-cold"</code></li>
+<li><code>"mel01-flex"</code></li>
+<li><code>"osl01-standard"</code></li>
+<li><code>"osl01-vault"</code></li>
+<li><code>"osl01-cold"</code></li>
+<li><code>"osl01-flex"</code></li>
+<li><code>"sao01-standard"</code></li>
+<li><code>"sao01-vault"</code></li>
+<li><code>"sao01-cold"</code></li>
+<li><code>"sao01-flex"</code></li>
+<li><code>"tor01-standard"</code></li>
+<li><code>"tor01-vault"</code></li>
+<li><code>"tor01-cold"</code></li>
+<li><code>"tor01-flex"</code></li>
 </ul>
 </li>
 </ul>
@@ -5030,6 +5629,37 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
+<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"STANDARD"</code></li>
+<li><code>"GLACIER"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -6382,6 +7012,320 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="putBucketLifecycleConfiguration-property">
+  
+    <strong>putBucketLifecycleConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketLifecycleConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  LifecycleConfiguration: {
+    Rules: [ /* required */
+      {
+        Status: &#39;Enabled | Disabled&#39;, /* required */
+        AbortIncompleteMultipartUpload: {
+          DaysAfterInitiation: 0
+        },
+        Expiration: {
+          Date: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+          Days: 0,
+          ExpiredObjectDeleteMarker: true || false
+        },
+        Filter: {
+          And: {
+            Prefix: &#39;STRING_VALUE&#39;,
+            Tags: [
+              {
+                Key: &#39;STRING_VALUE&#39;, /* required */
+                Value: &#39;STRING_VALUE&#39; /* required */
+              },
+              /* more items */
+            ]
+          },
+          Prefix: &#39;STRING_VALUE&#39;,
+          Tag: {
+            Key: &#39;STRING_VALUE&#39;, /* required */
+            Value: &#39;STRING_VALUE&#39; /* required */
+          }
+        },
+        ID: &#39;STRING_VALUE&#39;,
+        NoncurrentVersionExpiration: {
+          NoncurrentDays: 0
+        },
+        NoncurrentVersionTransitions: [
+          {
+            NoncurrentDays: 0,
+            StorageClass: &#39;GLACIER | STANDARD&#39;
+          },
+          /* more items */
+        ],
+        Prefix: &#39;STRING_VALUE&#39;,
+        Transitions: [
+          {
+            Date: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+            Days: 0,
+            StorageClass: &#39;GLACIER | STANDARD&#39;,
+            TemporaryCopyStorageClass: &#39;GLACIER | STANDARD&#39;
+          },
+          /* more items */
+        ]
+      },
+      /* more items */
+    ]
+  }
+};
+s3.putBucketLifecycleConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>LifecycleConfiguration</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>Rules</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Expiration</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>ExpiredObjectDeleteMarker</code> &mdash; (<code>Boolean</code>)  Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.</li>
+</ul>
+</li>
+<li><code>ID</code> &mdash; (<code>String</code>)  Unique identifier for the rule. The value cannot be longer than 255 characters.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.</li>
+<li><code>Filter</code> &mdash; (<code>map</code>)  The Filter is used to identify objects that a Lifecycle Rule applies to. A Filter must have exactly one of Prefix, Tag, or And specified.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  Prefix identifying one or more objects to which the rule applies.</li>
+<li><code>Tag</code> &mdash; (<code>map</code>)  This tag must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+<li><code>And</code> &mdash; (<code>map</code>)  This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+<li><code>Tags</code> &mdash; (<code>Array&lt;map&gt;</code>)  All of these tags must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Disabled"</code></li>
+</ul>
+</li>
+<li><code>Transitions</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>NoncurrentVersionTransitions</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>NoncurrentVersionExpiration</code> &mdash; (<code>map</code>)  Specifies when noncurrent object versions expire. Upon expiration, IBM COS permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that IBM COS delete noncurrent object versions at a specific period in the object's lifetime.
+
+<ul>
+<li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  Specifies the number of days an object is noncurrent before IBM COS can perform the associated action.</li>
+</ul>
+</li>
+<li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+
+<ul>
+<li><code>DaysAfterInitiation</code> &mdash; (<code>Integer</code>)  Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="putObject-property">
   
     <strong>putObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -6777,6 +7721,205 @@ s3.putObjectAcl(params, function(err, data) {
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  Allows grantee to write the ACL for the applicable bucket.</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>RequestCharged</code> &mdash; (<code>String</code>)  If present, indicates that the requester was successfully charged for the request.
+ Possible values include:
+
+<ul>
+<li><code>"requester"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restoreObject-property">
+  
+    <strong>restoreObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Restores an archived copy of an object back into Amazon S3</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the restoreObject operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  RestoreRequest: {
+    Days: 0, /* required */
+    GlacierJobParameters: {
+      Tier: &#39;Standard | Bulk | Expedited&#39; /* required */
+    }
+  },
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.restoreObject(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)</li>
+<li><code>RestoreRequest</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)  Lifetime of the active copy in days</li>
+<li><code>GlacierJobParameters</code> &mdash; (<code>map</code>)  Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation.
+
+<ul>
+<li><code>Tier</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Glacier retrieval tier at which the restore will be processed.
+ Possible values include:
+
+<ul>
+<li><code>"Standard"</code></li>
+<li><code>"Bulk"</code></li>
+<li><code>"Expedited"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -8204,6 +9347,37 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
+<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"STANDARD"</code></li>
+<li><code>"GLACIER"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -8415,6 +9589,37 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
+<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"GLACIER"</code></li>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+ Possible values include:
+
+<ul>
+<li><code>"STANDARD"</code></li>
+<li><code>"GLACIER"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -8464,7 +9669,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Fri Aug  3 14:14:21 2018 by
+  Generated on Wed Oct 31 09:33:58 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.7).
 </div>
