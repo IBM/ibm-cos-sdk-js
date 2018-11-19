@@ -23,6 +23,14 @@ declare class S3 extends S3Customizations {
    */
   abortMultipartUpload(callback?: (err: AWSError, data: S3.Types.AbortMultipartUploadOutput) => void): Request<S3.Types.AbortMultipartUploadOutput, AWSError>;
   /**
+   * Add a legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.
+   */
+  addLegalHold(params: S3.Types.LegalHoldRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add a legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.
+   */
+  addLegalHold(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Completes a multipart upload by assembling previously uploaded parts.
    */
   completeMultipartUpload(params: S3.Types.CompleteMultipartUploadRequest, callback?: (err: AWSError, data: S3.Types.CompleteMultipartUploadOutput) => void): Request<S3.Types.CompleteMultipartUploadOutput, AWSError>;
@@ -71,6 +79,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Remove Legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.
+   */
+  deleteLegalHold(params: S3.Types.LegalHoldRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove Legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.
+   */
+  deleteLegalHold(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the lifecycle configuration from the bucket.
    */
   deleteBucketLifecycle(params: S3.Types.DeleteBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -94,6 +110,14 @@ declare class S3 extends S3Customizations {
    * This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.
    */
   deleteObjects(callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
+  /**
+   * This implementation of the POST operation uses the extendRetention sub-resource to extend the retention period of a protected object in a protected vault.
+   */
+  extendObjectRetention(params: S3.Types.ExtendObjectRetentionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This implementation of the POST operation uses the extendRetention sub-resource to extend the retention period of a protected object in a protected vault.
+   */
+  extendObjectRetention(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Gets the access control policy for the bucket.
    */
@@ -126,6 +150,14 @@ declare class S3 extends S3Customizations {
    * Returns the region the bucket resides in.
    */
   getBucketLocation(callback?: (err: AWSError, data: S3.Types.GetBucketLocationOutput) => void): Request<S3.Types.GetBucketLocationOutput, AWSError>;
+  /**
+   * Returns the protection configuration of a bucket.
+   */
+  getBucketProtectionConfiguration(params: S3.Types.GetBucketProtectionConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketProtectionConfigurationOutput) => void): Request<S3.Types.GetBucketProtectionConfigurationOutput, AWSError>;
+  /**
+   * Returns the protection configuration of a bucket.
+   */
+  getBucketProtectionConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketProtectionConfigurationOutput) => void): Request<S3.Types.GetBucketProtectionConfigurationOutput, AWSError>;
   /**
    * Retrieves objects from IBM COS.
    */
@@ -167,6 +199,14 @@ declare class S3 extends S3Customizations {
    */
   listBuckets(callback?: (err: AWSError, data: S3.Types.ListBucketsOutput) => void): Request<S3.Types.ListBucketsOutput, AWSError>;
   /**
+   * Returns a list of legal holds on an object
+   */
+  listLegalHolds(params: S3.Types.ListLegalHoldsRequest, callback?: (err: AWSError, data: S3.Types.ListLegalHoldsOutput) => void): Request<S3.Types.ListLegalHoldsOutput, AWSError>;
+  /**
+   * Returns a list of legal holds on an object
+   */
+  listLegalHolds(callback?: (err: AWSError, data: S3.Types.ListLegalHoldsOutput) => void): Request<S3.Types.ListLegalHoldsOutput, AWSError>;
+  /**
    * This operation lists in-progress multipart uploads.
    */
   listMultipartUploads(params: S3.Types.ListMultipartUploadsRequest, callback?: (err: AWSError, data: S3.Types.ListMultipartUploadsOutput) => void): Request<S3.Types.ListMultipartUploadsOutput, AWSError>;
@@ -206,6 +246,14 @@ declare class S3 extends S3Customizations {
    * Sets the cors configuration for a bucket.
    */
   putBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the protection configuration of an existing bucket.
+   */
+  putBucketProtectionConfiguration(params: S3.Types.PutBucketProtectionConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the protection configuration of an existing bucket.
+   */
+  putBucketProtectionConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
    */
@@ -316,6 +364,7 @@ declare namespace S3 {
     Owner?: Owner;
   }
   export type AccountId = string;
+  export type AdditionalRetentionPeriod = number;
   export type AllowedHeader = string;
   export type AllowedHeaders = AllowedHeader[];
   export type AllowedMethod = string;
@@ -340,6 +389,17 @@ declare namespace S3 {
   export type BucketLocationConstraint = "us-standard"|"us-vault"|"us-cold"|"us-flex"|"us-east-standard"|"us-east-vault"|"us-east-cold"|"us-east-flex"|"us-south-standard"|"us-south-vault"|"us-south-cold"|"us-south-flex"|"eu-standard"|"eu-vault"|"eu-cold"|"eu-flex"|"eu-gb-standard"|"eu-gb-vault"|"eu-gb-cold"|"eu-gb-flex"|"eu-de-standard"|"eu-de-vault"|"eu-de-cold"|"eu-de-flex"|"ap-standard"|"ap-vault"|"ap-cold"|"ap-flex"|"ams03-standard"|"ams03-vault"|"ams03-cold"|"ams03-flex"|"che01-standard"|"che01-vault"|"che01-cold"|"che01-flex"|"mel01-standard"|"mel01-vault"|"mel01-cold"|"mel01-flex"|"osl01-standard"|"osl01-vault"|"osl01-cold"|"osl01-flex"|"sao01-standard"|"sao01-vault"|"sao01-cold"|"sao01-flex"|"tor01-standard"|"tor01-vault"|"tor01-cold"|"tor01-flex"|string;
   export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE"|string;
   export type BucketName = string;
+  export interface BucketProtectionDefaultRetention {
+    Days: Days;
+  }
+  export interface BucketProtectionMaximumRetention {
+    Days: Days;
+  }
+  export interface BucketProtectionMinimumRetention {
+    Days: Days;
+  }
+  export type BucketProtectionStatus = "Retention"|string;
+  export type BucketProtectionEnablePermanentRetention = boolean;
   export type Buckets = Bucket[];
   export interface CORSConfiguration {
     CORSRules: CORSRules;
@@ -403,6 +463,18 @@ declare namespace S3 {
     Bucket: BucketName;
     Key: ObjectKey;
     MultipartUpload?: CompletedMultipartUpload;
+    /**
+     * Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.
+     */
+    RetentionExpirationDate?: RetentionExpirationDate;
+    /**
+     * A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.
+     */
+    RetentionLegalHoldId?: RetentionLegalHoldID;
+    /**
+     * Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.
+     */
+    RetentionPeriod?: RetentionPeriod;
     UploadId: MultipartUploadId;
   }
   export interface CompletedMultipartUpload {
@@ -539,6 +611,22 @@ declare namespace S3 {
      * Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
      */
     MetadataDirective?: MetadataDirective;
+    /**
+     * This header controls how the Protection state of the source object is copied to the destination object.If copied, the retention period and all legal holds are copied onto the new object. The legal hold date's is set to the date of the copy.
+     */
+    RetentionDirective?: RetentionDirective;
+    /**
+     * Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.
+     */
+    RetentionExpirationDate?: RetentionExpirationDate;
+    /**
+     * A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.
+     */
+    RetentionLegalHoldId?: RetentionLegalHoldID;
+    /**
+     * Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.
+     */
+    RetentionPeriod?: RetentionPeriod;
     /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
      */
@@ -876,6 +964,15 @@ declare namespace S3 {
   export type Expires = Date;
   export type ExposeHeader = string;
   export type ExposeHeaders = ExposeHeader[];
+  export interface ExtendObjectRetentionRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    AdditionalRetentionPeriod?: AdditionalRetentionPeriod;
+    ExtendRetentionFromCurrentTime?: ExtendRetentionFromCurrentTime;
+    NewRetentionExpirationDate?: NewRetentionExpirationDate;
+    NewRetentionPeriod?: NewRetentionPeriod;
+  }
+  export type ExtendRetentionFromCurrentTime = number;
   export type FetchOwner = boolean;
   export interface FilterRule {
     /**
@@ -913,6 +1010,31 @@ declare namespace S3 {
     LocationConstraint?: BucketLocationConstraint;
   }
   export interface GetBucketLocationRequest {
+    Bucket: BucketName;
+  }
+  export interface GetBucketProtectionConfigurationOutput {
+    /**
+     * Retention status of a bucket.
+     */
+    Status?: BucketProtectionStatus;
+    /**
+     * Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
+     */
+    MinimumRetention?: BucketProtectionMinimumRetention;
+    /**
+     * Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
+     */
+    DefaultRetention?: BucketProtectionDefaultRetention;
+    /**
+     * Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
+     */
+    MaximumRetention?: BucketProtectionMaximumRetention;
+    /**
+     * Enable permanent retention for an object.
+     */
+    EnablePermanentRetention?: BucketProtectionEnablePermanentRetention;
+  }
+  export interface GetBucketProtectionConfigurationRequest {
     Bucket: BucketName;
   }
   export interface GetObjectAclOutput {
@@ -1000,6 +1122,22 @@ declare namespace S3 {
      * A map of metadata to store with the object in S3.
      */
     Metadata?: Metadata;
+    /**
+     * Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.
+     */
+    RetentionExpirationDate?: RetentionExpirationDate;
+    /**
+     * Returns the count of legal holds on the object. If there are no legal holds, the header is not returned
+     */
+    RetentionLegalHoldCount?: RetentionLegalHoldCount;
+    /**
+     * Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * The source of the retention period stored for the object
+     */
+    RetentionPeriodSource?: RetentionPeriodSource;
     /**
      * If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
      */
@@ -1193,6 +1331,22 @@ declare namespace S3 {
      */
     Metadata?: Metadata;
     /**
+     * Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.
+     */
+    RetentionExpirationDate?: RetentionExpirationDate;
+    /**
+     * Returns the count of legal holds on the object. If there are no legal holds, the header is not returned
+     */
+    RetentionLegalHoldCount?: RetentionLegalHoldCount;
+    /**
+     * Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
+     * The source of the retention period stored for the object
+     */
+    RetentionPeriodSource?: RetentionPeriodSource;
+    /**
      * If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
@@ -1296,6 +1450,17 @@ declare namespace S3 {
   export type KeyMarker = string;
   export type KeyPrefixEquals = string;
   export type LastModified = Date;
+  export interface LegalHold {
+    Date?: _Date;
+    ID?: LegalHoldID;
+  }
+  export type LegalHoldID = string;
+  export interface LegalHoldRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
+    RetentionLegalHoldId: RetentionLegalHoldID;
+  }
+  export type LegalHolds = LegalHold[];
   export interface LifecycleConfiguration {
     Rules: Rules;
   }
@@ -1358,6 +1523,16 @@ declare namespace S3 {
   export interface ListBucketsOutput {
     Buckets?: Buckets;
     Owner?: Owner;
+  }
+  export interface ListLegalHoldsOutput {
+    CreateTime?: _Date;
+    LegalHolds?: LegalHolds;
+    RetentionPeriod?: RetentionPeriod;
+    RetentionPeriodExpirationDate?: RetentionExpirationDate;
+  }
+  export interface ListLegalHoldsRequest {
+    Bucket: BucketName;
+    Key: ObjectKey;
   }
   export interface ListMultipartUploadsOutput {
     /**
@@ -1568,6 +1743,8 @@ declare namespace S3 {
   }
   export type MultipartUploadId = string;
   export type MultipartUploadList = MultipartUpload[];
+  export type NewRetentionExpirationDate = Date;
+  export type NewRetentionPeriod = number;
   export type NextKeyMarker = string;
   export type NextMarker = string;
   export type NextPartNumberMarker = number;
@@ -1677,6 +1854,28 @@ declare namespace S3 {
   export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
   export type Policy = string;
   export type Prefix = string;
+  export interface ProtectionConfiguration {
+    /**
+     * Retention status of a bucket.
+     */
+    Status: BucketProtectionStatus;
+    /**
+     * Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
+     */
+    MinimumRetention: BucketProtectionMinimumRetention;
+    /**
+     * Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
+     */
+    DefaultRetention: BucketProtectionDefaultRetention;
+    /**
+     * Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
+     */
+    MaximumRetention: BucketProtectionMaximumRetention;
+    /**
+     * Enable permanent retention for an object.
+     */
+    EnablePermanentRetention?: BucketProtectionEnablePermanentRetention;
+  }
   export type Protocol = "http"|"https"|string;
   export interface PutBucketAclRequest {
     /**
@@ -1711,6 +1910,13 @@ declare namespace S3 {
     Bucket: BucketName;
     CORSConfiguration: CORSConfiguration;
     ContentMD5?: ContentMD5;
+  }
+  export interface PutBucketProtectionConfigurationRequest {
+    Bucket: BucketName;
+    /**
+     * Container for setting retention settings.
+     */
+    ProtectionConfiguration: ProtectionConfiguration;
   }
   export interface PutBucketLifecycleConfigurationRequest {
     Bucket: BucketName;
@@ -1853,6 +2059,18 @@ declare namespace S3 {
      */
     Metadata?: Metadata;
     /**
+     * Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.
+     */
+    RetentionExpirationDate?: RetentionExpirationDate;
+    /**
+     * A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.
+     */
+    RetentionLegalHoldId?: RetentionLegalHoldID;
+    /**
+     * Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.
+     */
+    RetentionPeriod?: RetentionPeriod;
+    /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
      */
     ServerSideEncryption?: ServerSideEncryption;
@@ -1958,6 +2176,12 @@ declare namespace S3 {
      */
     GlacierJobParameters?: GlacierJobParameters;
   }
+  export type RetentionDirective = "COPY"|"REPLACE"|string;
+  export type RetentionExpirationDate = Date;
+  export type RetentionLegalHoldCount = number;
+  export type RetentionLegalHoldID = string;
+  export type RetentionPeriod = number;
+  export type RetentionPeriodSource = "Bucket"|"Object"|string;
   export type Role = string;
   export interface RoutingRule {
     /**
