@@ -174,7 +174,11 @@ doCreateBucket()
     });
 </code></pre>
 
-<h2>Archive Tier Support (New)</h2>
+<h2>Immutable Object Storage (New)</h2>
+
+<p>Users can configure buckets with an Immutable Object Storage policy to prevent objects from being modified or deleted for a defined period of time.  The retention period can be specified on a per-object basis, or objects can inherit a default retention period set on the bucket.  It is also possible to set open-ended and permanent retention periods.  Immutable Object Storage meets the rules set forth by the SEC governing record retention, and IBM Cloud administrators are unable to bypass these restrictions.  For more detail <a href="https://console.bluemix.net/docs/services/cloud-object-storage/libraries/node.html#using-node-js">see the documentation</a>.</p>
+
+<h2>Archive Tier Support</h2>
 
 <p>You can automatically archive objects after a specified length of time or after a specified date.  Once archived, a temporary copy of an object can be restored for access as needed.  Restore time may take up to 15 hours.</p>
 
@@ -201,9 +205,9 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Wed Oct 31 09:33:57 2018 by
+  Generated on Mon Nov 19 14:36:36 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.7).
+  0.8.7.6 (ruby-2.5.1).
 </div>
 
 <!-- BEGIN-SECTION -->

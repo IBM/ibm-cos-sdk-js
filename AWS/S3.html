@@ -309,6 +309,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#addLegalHold-property" title="addLegalHold"><strong>addLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add a legal hold on an object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#completeMultipartUpload-property" title="completeMultipartUpload"><strong>completeMultipartUpload</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -509,6 +534,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deleteLegalHold-property" title="deleteLegalHold"><strong>deleteLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove Legal hold on an object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#deleteObject-property" title="deleteObject"><strong>deleteObject</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -551,6 +601,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>This operation enables you to delete multiple objects from a bucket using a single HTTP request.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extendObjectRetention-property" title="extendObjectRetention"><strong>extendObjectRetention</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This implementation of the POST operation uses the extendRetention sub-resource to extend the retention period of a protected object in a protected vault.</p>
 </div></span>
   
 </li>
@@ -651,6 +726,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the region the bucket resides in.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getBucketProtectionConfiguration-property" title="getBucketProtectionConfiguration"><strong>getBucketProtectionConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the protection configuration of a bucket.</p>
 </div></span>
   
 </li>
@@ -809,6 +909,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#listLegalHolds-property" title="listLegalHolds"><strong>listLegalHolds</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of legal holds on an object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#listMultipartUploads-property" title="listMultipartUploads"><strong>listMultipartUploads</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -951,6 +1076,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Sets lifecycle configuration for your bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putBucketProtectionConfiguration-property" title="putBucketProtectionConfiguration"><strong>putBucketProtectionConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the protection configuration of an existing bucket.</p>
 </div></span>
   
 </li>
@@ -1827,6 +1977,167 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="addLegalHold-property">
+  
+    <strong>addLegalHold</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add a legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the addLegalHold operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  RetentionLegalHoldId: &#39;STRING_VALUE&#39; /* required */
+};
+s3.addLegalHold(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="completeMultipartUpload-property">
   
     <strong>completeMultipartUpload</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -1863,7 +2174,10 @@ subsequent event callback registration.</p>
       },
       /* more items */
     ]
-  }
+  },
+  RetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
+  RetentionPeriod: 0
 };
 s3.completeMultipartUpload(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -1901,6 +2215,9 @@ s3.completeMultipartUpload(params, function(err, data) {
 </li>
 </ul>
 </li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)  A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
 <li><code>UploadId</code> &mdash; (<code>String</code>)</li>
 </ul>
 
@@ -2080,6 +2397,10 @@ subsequent event callback registration.</p>
     /* anotherKey: ... */
   },
   MetadataDirective: &#39;COPY | REPLACE&#39;,
+  RetentionDirective: &#39;COPY | REPLACE&#39;,
+  RetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
+  RetentionPeriod: 0,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
   SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
@@ -2148,6 +2469,17 @@ s3.copyObject(params, function(err, data) {
 <li><code>"REPLACE"</code></li>
 </ul>
 </li>
+<li><code>RetentionDirective</code> &mdash; (<code>String</code>)  This header controls how the Protection state of the source object is copied to the destination object.If copied, the retention period and all legal holds are copied onto the new object. The legal hold date's is set to the date of the copy.
+ Possible values include:
+
+<ul>
+<li><code>"COPY"</code></li>
+<li><code>"REPLACE"</code></li>
+</ul>
+</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)  A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -3399,6 +3731,167 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="deleteLegalHold-property">
+  
+    <strong>deleteLegalHold</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Remove Legal hold on an object. The legal hold identifiers are stored in the object metadata along with the timestamp of when they are POSTed to the object. The presence of any legal hold identifiers prevents the modification or deletion of the object data, even if the retention period has expired. The presence of a retention period header is required, otherwise a 400 error is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deleteLegalHold operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  RetentionLegalHoldId: &#39;STRING_VALUE&#39; /* required */
+};
+s3.deleteLegalHold(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="deleteObject-property">
   
     <strong>deleteObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -3738,6 +4231,173 @@ The <code>data</code> object has the following properties:</p>
 </li>
 </ul>
 
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="extendObjectRetention-property">
+  
+    <strong>extendObjectRetention</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This implementation of the POST operation uses the extendRetention sub-resource to extend the retention period of a protected object in a protected vault.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the extendObjectRetention operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  AdditionalRetentionPeriod: 0,
+  ExtendRetentionFromCurrentTime: 0,
+  NewRetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  NewRetentionPeriod: 0
+};
+s3.extendObjectRetention(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>AdditionalRetentionPeriod</code> &mdash; (<code>Integer</code>)</li>
+<li><code>ExtendRetentionFromCurrentTime</code> &mdash; (<code>Integer</code>)  Retention Period in seconds for the object. The Retention will be enforced from the current time until current time + the value in this header. This header will only be supported for objects that are currently stored with an indefinite retention period (-1). This value has to be within the ranges defined for the bucket.</li>
+<li><code>NewRetentionExpirationDate</code> &mdash; (<code>Date</code>)</li>
+<li><code>NewRetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period, in seconds, to use for the object in place of the existing retention period stored for the object. If this value is less than the existing value stored for the object, a 400 error will be returned. If this field and Additional-Retention-Period and/or New-Retention-Expiration-Date are specified, a 400 error will be returned. If none of the Request Headers are specified, a 400 error will be returned.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
 </div>
       
     </li>
@@ -4629,6 +5289,194 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getBucketProtectionConfiguration-property">
+  
+    <strong>getBucketProtectionConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the protection configuration of a bucket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getBucketProtectionConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.getBucketProtectionConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>Status</code> &mdash; (<code>String</code>)  Retention status of a bucket.
+ Possible values include:
+
+<ul>
+<li><code>"Retention"</code></li>
+</ul>
+</li>
+<li><code>MinimumRetention</code> &mdash; (<code>map</code>)  Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>DefaultRetention</code> &mdash; (<code>map</code>)  Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>MaximumRetention</code> &mdash; (<code>map</code>)  Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>EnablePermanentRetention</code> &mdash; (<code>Boolean</code>)  Enable permanent retention for an object.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="getObject-property">
   
     <strong>getObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -4812,6 +5660,17 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldCount</code> &mdash; (<code>Integer</code>)  Returns the count of legal holds on the object. If there are no legal holds, the header is not returned</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
+<li><code>RetentionPeriodSource</code> &mdash; (<code>String</code>)  The source of the retention period stored for the object
+ Possible values include:
+
+<ul>
+<li><code>"Bucket"</code></li>
+<li><code>"Object"</code></li>
+</ul>
+</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.</li>
@@ -5616,6 +6475,17 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldCount</code> &mdash; (<code>Integer</code>)  Returns the count of legal holds on the object. If there are no legal holds, the header is not returned</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
+<li><code>RetentionPeriodSource</code> &mdash; (<code>String</code>)  The source of the retention period stored for the object
+ Possible values include:
+
+<ul>
+<li><code>"Bucket"</code></li>
+<li><code>"Object"</code></li>
+</ul>
+</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.</li>
@@ -5862,6 +6732,180 @@ The <code>data</code> object has the following properties:</p>
 <li><code>ID</code> &mdash; (<code>String</code>)</li>
 </ul>
 </li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listLegalHolds-property">
+  
+    <strong>listLegalHolds</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of legal holds on an object</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the listLegalHolds operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39; /* required */
+};
+s3.listLegalHolds(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>CreateTime</code> &mdash; (<code>Date</code>)</li>
+<li><code>LegalHolds</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Date</code> &mdash; (<code>Date</code>)</li>
+<li><code>ID</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. The object can be neither overwritten nor deleted until the amount of time specified in the retention period has elapsed. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
+<li><code>RetentionPeriodExpirationDate</code> &mdash; (<code>Date</code>)</li>
 </ul>
 
 </div>
@@ -7326,6 +8370,207 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="putBucketProtectionConfiguration-property">
+  
+    <strong>putBucketProtectionConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the protection configuration of an existing bucket.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketProtectionConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ProtectionConfiguration: { /* required */
+    DefaultRetention: { /* required */
+      Days: 0 /* required */
+    },
+    MaximumRetention: { /* required */
+      Days: 0 /* required */
+    },
+    MinimumRetention: { /* required */
+      Days: 0 /* required */
+    },
+    Status: &#39;Retention&#39;, /* required */
+    EnablePermanentRetention: true || false
+  }
+};
+s3.putBucketProtectionConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>ProtectionConfiguration</code> &mdash; (<code>map</code>)  Container for setting retention settings.
+
+<ul>
+<li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Retention status of a bucket.
+ Possible values include:
+
+<ul>
+<li><code>"Retention"</code></li>
+</ul>
+</li>
+<li><code>MinimumRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>DefaultRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>MaximumRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
+
+<ul>
+<li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
+</ul>
+</li>
+<li><code>EnablePermanentRetention</code> &mdash; (<code>Boolean</code>)  Enable permanent retention for an object.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="putObject-property">
   
     <strong>putObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -7371,6 +8616,9 @@ subsequent event callback registration.</p>
     someKey: &#39;STRING_VALUE&#39;,
     /* anotherKey: ... */
   },
+  RetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
+  RetentionPeriod: 0,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
   SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
@@ -7429,6 +8677,9 @@ s3.putObject(params, function(err, data) {
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  Allows grantee to write the ACL for the applicable object.</li>
 <li><code>Key</code> &mdash; (<code>String</code>)  Object key for which the PUT operation was initiated.</li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)  A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -8137,6 +9388,9 @@ s3.upload(params, options, function(err, data) {
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  Allows grantee to write the ACL for the applicable object.</li>
 <li><code>Key</code> &mdash; (<code>String</code>)  Object key for which the PUT operation was initiated.</li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldId</code> &mdash; (<code>String</code>)  A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -9334,6 +10588,17 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldCount</code> &mdash; (<code>Integer</code>)  Returns the count of legal holds on the object. If there are no legal holds, the header is not returned</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
+<li><code>RetentionPeriodSource</code> &mdash; (<code>String</code>)  The source of the retention period stored for the object
+ Possible values include:
+
+<ul>
+<li><code>"Bucket"</code></li>
+<li><code>"Object"</code></li>
+</ul>
+</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.</li>
@@ -9576,6 +10841,17 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>Metadata</code> &mdash; (<code>map&lt;String&gt;</code>)  A map of metadata to store with the object in S3.</li>
+<li><code>RetentionExpirationDate</code> &mdash; (<code>Date</code>)  Date on which it will be legal to delete or modify the object. You can only specify this or the Retention-Period header. If both are specified a 400 error will be returned. If neither is specified the bucket's DefaultRetention period will be used. This header should be used to calculate a retention period in seconds and then stored in that manner.</li>
+<li><code>RetentionLegalHoldCount</code> &mdash; (<code>Integer</code>)  Returns the count of legal holds on the object. If there are no legal holds, the header is not returned</li>
+<li><code>RetentionPeriod</code> &mdash; (<code>Integer</code>)  Retention period to store on the object in seconds. If this field and Retention-Expiration-Date are specified a 400 error is returned. If neither is specified the bucket's DefaultRetention period will be used. 0 is a legal value assuming the bucket's minimum retention period is also 0.</li>
+<li><code>RetentionPeriodSource</code> &mdash; (<code>String</code>)  The source of the retention period stored for the object
+ Possible values include:
+
+<ul>
+<li><code>"Bucket"</code></li>
+<li><code>"Object"</code></li>
+</ul>
+</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  If server-side encryption with a customer-provided encryption key was requested, the response will include this header to provide round trip message integrity verification of the customer-provided encryption key.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.</li>
@@ -9669,9 +10945,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Wed Oct 31 09:33:58 2018 by
+  Generated on Mon Nov 19 14:36:36 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.7).
+  0.8.7.6 (ruby-2.5.1).
 </div>
 
 <!-- BEGIN-SECTION -->
