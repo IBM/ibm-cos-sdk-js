@@ -10,7 +10,7 @@ export class Service {
 
     /**
      * Defines a new Service class using a service identifier and list of versions including an optional set of features (functions) to apply to the class prototype.
-     * 
+     *
      * @param {string} serviceIdentifier - the identifier for the service.
      * @param {string[]} versions - a list of versions that work with this service.
      * @param {Object} features - an object to attach to the prototype.
@@ -18,16 +18,16 @@ export class Service {
     defineService(serviceIdentifier: string, versions: string[], features?: any): typeof Service;
     /**
      * Calls an operation on a service with the given input parameters.
-     * 
+     *
      * @param {string} operation - the name of the operation to call on the service.
-     * @param {map} params - a map of input options for the operation. 
+     * @param {map} params - a map of input options for the operation.
      */
     makeRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
     /**
      * Calls an operation on a service with the given input parameters, without any authentication data.
-     * 
+     *
      * @param {string} operation - the name of the operation to call on the service.
-     * @param {map} params - a map of input options for the operation. 
+     * @param {map} params - a map of input options for the operation.
      */
     makeUnauthenticatedRequest(operation: string, params?: {[key: string]: any}, callback?: (err: AWSError, data: any) => void): Request<any, AWSError>;
     /**
@@ -54,13 +54,30 @@ export class Service {
 }
 
 export interface ServiceConfigurationOptions extends ConfigurationOptions {
+
     /**
-     * The endpoint URI to send requests to. The default endpoint is built from the configured region. 
+     * Api Key retrieved from service credentials JSON in IBM Cloud
+     */
+    apiKeyId?: string;
+
+    /**
+     * Auth end-point should be https://iam.ng.bluemix.net/oidc/token
+     */
+    ibmAuthEndpoint?:string;
+
+    /**
+     * Service instance ID retrieved from service credentials JSON in IBM Cloud
+     */
+    serviceInstanceId?:string;
+
+    /**
+     * The endpoint URI to send requests to. The default endpoint is built from the configured region.
      * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com'.
      */
     endpoint?: string;
+
     /**
-     * An optional map of parameters to bind to every request sent by this service object. 
+     * An optional map of parameters to bind to every request sent by this service object.
      * For more information on bound parameters, see "Working with Services" in the Getting Started Guide.
      */
     params?: {
