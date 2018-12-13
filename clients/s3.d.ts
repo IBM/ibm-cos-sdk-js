@@ -223,6 +223,14 @@ declare class S3 extends S3Customizations {
    */
   listObjects(callback?: (err: AWSError, data: S3.Types.ListObjectsOutput) => void): Request<S3.Types.ListObjectsOutput, AWSError>;
   /**
+   * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.
+   */
+  listObjectsV2(params: S3.Types.ListObjectsV2Request, callback?: (err: AWSError, data: S3.Types.ListObjectsV2Output) => void): Request<S3.Types.ListObjectsV2Output, AWSError>;
+  /**
+   * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.
+   */
+  listObjectsV2(callback?: (err: AWSError, data: S3.Types.ListObjectsV2Output) => void): Request<S3.Types.ListObjectsV2Output, AWSError>;
+  /**
    * Lists the parts that have been uploaded for a specific multipart upload.
    */
   listParts(params: S3.Types.ListPartsRequest, callback?: (err: AWSError, data: S3.Types.ListPartsOutput) => void): Request<S3.Types.ListPartsOutput, AWSError>;
@@ -1641,6 +1649,90 @@ declare namespace S3 {
      * Limits the response to keys that begin with the specified prefix.
      */
     Prefix?: Prefix;
+  }
+  export interface ListObjectsV2Output {
+    /**
+     * A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+     */
+    IsTruncated?: IsTruncated;
+    /**
+     * Metadata about each object returned.
+     */
+    Contents?: ObjectList;
+    /**
+     * Name of the bucket to list.
+     */
+    Name?: BucketName;
+    /**
+     * Limits the response to keys that begin with the specified prefix.
+     */
+    Prefix?: Prefix;
+    /**
+     * A delimiter is a character you use to group keys.
+     */
+    Delimiter?: Delimiter;
+    /**
+     * Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter
+     */
+    CommonPrefixes?: CommonPrefixList;
+    /**
+     * Encoding type used by Amazon S3 to encode object keys in the response.
+     */
+    EncodingType?: EncodingType;
+    /**
+     * KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys 
+     */
+    KeyCount?: KeyCount;
+    /**
+     * ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+     */
+    ContinuationToken?: Token;
+    /**
+     * NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key
+     */
+    NextContinuationToken?: NextToken;
+    /**
+     * StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+     */
+    StartAfter?: StartAfter;
+  }
+  export interface ListObjectsV2Request {
+    /**
+     * Name of the bucket to list.
+     */
+    Bucket: BucketName;
+    /**
+     * A delimiter is a character you use to group keys.
+     */
+    Delimiter?: Delimiter;
+    /**
+     * Encoding type used by Amazon S3 to encode object keys in the response.
+     */
+    EncodingType?: EncodingType;
+    /**
+     * Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * Limits the response to keys that begin with the specified prefix.
+     */
+    Prefix?: Prefix;
+    /**
+     * ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+     */
+    ContinuationToken?: Token;
+    /**
+     * The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true
+     */
+    FetchOwner?: FetchOwner;
+    /**
+     * StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+     */
+    StartAfter?: StartAfter;
   }
   export interface ListPartsOutput {
     /**

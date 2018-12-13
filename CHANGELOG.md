@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+# 1.4.1
+## Content
+### Features
+* GET Bucket (List Objects) Version 2
+### Defect Fixes
+* COSSDK-47892: https://github.com/IBM/ibm-cos-sdk-js/issues/34
+* COSSDK-48042: https://github.com/IBM/ibm-cos-sdk-js/pull/36
+
+
 # 1.4.0
 ## Content
 ### Features

@@ -423,6 +423,25 @@
       "documentation": "Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.",
       "alias": "GetBucket"
     },
+    "ListObjectsV2": {
+      "name": "ListObjectsV2",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?list-type=2"
+      },
+      "input": {
+        "shape": "ListObjectsV2Request"
+      },
+      "output": {
+        "shape": "ListObjectsV2Output"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchBucket"
+        }
+      ],
+      "documentation": "<p>Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.</p>"
+    },
     "ListParts": {
       "name": "ListParts",
       "http": {
@@ -3323,6 +3342,115 @@
           "documentation": "Limits the response to keys that begin with the specified prefix.",
           "location": "querystring",
           "locationName": "prefix"
+        }
+      }
+    },
+    "ListObjectsV2Output": {
+      "type": "structure",
+      "members": {
+        "IsTruncated": {
+          "shape": "IsTruncated",
+          "documentation": "<p>A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.</p>"
+        },
+        "Contents": {
+          "shape": "ObjectList",
+          "documentation": "<p>Metadata about each object returned.</p>"
+        },
+        "Name": {
+          "shape": "BucketName",
+          "documentation": "<p>Name of the bucket to list.</p>"
+        },
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>Limits the response to keys that begin with the specified prefix.</p>"
+        },
+        "Delimiter": {
+          "shape": "Delimiter",
+          "documentation": "<p>A delimiter is a character you use to group keys.</p>"
+        },
+        "MaxKeys": {
+          "shape": "MaxKeys",
+          "documentation": "<p>Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</p>"
+        },
+        "CommonPrefixes": {
+          "shape": "CommonPrefixList",
+          "documentation": "<p>CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter</p>"
+        },
+        "EncodingType": {
+          "shape": "EncodingType",
+          "documentation": "<p>Encoding type used by Amazon S3 to encode object keys in the response.</p>"
+        },
+        "KeyCount": {
+          "shape": "KeyCount",
+          "documentation": "<p>KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys </p>"
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "<p>ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key</p>"
+        },
+        "NextContinuationToken": {
+          "shape": "NextToken",
+          "documentation": "<p>NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key</p>"
+        },
+        "StartAfter": {
+          "shape": "StartAfter",
+          "documentation": "<p>StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket</p>"
+        }
+      }
+    },
+    "ListObjectsV2Request": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>Name of the bucket to list.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "Delimiter": {
+          "shape": "Delimiter",
+          "documentation": "<p>A delimiter is a character you use to group keys.</p>",
+          "location": "querystring",
+          "locationName": "delimiter"
+        },
+        "EncodingType": {
+          "shape": "EncodingType",
+          "documentation": "<p>Encoding type used by Amazon S3 to encode object keys in the response.</p>",
+          "location": "querystring",
+          "locationName": "encoding-type"
+        },
+        "MaxKeys": {
+          "shape": "MaxKeys",
+          "documentation": "<p>Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</p>",
+          "location": "querystring",
+          "locationName": "max-keys"
+        },
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>Limits the response to keys that begin with the specified prefix.</p>",
+          "location": "querystring",
+          "locationName": "prefix"
+        },
+        "ContinuationToken": {
+          "shape": "Token",
+          "documentation": "<p>ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key</p>",
+          "location": "querystring",
+          "locationName": "continuation-token"
+        },
+        "FetchOwner": {
+          "shape": "FetchOwner",
+          "documentation": "<p>The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true</p>",
+          "location": "querystring",
+          "locationName": "fetch-owner"
+        },
+        "StartAfter": {
+          "shape": "StartAfter",
+          "documentation": "<p>StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket</p>",
+          "location": "querystring",
+          "locationName": "start-after"
         }
       }
     },

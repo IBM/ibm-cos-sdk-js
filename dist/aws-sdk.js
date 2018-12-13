@@ -1423,6 +1423,81 @@ module.exports={
       },
       "alias": "GetBucket"
     },
+    "ListObjectsV2": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?list-type=2"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          },
+          "Delimiter": {
+            "location": "querystring",
+            "locationName": "delimiter"
+          },
+          "EncodingType": {
+            "location": "querystring",
+            "locationName": "encoding-type"
+          },
+          "MaxKeys": {
+            "location": "querystring",
+            "locationName": "max-keys",
+            "type": "integer"
+          },
+          "Prefix": {
+            "location": "querystring",
+            "locationName": "prefix"
+          },
+          "ContinuationToken": {
+            "location": "querystring",
+            "locationName": "continuation-token"
+          },
+          "FetchOwner": {
+            "location": "querystring",
+            "locationName": "fetch-owner",
+            "type": "boolean"
+          },
+          "StartAfter": {
+            "location": "querystring",
+            "locationName": "start-after"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "Contents": {
+            "shape": "S9v"
+          },
+          "Name": {},
+          "Prefix": {},
+          "Delimiter": {},
+          "MaxKeys": {
+            "type": "integer"
+          },
+          "CommonPrefixes": {
+            "shape": "S9d"
+          },
+          "EncodingType": {},
+          "KeyCount": {
+            "type": "integer"
+          },
+          "ContinuationToken": {},
+          "NextContinuationToken": {},
+          "StartAfter": {}
+        }
+      }
+    },
     "ListParts": {
       "http": {
         "method": "GET",

@@ -177,6 +177,18 @@ export abstract class ConfigurationOptions {
      */
     credentialProvider?: CredentialProviderChain
     /**
+     * Api Key retrieved from service credentials JSON in IBM Cloud
+     */
+    apiKeyId?: string
+    /**
+     * Auth end-point should be https://iam.ng.bluemix.net/oidc/token
+     */
+    ibmAuthEndpoint?: string
+    /**
+     * Service instance ID retrieved from service credentials JSON in IBM Cloud
+     */
+    serviceInstanceId?: string
+    /**
      * AWS access key ID.
      * 
      * @deprecated
