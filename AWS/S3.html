@@ -984,6 +984,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#listObjectsV2-property" title="listObjectsV2"><strong>listObjectsV2</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns some or all (up to 1000) of the objects in a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#listParts-property" title="listParts"><strong>listParts</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -7402,6 +7427,236 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="listObjectsV2-property">
+  
+    <strong>listObjectsV2</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the listObjectsV2 operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ContinuationToken: &#39;STRING_VALUE&#39;,
+  Delimiter: &#39;STRING_VALUE&#39;,
+  EncodingType: &#39;url&#39;,
+  FetchOwner: true || false,
+  MaxKeys: 0,
+  Prefix: &#39;STRING_VALUE&#39;,
+  StartAfter: &#39;STRING_VALUE&#39;
+};
+s3.listObjectsV2(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>Name of the bucket to list.</p></li>
+<li><code>Delimiter</code> &mdash; (<code>String</code>)  <p>A delimiter is a character you use to group keys.</p></li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  <p>Encoding type used by Amazon S3 to encode object keys in the response.</p>
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p>Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</p></li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Limits the response to keys that begin with the specified prefix.</p></li>
+<li><code>ContinuationToken</code> &mdash; (<code>String</code>)  <p>ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key</p></li>
+<li><code>FetchOwner</code> &mdash; (<code>Boolean</code>)  <p>The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true</p></li>
+<li><code>StartAfter</code> &mdash; (<code>String</code>)  <p>StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)  <p>A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.</p></li>
+<li><code>Contents</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p>Metadata about each object returned.</p>
+
+<ul>
+<li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>LastModified</code> &mdash; (<code>Date</code>)</li>
+<li><code>ETag</code> &mdash; (<code>String</code>)</li>
+<li><code>Size</code> &mdash; (<code>Integer</code>)</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"STANDARD"</code></li>
+<li><code>"REDUCED_REDUNDANCY"</code></li>
+<li><code>"GLACIER"</code></li>
+</ul>
+</li>
+<li><code>Owner</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>DisplayName</code> &mdash; (<code>String</code>)</li>
+<li><code>ID</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Name</code> &mdash; (<code>String</code>)  <p>Name of the bucket to list.</p></li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Limits the response to keys that begin with the specified prefix.</p></li>
+<li><code>Delimiter</code> &mdash; (<code>String</code>)  <p>A delimiter is a character you use to group keys.</p></li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p>Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</p></li>
+<li><code>CommonPrefixes</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p>CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter</p>
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  <p>Encoding type used by Amazon S3 to encode object keys in the response.</p>
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+<li><code>KeyCount</code> &mdash; (<code>Integer</code>)  <p>KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys </p></li>
+<li><code>ContinuationToken</code> &mdash; (<code>String</code>)  <p>ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key</p></li>
+<li><code>NextContinuationToken</code> &mdash; (<code>String</code>)  <p>NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key</p></li>
+<li><code>StartAfter</code> &mdash; (<code>String</code>)  <p>StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="listParts-property">
   
     <strong>listParts</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -10945,7 +11200,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Nov 19 14:36:36 2018 by
+  Generated on Thu Dec 13 12:07:06 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.5.1).
 </div>
