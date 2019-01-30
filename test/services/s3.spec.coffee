@@ -89,6 +89,35 @@ describe 'AWS.S3', ->
       s3.clearBucketRegionCache()
       expect(s3.bucketRegionCache).to.eql({})
 
+
+  describe 'validateBucketName', ->
+    describe 'when encountering a "Bucket" and "Key" using sigv4', ->
+      it 'will move characters after forward slash in "Bucket" to front of "Key"', (done) ->
+        helpers.mockResponses [data: ETag: 'ETAG']
+        s3 = new AWS.S3 signatureVersion: 'v4'
+        s3.putObject
+          Bucket: 'foo/bar/dinosaur'
+          Key: 'baz'
+          Body: 'test'
+        , (err, data) ->
+          expect(this.request.params.Bucket).to.eql 'foo'
+          expect(this.request.params.Key).to.eql 'bar/dinosaur/baz'
+          expect(data).to.eql ETag: 'ETAG'
+          done()
+
+      it 'will prepend trailing slashes in "Bucket" to the "Key"', (done) ->
+        helpers.mockResponses [data: ETag: 'ETAG']
+        s3 = new AWS.S3 signatureVersion: 'v4'
+        s3.putObject
+          Bucket: 'foo/'
+          Key: ''
+          Body: 'test'
+        , (err, data) ->
+          expect(this.request.params.Bucket).to.eql 'foo'
+          expect(this.request.params.Key).to.eql '/'
+          expect(data).to.eql ETag: 'ETAG'
+          done()
+
   describe 'getSignerClass', ->
     getVersion = (signer) ->
       if (signer == AWS.Signers.S3)
@@ -97,7 +126,14 @@ describe 'AWS.S3', ->
         return 'v4'
       else if (signer == AWS.Signers.V2)
         return 'v2'
-    
+
+    describe 'will throw an error when', ->
+      it 'using sigv4 and the "Bucket" parameter starts with a forward slash', (done) ->
+        s3 = new AWS.S3 signatureVersion: 'v4'
+        s3.createBucket Bucket: '/foo', (err, data) ->
+          expect(err.code).to.eql 'InvalidBucket'
+        done()
+
     describe 'when using presigned requests', ->
       req = null
 
@@ -190,6 +226,29 @@ describe 'AWS.S3', ->
       req = build('listObjects', Bucket: 'bucket')
       expect(req.endpoint.hostname).to.equal('foo.bar')
       expect(req.path).to.equal('/bucket')
+
+    it 'allows user to use key that is substring of bucket', ->
+      req = build('putObject',
+        Bucket: 'foobar'
+        Key: 'foo')
+      expect(req.path).to.equal '/foo'
+      expect(req.virtualHostedBucket).to.equal 'foobar'
+      return
+    it 'allows user to use key that matches bucket', ->
+      req = build('putObject',
+        Bucket: 'foobar'
+        Key: 'foobar')
+      expect(req.path).to.equal '/foobar'
+      expect(req.virtualHostedBucket).to.equal 'foobar'
+      return
+    it 'allows user to use key, with querystring param, that matches bucket', ->
+      req = build('headObject',
+        Bucket: 'foobar'
+        Key: 'foobar'
+        VersionId: 'null')
+      expect(req.path).to.equal '/foobar?versionId=null'
+      expect(req.virtualHostedBucket).to.equal 'foobar'
+      return
 
     it 'does not allow non-bucket operations with s3BucketEndpoint set', ->
       s3 = new AWS.S3(endpoint: 'foo.bar', s3BucketEndpoint: true, paramValidation: true)
@@ -795,6 +854,47 @@ describe 'AWS.S3', ->
       expect(req.httpRequest.region).to.equal('eu-west-1')
       expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com')
 
+    describe 'cross-region putObject', ->
+      describe 'dualstack and s3-accelerate', ->
+        it 'includes full object key in path', ->
+          err = 
+            code: 301
+            statusCode: 301
+            region: 'eu-west-1'
+          s3 = new (AWS.S3)(
+            useAccelerateEndpoint: true
+            useDualstack: true)
+          req = request('putObject',
+            Bucket: 'test'
+            Key: 'foo/bar*_.~\-%/biz')
+          req.build()
+          retryable = s3.retryableError(err, req)
+          expect(retryable).to.equal true
+          expect(req.httpRequest.region).to.equal 'eu-west-1'
+          expect(req.httpRequest.endpoint.hostname).to.equal 'test.s3-accelerate.dualstack.amazonaws.com'
+          expect(req.httpRequest.path).to.equal '/foo/bar%2A_.~-%25/biz'
+          return
+
+        it 'includes full object key in path when bucket matches object prefix', ->
+          err = 
+            code: 301
+            statusCode: 301
+            region: 'eu-west-1'
+          s3 = new (AWS.S3)(
+            useAccelerateEndpoint: true
+            useDualstack: true)
+          req = request('putObject',
+            Bucket: 'foo'
+            Key: 'foo/bar*_.~\-%/biz')
+          req.build()
+          retryable = s3.retryableError(err, req)
+          expect(retryable).to.equal true
+          expect(req.httpRequest.region).to.equal 'eu-west-1'
+          expect(req.httpRequest.endpoint.hostname).to.equal 'foo.s3-accelerate.dualstack.amazonaws.com'
+          expect(req.httpRequest.path).to.equal '/foo/bar%2A_.~-%25/biz'
+          return
+        return
+
     it 'should retry with updated region but not endpoint if non-S3 url endpoint is specified', ->
       err = {code: 'PermanentRedirect', statusCode:301, region: 'eu-west-1'}
       s3 = new AWS.S3(endpoint: 'https://fake-custom-url.com', s3BucketEndpoint: true)
@@ -1260,9 +1360,10 @@ describe 'AWS.S3', ->
   AWS.util.each AWS.S3.prototype.computableChecksumOperations, (operation) ->
     describe operation, ->
       it 'forces Content-MD5 header parameter', ->
-        req = s3[operation](Bucket: 'bucket', ContentMD5: '000').build()
-        hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64')
-        expect(req.httpRequest.headers['Content-MD5']).to.equal(hash)
+        if s3[operation]
+          req = s3[operation](Bucket: 'bucket', ContentMD5: '000').build()
+          hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64')
+          expect(req.httpRequest.headers['Content-MD5']).to.equal(hash)
 
   describe 'willComputeChecksums', ->
     willCompute = (operation, opts) ->
@@ -1493,7 +1594,7 @@ describe 'AWS.S3', ->
       s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
         expect(data).to.include.keys('fields', 'url')
         expect(data.url).to.be.a.string
-        expect(data.fields).to.be.an.object
+        expect(data.fields).to.be.an('object')
         done()
 
     it 'should include a policy, signature, and signing metadata', (done) ->
@@ -1537,7 +1638,7 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3()
       s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
         decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        expect(decoded).to.be.an.object
+        expect(decoded).to.be.an('object')
         expect(decoded).to.include.key('expiration', 'conditions')
         done()
 
@@ -1568,7 +1669,7 @@ describe 'AWS.S3', ->
       s3 = new AWS.S3()
       s3.createPresignedPost {Bucket: 'bucket'}, (err, data) ->
         decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        expect(decoded.conditions).to.be.an.array
+        expect(decoded.conditions).to.be.an('array')
         found = {}
         for index, condition of decoded.conditions
           conditionKey = Object.keys(condition)[0]
@@ -1591,7 +1692,7 @@ describe 'AWS.S3', ->
 
       s3.createPresignedPost {Bucket: 'bucket', Conditions: conditions}, (err, data) ->
         decoded = JSON.parse(AWS.util.base64.decode(data.fields.Policy))
-        expect(decoded.conditions).to.be.an.array
+        expect(decoded.conditions).to.be.an('array')
         expect(conditions[0]).to.deep.equal(decoded.conditions[0])
         expect(conditions[1]).to.deep.equal(decoded.conditions[1])
         expect(conditions[2]).to.deep.equal(decoded.conditions[2])

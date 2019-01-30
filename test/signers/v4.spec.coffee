@@ -90,6 +90,40 @@ describe 'AWS.Signers.V4', ->
       signer.request.headers = {'Header': ' \t   Value  \t  '}
       expect(signer.canonicalHeaders()).to.equal('header:Value')
 
+    it 'should throw an error when header value is null', ->
+      signer.request.headers =
+        foo: null
+        bar: 'd'
+      try
+        signer.canonicalHeaders()
+      catch e
+        err = e
+      expect(typeof err).to.equal 'object'
+      expect(err.code).to.equal 'InvalidHeader'
+
+    it 'should throw an error when header value is undefined', ->
+      signer.request.headers =
+        foo: undefined
+        bar: 'd'
+      try
+        signer.canonicalHeaders()
+      catch e
+        err = e
+      expect(typeof err).to.equal 'object'
+      expect(err.code).to.equal 'InvalidHeader'
+
+    it 'should throw an error when header value does not have toString', ->
+      err
+      signer.request.headers =
+        foo: Object.create(null)
+        bar: 'd'
+      try
+        signer.canonicalHeaders()
+      catch e
+        err = e
+      expect(typeof err).to.equal 'object'
+      expect(err.code).to.equal 'InvalidHeader'
+
   describe 'presigned urls', ->
 
     it 'hoists content-type to the query string', ->

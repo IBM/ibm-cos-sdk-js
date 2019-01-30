@@ -601,9 +601,9 @@ describe 'AWS.util.hoistPayloadMember', ->
 
   service = null
   buildService = (api) ->
-    service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
+    service = new AWS.Service endpoint: 'http://localhost', apiConfig: api, signatureVersion: 'v4'
 
-  it 'hoists structure payload members', ->
+  it 'hoists structure payload members', (done) ->
     api =
       'metadata': 'protocol': 'rest-xml'
       'operations': 'sample': 'output': 'shape': 'OutputShape'
@@ -624,10 +624,43 @@ describe 'AWS.util.hoistPayloadMember', ->
     buildService(api)
     helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
     req = service.sample()
-    req.send()
-    hoist(req.response)
-    expect(req.response.data.Foo).to.eql('abc')
-    expect(req.response.data.Data.Foo).to.eql('abc')
+    req.send((err, data) -> 
+      hoist(req.response)
+      expect(data.Foo).to.eql('abc')
+      expect(data.Data.Foo).to.eql('abc')
+      done()
+    )
+    
+
+  if typeof Promise != 'undefined'
+      it 'hoists structure payload members', ->
+        AWS.config.setPromisesDependency();
+        api =
+          'metadata': 'protocol': 'rest-xml'
+          'operations': 'sample': 'output': 'shape': 'OutputShape'
+          'shapes':
+            'OutputShape':
+              'type': 'structure'
+              'payload': 'Data'
+              'members':
+                'Data': 'shape': 'SingleStructure'
+            'StringType': 'type': 'string'
+            'SingleStructure':
+              'type': 'structure'
+              'members': 'Foo': 'shape': 'StringType'
+        httpResp =
+          'status_code': 200
+          'headers': 'X-Foo': 'baz'
+          'body': '<OperationNameResponse><Foo>abc</Foo></OperationNameResponse>'
+        buildService(api)
+        helpers.mockHttpResponse httpResp.status_code, httpResp.headers, httpResp.body
+        req = service.sample()
+        res = req.promise()
+        res.then((data) -> 
+          hoist(req.response)
+          expect(data.Foo).to.eql('abc')
+          expect(data.Data.Foo).to.eql('abc')
+        )
 
   it 'does not hoist streaming payload members', ->
     api =
@@ -666,7 +699,7 @@ describe 'AWS.util.extractRequestId', ->
       'SingleStructure':
         'type': 'structure'
         'members': 'Foo': 'shape': 'StringType'
-  service = new AWS.Service endpoint: 'http://localhost', apiConfig: api
+  service = new AWS.Service endpoint: 'http://localhost', apiConfig: api, signatureVersion: 'v4'
 
   it 'sets requestId on the response when requestId is valid', ->
     helpers.mockHttpResponse 200, {'x-amz-request-id': 'RequestId1'}, {}
@@ -817,11 +850,11 @@ describe 'AWS.util.calculateRetryDelay', ->
 describe 'AWS.util.userAgent', ->
   it 'should include an identifier for the browser SDK', ->
     helpers.spyOn(AWS.util, 'isBrowser').andReturn true
-    expect(AWS.util.userAgent()).to.match(/^aws-sdk-js/)
+    expect(AWS.util.userAgent()).to.match(/^ibm-cos-sdk-js/)
 
   it 'should include an identifier for the node SDK', ->
     helpers.spyOn(AWS.util, 'isBrowser').andReturn false
-    expect(AWS.util.userAgent()).to.match(/^aws-sdk-nodejs/)
+    expect(AWS.util.userAgent()).to.match(/^ibm-cos-sdk-nodejs/)
 
   it 'should include the current SDK version number', ->
     expect(AWS.util.userAgent()).to.have.string(AWS.VERSION)

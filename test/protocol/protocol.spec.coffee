@@ -6,9 +6,6 @@ sortQS = (body) ->
   util.queryParamsToString(AWS.util.queryStringParse(body))
 
 protocols =
-  ec2:
-    input:  require('../fixtures/protocol/input/ec2')
-    output: require('../fixtures/protocol/output/ec2')
   json:
     input:  require('../fixtures/protocol/input/json')
     output: require('../fixtures/protocol/output/json')
@@ -44,7 +41,7 @@ setupTests = (svcName, type) ->
             api.operations[_case.op] = _case.given
 
           # create service
-          svc = new AWS.Service endpoint: 'http://localhost', apiConfig: api
+          svc = new AWS.Service endpoint: 'http://localhost', apiConfig: api, signatureVersion: 'v4'
 
           group.cases.forEach (_case, i) ->
             it _case.op, ->
@@ -65,7 +62,7 @@ inputCase = (svc, _case, i, done) ->
   expect(util.queryStringParse(reqUrl.query)).to.eql(util.queryStringParse(dataUrl.query))
 
 
-  if svc.api.protocol == 'query' or svc.api.protocol == 'ec2'
+  if svc.api.protocol == 'query'
     expect(sortQS(req.httpRequest.body)).to.equal(sortQS(data.body))
   else if svc.api.protocol.match(/(json|xml)/)
     if req.httpRequest.body == '{}' then req.httpRequest.body = ''
@@ -132,7 +129,6 @@ formatData = (data, shape) ->
 
    
 describe 'AWS protocol support', ->
-  tests 'ec2'
   tests 'query'
   tests 'json'
   tests 'rest-json'

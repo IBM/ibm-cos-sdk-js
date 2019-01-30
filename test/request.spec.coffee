@@ -18,19 +18,26 @@ describe 'AWS.Request', ->
   describe 'error handling', ->
     it 'throws errors out of callback', ->
       helpers.mockHttpResponse 200, {}, ''
-      expect(->
-        service.makeRequest 'mockMethod', ->
-          throw new Error('error')
-      ).to.throw('error')
+      `
+      expect(function() {
+        service.makeRequest('mockMethod', function() {
+          throw new Error('error');
+        }).send();
+      }).to.throw('error');
+      `
 
     for evt in ['error', 'success', 'complete']
       it 'throws errors out of terminal ' + evt + ' event', ->
         helpers.mockHttpResponse 200, {}, ''
-        expect(->
-          req = service.makeRequest('mockMethod')
-          req.on evt, -> throw new Error('error')
-          req.send()
-        ).to.throw('error')
+        `
+        expect(function() {
+          var req = service.makeRequest('mockMethod');
+          req.on(evt, function() {
+              throw new Error('error');
+          });
+          req.send();
+        }).to.throw('error');
+        `
 
     it 'propagates errors to error event', ->
       helpers.mockHttpResponse 200, {}, ''
@@ -42,12 +49,12 @@ describe 'AWS.Request', ->
       ).not.to.throw('error')
       expect(err.message).to.equal('error')
 
-    xit 'propagates request creation errors into response', ->
+    it 'propagates request creation errors into response', ->
       helpers.spyOn(AWS.HttpClient, 'getInstance')
       AWS.HttpClient.getInstance.andReturn handleRequest: (req, opts, cb, errCb) ->
         throw new Error('XHR error')
-      db = new AWS.DynamoDB
-      req = db.listTables()
+      s3 = new AWS.S3
+      req = s3.listBuckets()
       req.send()
       expect(req.response.error.message).to.equal('XHR error')
 
@@ -281,6 +288,13 @@ describe 'AWS.Request', ->
       promise = req.promise()
       expect(promise instanceof P).to.equal(true)
 
+    if typeof Promise != 'undefined'
+      it.skip 'binds response object to value with which the promise is resolved', ->
+        AWS.config.setPromisesDependency()
+        helpers.mockHttpResponse 200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']
+        service.makeRequest('mockMethod').promise().then (data) ->
+          expect(data.$response.httpResponse.statusCode).to.equal(200)
+
     it 'appends \'promise\' to the user agent', ->
       P = ->
       AWS.config.setPromisesDependency(P)
@@ -380,7 +394,7 @@ describe 'AWS.Request', ->
           expect(data).to.equal('FOOBARBAZQUX')
           done()
 
-      it 'only accepts data up to the specified content-length', (done) ->
+      it 'errors if data received exceeds content-length', (done) ->
         AWS.HttpClient.streamsApiVersion = 1
 
         app = (req, resp) ->
@@ -396,8 +410,7 @@ describe 'AWS.Request', ->
           expect(error).to.be.null
         s.on 'data', (c) -> data += c.toString()
         s.on 'end', ->
-          expect(error).to.be.null
-          expect(data).to.equal('FOOBARBAZQU')
+          expect(error).to.not.be.null
           done()
 
       it 'streams2 data (readable event)', (done) ->
@@ -477,7 +490,7 @@ describe 'AWS.Request', ->
           catch e
             console.log(e.stack)
 
-      it 'only accepts data up to the specified content-length', (done) ->
+      it 'errors if data received exceeds the content-length (streams2)', (done) ->
         if AWS.HttpClient.streamsApiVersion < 2
           return done()
 
@@ -490,11 +503,9 @@ describe 'AWS.Request', ->
         s = request.createReadStream()
         s.on 'error', (e) ->
           error = e
-          # should fail because 'error' should not be emitted
-          expect(error).to.be.null
+          expect(error).to.not.be.null
         s.on 'end', ->
-          expect(error).to.be.null
-          expect(data).to.equal('FOOBARBAZQU')
+          expect(error).to.not.be.null
           done()
         s.on 'readable', ->
           try
@@ -648,6 +659,18 @@ describe 'AWS.Request', ->
           expect(reqError.region).to.equal('mock-region')
           expect(resp.retryCount).to.equal(0)
           done()
+
+      it 'successfully handles connection timeout', (done) ->
+        app = (req, resp) ->
+          resp.writeHead 200,
+            'content-length': 512 * 1024
+          resp.write new Buffer(512 * 1024)
+          resp.end()
+        service.config.httpOptions.timeout = 5;
+        request = service.makeRequest('mockMethod');
+        s = request.createReadStream();
+        s.on 'error', (e) ->
+          setImmediate -> done()
 
   if AWS.util.isNode()
     describe 'domain support', ->

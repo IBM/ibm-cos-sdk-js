@@ -1,5 +1,10 @@
 helpers = require('./helpers')
+ShakyStream = require('./mocks/shaky-stream')
 AWS = helpers.AWS
+
+EventEmitter = require('events').EventEmitter;
+
+httpModule = require('http');
 
 if AWS.util.isNode()
   describe 'AWS.NodeHttpClient', ->
@@ -43,3 +48,49 @@ if AWS.util.isNode()
           expect(err.code).to.equal('TimeoutError')
           expect(err.message).to.equal('Connection timed out after 1ms')
           expect(numCalls).to.equal(1)
+
+      it 'supports connectTimeout in httpOptions', ->
+        numCalls = 0
+        req = new AWS.HttpRequest 'http://10.255.255.255'
+        http.handleRequest req, connectTimeout: 1, null, (err) ->
+          numCalls += 1
+          expect(err.code).to.equal 'TimeoutError'
+          expect(err.message).to.equal 'Socket timed out without establishing a connection'
+          expect(numCalls).to.equal 1
+
+      describe 'timeout', ->
+        it 'is obeyed even after response headers are received', (done) ->
+          # a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity
+          server = httpModule.createServer (req, res) ->
+            res.setHeader 'Content-Type', 'application/xml'
+            ss = new ShakyStream
+              pauseFor: 1000 # simulate 1 second pause while receiving data
+            ss.pipe res
+          server.listen 3334
+          s3 = new AWS.S3
+            endpoint: 'http://127.0.0.1:3334'
+            httpOptions:
+              timeout: 100
+          s3.createBucket bucket: 'foo', (err, data) ->
+            server.close()
+            expect(err.name).to.equal 'TimeoutError'
+            done()
+
+        it 'does not trigger unnecessarily', (done) ->
+          # a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity
+          server = httpModule.createServer (req, res) ->
+            res.setHeader 'Content-Type', 'application/xml'
+            ss = new ShakyStream
+              pauseFor: 100 # simulate 100 ms pause while receiving data
+            ss.pipe res
+          server.listen 3334
+          s3 = new AWS.S3
+            endpoint: 'http://127.0.0.1:3334'
+            httpOptions:
+              timeout: 1000
+          s3.createBucket bucket: 'foo', (err, data) ->
+            server.close()
+            expect(err).to.equal null
+            done()
+
+

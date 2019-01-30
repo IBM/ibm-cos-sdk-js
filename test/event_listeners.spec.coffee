@@ -20,7 +20,10 @@ describe 'AWS.EventListeners', ->
 
     totalWaited = 0
     delays = []
-    service = new MockService(maxRetries: 3)
+    service = new MockService
+      maxRetries: 3
+      httpOptions:
+        timeout: 100
     service.config.credentials = AWS.util.copy(service.config.credentials)
 
     #Mock the random method
@@ -621,7 +624,7 @@ describe 'AWS.EventListeners', ->
           domains = []
 
         afterEach ->
-          domains.forEach (d) -> d.exit(); d.dispose()
+          domains.forEach (d) -> d.exit();
 
         it 'sends error raised from complete event to a domain', ->
           result = false

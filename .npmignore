@@ -3,6 +3,7 @@
 .travis.yml
 .gitignore
 apis/*.normal.json
+CHANGELOG.md
 configuration
 configuration.sample
 coverage

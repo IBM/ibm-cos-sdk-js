@@ -112,6 +112,13 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
     data = [data]
 
   httpResp = new EventEmitter()
+  httpResp.pipe = (destination) ->
+    process.nextTick ->
+      AWS.util.arrayEach data.slice(), (str) -> destination.write str
+
+      destination.end()
+    destination
+
   httpResp.statusCode = status
   httpResp.headers = headers
 
@@ -125,7 +132,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
         if chunk is null
           null
         else
-          new Buffer(chunk)
+          Buffer.from(chunk)
       else
         null
 
@@ -133,7 +140,7 @@ mockHttpSuccessfulResponse = (status, headers, data, cb) ->
     if AWS.util.isNode() && httpResp._events.readable
       httpResp.emit('readable')
     else
-      httpResp.emit('data', new Buffer(str))
+      httpResp.emit('data', Buffer.from(str))
 
   if httpResp._events['readable'] || httpResp._events['data']
     httpResp.emit('end')
@@ -151,7 +158,7 @@ mockHttpResponse = (status, headers, data) ->
       errCb(status)
     stream
 
-  return stream
+  stream
 
 mockIntermittentFailureResponse = (numFailures, status, headers, data) ->
   retryCount = 0

@@ -10,6 +10,122 @@ describe 'AWS.Model.Shape', ->
       expect(shape.members.body.isStreaming).to.eql(true)
 
   describe 'TimestampShape', ->
+    it 'can be inherited', ->
+      api = new AWS.Model.Api
+        metadata:
+          timestampFormat: 'rfc822'
+        shapes:
+          S1:
+            type: 'timestamp'
+            timestampFormat: 'iso8601'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'iso8601'
+
+    it 'prefers rfc822 if header', ->
+      api = new AWS.Model.Api
+        metadata:
+          timestampFormat: 'iso8601'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+            location: 'header'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'rfc822'
+
+    it 'prefers own timestampFormat if not header', ->
+      api = new AWS.Model.Api
+        metadata:
+          timestampFormat: 'iso8601'
+        shapes:
+          S1:
+            type: 'timestamp'
+            timestampFormat: 'rfc822'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+            timestampFormat: 'iso8601'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'iso8601'
+
+    it 'will use api metadata timestampFormat if not found elsewhere', ->
+      api = new AWS.Model.Api
+        metadata:
+          timestampFormat: 'unixTimestamp'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'unixTimestamp'
+
+    it 'will default to unixTimestamp when if not specified and protocol is json', ->
+      api = new AWS.Model.Api
+        metadata:
+          protocol: 'json'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'unixTimestamp'
+
+    it 'will default to unixTimestamp when if not specified and protocol is rest-json', ->
+      api = new AWS.Model.Api
+        metadata:
+          protocol: 'rest-json'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'unixTimestamp'
+
+    it 'will default to iso8601 when if not specified and protocol is rest-xml', ->
+      api = new AWS.Model.Api
+        metadata:
+          protocol: 'rest-xml'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'iso8601'
+
+    it 'will default to iso8601 when if not specified and protocol is query', ->
+      api = new AWS.Model.Api
+        metadata:
+          protocol: 'query'
+        shapes:
+          S1:
+            type: 'timestamp'
+      shape = AWS.Model.Shape.create
+        members:
+          Date:
+            shape: 'S1'
+      , api: api
+      expect(shape.members.Date.timestampFormat).to.eql 'iso8601'
+
     describe 'toType()', ->
       it 'converts unix timestamps', ->
         api = new AWS.Model.Api metadata: timestampFormat: 'unixTimestamp'

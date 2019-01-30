@@ -1,5 +1,4 @@
---compilers coffee:coffee-script
 --reporter dot
 --ui bdd
 --timeout 4000
---no-exit
+--require coffee-script/register
