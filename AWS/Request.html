@@ -136,6 +136,10 @@ be called:</p>
 <pre class="code javascript"><code class="javascript">request.send();
 </code></pre>
 
+<p>Since registered callbacks may or may not be idempotent, requests should only
+be sent once. To perform the same operation multiple times, you will need to
+create multiple request objects, each with its own registered callbacks.</p>
+
 <h2>Removing Default Listeners for Events</h2>
 
 <p>Request objects are built with default listeners for the various events,
@@ -546,7 +550,7 @@ depending on whether the request succeeded or not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Converts the request object into a readable stream that can be read from or piped into a writable stream.</p>
+    <span class="summary_desc"><div class='inline'><p>Sends the request and converts the request object into a readable stream that can be read from or piped into a writable stream.</p>
 </div></span>
   
 </li>
@@ -646,7 +650,7 @@ depending on whether the request succeeded or not.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns a 'thenable' promise.</p>
+    <span class="summary_desc"><div class='inline'><p>Sends the request and returns a 'thenable' promise.</p>
 </div></span>
   
 </li>
@@ -2007,8 +2011,8 @@ the raw HTTP body contents.</p>
 </div>
   </div>
 
-<p>Converts the request object into a readable stream that
-can be read from or piped into a writable stream.</p>
+<p>Sends the request and converts the request object into a readable stream
+that can be read from or piped into a writable stream.</p>
 
 
   </div>
@@ -2352,7 +2356,7 @@ response data.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a 'thenable' promise.</p>
+    <p>Sends the request and returns a 'thenable' promise.</p>
 
 <p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
 The first callback will be called if the promise is fulfilled, and the second
@@ -2611,9 +2615,9 @@ the request. Set to <code>null</code> if a request error occurs.</p>
       </div>
 
       <div id="footer">
-  Generated on Thu Dec 13 12:07:07 2018 by
+  Generated on Wed Jan 30 18:48:49 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.5.1).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
 <!-- BEGIN-SECTION -->
