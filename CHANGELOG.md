@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+# 1.4.3
+## Content
+### Features
+### Defect Fixes
+* COSSDK-50320: https://github.com/IBM/ibm-cos-sdk-js/issues/41
+
+
 # 1.4.2
 ## Content
 ### Features
