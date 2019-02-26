@@ -1,6 +1,12 @@
 # CHANGELOG
 
 
+# 1.4.4
+## Content
+### Defect Fixes
+* AWS Patches aligned to version v2.406.0 of the AWS NodeJS SDK
+
+
 # 1.4.3
 ## Content
 ### Features
