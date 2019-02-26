@@ -5976,6 +5976,26 @@ callback.</p>
 </div>
   </div>
 
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Not all operation parameters are supported when using pre-signed
+URLs. Certain parameters, such as <code>SSECustomerKey</code>, <code>ACL</code>, <code>Expires</code>,
+<code>ContentLength</code>, or <code>Tagging</code> must be provided as headers when sending a
+request. If you are using pre-signed URLs to upload from a browser and
+need to use these fields, see <span class='object_link'><a href="#createPresignedPost-property" title="AWS.S3.createPresignedPost (property)">createPresignedPost()</a></span>.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>The default signer allows altering the request by adding corresponding
+headers to set some parameters (e.g. Range) and these added parameters
+won't be signed. You must use signatureVersion v4 to to include these
+parameters in the signed portion of the URL and enforce exact matching
+between headers and signed params in the URL.</p>
+</div>
+  </div>
+
 <p>Get a pre-signed URL for a given operation name.</p>
 
 
@@ -11200,9 +11220,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Feb  5 15:08:12 2019 by
+  Generated on Tue Feb 26 13:00:07 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.5.1).
+  0.8.7.6 (ruby-2.3.7).
 </div>
 
 <!-- BEGIN-SECTION -->
