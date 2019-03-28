@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+# 1.4.5
+## Content
+### Features
+* Public Access
+### Defect Fixes
+* COSSDK-50781: https://github.ibm.com/objectstore/cases/issues/137
+* COSSDK-52371: https://github.ibm.com/objectstore/objectstorage-issues/issues/634
+* AWS Patches aligned to version v2.425.0 of the AWS NodeJS SDK
+
+
 # 1.4.4
 ## Content
 ### Defect Fixes

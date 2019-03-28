@@ -391,6 +391,24 @@ describe('AWS.S3', function() {
           done();
         });
       });
+
+      describe('will return "none" when', function() {
+        it('user uses an AnonymousCredentials credential', function(done) {
+          s3 = new AWS.S3({
+            credentials: new AWS.AnonymousCredentials()
+          });
+          expect(s3.getSignatureVersion()).to.equal('none');
+          done();
+        });
+
+        it('user specifies a signatureVersion of none', function(done) {
+          s3 = new AWS.S3({
+            signatureVersion: 'none'
+          });
+          expect(s3.getSignatureVersion()).to.equal('none');
+          done();
+        });
+      });
     });
   });
 

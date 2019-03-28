@@ -1,3 +1,4 @@
+export {AnonymousCredentials} from './credentials/anonymous_credentials';
 export {Config} from './config';
 export {Credentials} from './credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
