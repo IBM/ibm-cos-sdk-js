@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+# 1.5.0
+## Content
+### Features
+* Object Expiration Rules
+### Defect Fixes
+* COSSDK-53979: https://github.com/IBM/ibm-cos-sdk-js/issues/43
+* AWS Patches aligned to version v2.460.0 of the AWS NodeJS SDK
+
+
 # 1.4.5
 ## Content
 ### Features
