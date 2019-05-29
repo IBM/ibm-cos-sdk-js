@@ -39,11 +39,11 @@ declare class S3 extends S3Customizations {
    */
   completeMultipartUpload(callback?: (err: AWSError, data: S3.Types.CompleteMultipartUploadOutput) => void): Request<S3.Types.CompleteMultipartUploadOutput, AWSError>;
   /**
-   * Creates a copy of an object that is already stored in IBM COS.
+   * Creates a copy of an object that is already stored in Amazon S3.
    */
   copyObject(params: S3.Types.CopyObjectRequest, callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
   /**
-   * Creates a copy of an object that is already stored in IBM COS.
+   * Creates a copy of an object that is already stored in Amazon S3.
    */
   copyObject(callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
   /**
@@ -134,6 +134,14 @@ declare class S3 extends S3Customizations {
    * Returns the cors configuration for the bucket.
    */
   getBucketCors(callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
+  /**
+   *  No longer used, see the GetBucketLifecycleConfiguration operation.
+   */
+  getBucketLifecycle(params: S3.Types.GetBucketLifecycleRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
+  /**
+   *  No longer used, see the GetBucketLifecycleConfiguration operation.
+   */
+  getBucketLifecycle(callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
   /**
    * Returns the lifecycle configuration information set on the bucket.
    */
@@ -262,6 +270,14 @@ declare class S3 extends S3Customizations {
    * Sets the protection configuration of an existing bucket.
    */
   putBucketProtectionConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  No longer used, see the PutBucketLifecycleConfiguration operation.
+   */
+  putBucketLifecycle(params: S3.Types.PutBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  No longer used, see the PutBucketLifecycleConfiguration operation.
+   */
+  putBucketLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
    */
@@ -476,7 +492,7 @@ declare namespace S3 {
      */
     RetentionExpirationDate?: RetentionExpirationDate;
     /**
-     * A single legal hold to apply to the object. A legal hold is a Y character long string. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.
+     * A single legal hold to apply to the object. A legal hold is a character long string of max length 64. The object cannot be overwritten or deleted until all legal holds associated with the object are removed.
      */
     RetentionLegalHoldId?: RetentionLegalHoldID;
     /**
@@ -656,7 +672,7 @@ declare namespace S3 {
      */
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     /**
-     * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+     * Applies only to Amazon S3. Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
     /**
@@ -1012,6 +1028,12 @@ declare namespace S3 {
     Rules?: LifecycleRules;
   }
   export interface GetBucketLifecycleConfigurationRequest {
+    Bucket: BucketName;
+  }
+  export interface GetBucketLifecycleOutput {
+    Rules?: Rules;
+  }
+  export interface GetBucketLifecycleRequest {
     Bucket: BucketName;
   }
   export interface GetBucketLocationOutput {
@@ -1470,7 +1492,7 @@ declare namespace S3 {
   }
   export type LegalHolds = LegalHold[];
   export interface LifecycleConfiguration {
-    Rules: Rules;
+    Rules: LifecycleRules;
   }
   export interface LifecycleExpiration {
     /**
@@ -1491,20 +1513,20 @@ declare namespace S3 {
     /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
      */
-    ID?: ID;
+    ID: ID;
     /**
      * Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
      */
     Prefix?: Prefix;
-    Filter?: LifecycleRuleFilter;
+    Filter: LifecycleRuleFilter;
     /**
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
      */
     Status: ExpirationStatus;
+    /**
+     * Currently only one Transition allowed, also Date and Days fields are mutually exclusive.
+     */
     Transitions?: TransitionList;
-    NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
-    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
-    AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export interface LifecycleRuleAndOperator {
     Prefix?: Prefix;
@@ -1515,14 +1537,9 @@ declare namespace S3 {
   }
   export interface LifecycleRuleFilter {
     /**
-     * Prefix identifying one or more objects to which the rule applies.
+     * Empty prefix allowed only.
      */
     Prefix?: Prefix;
-    /**
-     * This tag must exist in the object's tag set in order for the rule to apply.
-     */
-    Tag?: Tag;
-    And?: LifecycleRuleAndOperator;
   }
   export type LifecycleRules = LifecycleRule[];
   export interface ListBucketsInput {
@@ -2014,6 +2031,20 @@ declare namespace S3 {
     Bucket: BucketName;
     LifecycleConfiguration?: BucketLifecycleConfiguration;
   }
+  export interface PutBucketLifecycleRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+    /**
+     * 
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
+    LifecycleConfiguration?: LifecycleConfiguration;
+  }
   export interface PutObjectAclOutput {
     RequestCharged?: RequestCharged;
   }
@@ -2288,13 +2319,17 @@ declare namespace S3 {
   export type RoutingRules = RoutingRule[];
   export interface Rule {
     /**
+     * 
+     */
+    Expiration?: LifecycleExpiration;
+    /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
      */
     ID?: ID;
     /**
      * Prefix identifying one or more objects to which the rule applies.
      */
-    Prefix: Prefix;
+    Prefix?: Prefix;
     /**
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
      */

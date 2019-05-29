@@ -178,6 +178,26 @@
         }
       };
 
+      describe('add Transfer-Encoding header', function() {
+        it('when streaming payload is unsigned payload if content length is not available', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var service = new FooService();
+          var req = service.putStream({
+            Body: 'NoLengthBody'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Transfer-Encoding']).to.equal('chunked');
+            expect(!err).to.equal(true);
+            AWS.util.string.byteLength = oldByteLength;
+            done();
+          });
+        });
+      });
+
       describe('adds Content-Length header', function() {
         var contentLength;
         contentLength = function(body) {
@@ -250,6 +270,57 @@
 
         it('builds Content-Length for buffer body', function() {
           return expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6);
+        });
+
+        describe ('when has requiresLength trait exists', function() {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          beforeEach(function() {
+            helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+              throw new Error('Cannot determine length of ' + chunk);
+            });
+          });
+          afterEach(function() {
+            AWS.util.string.byteLength = oldByteLength;
+          });
+
+          it('throws error when content length is required in payload shape but length is not available', function(done) {
+            var req = service.putBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            //this event listener will raise error even before setting content length
+            req.removeListener('afterBuild', AWS.EventListeners.Core.COMPUTE_SHA256);
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+
+          it('throws error when content length is required in unsigned payload shape but length is not available', function(done) {
+            var req = service.putUnsignedBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+        });
+
+        it('throws error when non-streaming body has no length', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var req = service.putNonStream({
+            Body: 'NoLengthBody'
+          });
+          req.runTo('sign', function(err) {
+            AWS.util.string.byteLength = oldByteLength;
+            expect(err.message).to.contain('Cannot determine length of');
+            done();
+          });
         });
 
         if (AWS.util.isNode()) {
@@ -854,7 +925,212 @@
         return expect(data).to.match(match);
       });
     });
-    return describe('terminal callback error handling', function() {
+
+    describe('logging sensitive information', function() {
+      var logger;
+      var data = null;
+      var apiJSON = null;
+      logfn = function(d) {
+        return data += d;
+      };
+      beforeEach(function() {
+        logger = {};
+        data = '';
+        apiJSON = {
+          operations: {
+            mockMethod: {
+              input: {
+                type: "structure",
+                members: {
+                  foo: {
+                    type: "string",
+                    sensitive: true
+                  }
+                }
+              },
+              output: {}
+            }
+          }
+        }
+      })
+
+      it('with sensitive trait in shape\'s own property', function() {
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: 'secret_key_id'
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(JSON.stringify(request.params).indexOf('secret_key_id') >= 0).to.equal(true);
+      });
+
+      it('from input shape of structure and with un-inlined shape', function() {
+        var api = new AWS.Model.Api({
+          operations: {
+            mockMethod: {
+              input: {
+                type: "structure",
+                members: {
+                  foo: {
+                    shape: "S1"
+                  },
+                  baz: {
+                    type: 'structure',
+                    members: {
+                      bar: {}
+                    }
+                  }
+                }
+              },
+              output: {}
+            }
+          },
+          shapes: {
+            S1: {
+              type: 'blob',
+              sensitive: true
+            }
+          }
+        })
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: 'secret_key_id',
+          baz: {
+            bar: 'should log'
+          },
+          qux: 'nonsense'
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('bar: \'should log\'') >= 0).to.equal(true);
+        expect(data.indexOf('qux: \'nonsense\'') >= 0).to.equal(true);
+      });
+
+      it('from input shape of list', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            sensitive: true
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: ['secret_key_id', 'secret_access_key']
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from input shape of map', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'string',
+            sensitive: true
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: 'secret_key_id',
+            key1: 'secret_key_id'
+          }
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+      });
+
+      it('with recursive input shape', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'list',
+            member: {
+              type: 'structure',
+              members: {
+                bar: {sensitive: true}
+              }
+            }
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
+          }
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      })
+
+      it('from input shape of scalars', function() {
+        var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
+        Array.prototype.forEach.call(allShapeTypes, function(shapeType){
+          apiJSON.operations.mockMethod.input.members.foo = {
+            type: shapeType,
+            sensitive: true
+          };
+          var api = new AWS.Model.Api(apiJSON);
+          var CustomMockService = MockServiceFromApi(api);
+          service = new CustomMockService({logger: logger});
+          helpers.mockHttpResponse(200, {}, []);
+          logger.log = logfn;
+          service.makeRequest('mockMethod', {
+            foo: '1234567'
+          }).send();
+          expect(data.indexOf('1234567')).to.equal(-1);
+        })
+      });
+
+      it('from input of undefined', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: {},
+              baz: {}
+            }
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [undefined, {bar: 'bar'}]
+        }).send();
+        expect(data.indexOf('bar: \'bar\'') >= 0).to.equal(true);
+        expect(data.indexOf('undefined') >= 0).to.equal(true);
+        expect(data.indexOf('{}')).to.equal(-1);
+      })
+    });
+
+    describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {
           helpers.mockResponse({
