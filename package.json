@@ -1,7 +1,7 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.5.1-0",
+  "version": "1.5.1",
   "author": {
     "name": "IBM",
     "email": "",

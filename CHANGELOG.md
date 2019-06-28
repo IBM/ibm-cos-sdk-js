@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+# 1.5.1
+## Content
+### Features
+* Extended Listing Support
+### Defect Fixes
+* COSSDK-53979: https://github.com/IBM/ibm-cos-sdk-js/issues/43
+
+
 # 1.5.0
 ## Content
 ### Features

@@ -207,6 +207,14 @@ declare class S3 extends S3Customizations {
    */
   listBuckets(callback?: (err: AWSError, data: S3.Types.ListBucketsOutput) => void): Request<S3.Types.ListBucketsOutput, AWSError>;
   /**
+   * Returns a list of all buckets owned by the authenticated sender of the request, along with the LocationConstraint describing the region that the bucket resides in and the bucket's storage tier.
+   */
+  listBucketsExtended(params: S3.Types.ListBucketsExtendedInput, callback?: (err: AWSError, data: S3.Types.ListBucketsExtendedOutput) => void): Request<S3.Types.ListBucketsExtendedOutput, AWSError>;
+  /**
+   * Returns a list of all buckets owned by the authenticated sender of the request, along with the LocationConstraint describing the region that the bucket resides in and the bucket's storage tier.
+   */
+  listBucketsExtended(callback?: (err: AWSError, data: S3.Types.ListBucketsExtendedOutput) => void): Request<S3.Types.ListBucketsExtendedOutput, AWSError>;
+  /**
    * Returns a list of legal holds on an object
    */
   listLegalHolds(params: S3.Types.ListLegalHoldsRequest, callback?: (err: AWSError, data: S3.Types.ListLegalHoldsOutput) => void): Request<S3.Types.ListLegalHoldsOutput, AWSError>;
@@ -405,6 +413,7 @@ declare namespace S3 {
      * Date the bucket was created.
      */
     CreationDate?: CreationDate;
+    LocationConstraint?: BucketLocationConstraint;
   }
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
   export interface BucketLifecycleConfiguration {
@@ -1545,7 +1554,28 @@ declare namespace S3 {
   export interface ListBucketsInput {
     IBMServiceInstanceId?: undefined;
   }
+  export interface ListBucketsExtendedInput {
+    IBMServiceInstanceId?: undefined;
+    /**
+     * Specifies the key to start with when listing objects in a bucket.
+     */
+    Marker?: Marker;
+    /**
+     * Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * Limits the response to keys that begin with the specified prefix.
+     */
+    Prefix?: Prefix;
+  }
   export interface ListBucketsOutput {
+    Buckets?: Buckets;
+    Owner?: Owner;
+  }
+  export interface ListBucketsExtendedOutput {
+    IsTruncated?: IsTruncated;
+    Marker?: Marker;
     Buckets?: Buckets;
     Owner?: Owner;
   }

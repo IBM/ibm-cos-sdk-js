@@ -394,6 +394,22 @@
       "documentation": "Returns a list of all buckets owned by the authenticated sender of the request.",
       "alias": "GetService"
     },
+    "ListBucketsExtended": {
+      "name": "ListBucketsExtended",
+      "http": {
+        "method": "GET",
+        "requestUri": "/?extended"
+      },
+      "input": {
+        "shape": "ListBucketsExtendedInput"
+      },
+      "output": {
+        "shape": "ListBucketsExtendedOutput"
+      },
+      "documentationUrl": "https://cloud.ibm.com/docs/services/cloud-object-storage/api-reference?topic=cloud-object-storage-compatibility-api-bucket-operations#compatibility-api-list-buckets",
+      "documentation": "Returns a list of all buckets owned by the authenticated sender of the request, along with the LocationConstraint describing the region that the bucket resides in and the bucket's storage tier.",
+      "alias": "GetServiceExtended"
+    },
     "ListLegalHolds": {
       "name": "ListLegalHolds",
       "http": {
@@ -735,6 +751,9 @@
         "CreationDate": {
           "shape": "CreationDate",
           "documentation": "Date the bucket was created."
+        },
+        "LocationConstraint": {
+          "shape": "BucketLocationConstraint"
         }
       }
     },
@@ -3154,9 +3173,53 @@
         }
       }
     },
+    "ListBucketsExtendedInput": {
+      "type": "structure",
+      "members": {
+        "IBMServiceInstanceId": {
+          "location": "header",
+          "locationName": "Ibm-Service-Instance-Id"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"Specifies the key to start with when listing objects in a bucket.",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "MaxKeys":{
+          "shape":"MaxKeys",
+          "documentation":"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.",
+          "location":"querystring",
+          "locationName":"max-keys"
+        },
+        "Prefix":{
+          "shape":"Prefix",
+          "documentation":"Limits the response to keys that begin with the specified prefix.",
+          "location":"querystring",
+          "locationName":"prefix"
+        }
+      }
+    },
     "ListBucketsOutput": {
       "type": "structure",
       "members": {
+        "Buckets": {
+          "shape": "Buckets"
+        },
+        "Owner": {
+          "shape": "Owner"
+        }
+      }
+    },
+    "ListBucketsExtendedOutput": {
+      "type": "structure",
+      "members": {
+        "IsTruncated": {
+          "shape": "IsTruncated"
+        },
+        "Marker": {
+          "shape": "Marker"
+        },
         "Buckets": {
           "shape": "Buckets"
         },
