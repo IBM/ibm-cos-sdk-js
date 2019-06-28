@@ -934,6 +934,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#listBucketsExtended-property" title="listBucketsExtended"><strong>listBucketsExtended</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a list of all buckets owned by the authenticated sender of the request, along with the LocationConstraint describing the region that the bucket resides in and the bucket's storage tier.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#listLegalHolds-property" title="listLegalHolds"><strong>listLegalHolds</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -6987,6 +7012,306 @@ The <code>data</code> object has the following properties:</p>
 <ul>
 <li><code>Name</code> &mdash; (<code>String</code>)  The name of the bucket.</li>
 <li><code>CreationDate</code> &mdash; (<code>Date</code>)  Date the bucket was created.</li>
+<li><code>LocationConstraint</code> &mdash; (<code>String</code>)
+ Possible values include:
+
+<ul>
+<li><code>"us-standard"</code></li>
+<li><code>"us-vault"</code></li>
+<li><code>"us-cold"</code></li>
+<li><code>"us-flex"</code></li>
+<li><code>"us-east-standard"</code></li>
+<li><code>"us-east-vault"</code></li>
+<li><code>"us-east-cold"</code></li>
+<li><code>"us-east-flex"</code></li>
+<li><code>"us-south-standard"</code></li>
+<li><code>"us-south-vault"</code></li>
+<li><code>"us-south-cold"</code></li>
+<li><code>"us-south-flex"</code></li>
+<li><code>"eu-standard"</code></li>
+<li><code>"eu-vault"</code></li>
+<li><code>"eu-cold"</code></li>
+<li><code>"eu-flex"</code></li>
+<li><code>"eu-gb-standard"</code></li>
+<li><code>"eu-gb-vault"</code></li>
+<li><code>"eu-gb-cold"</code></li>
+<li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-de-standard"</code></li>
+<li><code>"eu-de-vault"</code></li>
+<li><code>"eu-de-cold"</code></li>
+<li><code>"eu-de-flex"</code></li>
+<li><code>"ap-standard"</code></li>
+<li><code>"ap-vault"</code></li>
+<li><code>"ap-cold"</code></li>
+<li><code>"ap-flex"</code></li>
+<li><code>"ams03-standard"</code></li>
+<li><code>"ams03-vault"</code></li>
+<li><code>"ams03-cold"</code></li>
+<li><code>"ams03-flex"</code></li>
+<li><code>"che01-standard"</code></li>
+<li><code>"che01-vault"</code></li>
+<li><code>"che01-cold"</code></li>
+<li><code>"che01-flex"</code></li>
+<li><code>"mel01-standard"</code></li>
+<li><code>"mel01-vault"</code></li>
+<li><code>"mel01-cold"</code></li>
+<li><code>"mel01-flex"</code></li>
+<li><code>"osl01-standard"</code></li>
+<li><code>"osl01-vault"</code></li>
+<li><code>"osl01-cold"</code></li>
+<li><code>"osl01-flex"</code></li>
+<li><code>"sao01-standard"</code></li>
+<li><code>"sao01-vault"</code></li>
+<li><code>"sao01-cold"</code></li>
+<li><code>"sao01-flex"</code></li>
+<li><code>"tor01-standard"</code></li>
+<li><code>"tor01-vault"</code></li>
+<li><code>"tor01-cold"</code></li>
+<li><code>"tor01-flex"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Owner</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>DisplayName</code> &mdash; (<code>String</code>)</li>
+<li><code>ID</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="listBucketsExtended-property">
+  
+    <strong>listBucketsExtended</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of all buckets owned by the authenticated sender of the request, along with the LocationConstraint describing the region that the bucket resides in and the bucket's storage tier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the listBucketsExtended operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  IBMServiceInstanceId: &#39;STRING_VALUE&#39;,
+  Marker: &#39;STRING_VALUE&#39;,
+  MaxKeys: 0,
+  Prefix: &#39;STRING_VALUE&#39;
+};
+s3.listBucketsExtended(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)</li>
+<li><code>Marker</code> &mdash; (<code>String</code>)  Specifies the key to start with when listing objects in a bucket.</li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  Limits the response to keys that begin with the specified prefix.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)</li>
+<li><code>Marker</code> &mdash; (<code>String</code>)</li>
+<li><code>Buckets</code> &mdash; (<code>Array&lt;map&gt;</code>)
+
+<ul>
+<li><code>Name</code> &mdash; (<code>String</code>)  The name of the bucket.</li>
+<li><code>CreationDate</code> &mdash; (<code>Date</code>)  Date the bucket was created.</li>
+<li><code>LocationConstraint</code> &mdash; (<code>String</code>)
+ Possible values include:
+
+<ul>
+<li><code>"us-standard"</code></li>
+<li><code>"us-vault"</code></li>
+<li><code>"us-cold"</code></li>
+<li><code>"us-flex"</code></li>
+<li><code>"us-east-standard"</code></li>
+<li><code>"us-east-vault"</code></li>
+<li><code>"us-east-cold"</code></li>
+<li><code>"us-east-flex"</code></li>
+<li><code>"us-south-standard"</code></li>
+<li><code>"us-south-vault"</code></li>
+<li><code>"us-south-cold"</code></li>
+<li><code>"us-south-flex"</code></li>
+<li><code>"eu-standard"</code></li>
+<li><code>"eu-vault"</code></li>
+<li><code>"eu-cold"</code></li>
+<li><code>"eu-flex"</code></li>
+<li><code>"eu-gb-standard"</code></li>
+<li><code>"eu-gb-vault"</code></li>
+<li><code>"eu-gb-cold"</code></li>
+<li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-de-standard"</code></li>
+<li><code>"eu-de-vault"</code></li>
+<li><code>"eu-de-cold"</code></li>
+<li><code>"eu-de-flex"</code></li>
+<li><code>"ap-standard"</code></li>
+<li><code>"ap-vault"</code></li>
+<li><code>"ap-cold"</code></li>
+<li><code>"ap-flex"</code></li>
+<li><code>"ams03-standard"</code></li>
+<li><code>"ams03-vault"</code></li>
+<li><code>"ams03-cold"</code></li>
+<li><code>"ams03-flex"</code></li>
+<li><code>"che01-standard"</code></li>
+<li><code>"che01-vault"</code></li>
+<li><code>"che01-cold"</code></li>
+<li><code>"che01-flex"</code></li>
+<li><code>"mel01-standard"</code></li>
+<li><code>"mel01-vault"</code></li>
+<li><code>"mel01-cold"</code></li>
+<li><code>"mel01-flex"</code></li>
+<li><code>"osl01-standard"</code></li>
+<li><code>"osl01-vault"</code></li>
+<li><code>"osl01-cold"</code></li>
+<li><code>"osl01-flex"</code></li>
+<li><code>"sao01-standard"</code></li>
+<li><code>"sao01-vault"</code></li>
+<li><code>"sao01-cold"</code></li>
+<li><code>"sao01-flex"</code></li>
+<li><code>"tor01-standard"</code></li>
+<li><code>"tor01-vault"</code></li>
+<li><code>"tor01-cold"</code></li>
+<li><code>"tor01-flex"</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Owner</code> &mdash; (<code>map</code>)
@@ -11610,9 +11935,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Jun 10 12:25:52 2019 by
+  Generated on Fri Jun 28 09:55:46 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.7).
+  0.8.7.6 (ruby-2.3.0).
 </div>
 
 <!-- BEGIN-SECTION -->
