@@ -6,8 +6,6 @@
 
   AWS = helpers.AWS;
 
-  Buffer = AWS.util.Buffer;
-
   describe('AWS.ParamValidator', function() {
     var expectError, expectValid, input, members, ref, validate;
     ref = [{}, {}], members = ref[0], input = ref[1];
@@ -634,7 +632,7 @@
       });
       it('accepts Buffers', function() {
         return expectValid({
-          param: new Buffer(100)
+          param: AWS.util.buffer.alloc(100)
         });
       });
       it('accepts typed arrays', function() {
@@ -696,7 +694,7 @@
       });
       it('accepts Buffers', function() {
         return expectValid({
-          param: new Buffer(100)
+          param: AWS.util.buffer.alloc(100)
         });
       });
       it('accepts Streams', function() {

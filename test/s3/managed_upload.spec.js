@@ -19,7 +19,7 @@
       })());
     } catch (error) {
       e = error;
-      return new AWS.util.Buffer(size);
+      return new AWS.util.buffer.alloc(size);
     }
   };
 
@@ -500,7 +500,7 @@
           queueSize: 4,
           leavePartsOnError: true,
           params: {
-            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+            Body: AWS.util.buffer.alloc(1024 * 1024 * 20)
           }
         });
         upload.send(function(err, data) {
@@ -525,7 +525,7 @@
           partSize: 1024 * 1024 * 5,
           leavePartsOnError: true,
           params: {
-            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+            Body: AWS.util.buffer.alloc(1024 * 1024 * 20)
           }
         });
         upload.send(function(err, data) {

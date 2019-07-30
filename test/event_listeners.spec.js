@@ -208,7 +208,7 @@
           it('when payload is a buffer', function() {
             var service = new FooService();
             var req = service.putStream({
-              Body: new AWS.util.Buffer('test')
+              Body: AWS.util.buffer.toBuffer('test')
             });
 
             req.runTo('sign', function(err) {
@@ -269,7 +269,7 @@
         });
 
         it('builds Content-Length for buffer body', function() {
-          return expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6);
+          return expect(contentLength(AWS.util.buffer.toBuffer('tï№'))).to.equal(6);
         });
 
         describe ('when has requiresLength trait exists', function() {

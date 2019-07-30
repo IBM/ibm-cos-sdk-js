@@ -181,7 +181,7 @@ export abstract class ConfigurationOptions {
      */
     apiKeyId?: string
     /**
-     * Auth end-point should be https://iam.ng.bluemix.net/oidc/token
+     * Auth end-point should be https://iam.cloud.ibm.com/identity/token
      */
     ibmAuthEndpoint?: string
     /**

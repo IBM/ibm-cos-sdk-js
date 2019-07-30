@@ -1,7 +1,7 @@
 var helpers = require('../helpers'),
   AWS = helpers.AWS,
   Stream = AWS.util.stream,
-  Buffer = AWS.util.Buffer;
+  buffer = AWS.util.buffer;
 
 describe('AWS.S3', function() {
   var s3 = null;
@@ -782,7 +782,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: new Buffer(1024 * 1024 - 1)
+            Body: buffer.alloc(1024 * 1024 - 1)
           });
           expect(req.headers['Expect']).not.to.exist;
         });
@@ -791,7 +791,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: new Buffer(1024 * 1024 + 1)
+            Body: buffer.alloc(1024 * 1024 + 1)
           });
           expect(req.headers['Expect']).to.equal('100-continue');
         });
@@ -822,7 +822,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.equal('UNSIGNED-PAYLOAD');
       });
@@ -832,7 +832,7 @@ describe('AWS.S3', function() {
           s3DisableBodySigning: true,
           signatureVersion: 'v4'
         });
-        var buf = new Buffer(1024 * 1024 * 5);
+        var buf = AWS.util.buffer.alloc(1024 * 1024 * 5);
         buf.fill(0);
         var req = build('putObject', {
           Bucket: 'bucket',
@@ -851,7 +851,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.exist;
         expect(req.headers['X-Amz-Content-Sha256']).to.not.equal('UNSIGNED-PAYLOAD');
@@ -866,7 +866,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.not.exist;
       });
@@ -881,7 +881,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.exist;
         expect(req.headers['X-Amz-Cotnent-Sha256']).to.not.equal('UNSIGNED-PAYLOAD');
@@ -896,7 +896,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer(1024 * 1024 * 5)
+          Body: AWS.util.buffer.alloc(1024 * 1024 * 5)
         });
         expect(req.headers['X-Amz-Content-Sha256']).to.not.exist;
       });
@@ -953,7 +953,7 @@ describe('AWS.S3', function() {
         var req = build('putObject', {
           Bucket: 'bucket',
           Key: 'key',
-          Body: new Buffer('body'),
+          Body: AWS.util.buffer.toBuffer('body'),
           ContentType: 'image/png'
         });
         expect(req.headers['Content-Type']).to.equal('image/png');
@@ -1194,7 +1194,7 @@ describe('AWS.S3', function() {
           Bucket: 'bucket',
           Key: 'key',
           Body: 'data',
-          SSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
+          SSECustomerKey: AWS.util.buffer.toBuffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
           SSECustomerAlgorithm: 'AES256'
         });
         req.build();
@@ -1224,7 +1224,7 @@ describe('AWS.S3', function() {
           Key: 'key',
           CopySource: 'bucket/oldkey',
           Body: 'data',
-          CopySourceSSECustomerKey: new AWS.util.Buffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
+          CopySourceSSECustomerKey: AWS.util.buffer.toBuffer('098f6bcd4621d373cade4e832627b4f6', 'hex'),
           CopySourceSSECustomerAlgorithm: 'AES256'
         });
         req.build();
@@ -1326,7 +1326,7 @@ describe('AWS.S3', function() {
         req = request('operation');
       }
       var resp = new AWS.Response(req);
-      resp.httpResponse.body = new Buffer(body || '');
+      resp.httpResponse.body = AWS.util.buffer.toBuffer(body || '');
       resp.httpResponse.statusCode = statusCode;
       resp.httpResponse.headers = {
         'x-amz-request-id': 'RequestId',
@@ -2609,7 +2609,7 @@ describe('AWS.S3', function() {
           };
           tr.length = 0;
           tr.path = 'path/to/file';
-          tr.push(new Buffer(''));
+          tr.push(buffer.toBuffer(''));
           tr.end();
           return tr;
         });
@@ -2653,7 +2653,7 @@ describe('AWS.S3', function() {
               return tr.push(null);
             } else {
               didRead = true;
-              return tr.push(new Buffer('test'));
+              return tr.push(buffer.toBuffer('test'));
             }
           };
           return tr;
@@ -2702,6 +2702,21 @@ describe('AWS.S3', function() {
 
     afterEach(function(done) {
       done();
+    });
+
+    it('throws error when supplying a non-number value', function(done) {
+      var expiresString = '60';
+      try {
+        s3.getSignedUrl('getObject', {
+          Bucket: 'bucket',
+          Key: 'key',
+          Expires: expiresString
+        });
+      } catch (e) {
+        expect(e.code).to.eql('InvalidParameterException');
+        expect(e.message).to.eql('The expiration must be a number, received ' + typeof expiresString);
+        done();
+      }
     });
 
     it('gets a signed URL for getObject', function() {
@@ -3117,7 +3132,7 @@ describe('AWS.S3', function() {
         foo: 'bar',
         fizz: 1
       });
-      var body = new Buffer(policy);
+      var body = AWS.util.buffer.toBuffer(policy);
       helpers.mockHttpResponse(200, {}, body);
       s3.getBucketPolicy(function(err, data) {
         expect(Buffer.isBuffer(data.Policy)).to.be['false'];

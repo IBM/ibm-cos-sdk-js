@@ -292,7 +292,8 @@
           body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>';
         }
         response.httpResponse.statusCode = 400;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.statusMessage = 'Bad Request';
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('extracts the error code and message', function() {
@@ -334,7 +335,7 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('parses the xml body', function() {

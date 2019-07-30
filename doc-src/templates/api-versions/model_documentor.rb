@@ -58,9 +58,11 @@ DOCS
 
     if service_desc
       @lines << <<-DOCS.strip
+
 ### Service Description
       
 #{service_desc}
+
 DOCS
     end
 
@@ -440,8 +442,12 @@ class ExampleShapeVisitor
   end
 
   def visit_binary(node, required = false)
-    value = "new Buffer('...') || 'STRING_VALUE'"
-    value += " || streamObject" if node['streaming']
+    value = "Buffer.from('...') || 'STRING_VALUE'"
+    if node['streaming']
+      value += " || streamObject"
+    else
+      value += " /* Strings will be Base-64 encoded on your behalf */"
+    end
     value
   end
   alias visit_blob visit_binary

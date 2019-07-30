@@ -48,7 +48,6 @@ var util = require('util');
 var config = {
     endpoint: '<endpoint>',
     apiKeyId: '<api-key>',
-    ibmAuthEndpoint: 'https://iam.ng.bluemix.net/oidc/token',
     serviceInstanceId: '<resource-instance-id>',
 };
 

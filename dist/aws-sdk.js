@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v1.4.6-0
+// AWS SDK for JavaScript v1.5.2
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -864,6 +864,60 @@ module.exports={
         }
       }
     },
+    "GetBucketLifecycle": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Rules": {
+            "locationName": "Rule",
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Status"
+              ],
+              "members": {
+                "Expiration": {
+                  "shape": "S3e"
+                },
+                "ID": {},
+                "Prefix": {},
+                "Status": {},
+                "Transition": {
+                  "shape": "S3k"
+                },
+                "AbortIncompleteMultipartUpload": {
+                  "type": "structure",
+                  "members": {
+                    "DaysAfterInitiation": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "flattened": true
+          }
+        }
+      },
+      "deprecated": true
+    },
     "GetBucketLifecycleConfiguration": {
       "http": {
         "method": "GET",
@@ -885,7 +939,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S3c",
+            "shape": "S3q",
             "locationName": "Rule"
           }
         }
@@ -937,13 +991,13 @@ module.exports={
         "members": {
           "Status": {},
           "MinimumRetention": {
-            "shape": "S3t"
+            "shape": "S3z"
           },
           "DefaultRetention": {
-            "shape": "S3u"
+            "shape": "S40"
           },
           "MaximumRetention": {
-            "shape": "S3v"
+            "shape": "S41"
           },
           "EnablePermanentRetention": {
             "type": "boolean"
@@ -1418,7 +1472,7 @@ module.exports={
             "type": "integer"
           },
           "Transition": {
-            "shape": "S3m",
+            "shape": "S3k",
             "location": "header",
             "locationName": "x-ibm-transition"
           },
@@ -1446,17 +1500,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Buckets": {
-            "type": "list",
-            "member": {
-              "locationName": "Bucket",
-              "type": "structure",
-              "members": {
-                "Name": {},
-                "CreationDate": {
-                  "type": "timestamp"
-                }
-              }
-            }
+            "shape": "S4y"
           },
           "Owner": {
             "shape": "S2n"
@@ -1464,6 +1508,50 @@ module.exports={
         }
       },
       "alias": "GetService"
+    },
+    "ListBucketsExtended": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/?extended"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "IBMServiceInstanceId": {
+            "location": "header",
+            "locationName": "Ibm-Service-Instance-Id"
+          },
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          },
+          "MaxKeys": {
+            "location": "querystring",
+            "locationName": "max-keys",
+            "type": "integer"
+          },
+          "Prefix": {
+            "location": "querystring",
+            "locationName": "prefix"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "IsTruncated": {
+            "type": "boolean"
+          },
+          "Marker": {},
+          "Buckets": {
+            "shape": "S4y"
+          },
+          "Owner": {
+            "shape": "S2n"
+          }
+        }
+      },
+      "alias": "GetServiceExtended"
     },
     "ListLegalHolds": {
       "http": {
@@ -1589,14 +1677,14 @@ module.exports={
                   "shape": "S2n"
                 },
                 "Initiator": {
-                  "shape": "S5d"
+                  "shape": "S5n"
                 }
               }
             },
             "flattened": true
           },
           "CommonPrefixes": {
-            "shape": "S5e"
+            "shape": "S5o"
           },
           "EncodingType": {}
         }
@@ -1658,7 +1746,7 @@ module.exports={
           "Marker": {},
           "NextMarker": {},
           "Contents": {
-            "shape": "S5l"
+            "shape": "S5t"
           },
           "Name": {},
           "Prefix": {},
@@ -1667,7 +1755,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S5e"
+            "shape": "S5o"
           },
           "EncodingType": {}
         }
@@ -1728,7 +1816,7 @@ module.exports={
             "type": "boolean"
           },
           "Contents": {
-            "shape": "S5l"
+            "shape": "S5t"
           },
           "Name": {},
           "Prefix": {},
@@ -1737,7 +1825,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S5e"
+            "shape": "S5o"
           },
           "EncodingType": {},
           "KeyCount": {
@@ -1834,7 +1922,7 @@ module.exports={
             "flattened": true
           },
           "Initiator": {
-            "shape": "S5d"
+            "shape": "S5n"
           },
           "Owner": {
             "shape": "S2n"
@@ -1859,7 +1947,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S64",
+            "shape": "S6c",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -1965,13 +2053,13 @@ module.exports={
             "members": {
               "Status": {},
               "MinimumRetention": {
-                "shape": "S3t"
+                "shape": "S3z"
               },
               "DefaultRetention": {
-                "shape": "S3u"
+                "shape": "S40"
               },
               "MaximumRetention": {
-                "shape": "S3v"
+                "shape": "S41"
               },
               "EnablePermanentRetention": {
                 "type": "boolean"
@@ -1981,6 +2069,43 @@ module.exports={
         },
         "payload": "ProtectionConfiguration"
       }
+    },
+    "PutBucketLifecycle": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?lifecycle"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "locationName": "Content-MD5"
+          },
+          "LifecycleConfiguration": {
+            "locationName": "LifecycleConfiguration",
+            "type": "structure",
+            "required": [
+              "Rules"
+            ],
+            "members": {
+              "Rules": {
+                "shape": "S3q",
+                "locationName": "Rule"
+              }
+            }
+          }
+        },
+        "payload": "LifecycleConfiguration"
+      },
+      "deprecated": true
     },
     "PutBucketLifecycleConfiguration": {
       "http": {
@@ -2008,7 +2133,7 @@ module.exports={
             ],
             "members": {
               "Rules": {
-                "shape": "S3c",
+                "shape": "S3q",
                 "locationName": "Rule"
               }
             }
@@ -2195,7 +2320,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S64",
+            "shape": "S6c",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -2642,29 +2767,49 @@ module.exports={
       },
       "flattened": true
     },
-    "S3c": {
+    "S3e": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "S3f"
+        },
+        "Days": {
+          "type": "integer"
+        },
+        "ExpiredObjectDeleteMarker": {
+          "type": "boolean"
+        }
+      }
+    },
+    "S3f": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    },
+    "S3k": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "S3f"
+        },
+        "Days": {
+          "type": "integer"
+        },
+        "TemporaryCopyStorageClass": {},
+        "StorageClass": {}
+      }
+    },
+    "S3q": {
       "type": "list",
       "member": {
         "type": "structure",
         "required": [
-          "Filter",
+          "ID",
           "Status",
-          "Transitions"
+          "Filter"
         ],
         "members": {
           "Expiration": {
-            "type": "structure",
-            "members": {
-              "Date": {
-                "shape": "S3f"
-              },
-              "Days": {
-                "type": "integer"
-              },
-              "ExpiredObjectDeleteMarker": {
-                "type": "boolean"
-              }
-            }
+            "shape": "S3e"
           },
           "ID": {},
           "Prefix": {
@@ -2681,7 +2826,7 @@ module.exports={
             "locationName": "Transition",
             "type": "list",
             "member": {
-              "shape": "S3m"
+              "shape": "S3k"
             },
             "flattened": true
           }
@@ -2689,24 +2834,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S3f": {
-      "type": "timestamp",
-      "timestampFormat": "iso8601"
-    },
-    "S3m": {
-      "type": "structure",
-      "members": {
-        "Date": {
-          "shape": "S3f"
-        },
-        "Days": {
-          "type": "integer"
-        },
-        "TemporaryCopyStorageClass": {},
-        "StorageClass": {}
-      }
-    },
-    "S3t": {
+    "S3z": {
       "type": "structure",
       "required": [
         "Days"
@@ -2717,7 +2845,7 @@ module.exports={
         }
       }
     },
-    "S3u": {
+    "S40": {
       "type": "structure",
       "required": [
         "Days"
@@ -2728,7 +2856,7 @@ module.exports={
         }
       }
     },
-    "S3v": {
+    "S41": {
       "type": "structure",
       "required": [
         "Days"
@@ -2739,14 +2867,28 @@ module.exports={
         }
       }
     },
-    "S5d": {
+    "S4y": {
+      "type": "list",
+      "member": {
+        "locationName": "Bucket",
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "CreationDate": {
+            "type": "timestamp"
+          },
+          "LocationConstraint": {}
+        }
+      }
+    },
+    "S5n": {
       "type": "structure",
       "members": {
         "ID": {},
         "DisplayName": {}
       }
     },
-    "S5e": {
+    "S5o": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -2756,7 +2898,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S5l": {
+    "S5t": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -2777,7 +2919,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S64": {
+    "S6c": {
       "type": "structure",
       "members": {
         "Grants": {
@@ -3222,7 +3364,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '1.4.6-0',
+  VERSION: '1.5.2',
 
 
   Signers: {},
@@ -3469,6 +3611,15 @@ AWS.EventListeners = {
   Core: {} /* doc hack */
 };
 
+
+function getOperationAuthtype(req) {
+    if (!req.service.api.operations) {
+        return '';
+    }
+    var operation = req.service.api.operations[req.operation];
+    return operation ? operation.authtype : '';
+}
+
 AWS.EventListeners = {
   Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
     addAsync('VALIDATE_CREDENTIALS', 'validate',
@@ -3552,9 +3703,25 @@ AWS.EventListeners = {
     });
 
     add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
+      var authtype = getOperationAuthtype(req);
+      var payloadMember = AWS.util.getRequestPayloadShape(req);
       if (req.httpRequest.headers['Content-Length'] === undefined) {
-        var length = AWS.util.string.byteLength(req.httpRequest.body);
-        req.httpRequest.headers['Content-Length'] = length;
+        try {
+          var length = AWS.util.string.byteLength(req.httpRequest.body);
+          req.httpRequest.headers['Content-Length'] = length;
+        } catch (err) {
+          if (payloadMember && payloadMember.isStreaming) {
+            if (payloadMember.requiresLength) {
+              throw err;
+            } else if (authtype.indexOf('unsigned-body') >= 0) {
+              req.httpRequest.headers['Transfer-Encoding'] = 'chunked';
+              return;
+            } else {
+              throw err;
+            }
+          }
+          throw err;
+        }
       }
     });
 
@@ -3709,7 +3876,7 @@ AWS.EventListeners = {
         function HTTP_HEADERS(statusCode, headers, resp) {
       resp.httpResponse.statusCode = statusCode;
       resp.httpResponse.headers = headers;
-      resp.httpResponse.body = new AWS.util.Buffer('');
+      resp.httpResponse.body = AWS.util.buffer.toBuffer('');
       resp.httpResponse.buffers = [];
       resp.httpResponse.numBytes = 0;
       var dateHeader = headers.date || headers.Date;
@@ -3732,7 +3899,7 @@ AWS.EventListeners = {
           resp.request.emit('httpDownloadProgress', [progress, resp]);
         }
 
-        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
+        resp.httpResponse.buffers.push(AWS.util.buffer.toBuffer(chunk));
       }
     });
 
@@ -3853,14 +4020,57 @@ AWS.EventListeners = {
       var req = resp.request;
       var logger = req.service.config.logger;
       if (!logger) return;
+      function filterSensitiveLog(inputShape, shape) {
+        if (!shape) {
+          return shape;
+        }
+        switch (inputShape.type) {
+          case 'structure':
+            var struct = {};
+            AWS.util.each(shape, function(subShapeName, subShape) {
+              if (Object.prototype.hasOwnProperty.call(inputShape.members, subShapeName)) {
+                struct[subShapeName] = filterSensitiveLog(inputShape.members[subShapeName], subShape);
+              } else {
+                struct[subShapeName] = subShape;
+              }
+            })
+            return struct
+          case 'list':
+            var list = [];
+            AWS.util.arrayEach(shape, function(subShape, index) {
+              list.push(filterSensitiveLog(inputShape.member, subShape));
+            })
+            return list;
+          case 'map':
+            var map = {};
+            AWS.util.each(shape, function(key, value) {
+              map[key] = filterSensitiveLog(inputShape.value, value);
+            })
+            return map;
+          default:
+            if (inputShape.isSensitive) {
+              return '***SensitiveInformation***'
+            } else {
+              return shape;
+            }
+        }
+      }
 
       function buildMessage() {
         var time = AWS.util.date.getDate().getTime();
         var delta = (time - req.startTime.getTime()) / 1000;
         var ansi = logger.isTTY ? true : false;
         var status = resp.httpResponse.statusCode;
-        var params = require('util').inspect(req.params, true, null);
-
+        var censoredParams = req.params;
+        if (
+          req.service.api.operations &&
+              req.service.api.operations[req.operation] &&
+              req.service.api.operations[req.operation].input
+        ) {
+          var inputShape = req.service.api.operations[req.operation].input;
+          censoredParams = filterSensitiveLog(inputShape, req.params);
+        }
+        var params = require('util').inspect(censoredParams, true, null);
         var message = '';
         if (ansi) message += '\x1B[33m';
         message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
@@ -4205,7 +4415,7 @@ function TokenManager() {
     };
 
     config = {
-        ibmAuthEndpoint: 'https://iam.ng.bluemix.net/oidc/token',
+        ibmAuthEndpoint: 'https://iam.cloud.ibm.com/identity/token',
         apiKeyId: null,
         token: null,
         refreshToken: null,
@@ -4853,11 +5063,14 @@ function Shape(shape, options, memberName) {
   property(this, 'name', this.name || shape.xmlName || shape.queryName ||
     shape.locationName || memberName);
   property(this, 'isStreaming', shape.streaming || this.isStreaming || false);
+  property(this, 'requiresLength', shape.requiresLength, false);
   property(this, 'isComposite', shape.isComposite || false);
   property(this, 'isShape', true, false);
   property(this, 'isQueryName', shape.queryName ? true : false, false);
   property(this, 'isLocationName', shape.locationName ? true : false, false);
   property(this, 'isIdempotent', shape.idempotencyToken === true);
+  property(this, 'isJsonValue', shape.jsonvalue === true);
+  property(this, 'isSensitive', shape.sensitive === true || shape.prototype && shape.prototype.sensitive === true);
 
   if (options.documentation) {
     property(this, 'documentation', shape.documentation);
@@ -5128,7 +5341,16 @@ function IntegerShape() {
 
 function BinaryShape() {
   Shape.apply(this, arguments);
-  this.toType = util.base64.decode;
+  this.toType = function(value) {
+    var buf = util.base64.decode(value);
+    if (this.isSensitive && util.isNode() && typeof util.Buffer.alloc === 'function') {
+
+      var secureBuf = util.Buffer.alloc(buf.length, buf);
+      buf.fill(0);
+      buf = secureBuf;
+    }
+    return buf;
+  };
   this.toWireFormat = util.base64.encode;
 }
 
@@ -6805,7 +7027,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     self.body = self.service.config.params.Body;
     if (!self.body) throw new Error('params.Body is required');
     if (typeof self.body === 'string') {
-      self.body = new AWS.util.Buffer(self.body);
+      self.body = AWS.util.buffer.toBuffer(self.body);
+    } else if (!self.body) {
+      throw new Error('params.Body is required');
     }
     self.sliceFn = AWS.util.arraySliceFn(self.body);
   },
@@ -8365,6 +8589,12 @@ AWS.util.update(AWS.S3.prototype, {
   getSignedUrl: function getSignedUrl(operation, params, callback) {
     params = AWS.util.copy(params || {});
     var expires = params.Expires || 900;
+
+    if (typeof expires !== 'number') {
+      throw AWS.util.error(new Error(),
+        { code: 'InvalidParameterException', message: 'The expiration must be a number, received ' + typeof expires });
+    }
+
     delete params.Expires; // we can't validate this
     var request = this.makeRequest(operation, params);
     var hasNextTick = typeof process === 'object' && typeof process.nextTick === 'function';
@@ -8587,7 +8817,9 @@ AWS.Signers.IAM = inherit(AWS.Signers.RequestSigner, {
     var token = credentials.tokenManager.getToken();
     this.request.headers['Authorization'] = 'Bearer ' + (token.accessToken || token['access_token']);
 
-    if (req.operation === 'createBucket' || req.operation === 'listBuckets') {
+    if (req.operation === 'createBucket' ||
+        req.operation === 'listBuckets' ||
+        req.operation === 'listBucketsExtended') {
       if (!this.request.headers['Ibm-Service-Instance-Id']) {
         this.request.headers['Ibm-Service-Instance-Id'] = credentials.serviceInstanceId;
       }
@@ -9473,7 +9705,7 @@ var util = {
       if (string === null || typeof string === 'undefined') {
         return string;
       }
-      var buf = (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string) : new util.Buffer(string);
+      var buf = util.buffer.toBuffer(string);
       return buf.toString('base64');
     },
 
@@ -9484,14 +9716,35 @@ var util = {
       if (string === null || typeof string === 'undefined') {
         return string;
       }
-      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string, 'base64') : new util.Buffer(string, 'base64');
+      return util.buffer.toBuffer(string, 'base64');
     }
 
   },
 
   buffer: {
+
+    toBuffer: function(data, encoding) {
+      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ?
+        util.Buffer.from(data, encoding) : new util.Buffer(data, encoding);
+    },
+
+    alloc: function(size, fill, encoding) {
+      if (typeof size !== 'number') {
+        throw new Error('size passed to alloc must be a number.');
+      }
+      if (typeof util.Buffer.alloc === 'function') {
+        return util.Buffer.alloc(size, fill, encoding);
+      } else {
+        var buf = new util.Buffer(size);
+        if (fill !== undefined && typeof buf.fill === 'function') {
+          buf.fill(fill, undefined, undefined, encoding);
+        }
+        return buf;
+      }
+    },
+
     toStream: function toStream(buffer) {
-      if (!util.Buffer.isBuffer(buffer)) buffer = new util.Buffer(buffer);
+      if (!util.Buffer.isBuffer(buffer)) buffer =  util.buffer.toBuffer(buffer);
 
       var readable = new (util.stream.Readable)();
       var pos = 0;
@@ -9517,7 +9770,7 @@ var util = {
         length += buffers[i].length;
       }
 
-      buffer = new util.Buffer(length);
+      buffer = util.buffer.alloc(length);
 
       for (i = 0; i < buffers.length; i++) {
         buffers[i].copy(buffer, offset);
@@ -9531,7 +9784,7 @@ var util = {
   string: {
     byteLength: function byteLength(string) {
       if (string === null || string === undefined) return 0;
-      if (typeof string === 'string') string = new util.Buffer(string);
+      if (typeof string === 'string') string = util.buffer.toBuffer(string);
 
       if (typeof string.byteLength === 'number') {
         return string.byteLength;
@@ -9719,7 +9972,7 @@ var util = {
       var crc = 0 ^ -1;
 
       if (typeof data === 'string') {
-        data = new util.Buffer(data);
+        data = util.buffer.toBuffer(data);
       }
 
       for (var i = 0; i < data.length; i++) {
@@ -9733,7 +9986,7 @@ var util = {
       if (!digest) digest = 'binary';
       if (digest === 'buffer') { digest = undefined; }
       if (!fn) fn = 'sha256';
-      if (typeof string === 'string') string = new util.Buffer(string);
+      if (typeof string === 'string') string = util.buffer.toBuffer(string);
       return util.crypto.lib.createHmac(fn, key).update(string).digest(digest);
     },
 
@@ -9749,7 +10002,7 @@ var util = {
       var hash = util.crypto.createHash(algorithm);
       if (!digest) { digest = 'binary'; }
       if (digest === 'buffer') { digest = undefined; }
-      if (typeof data === 'string') data = new util.Buffer(data);
+      if (typeof data === 'string') data = util.buffer.toBuffer(data);
       var sliceFn = util.arraySliceFn(data);
       var isBuffer = util.Buffer.isBuffer(data);
       if (util.isBrowser() && typeof ArrayBuffer !== 'undefined' && data && data.buffer instanceof ArrayBuffer) isBuffer = true;
@@ -10218,7 +10471,25 @@ var util = {
     } else {
       setTimeout(callback, 0);
     }
-  }
+  },
+
+
+  getRequestPayloadShape: function getRequestPayloadShape(req) {
+    var operations = req.service.api.operations;
+    if (!operations) return undefined;
+    var operation = (operations || {})[req.operation];
+    if (!operation || !operation.input || !operation.input.payload) return undefined;
+    return operation.input.members[operation.input.payload];
+  },
+
+
+  defaultProfile: 'default',
+
+
+  configOptInEnv: 'AWS_SDK_LOAD_CONFIG',
+
+
+  sharedCredentialsFileEnv: 'AWS_SHARED_CREDENTIALS_FILE',
 
 };
 
@@ -17404,6 +17675,7 @@ module.exports = verify
 
 }).call(this,require("buffer").Buffer)
 },{"./curves.json":96,"bn.js":70,"buffer":100,"elliptic":121,"parse-asn1":166}],100:[function(require,module,exports){
+(function (Buffer){
 
 
 
@@ -19047,7 +19319,8 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":69,"ieee754":153}],101:[function(require,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"base64-js":69,"buffer":100,"ieee754":153}],101:[function(require,module,exports){
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -19062,7 +19335,7 @@ module.exports = function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 },{"buffer":100}],102:[function(require,module,exports){
-(function (global){
+(function (global,Buffer){
 
 
 
@@ -20715,8 +20988,8 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":69,"ieee754":153,"isarray":156}],103:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
+},{"base64-js":69,"buffer":100,"ieee754":153,"isarray":156}],103:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
 var StringDecoder = require('string_decoder').StringDecoder
@@ -25833,35 +26106,30 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":70,"minimalistic-assert":160,"minimalistic-crypto-utils":161}],136:[function(require,module,exports){
 module.exports={
-  "_args": [
-    [
-      "elliptic@6.4.1",
-      "/Users/kellerbrus.ibm.com/Code/ibm-cos-sdk-js"
-    ]
-  ],
-  "_from": "elliptic@6.4.1",
+  "_from": "elliptic@^6.0.0",
   "_id": "elliptic@6.4.1",
   "_inBundle": false,
   "_integrity": "sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==",
   "_location": "/elliptic",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "elliptic@6.4.1",
+    "raw": "elliptic@^6.0.0",
     "name": "elliptic",
     "escapedName": "elliptic",
-    "rawSpec": "6.4.1",
+    "rawSpec": "^6.0.0",
     "saveSpec": null,
-    "fetchSpec": "6.4.1"
+    "fetchSpec": "^6.0.0"
   },
   "_requiredBy": [
     "/browserify-sign",
     "/create-ecdh"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
-  "_spec": "6.4.1",
-  "_where": "/Users/kellerbrus.ibm.com/Code/ibm-cos-sdk-js",
+  "_shasum": "c2d0b7776911b86722c632c3c06c60f2f819939a",
+  "_spec": "elliptic@^6.0.0",
+  "_where": "/Users/kellerbrus.ibm.com/Code/ibm-cos-sdk-js/node_modules/browserify-sign",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -25869,6 +26137,7 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
@@ -25878,6 +26147,7 @@ module.exports={
     "minimalistic-assert": "^1.0.0",
     "minimalistic-crypto-utils": "^1.0.0"
   },
+  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "brfs": "^1.4.3",
@@ -30140,12 +30410,12 @@ var X509Certificate = asn.define('X509Certificate', function () {
 module.exports = X509Certificate
 
 },{"asn1.js":55}],165:[function(require,module,exports){
-(function (Buffer){
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
-var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----/m
-var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
+var startRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----/m
+var fullRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
 var evp = require('evp_bytestokey')
 var ciphers = require('browserify-aes')
+var Buffer = require('safe-buffer').Buffer
 module.exports = function (okey, password) {
   var key = okey.toString()
   var match = key.match(findProc)
@@ -30155,8 +30425,8 @@ module.exports = function (okey, password) {
     decrypted = new Buffer(match2[2].replace(/[\r\n]/g, ''), 'base64')
   } else {
     var suite = 'aes' + match[1]
-    var iv = new Buffer(match[2], 'hex')
-    var cipherText = new Buffer(match[3].replace(/[\r\n]/g, ''), 'base64')
+    var iv = Buffer.from(match[2], 'hex')
+    var cipherText = Buffer.from(match[3].replace(/[\r\n]/g, ''), 'base64')
     var cipherKey = evp(password, iv.slice(0, 8), parseInt(match[1], 10)).key
     var out = []
     var cipher = ciphers.createDecipheriv(suite, cipherKey, iv)
@@ -30171,8 +30441,7 @@ module.exports = function (okey, password) {
   }
 }
 
-}).call(this,require("buffer").Buffer)
-},{"browserify-aes":75,"buffer":100,"evp_bytestokey":138}],166:[function(require,module,exports){
+},{"browserify-aes":75,"evp_bytestokey":138,"safe-buffer":204}],166:[function(require,module,exports){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
 var fixProc = require('./fixProc')
@@ -31643,6 +31912,10 @@ arguments[4][183][0].apply(exports,arguments)
 (function (process,global){
 'use strict'
 
+var MAX_BYTES = 65536
+
+var MAX_UINT32 = 4294967295
+
 function oldBrowser () {
   throw new Error('Secure random number generation is not supported by this browser.\nUse Chrome, Firefox or Internet Explorer 11')
 }
@@ -31657,14 +31930,19 @@ if (crypto && crypto.getRandomValues) {
 }
 
 function randomBytes (size, cb) {
-  if (size > 65536) throw new Error('requested too many random bytes')
-  var rawBytes = new global.Uint8Array(size)
+  if (size > MAX_UINT32) throw new RangeError('requested too many random bytes')
+
+  var bytes = Buffer.allocUnsafe(size)
 
   if (size > 0) {  // getRandomValues fails on IE if size == 0
-    crypto.getRandomValues(rawBytes)
+    if (size > MAX_BYTES) { // this is the max bytes crypto.getRandomValues
+      for (var generated = 0; generated < size; generated += MAX_BYTES) {
+        crypto.getRandomValues(bytes.slice(generated, generated + MAX_BYTES))
+      }
+    } else {
+      crypto.getRandomValues(bytes)
+    }
   }
-
-  var bytes = Buffer.from(rawBytes.buffer)
 
   if (typeof cb === 'function') {
     return process.nextTick(function () {

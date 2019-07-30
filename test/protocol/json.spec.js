@@ -112,7 +112,8 @@
       var extractError;
       extractError = function(body) {
         response.httpResponse.statusCode = 500;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.statusMessage = 'Internal Server Error';
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('removes prefixes from the error code', function() {
@@ -177,7 +178,7 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('JSON parses http response bodies', function() {
