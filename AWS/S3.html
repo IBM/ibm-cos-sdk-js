@@ -2485,7 +2485,7 @@ subsequent event callback registration.</p>
   CopySourceIfNoneMatch: &#39;STRING_VALUE&#39;,
   CopySourceIfUnmodifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   CopySourceSSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  CopySourceSSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  CopySourceSSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   CopySourceSSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   Expires: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   GrantFullControl: &#39;STRING_VALUE&#39;,
@@ -2502,7 +2502,7 @@ subsequent event callback registration.</p>
   RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
   RetentionPeriod: 0,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
@@ -3038,7 +3038,7 @@ subsequent event callback registration.</p>
     /* anotherKey: ... */
   },
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
@@ -5786,7 +5786,7 @@ subsequent event callback registration.</p>
   ResponseContentType: &#39;STRING_VALUE&#39;,
   ResponseExpires: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   VersionId: &#39;STRING_VALUE&#39;
 };
@@ -6629,7 +6629,7 @@ subsequent event callback registration.</p>
   PartNumber: 0,
   Range: &#39;STRING_VALUE&#39;,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   VersionId: &#39;STRING_VALUE&#39;
 };
@@ -9589,7 +9589,7 @@ subsequent event callback registration.</p>
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   Key: &#39;STRING_VALUE&#39;, /* required */
   ACL: &#39;private | public-read | public-read-write | authenticated-read | aws-exec-read | bucket-owner-read | bucket-owner-full-control&#39;,
-  Body: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39; || streamObject,
+  Body: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; || streamObject,
   CacheControl: &#39;STRING_VALUE&#39;,
   ContentDisposition: &#39;STRING_VALUE&#39;,
   ContentEncoding: &#39;STRING_VALUE&#39;,
@@ -9610,7 +9610,7 @@ subsequent event callback registration.</p>
   RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
   RetentionPeriod: 0,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
@@ -10544,11 +10544,11 @@ s3.upload(params, options, function(err, data) {
   Key: &#39;STRING_VALUE&#39;, /* required */
   PartNumber: 0, /* required */
   UploadId: &#39;STRING_VALUE&#39;, /* required */
-  Body: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39; || streamObject,
+  Body: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; || streamObject,
   ContentLength: 0,
   ContentMD5: &#39;STRING_VALUE&#39;,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;
 };
 s3.uploadPart(params, function(err, data) {
@@ -10743,10 +10743,10 @@ subsequent event callback registration.</p>
   CopySourceIfUnmodifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   CopySourceRange: &#39;STRING_VALUE&#39;,
   CopySourceSSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  CopySourceSSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  CopySourceSSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   CopySourceSSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
-  SSECustomerKey: new Buffer(&#39;...&#39;) || &#39;STRING_VALUE&#39;,
+  SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;
 };
 s3.uploadPartCopy(params, function(err, data) {
@@ -11935,9 +11935,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Fri Jun 28 09:55:46 2019 by
+  Generated on Tue Jul 30 11:55:21 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.0).
+  0.8.7.6 (ruby-2.3.7).
 </div>
 
 <!-- BEGIN-SECTION -->

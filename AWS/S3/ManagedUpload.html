@@ -374,6 +374,13 @@ option to <code>true</code> when initializing the upload object.</p>
 
   <div class="note notetag">
     <strong>Note:</strong>
+    <div class='inline'><p>In Node.js, sending "Body" as <a href="https://nodejs.org/dist/latest/docs/api/stream.html#stream_object_mode" target="_parent" title="object-mode stream">object-mode stream</a>
+may result in upload hangs. Using buffer stream is preferable.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
     <div class='inline'><p>ContentMD5 should not be provided when using the managed upload object.
 Instead, setting "computeChecksums" to true will enable automatic ContentMD5 generation
 by the managed upload object.</p>
@@ -717,7 +724,7 @@ not yet uploaded will not be sent, and the multipart upload will be cleaned up.<
       
       <pre class="example code"><code>var params = {
   Bucket: &#39;bucket&#39;, Key: &#39;key&#39;,
-  Body: new Buffer(1024 * 1024 * 25) // 25MB payload
+  Body: Buffer.alloc(1024 * 1024 * 25) // 25MB payload
 };
 var upload = s3.upload(params);
 upload.send(function (err, data) {
@@ -975,9 +982,9 @@ upload.send(function(err, data) {
       </div>
 
       <div id="footer">
-  Generated on Fri Jun 28 09:55:46 2019 by
+  Generated on Tue Jul 30 11:55:21 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.0).
+  0.8.7.6 (ruby-2.3.7).
 </div>
 
 <!-- BEGIN-SECTION -->

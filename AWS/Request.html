@@ -162,7 +162,7 @@ example:</p>
   on('success', function(response) {
     console.log("Success!");
   }).
-  on('error', function(response) {
+  on('error', function(error, response) {
     console.log("Error!");
   }).
   on('complete', function(response) {
@@ -1934,7 +1934,7 @@ sent by the service.</p>
       
       <pre class="example code"><code>var params = {
   Bucket: &#39;bucket&#39;, Key: &#39;key&#39;,
-  Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+  Body: Buffer.alloc(1024 * 1024 * 5) // 5MB payload
 };
 var request = s3.putObject(params);
 request.send(function (err, data) {
@@ -2615,9 +2615,9 @@ the request. Set to <code>null</code> if a request error occurs.</p>
       </div>
 
       <div id="footer">
-  Generated on Fri Jun 28 09:55:46 2019 by
+  Generated on Tue Jul 30 11:55:21 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.0).
+  0.8.7.6 (ruby-2.3.7).
 </div>
 
 <!-- BEGIN-SECTION -->
