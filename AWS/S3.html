@@ -5,7 +5,7 @@
 <title>
   Class: AWS.S3
   
-    &mdash; ibm-cos-sdk Documentation
+    &mdash; IBM COS SDK for JavaScript
   
 </title>
 
@@ -851,6 +851,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Get a pre-signed URL for a given operation name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getSignedUrlPromise-property" title="getSignedUrlPromise"><strong>getSignedUrlPromise</strong>() &#x21d2; Promise </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns a 'thenable' promise that will be resolved with a pre-signed URL for a given operation name.</p>
 </div></span>
   
 </li>
@@ -6405,6 +6430,213 @@ signed URL.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getSignedUrlPromise-property">
+  
+    <strong>getSignedUrlPromise</strong>() &#x21d2; <tt>Promise</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Not all operation parameters are supported when using pre-signed
+URLs. Certain parameters, such as <code>SSECustomerKey</code>, <code>ACL</code>, <code>Expires</code>,
+<code>ContentLength</code>, or <code>Tagging</code> must be provided as headers when sending a
+request. If you are using pre-signed URLs to upload from a browser and
+need to use these fields, see <span class='object_link'><a href="#createPresignedPost-property" title="AWS.S3.createPresignedPost (property)">createPresignedPost()</a></span>.</p>
+</div>
+  </div>
+
+<p>Returns a 'thenable' promise that will be resolved with a pre-signed URL
+for a given operation name.</p>
+
+<p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
+The first callback will be called if the promise is fulfilled, and the second
+callback will be called if the promise is rejected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Pre-signing a getObject operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;};
+var promise = s3.getSignedUrlPromise(&#39;getObject&#39;, params);
+promise.then(function(url) {
+  console.log(&#39;The URL is&#39;, url);
+}, function(err) { ... });</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Pre-signing a putObject operation with a specific payload</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Body: &#39;body&#39;};
+var promise = s3.getSignedUrlPromise(&#39;putObject&#39;, params);
+promise.then(function(url) {
+  console.log(&#39;The URL is&#39;, url);
+}, function(err) { ... });</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Passing in a 1-minute expiry time for a pre-signed URL</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Expires: 60};
+var promise = s3.getSignedUrlPromise(&#39;getObject&#39;, params);
+promise.then(function(url) {
+  console.log(&#39;The URL is&#39;, url);
+}, function(err) { ... });</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the name of the operation to call</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>parameters to pass to the operation. See the given
+operation for the expected operation parameters. In addition, you can
+also pass the "Expires" parameter to inform S3 how long the URL should
+work for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">Callbacks:</p>
+  <ul class="callback">
+    
+      
+      <li class="callback_item">
+        <span class="signature"><strong>function</strong>(url) { ... } </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Called if the promise is fulfilled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the signed url</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+      </li>
+    
+      
+      <li class="callback_item">
+        <span class="signature"><strong>function</strong>(err) { ... } </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Called if the promise is rejected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if an error occurred, this value will be filled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+      </li>
+    
+  </ul>
+
+
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Promise</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A promise that represents the state of the <code>refresh</code> call.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="headBucket-property">
   
     <strong>headBucket</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -11935,9 +12167,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Jul 30 11:55:21 2019 by
+  Generated on Thu Sep 26 17:03:19 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.7).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->
