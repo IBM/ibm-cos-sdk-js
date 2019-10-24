@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 1.5.4
+## Content
+### Defect Fixes
+* COSSDK-60304: https://github.com/IBM/ibm-cos-sdk-js/issues/52
+* AWS Patches aligned to version v2.540.0 of the AWS NodeJS SDK
+
 # 1.5.3
 ## Content
 ### Defect Fixes
