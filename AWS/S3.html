@@ -534,6 +534,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deleteBucketTagging-property" title="deleteBucketTagging"><strong>deleteBucketTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deletes the tags from the bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#deleteLegalHold-property" title="deleteLegalHold"><strong>deleteLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -776,6 +801,56 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the protection configuration of a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getBucketTagging-property" title="getBucketTagging"><strong>getBucketTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the tag set associated with the bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getBucketVersioning-property" title="getBucketVersioning"><strong>getBucketVersioning</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the versioning state of a bucket.</p>
 </div></span>
   
 </li>
@@ -1084,6 +1159,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#listObjectVersions-property" title="listObjectVersions"><strong>listObjectVersions</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns metadata about all of the versions of objects in a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#listParts-property" title="listParts"><strong>listParts</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -1226,6 +1326,56 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Sets the protection configuration of an existing bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putBucketTagging-property" title="putBucketTagging"><strong>putBucketTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the tags for a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putBucketVersioning-property" title="putBucketVersioning"><strong>putBucketVersioning</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the versioning state of an existing bucket.</p>
 </div></span>
   
 </li>
@@ -2531,7 +2681,8 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;STANDARD | REDUCED_REDUNDANCY | STANDARD_IA&#39;
+  StorageClass: &#39;STANDARD | REDUCED_REDUNDANCY | STANDARD_IA&#39;,
+  VersionId: &#39;STRING_VALUE&#39;
 };
 s3.copyObject(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -2622,6 +2773,7 @@ s3.copyObject(params, function(err, data) {
 <li><code>"STANDARD_IA"</code></li>
 </ul>
 </li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for IBM COS to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
@@ -3856,6 +4008,164 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="deleteBucketTagging-property">
+  
+    <strong>deleteBucketTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deletes the tags from the bucket.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deleteBucketTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.deleteBucketTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="deleteLegalHold-property">
   
     <strong>deleteLegalHold</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -4787,7 +5097,8 @@ subsequent event callback registration.</p>
 </div></p>
       
       <pre class="example code"><code>var params = {
-  Bucket: &#39;STRING_VALUE&#39; /* required */
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  MirrorDestination: &#39;STRING_VALUE&#39;
 };
 s3.getBucketCors(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -4812,6 +5123,7 @@ s3.getBucketCors(params, function(err, data) {
         &mdash;
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 </ul>
 
 </div>
@@ -5771,6 +6083,357 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getBucketTagging-property">
+  
+    <strong>getBucketTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the tag set associated with the bucket.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getBucketTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  MirrorDestination: &#39;STRING_VALUE&#39;
+};
+s3.getBucketTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>TagSet</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getBucketVersioning-property">
+  
+    <strong>getBucketVersioning</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the versioning state of a bucket.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getBucketVersioning operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.getBucketVersioning(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>Status</code> &mdash; (<code>String</code>)  <p>The versioning state of the bucket.</p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Suspended"</code></li>
+</ul>
+</li>
+<li><code>MFADelete</code> &mdash; (<code>String</code>)  <p>Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.</p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Disabled"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="getObject-property">
   
     <strong>getObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -5802,6 +6465,7 @@ subsequent event callback registration.</p>
   IfModifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   IfNoneMatch: &#39;STRING_VALUE&#39;,
   IfUnmodifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   PartNumber: 0,
   Range: &#39;STRING_VALUE&#39;,
   ResponseCacheControl: &#39;STRING_VALUE&#39;,
@@ -5843,6 +6507,7 @@ s3.getObject(params, function(err, data) {
 <li><code>IfNoneMatch</code> &mdash; (<code>String</code>)  Return the object only if its entity tag (ETag) is different from the one specified, otherwise return a 304 (not modified).</li>
 <li><code>IfUnmodifiedSince</code> &mdash; (<code>Date</code>)  Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>ResponseCacheControl</code> &mdash; (<code>String</code>)  Sets the Cache-Control header of the response.</li>
 <li><code>ResponseContentDisposition</code> &mdash; (<code>String</code>)  Sets the Content-Disposition header of the response</li>
@@ -6043,6 +6708,7 @@ subsequent event callback registration.</p>
       <pre class="example code"><code>var params = {
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   Key: &#39;STRING_VALUE&#39;, /* required */
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   VersionId: &#39;STRING_VALUE&#39;
 };
 s3.getObjectAcl(params, function(err, data) {
@@ -6069,6 +6735,7 @@ s3.getObjectAcl(params, function(err, data) {
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 </ul>
 
@@ -6858,6 +7525,7 @@ subsequent event callback registration.</p>
   IfModifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   IfNoneMatch: &#39;STRING_VALUE&#39;,
   IfUnmodifiedSince: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   PartNumber: 0,
   Range: &#39;STRING_VALUE&#39;,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
@@ -6893,6 +7561,7 @@ s3.headObject(params, function(err, data) {
 <li><code>IfNoneMatch</code> &mdash; (<code>String</code>)  Return the object only if its entity tag (ETag) is different from the one specified, otherwise return a 304 (not modified).</li>
 <li><code>IfUnmodifiedSince</code> &mdash; (<code>Date</code>)  Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -7617,7 +8286,8 @@ subsequent event callback registration.</p>
       
       <pre class="example code"><code>var params = {
   Bucket: &#39;STRING_VALUE&#39;, /* required */
-  Key: &#39;STRING_VALUE&#39; /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  MirrorDestination: &#39;STRING_VALUE&#39;
 };
 s3.listLegalHolds(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -7643,6 +8313,7 @@ s3.listLegalHolds(params, function(err, data) {
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 </ul>
 
 </div>
@@ -7795,6 +8466,7 @@ subsequent event callback registration.</p>
   EncodingType: &#39;url&#39;,
   KeyMarker: &#39;STRING_VALUE&#39;,
   MaxUploads: 0,
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   Prefix: &#39;STRING_VALUE&#39;,
   UploadIdMarker: &#39;STRING_VALUE&#39;
 };
@@ -7831,6 +8503,7 @@ s3.listMultipartUploads(params, function(err, data) {
 </li>
 <li><code>KeyMarker</code> &mdash; (<code>String</code>)  Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin.</li>
 <li><code>MaxUploads</code> &mdash; (<code>Integer</code>)  Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response.</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Prefix</code> &mdash; (<code>String</code>)  Lists in-progress uploads only for those keys that begin with the specified prefix.</li>
 <li><code>UploadIdMarker</code> &mdash; (<code>String</code>)  Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored.</li>
 </ul>
@@ -8028,6 +8701,7 @@ subsequent event callback registration.</p>
   EncodingType: &#39;url&#39;,
   Marker: &#39;STRING_VALUE&#39;,
   MaxKeys: 0,
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   Prefix: &#39;STRING_VALUE&#39;
 };
 s3.listObjects(params, function(err, data) {
@@ -8063,6 +8737,7 @@ s3.listObjects(params, function(err, data) {
 </li>
 <li><code>Marker</code> &mdash; (<code>String</code>)  Specifies the key to start with when listing objects in a bucket.</li>
 <li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Prefix</code> &mdash; (<code>String</code>)  Limits the response to keys that begin with the specified prefix.</li>
 </ul>
 
@@ -8453,6 +9128,250 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="listObjectVersions-property">
+  
+    <strong>listObjectVersions</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns metadata about all of the versions of objects in a bucket.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the listObjectVersions operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Delimiter: &#39;STRING_VALUE&#39;,
+  EncodingType: &#39;url&#39;,
+  KeyMarker: &#39;STRING_VALUE&#39;,
+  MaxKeys: 0,
+  Prefix: &#39;STRING_VALUE&#39;,
+  VersionIdMarker: &#39;STRING_VALUE&#39;
+};
+s3.listObjectVersions(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>Delimiter</code> &mdash; (<code>String</code>)  <p>A delimiter is a character you use to group keys.</p></li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  Requests IBM COS to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that IBM COS encode the keys in the response.
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+<li><code>KeyMarker</code> &mdash; (<code>String</code>)  <p>Specifies the key to start with when listing objects in a bucket.</p></li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p>Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.</p></li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Limits the response to keys that begin with the specified prefix.</p></li>
+<li><code>VersionIdMarker</code> &mdash; (<code>String</code>)  <p>Specifies the object version you want to start listing from.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>IsTruncated</code> &mdash; (<code>Boolean</code>)  <p>A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results.</p></li>
+<li><code>KeyMarker</code> &mdash; (<code>String</code>)  <p>Marks the last Key returned in a truncated response.</p></li>
+<li><code>VersionIdMarker</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>NextKeyMarker</code> &mdash; (<code>String</code>)  <p>Use this value for the key marker request parameter in a subsequent request.</p></li>
+<li><code>NextVersionIdMarker</code> &mdash; (<code>String</code>)  <p>Use this value for the next version id marker parameter in a subsequent request.</p></li>
+<li><code>Versions</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+
+<ul>
+<li><code>ETag</code> &mdash; (<code>String</code>)</li>
+<li><code>Size</code> &mdash; (<code>Integer</code>)  Size in bytes of the object.</li>
+<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
+ Possible values include:
+
+<ul>
+<li><code>"STANDARD"</code></li>
+</ul>
+</li>
+<li><code>Key</code> &mdash; (<code>String</code>)  The object key.</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  Version ID of an object.</li>
+<li><code>IsLatest</code> &mdash; (<code>Boolean</code>)  Specifies whether the object is (true) or is not (false) the latest version of an object.</li>
+<li><code>LastModified</code> &mdash; (<code>Date</code>)  Date and time the object was last modified.</li>
+<li><code>Owner</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>DisplayName</code> &mdash; (<code>String</code>)</li>
+<li><code>ID</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>DeleteMarkers</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+
+<ul>
+<li><code>Owner</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>DisplayName</code> &mdash; (<code>String</code>)</li>
+<li><code>ID</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+<li><code>Key</code> &mdash; (<code>String</code>)  The object key.</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  Version ID of an object.</li>
+<li><code>IsLatest</code> &mdash; (<code>Boolean</code>)  Specifies whether the object is (true) or is not (false) the latest version of an object.</li>
+<li><code>LastModified</code> &mdash; (<code>Date</code>)  Date and time the object was last modified.</li>
+</ul>
+</li>
+<li><code>Name</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>Delimiter</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p/></li>
+<li><code>CommonPrefixes</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+</ul>
+</li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  <p>Encoding type used by Amazon S3 to encode object keys in the response.</p>
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="listParts-property">
   
     <strong>listParts</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -8482,6 +9401,7 @@ subsequent event callback registration.</p>
   Key: &#39;STRING_VALUE&#39;, /* required */
   UploadId: &#39;STRING_VALUE&#39;, /* required */
   MaxParts: 0,
+  MirrorDestination: &#39;STRING_VALUE&#39;,
   PartNumberMarker: 0
 };
 s3.listParts(params, function(err, data) {
@@ -8509,6 +9429,7 @@ s3.listParts(params, function(err, data) {
 <li><code>Bucket</code> &mdash; (<code>String</code>)</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
 <li><code>MaxParts</code> &mdash; (<code>Integer</code>)  Sets the maximum number of parts to return.</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>PartNumberMarker</code> &mdash; (<code>Integer</code>)  Specifies the part after which listing should begin. Only parts with higher part numbers will be listed.</li>
 <li><code>UploadId</code> &mdash; (<code>String</code>)  Upload ID identifying the multipart upload whose parts are being listed.</li>
 </ul>
@@ -9619,17 +10540,17 @@ subsequent event callback registration.</p>
       <pre class="example code"><code>var params = {
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   ProtectionConfiguration: { /* required */
-    DefaultRetention: { /* required */
+    DefaultRetention: {
       Days: 0 /* required */
     },
-    MaximumRetention: { /* required */
+    EnablePermanentRetention: true || false,
+    MaximumRetention: {
       Days: 0 /* required */
     },
-    MinimumRetention: { /* required */
+    MinimumRetention: {
       Days: 0 /* required */
     },
-    Status: &#39;Retention&#39;, /* required */
-    EnablePermanentRetention: true || false
+    Status: &#39;Retention&#39;
   }
 };
 s3.putBucketProtectionConfiguration(params, function(err, data) {
@@ -9658,32 +10579,400 @@ s3.putBucketProtectionConfiguration(params, function(err, data) {
 <li><code>ProtectionConfiguration</code> &mdash; (<code>map</code>)  Container for setting retention settings.
 
 <ul>
-<li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Retention status of a bucket.
+<li><code>Status</code> &mdash; (<code>String</code>)  Retention status of a bucket.
  Possible values include:
 
 <ul>
 <li><code>"Retention"</code></li>
 </ul>
 </li>
-<li><code>MinimumRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
+<li><code>MinimumRetention</code> &mdash; (<code>map</code>)  Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
 
 <ul>
 <li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
 </ul>
 </li>
-<li><code>DefaultRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
+<li><code>DefaultRetention</code> &mdash; (<code>map</code>)  Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
 
 <ul>
 <li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
 </ul>
 </li>
-<li><code>MaximumRetention</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
+<li><code>MaximumRetention</code> &mdash; (<code>map</code>)  Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
 
 <ul>
 <li><code>Days</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)</li>
 </ul>
 </li>
 <li><code>EnablePermanentRetention</code> &mdash; (<code>Boolean</code>)  Enable permanent retention for an object.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putBucketTagging-property">
+  
+    <strong>putBucketTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the tags for a bucket.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Tagging: { /* required */
+    TagSet: [ /* required */
+      {
+        Key: &#39;STRING_VALUE&#39;, /* required */
+        Value: &#39;STRING_VALUE&#39; /* required */
+      },
+      /* more items */
+    ]
+  },
+  ContentMD5: &#39;STRING_VALUE&#39;
+};
+s3.putBucketTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>Tagging</code> &mdash; (<code>map</code>)  <p/>
+
+<ul>
+<li><code>TagSet</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putBucketVersioning-property">
+  
+    <strong>putBucketVersioning</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.</p>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketVersioning operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  VersioningConfiguration: { /* required */
+    MFADelete: &#39;Enabled | Disabled&#39;,
+    Status: &#39;Enabled | Suspended&#39;
+  },
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  MFA: &#39;STRING_VALUE&#39;
+};
+s3.putBucketVersioning(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p/></li>
+<li><code>MFA</code> &mdash; (<code>String</code>)  <p>The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.</p></li>
+<li><code>VersioningConfiguration</code> &mdash; (<code>map</code>)  <p/>
+
+<ul>
+<li><code>MFADelete</code> &mdash; (<code>String</code>)  <p>Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.</p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Disabled"</code></li>
+</ul>
+</li>
+<li><code>Status</code> &mdash; (<code>String</code>)  <p>The versioning state of the bucket.</p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+<li><code>"Suspended"</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -11707,6 +12996,7 @@ s3.waitFor(&#39;objectExists&#39;, params, function(err, data) {
 <li><code>IfNoneMatch</code> &mdash; (<code>String</code>)  Return the object only if its entity tag (ETag) is different from the one specified, otherwise return a 304 (not modified).</li>
 <li><code>IfUnmodifiedSince</code> &mdash; (<code>Date</code>)  Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -11960,6 +13250,7 @@ s3.waitFor(&#39;objectNotExists&#39;, params, function(err, data) {
 <li><code>IfNoneMatch</code> &mdash; (<code>String</code>)  Return the object only if its entity tag (ETag) is different from the one specified, otherwise return a 304 (not modified).</li>
 <li><code>IfUnmodifiedSince</code> &mdash; (<code>Date</code>)  Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).</li>
 <li><code>Key</code> &mdash; (<code>String</code>)</li>
+<li><code>MirrorDestination</code> &mdash; (<code>String</code>)  Mirror source for object reads.</li>
 <li><code>Range</code> &mdash; (<code>String</code>)  Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.</a></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -12167,7 +13458,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Thu Oct 24 14:22:45 2019 by
+  Generated on Thu Dec 12 21:27:38 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
