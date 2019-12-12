@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 1.6.0
+## Content
+### Features
+* Support for On-Premise IBM Cloud Object Storage (3.14.8+)
+### Defect Fixes
+* AWS Patches aligned to version v2.571.0 of the AWS NodeJS SDK
+
 # 1.5.4
 ## Content
 ### Defect Fixes

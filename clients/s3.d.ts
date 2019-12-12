@@ -95,6 +95,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the tags from the bucket.
+   */
+  deleteBucketTagging(params: S3.Types.DeleteBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the tags from the bucket.
+   */
+  deleteBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
@@ -167,6 +175,22 @@ declare class S3 extends S3Customizations {
    */
   getBucketProtectionConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketProtectionConfigurationOutput) => void): Request<S3.Types.GetBucketProtectionConfigurationOutput, AWSError>;
   /**
+   * Returns the tag set associated with the bucket.
+   */
+  getBucketTagging(params: S3.Types.GetBucketTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetBucketTaggingOutput) => void): Request<S3.Types.GetBucketTaggingOutput, AWSError>;
+  /**
+   * Returns the tag set associated with the bucket.
+   */
+  getBucketTagging(callback?: (err: AWSError, data: S3.Types.GetBucketTaggingOutput) => void): Request<S3.Types.GetBucketTaggingOutput, AWSError>;
+  /**
+   * Returns the versioning state of a bucket.
+   */
+  getBucketVersioning(params: S3.Types.GetBucketVersioningRequest, callback?: (err: AWSError, data: S3.Types.GetBucketVersioningOutput) => void): Request<S3.Types.GetBucketVersioningOutput, AWSError>;
+  /**
+   * Returns the versioning state of a bucket.
+   */
+  getBucketVersioning(callback?: (err: AWSError, data: S3.Types.GetBucketVersioningOutput) => void): Request<S3.Types.GetBucketVersioningOutput, AWSError>;
+  /**
    * Retrieves objects from IBM COS.
    */
   getObject(params: S3.Types.GetObjectRequest, callback?: (err: AWSError, data: S3.Types.GetObjectOutput) => void): Request<S3.Types.GetObjectOutput, AWSError>;
@@ -231,6 +255,14 @@ declare class S3 extends S3Customizations {
    */
   listMultipartUploads(callback?: (err: AWSError, data: S3.Types.ListMultipartUploadsOutput) => void): Request<S3.Types.ListMultipartUploadsOutput, AWSError>;
   /**
+   * Returns metadata about all of the versions of objects in a bucket.
+   */
+  listObjectVersions(params: S3.Types.ListObjectVersionsRequest, callback?: (err: AWSError, data: S3.Types.ListObjectVersionsOutput) => void): Request<S3.Types.ListObjectVersionsOutput, AWSError>;
+  /**
+   * Returns metadata about all of the versions of objects in a bucket.
+   */
+  listObjectVersions(callback?: (err: AWSError, data: S3.Types.ListObjectVersionsOutput) => void): Request<S3.Types.ListObjectVersionsOutput, AWSError>;
+  /**
    * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.
    */
   listObjects(params: S3.Types.ListObjectsRequest, callback?: (err: AWSError, data: S3.Types.ListObjectsOutput) => void): Request<S3.Types.ListObjectsOutput, AWSError>;
@@ -294,6 +326,22 @@ declare class S3 extends S3Customizations {
    * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
    */
   putBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the tags for a bucket.
+   */
+  putBucketTagging(params: S3.Types.PutBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the tags for a bucket.
+   */
+  putBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
+   */
+  putBucketVersioning(params: S3.Types.PutBucketVersioningRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
+   */
+  putBucketVersioning(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds an object to a bucket.
    */
@@ -434,6 +482,7 @@ declare namespace S3 {
   export type BucketProtectionStatus = "Retention"|string;
   export type BucketProtectionEnablePermanentRetention = boolean;
   export type Buckets = Bucket[];
+  export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
   export interface CORSConfiguration {
     CORSRules: CORSRules;
   }
@@ -669,6 +718,10 @@ declare namespace S3 {
      */
     StorageClass?: StorageClass;
     /**
+     * VersionId used to reference a specific version of the object.
+     */
+    VersionId?: ObjectVersionId;
+    /**
      * Specifies the algorithm to use to when encrypting the object (e.g., AES256).
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
@@ -898,6 +951,12 @@ declare namespace S3 {
   export interface DeleteBucketRequest {
     Bucket: BucketName;
   }
+  export interface DeleteBucketTaggingRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+  }
   export type DeleteMarker = boolean;
   export interface DeleteMarkerEntry {
     Owner?: Owner;
@@ -1032,6 +1091,7 @@ declare namespace S3 {
   }
   export interface GetBucketCorsRequest {
     Bucket: BucketName;
+    MirrorDestination?: MirrorDestination;
   }
   export interface GetBucketLifecycleConfigurationOutput {
     Rules?: LifecycleRules;
@@ -1076,6 +1136,35 @@ declare namespace S3 {
   export interface GetBucketProtectionConfigurationRequest {
     Bucket: BucketName;
   }
+  export interface GetBucketTaggingOutput {
+    /**
+     * 
+     */
+    TagSet: TagSet;
+  }
+  export interface GetBucketTaggingRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+    MirrorDestination?: MirrorDestination;
+  }
+  export interface GetBucketVersioningOutput {
+    /**
+     * The versioning state of the bucket.
+     */
+    Status?: BucketVersioningStatus;
+    /**
+     * Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.
+     */
+    MFADelete?: MFADeleteStatus;
+  }
+  export interface GetBucketVersioningRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+  }
   export interface GetObjectAclOutput {
     Owner?: Owner;
     /**
@@ -1086,6 +1175,7 @@ declare namespace S3 {
   export interface GetObjectAclRequest {
     Bucket: BucketName;
     Key: ObjectKey;
+    MirrorDestination?: MirrorDestination;
     /**
      * VersionId used to reference a specific version of the object.
      */
@@ -1214,6 +1304,7 @@ declare namespace S3 {
      */
     IfUnmodifiedSince?: IfUnmodifiedSince;
     Key: ObjectKey;
+    MirrorDestination?: MirrorDestination;
     /**
      * Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
      */
@@ -1430,6 +1521,7 @@ declare namespace S3 {
      */
     IfUnmodifiedSince?: IfUnmodifiedSince;
     Key: ObjectKey;
+    MirrorDestination?: MirrorDestination;
     /**
      * Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
      */
@@ -1588,6 +1680,7 @@ declare namespace S3 {
   export interface ListLegalHoldsRequest {
     Bucket: BucketName;
     Key: ObjectKey;
+    MirrorDestination?: MirrorDestination;
   }
   export interface ListMultipartUploadsOutput {
     /**
@@ -1645,6 +1738,7 @@ declare namespace S3 {
      * Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response.
      */
     MaxUploads?: MaxUploads;
+    MirrorDestination?: MirrorDestination;
     /**
      * Lists in-progress uploads only for those keys that begin with the specified prefix.
      */
@@ -1653,6 +1747,87 @@ declare namespace S3 {
      * Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored.
      */
     UploadIdMarker?: UploadIdMarker;
+  }
+  export interface ListObjectVersionsOutput {
+    /**
+     * A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results.
+     */
+    IsTruncated?: IsTruncated;
+    /**
+     * Marks the last Key returned in a truncated response.
+     */
+    KeyMarker?: KeyMarker;
+    /**
+     * 
+     */
+    VersionIdMarker?: VersionIdMarker;
+    /**
+     * Use this value for the key marker request parameter in a subsequent request.
+     */
+    NextKeyMarker?: NextKeyMarker;
+    /**
+     * Use this value for the next version id marker parameter in a subsequent request.
+     */
+    NextVersionIdMarker?: NextVersionIdMarker;
+    /**
+     * 
+     */
+    Versions?: ObjectVersionList;
+    /**
+     * 
+     */
+    DeleteMarkers?: DeleteMarkers;
+    /**
+     * 
+     */
+    Name?: BucketName;
+    /**
+     * 
+     */
+    Prefix?: Prefix;
+    /**
+     * 
+     */
+    Delimiter?: Delimiter;
+    /**
+     * 
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * 
+     */
+    CommonPrefixes?: CommonPrefixList;
+    /**
+     * Encoding type used by Amazon S3 to encode object keys in the response.
+     */
+    EncodingType?: EncodingType;
+  }
+  export interface ListObjectVersionsRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+    /**
+     * A delimiter is a character you use to group keys.
+     */
+    Delimiter?: Delimiter;
+    EncodingType?: EncodingType;
+    /**
+     * Specifies the key to start with when listing objects in a bucket.
+     */
+    KeyMarker?: KeyMarker;
+    /**
+     * Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * Limits the response to keys that begin with the specified prefix.
+     */
+    Prefix?: Prefix;
+    /**
+     * Specifies the object version you want to start listing from.
+     */
+    VersionIdMarker?: VersionIdMarker;
   }
   export interface ListObjectsOutput {
     IBMSSEKPEnabled?: IBMSSEKPEnabled;
@@ -1692,6 +1867,7 @@ declare namespace S3 {
      * Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
      */
     MaxKeys?: MaxKeys;
+    MirrorDestination?: MirrorDestination;
     /**
      * Limits the response to keys that begin with the specified prefix.
      */
@@ -1836,6 +2012,7 @@ declare namespace S3 {
      * Sets the maximum number of parts to return.
      */
     MaxParts?: MaxParts;
+    MirrorDestination?: MirrorDestination;
     /**
      * Specifies the part after which listing should begin. Only parts with higher part numbers will be listed.
      */
@@ -1847,6 +2024,8 @@ declare namespace S3 {
   }
   export type Location = string;
   export type MFA = string;
+  export type MFADelete = "Enabled"|"Disabled"|string;
+  export type MFADeleteStatus = "Enabled"|"Disabled"|string;
   export type Marker = string;
   export type MaxAgeSeconds = number;
   export type MaxKeys = number;
@@ -1857,6 +2036,7 @@ declare namespace S3 {
   export type MetadataDirective = "COPY"|"REPLACE"|string;
   export type MetadataKey = string;
   export type MetadataValue = string;
+  export type MirrorDestination = string;
   export interface MultipartUpload {
     /**
      * Upload ID that identifies the multipart upload.
@@ -1997,19 +2177,19 @@ declare namespace S3 {
     /**
      * Retention status of a bucket.
      */
-    Status: BucketProtectionStatus;
+    Status?: BucketProtectionStatus;
     /**
      * Minimum retention period for an object, if a PUT of an object specifies a shorter retention period the PUT object will fail.
      */
-    MinimumRetention: BucketProtectionMinimumRetention;
+    MinimumRetention?: BucketProtectionMinimumRetention;
     /**
      * Default retention period for an object, if a PUT of an object does not specify a retention period this value will be converted to seconds and used.
      */
-    DefaultRetention: BucketProtectionDefaultRetention;
+    DefaultRetention?: BucketProtectionDefaultRetention;
     /**
      * Maximum retention period for an object, if a PUT of an object specifies a longer retention period the PUT object will fail.
      */
-    MaximumRetention: BucketProtectionMaximumRetention;
+    MaximumRetention?: BucketProtectionMaximumRetention;
     /**
      * Enable permanent retention for an object.
      */
@@ -2074,6 +2254,38 @@ declare namespace S3 {
      * 
      */
     LifecycleConfiguration?: LifecycleConfiguration;
+  }
+  export interface PutBucketTaggingRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+    /**
+     * 
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
+    Tagging: Tagging;
+  }
+  export interface PutBucketVersioningRequest {
+    /**
+     * 
+     */
+    Bucket: BucketName;
+    /**
+     * 
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+     */
+    MFA?: MFA;
+    /**
+     * 
+     */
+    VersioningConfiguration: VersioningConfiguration;
   }
   export interface PutObjectAclOutput {
     RequestCharged?: RequestCharged;
@@ -2393,6 +2605,12 @@ declare namespace S3 {
   }
   export type TagCount = number;
   export type TagSet = Tag[];
+  export interface Tagging {
+    /**
+     * 
+     */
+    TagSet: TagSet;
+  }
   export type TargetBucket = string;
   export interface TargetGrant {
     Grantee?: Grantee;
@@ -2577,6 +2795,16 @@ declare namespace S3 {
   }
   export type Value = string;
   export type VersionIdMarker = string;
+  export interface VersioningConfiguration {
+    /**
+     * Specifies whether MFA delete is enabled in the bucket versioning configuration. This element is only returned if the bucket has been configured with MFA delete. If the bucket has never been so configured, this element is not returned.
+     */
+    MFADelete?: MFADelete;
+    /**
+     * The versioning state of the bucket.
+     */
+    Status?: BucketVersioningStatus;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
