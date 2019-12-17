@@ -42,7 +42,7 @@ You can source credentials directly from a [Service Credential](https://cloud.ib
 ## Example code
 
 ```javascript
-var AWS = require('ibm-cos-sdk');
+var ibm = require('ibm-cos-sdk');
 var util = require('util');
 
 var config = {
@@ -51,7 +51,7 @@ var config = {
     serviceInstanceId: '<resource-instance-id>',
 };
 
-var cos = new AWS.S3(config);
+var cos = new ibm.S3(config);
 
 function doCreateBucket() {
     console.log('Creating bucket');
