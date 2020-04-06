@@ -1188,6 +1188,244 @@
           });
         });
       }
+      describe('tagging', function() {
+        it('should embed tags in PutObject request for single part uploads', function(done) {
+          var reqs;
+          reqs = helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          upload = new AWS.S3.ManagedUpload({
+            service: s3,
+            params: {
+              Body: smallbody
+            },
+            tags: [
+              {
+                Key: 'tag1',
+                Value: 'value1'
+              }, {
+                Key: 'tag2',
+                Value: 'value2'
+              }, {
+                Key: 'étiquette',
+                Value: 'valeur à être encodé'
+              }
+            ]
+          });
+          return send({}, function() {
+            expect(err).not.to.exist;
+            expect(reqs[0].httpRequest.headers['x-amz-tagging']).to.equal('tag1=value1&tag2=value2&%C3%A9tiquette=valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9');
+            return done();
+          });
+        });
+        it('should send a PutObjectTagging request following a successful multipart upload with tags', function(done) {
+          var reqs;
+          reqs = helpers.mockResponses([
+            {
+              data: {
+                UploadId: 'uploadId'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG1'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG2'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG3'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG4'
+              }
+            }, {
+              data: {
+                ETag: 'FINAL_ETAG',
+                Location: 'FINAL_LOCATION'
+              }
+            }, {}
+          ]);
+          upload = new AWS.S3.ManagedUpload({
+            service: s3,
+            params: {
+              Body: bigbody
+            },
+            tags: [
+              {
+                Key: 'tag1',
+                Value: 'value1'
+              }, {
+                Key: 'tag2',
+                Value: 'value2'
+              }, {
+                Key: 'étiquette',
+                Value: 'valeur à être encodé'
+              }, {
+                Key: 'number',
+                Value: 100
+              }
+            ]
+          });
+          return send({}, function() {
+            expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload', 's3.putObjectTagging']);
+            expect(err).not.to.exist;
+            expect(data.Location).to.equal('FINAL_LOCATION');
+            expect(reqs[6].params.Tagging).to.deep.equal({
+              TagSet: [
+                {
+                  Key: 'tag1',
+                  Value: 'value1'
+                }, {
+                  Key: 'tag2',
+                  Value: 'value2'
+                }, {
+                  Key: 'étiquette',
+                  Value: 'valeur à être encodé'
+                }, {
+                  Key: 'number',
+                  Value: '100'
+                }
+              ]
+            });
+            return done();
+          });
+        });
+        it('return errors from PutObjectTagging request following a successful multipart upload with tags', function(done) {
+          var reqs;
+          reqs = helpers.mockResponses([
+            {
+              data: {
+                UploadId: 'uploadId'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG1'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG2'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG3'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG4'
+              }
+            }, {
+              data: {
+                ETag: 'FINAL_ETAG',
+                Location: 'FINAL_LOCATION'
+              }
+            }, {
+              error: {
+                code: 'InvalidRequest'
+              },
+              data: null
+            }
+          ]);
+          upload = new AWS.S3.ManagedUpload({
+            service: s3,
+            params: {
+              Body: bigbody
+            },
+            tags: [
+              {
+                Key: 'tag1',
+                Value: 'value1'
+              }, {
+                Key: 'tag2',
+                Value: 'value2'
+              }, {
+                Key: 'étiquette',
+                Value: 'valeur à être encodé'
+              }
+            ]
+          });
+          return send({}, function() {
+            expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload', 's3.putObjectTagging']);
+            expect(err.code).to.equal('InvalidRequest');
+            return done();
+          });
+        });
+        return it('should throw when tags are not provided as an array', function(done) {
+          var e, reqs;
+          reqs = helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          try {
+            upload = new AWS.S3.ManagedUpload({
+              service: s3,
+              params: {
+                Body: smallbody
+              },
+              tags: 'tag1=value1&tag2=value2&%C3%A9tiquette=valeur%20%C3%A0%20%C3%AAtre%20encod%C3%A9'
+            });
+            return done(new Error('AWS.S3.ManagedUpload should have thrown when passed a string for tags'));
+          } catch (error) {
+            e = error;
+            return done();
+          }
+        });
+      });
+
+      describe('accesspoint', function() {
+        it('should make subsequent calls with accesspoint', function(done) {
+          var reqs = helpers.mockResponses([
+            {
+              data: {
+                UploadId: 'uploadId'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG1'
+              }
+            }, {
+              data: {
+                ETag: 'ETAG2'
+              }
+            }, {
+              data: {
+                ETag: 'FINAL_ETAG',
+                Location: 'FINAL_LOCATION'
+              }
+            }
+          ]);
+          var size = 18;
+          var opts = {
+            partSize: size,
+            queueSize: 1,
+            service: s3,
+            params: {
+              Body: bigbody,
+              Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint'
+            }
+          };
+          var endpoint = 'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com';
+          upload = new AWS.S3.ManagedUpload(opts);
+          return send({}, function() {
+            expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
+            expect(err).not.to.exist;
+            expect(reqs[0].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[1].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[2].httpRequest.endpoint.hostname).to.equal(endpoint);
+            expect(reqs[3].httpRequest.endpoint.hostname).to.equal(endpoint);
+            return done();
+          });
+        });
+      });
     });
   });
 
