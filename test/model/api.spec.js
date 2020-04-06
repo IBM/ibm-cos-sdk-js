@@ -45,6 +45,13 @@
         return expect(make().isApi).to.equal(true);
       });
     });
+
+    describe('serviceIdentifier', function() {
+      it('creates an API with passed serviceIdentifier', function() {
+        return expect(make({}, { serviceIdentifier: 'asdf' }).isApi).to.equal(true);
+      });
+    });
+
     describe('className', function() {
       it('generates the correct class name from fullName', function() {
         var api;

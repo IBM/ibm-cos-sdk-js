@@ -13,6 +13,7 @@
     "@types/node": "^6.0.88",
     "browserify": "^16.2.3",
     "chai": "^3.0",
+    "codecov": "^3.6.5",
     "coffeescript": "^1.12.7",
     "coveralls": "^3.0.2",
     "cucumber": "^5.0.2",

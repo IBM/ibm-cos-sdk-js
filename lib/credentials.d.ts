@@ -21,7 +21,7 @@ export class Credentials {
      *
      * @param {get} callback - Called when the instance metadata service responds. When called with no error, the credentials information has been loaded into the object.
      */
-    get(callback: (err: AWSError) => void): void;
+    get(callback: (err?: AWSError) => void): void;
     /**
      * Returns whether the credentials object should call refresh()
      */
@@ -32,7 +32,7 @@ export class Credentials {
      *
      * @param {function} callback - Called when the instance metadata service responds. When called with no error, the credentials information has been loaded into the object.
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
     /**
      * AWS access key ID.
      */
