@@ -115,7 +115,7 @@ into a terminal window:</p>
 
 <h2>Example code</h2>
 
-<pre class="code javascript"><code class="javascript">var AWS = require('ibm-cos-sdk');
+<pre class="code javascript"><code class="javascript">var ibm = require('ibm-cos-sdk');
 var util = require('util');
 
 var config = {
@@ -124,7 +124,7 @@ var config = {
     serviceInstanceId: '&lt;resource-instance-id&gt;',
 };
 
-var cos = new AWS.S3(config);
+var cos = new ibm.S3(config);
 
 function doCreateBucket() {
     console.log('Creating bucket');
@@ -204,7 +204,7 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Thu Dec 12 21:27:37 2019 by
+  Generated on Tue Apr  7 17:42:33 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
