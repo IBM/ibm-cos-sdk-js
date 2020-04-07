@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.6.1
+## Content
+### Defect Fixes
+* AWS Patches aligned to version v2.653.0 of the AWS NodeJS SDK
+
 # 1.6.0
 ## Content
 ### Features
