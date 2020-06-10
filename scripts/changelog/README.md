@@ -6,7 +6,8 @@ each version of the AWS SDK for JavaScript.
 Here is a sample of what an entry in the changelog looks like:
 
 ## 2.4.5
-* bugfix: Waiters: Some description of the bugfix ([Issue #9542]())
+
+* bugfix: Waiters: Some description of the bugfix (Issue #9542)
 * feature: S3: Some descripton of the new feature
 * API: RDS: Some description
 * API: DynamoDB: Some description
@@ -22,9 +23,11 @@ gets deleted or corrupted. A `.changes/` directory in the root directory will
 need to be created before running this script, if it does not already exist. To
 run this script, type the following command from the root SDK directory in the
 command line:
-```
+
+```shell script
 ./scripts/changelog/create-changelog
 ```
+
 The JSON files in the `.changes/` directory must be named with a version number
 (e.g. `2.4.5.json`) and its contents should be an array of objects. Each object
 represents one change in that version of the SDK, and should contain `"type"`,
@@ -45,18 +48,22 @@ can be recreated when the `create-changelog` script is run. The `.changes/` and
 `next-release/` directories will need to be created before running this script,
 if they do not already exist. To run this script, type the following command
 from the root SDK directory in the command line:
-```
+
+```shell script
 ./scripts/changelog/release
 ```
+
 Optionally, you can provide an argument to specify the version number of the
 new release. Accepted values are `major`, `minor`, `patch`, or a version number
 that is greater than the latest version (e.g. `2.4.6`). An error will be thrown
 if the specified version is not greater than the latest version, and execution
 will be halted. The former 3 choices specifies the type of version bump. For
 example, running
-```
+
+```shell script
 ./scripts/changelog/release minor
 ```
+
 will bump up the minor version from the latest version. If the latest version
 is `2.4.5`, then this would set the new version to `2.5.0`. If no argument is
 provided, then the script defaults to bumping the patch number.
@@ -85,12 +92,14 @@ or something like: Paginator), and a short `description` describing the change.
 
 Type the following command from the root SDK directory in the command line to
 run this script, using versions of node.js that support promises (0.12.x and higher):
-```
+
+```shell script
 node ./scripts/changelog/add-change.js
 ```
 
 This script will place a JSON file representing your change in the following location:
-```
+
+```shell script
 $SDK_ROOT/.changes/next-release/
 ```
 
