@@ -1284,6 +1284,14 @@ declare namespace S3 {
      * The count of parts this object has.
      */
     PartsCount?: PartsCount;
+    /**
+     * This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
+     */
+    TemporaryCopyStorageClass?: StorageClass;
+    /**
+     * Provides information of the transition storage class and time of transition.
+     */
+    Transition?: IBMTransition;
   }
   export interface GetObjectRequest {
     Bucket: BucketName;
@@ -1494,13 +1502,13 @@ declare namespace S3 {
      */
     PartsCount?: PartsCount;
     /**
+     * This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
+     */
+    TemporaryCopyStorageClass?: StorageClass;
+    /**
      * Provides information of the transition storage class and time of transition.
      */
-    Transition?: Transition;
-    /**
-     * This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
-     */
-    TemporaryCopyStorageClass?: TemporaryCopyStorageClass;
+    Transition?: IBMTransition;
   }
   export interface HeadObjectRequest {
     Bucket: BucketName;
@@ -2112,7 +2120,7 @@ declare namespace S3 {
   export type ObjectIdentifierList = ObjectIdentifier[];
   export type ObjectKey = string;
   export type ObjectList = Object[];
-  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|string;
+  export type ObjectStorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export interface ObjectVersion {
     ETag?: ETag;
     /**
@@ -2590,8 +2598,7 @@ declare namespace S3 {
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;
   export type Size = number;
   export type StartAfter = string;
-  export type TemporaryCopyStorageClass = "STANDARD"|"GLACIER"|string;
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
+  export type StorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export type Suffix = string;
   export interface Tag {
     /**
@@ -2621,7 +2628,7 @@ declare namespace S3 {
   }
   export type TargetGrants = TargetGrant[];
   export type TargetPrefix = string;
-  export type Tier = "Standard"|"Bulk"|"Expedited"|string;
+  export type Tier = "Accelerated"|"Standard"|"Bulk"|"Expedited"|string;
   export type Token = string;
   export interface Transition {
     /**
@@ -2633,16 +2640,12 @@ declare namespace S3 {
      */
     Days?: Days;
     /**
-     * This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
-     */
-    TemporaryCopyStorageClass?: TransitionStorageClass;
-    /**
      * The class of storage used to store the object.
      */
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD"|string;
+  export type TransitionStorageClass = "ACCELERATED"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group"|string;
   export type URI = string;
   export type UploadIdMarker = string;
@@ -2805,6 +2808,7 @@ declare namespace S3 {
      */
     Status?: BucketVersioningStatus;
   }
+  export type IBMTransition = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

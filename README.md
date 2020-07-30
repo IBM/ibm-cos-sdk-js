@@ -112,6 +112,10 @@ You can automatically archive objects after a specified length of time or after 
 
 An archive policy is set at the bucket level by calling the `putBucketLifecycle` method on a client instance. A newly added or modified archive policy applies to new objects uploaded and does not affect existing objects.  For more detail, [see the documentation](https://cloud.ibm.com/docs/services/cloud-object-storage/libraries/node.html#node).
 
+## Accelerated Archive
+
+Users can set an archive rule that would allow data restore from an archive in 2 hours or 12 hours.
+
 ## Getting Help
 
 Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:

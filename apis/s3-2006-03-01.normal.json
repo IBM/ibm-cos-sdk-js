@@ -2658,6 +2658,18 @@
           "documentation": "The count of parts this object has.",
           "location": "header",
           "locationName": "x-amz-mp-parts-count"
+        },
+        "TemporaryCopyStorageClass":{
+          "shape": "StorageClass",
+          "documentation": "This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.",
+          "location": "header",
+          "locationName": "x-ibm-restored-copy-storage-class"
+        },
+        "Transition": {
+          "shape": "IBMTransition",
+          "documentation": "Provides information of the transition storage class and time of transition.",
+          "location": "header",
+          "locationName": "x-ibm-transition"
         }
       },
       "payload": "Body"
@@ -3026,17 +3038,17 @@
           "location": "header",
           "locationName": "x-amz-mp-parts-count"
         },
+        "TemporaryCopyStorageClass":{
+          "shape": "StorageClass",
+          "documentation": "This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.",
+          "location": "header",
+          "locationName": "x-ibm-restored-copy-storage-class"
+        },
         "Transition": {
-          "shape": "Transition",
+          "shape": "IBMTransition",
           "documentation": "Provides information of the transition storage class and time of transition.",
           "location": "header",
           "locationName": "x-ibm-transition"
-        },
-        "TemporaryCopyStorageClass": {
-          "shape": "TemporaryCopyStorageClass",
-          "documentation": "This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.",
-          "location": "header",
-          "locationName": "x-ibm-restored-copy-storage-class"
         }
       }
     },
@@ -4233,9 +4245,14 @@
     "ObjectStorageClass": {
       "type": "string",
       "enum": [
+        "ACCELERATED",
         "STANDARD",
         "REDUCED_REDUNDANCY",
-        "GLACIER"
+        "GLACIER",
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "DEEP_ARCHIVE"
       ]
     },
     "ObjectVersion": {
@@ -5225,19 +5242,17 @@
     "StartAfter": {
       "type": "string"
     },
-    "TemporaryCopyStorageClass": {
-      "type": "string",
-      "enum": [
-        "STANDARD",
-        "GLACIER"
-      ]
-    },
     "StorageClass": {
       "type": "string",
       "enum": [
+        "ACCELERATED",
         "STANDARD",
         "REDUCED_REDUNDANCY",
-        "STANDARD_IA"
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "GLACIER",
+        "DEEP_ARCHIVE"
       ]
     },
     "Suffix": {
@@ -5311,6 +5326,7 @@
     "Tier": {
       "type": "string",
       "enum": [
+        "Accelerated",
         "Standard",
         "Bulk",
         "Expedited"
@@ -5330,10 +5346,6 @@
           "shape": "Days",
           "documentation": "Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
         },
-        "TemporaryCopyStorageClass": {
-          "shape": "TransitionStorageClass",
-          "documentation": "This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed."
-        },
         "StorageClass": {
           "shape": "TransitionStorageClass",
           "documentation": "The class of storage used to store the object."
@@ -5350,8 +5362,12 @@
     "TransitionStorageClass": {
       "type": "string",
       "enum": [
+        "ACCELERATED",
         "GLACIER",
-        "STANDARD"
+        "STANDARD_IA",
+        "ONEZONE_IA",
+        "INTELLIGENT_TIERING",
+        "DEEP_ARCHIVE"
       ]
     },
     "Type": {
@@ -5639,6 +5655,9 @@
         }
       },
       "documentation": "<p>Describes the versioning state of an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html\">PUT Bucket versioning</a> in the <i>Amazon Simple Storage Service API Reference</i>.</p>"
+    },
+    "IBMTransition":{
+      "type":"string"
     }
   }
 }
