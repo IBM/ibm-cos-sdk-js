@@ -2681,7 +2681,7 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;STANDARD | REDUCED_REDUNDANCY | STANDARD_IA&#39;,
+  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
   VersionId: &#39;STRING_VALUE&#39;
 };
 s3.copyObject(params, function(err, data) {
@@ -2768,9 +2768,14 @@ s3.copyObject(params, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
@@ -3219,7 +3224,7 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;STANDARD | REDUCED_REDUNDANCY | STANDARD_IA&#39;
+  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;
 };
 s3.createMultipartUpload(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -3281,9 +3286,14 @@ s3.createMultipartUpload(params, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -5397,20 +5407,16 @@ The <code>data</code> object has the following properties:</p>
 <ul>
 <li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
 <li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
-</ul>
-</li>
 <li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 </ul>
@@ -5617,20 +5623,16 @@ The <code>data</code> object has the following properties:</p>
 <ul>
 <li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
 <li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
-</ul>
-</li>
 <li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 </ul>
@@ -6637,12 +6639,32 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
+ Possible values include:
+
+<ul>
+<li><code>"ACCELERATED"</code></li>
+<li><code>"STANDARD"</code></li>
+<li><code>"REDUCED_REDUNDANCY"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
+</ul>
+</li>
+<li><code>Transition</code> &mdash; (<code>String</code>)  Provides information of the transition storage class and time of transition.</li>
 </ul>
 
 </div>
@@ -7683,43 +7705,32 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
-<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
-
-<ul>
-<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
-<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
 <ul>
-<li><code>"GLACIER"</code></li>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
-</ul>
-</li>
-<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
- Possible values include:
-
-<ul>
+<li><code>"REDUCED_REDUNDANCY"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"STANDARD"</code></li>
-<li><code>"GLACIER"</code></li>
-</ul>
-</li>
+<li><code>Transition</code> &mdash; (<code>String</code>)  Provides information of the transition storage class and time of transition.</li>
 </ul>
 
 </div>
@@ -8599,9 +8610,14 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>Owner</code> &mdash; (<code>map</code>)
@@ -8829,9 +8845,14 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"GLACIER"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>Owner</code> &mdash; (<code>map</code>)
@@ -9055,9 +9076,14 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"GLACIER"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>Owner</code> &mdash; (<code>map</code>)
@@ -9542,9 +9568,14 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 </ul>
@@ -10074,8 +10105,7 @@ subsequent event callback registration.</p>
           {
             Date: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
             Days: 0,
-            StorageClass: &#39;GLACIER | STANDARD&#39;,
-            TemporaryCopyStorageClass: &#39;GLACIER | STANDARD&#39;
+            StorageClass: &#39;ACCELERATED | GLACIER | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | DEEP_ARCHIVE&#39;
           },
           /* more items */
         ]
@@ -10143,20 +10173,16 @@ s3.putBucketLifecycle(params, function(err, data) {
 <ul>
 <li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
 <li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
-</ul>
-</li>
 <li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 </ul>
@@ -10316,8 +10342,7 @@ subsequent event callback registration.</p>
           {
             Date: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
             Days: 0,
-            StorageClass: &#39;GLACIER | STANDARD&#39;,
-            TemporaryCopyStorageClass: &#39;GLACIER | STANDARD&#39;
+            StorageClass: &#39;ACCELERATED | GLACIER | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | DEEP_ARCHIVE&#39;
           },
           /* more items */
         ]
@@ -10384,20 +10409,16 @@ s3.putBucketLifecycleConfiguration(params, function(err, data) {
 <ul>
 <li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
 <li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
-</ul>
-</li>
 <li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 </ul>
@@ -11135,7 +11156,7 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;STANDARD | REDUCED_REDUNDANCY | STANDARD_IA&#39;
+  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;
 };
 s3.putObject(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -11203,9 +11224,14 @@ s3.putObject(params, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -11632,7 +11658,7 @@ subsequent event callback registration.</p>
   RestoreRequest: {
     Days: 0, /* required */
     GlacierJobParameters: {
-      Tier: &#39;Standard | Bulk | Expedited&#39; /* required */
+      Tier: &#39;Accelerated | Standard | Bulk | Expedited&#39; /* required */
     }
   },
   VersionId: &#39;STRING_VALUE&#39;
@@ -11673,6 +11699,7 @@ s3.restoreObject(params, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"Accelerated"</code></li>
 <li><code>"Standard"</code></li>
 <li><code>"Bulk"</code></li>
 <li><code>"Expedited"</code></li>
@@ -11914,9 +11941,14 @@ s3.upload(params, options, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
@@ -13118,43 +13150,32 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
-<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
-
-<ul>
-<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
-<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
 <ul>
-<li><code>"GLACIER"</code></li>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
-</ul>
-</li>
-<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
- Possible values include:
-
-<ul>
+<li><code>"REDUCED_REDUNDANCY"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"STANDARD"</code></li>
-<li><code>"GLACIER"</code></li>
-</ul>
-</li>
+<li><code>Transition</code> &mdash; (<code>String</code>)  Provides information of the transition storage class and time of transition.</li>
 </ul>
 
 </div>
@@ -13372,43 +13393,32 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
 <li><code>"REDUCED_REDUNDANCY"</code></li>
 <li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
+<li><code>"GLACIER"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
-<li><code>Transition</code> &mdash; (<code>map</code>)  Provides information of the transition storage class and time of transition.
-
-<ul>
-<li><code>Date</code> &mdash; (<code>Date</code>)  Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.</li>
-<li><code>Days</code> &mdash; (<code>Integer</code>)  Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
+<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
 <ul>
-<li><code>"GLACIER"</code></li>
+<li><code>"ACCELERATED"</code></li>
 <li><code>"STANDARD"</code></li>
-</ul>
-</li>
-<li><code>StorageClass</code> &mdash; (<code>String</code>)  The class of storage used to store the object.
- Possible values include:
-
-<ul>
+<li><code>"REDUCED_REDUNDANCY"</code></li>
+<li><code>"STANDARD_IA"</code></li>
+<li><code>"ONEZONE_IA"</code></li>
+<li><code>"INTELLIGENT_TIERING"</code></li>
 <li><code>"GLACIER"</code></li>
-<li><code>"STANDARD"</code></li>
+<li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object is in the RestoreInProgress or Restored states. This header will indicate the storage class to which the restored copy of the data will be billed.
- Possible values include:
-
-<ul>
-<li><code>"STANDARD"</code></li>
-<li><code>"GLACIER"</code></li>
-</ul>
-</li>
+<li><code>Transition</code> &mdash; (<code>String</code>)  Provides information of the transition storage class and time of transition.</li>
 </ul>
 
 </div>
@@ -13458,9 +13468,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Apr  7 17:42:34 2020 by
+  Generated on Mon Aug 10 10:51:06 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.6.3).
 </div>
 
 <!-- BEGIN-SECTION -->

@@ -90,13 +90,17 @@ Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sd
 
 <h2>Quick start</h2>
 
-<p>You'll need:
-  * An instance of COS.
-  * An API key from <a href="https://cloud.ibm.com/docs/iam/users_roles.html">IBM Cloud Identity and Access Management</a> with at least <code>Writer</code> permissions.
-  * The ID of the instance of COS that you are working with.
-  * Token acquisition endpoint
-  * Service endpoint
-  * <strong>Node 4.0++</strong>.</p>
+<p>You'll need:</p>
+
+<ul>
+<li>An instance of COS.</li>
+<li>An API key from <a href="https://cloud.ibm.com/docs/iam/users_roles.html">IBM Cloud Identity and Access Management</a> with at least <code>Writer</code> permissions.</li>
+<li>The ID of the instance of COS that you are working with.</li>
+<li>Token acquisition endpoint</li>
+<li>Service endpoint</li>
+<li><strong>Node 4.0++</strong>.</li>
+</ul>
+
 
 <p>These values can be found in the IBM Cloud Console by <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/iam/service-credentials.html">generating a 'service credential'</a>.</p>
 
@@ -183,6 +187,10 @@ doCreateBucket()
 
 <p>An archive policy is set at the bucket level by calling the <code>putBucketLifecycle</code> method on a client instance. A newly added or modified archive policy applies to new objects uploaded and does not affect existing objects.  For more detail, <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/libraries/node.html#node">see the documentation</a>.</p>
 
+<h2>Accelerated Archive</h2>
+
+<p>Users can set an archive rule that would allow data restore from an archive in 2 hours or 12 hours.</p>
+
 <h2>Getting Help</h2>
 
 <p>Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:</p>
@@ -204,9 +212,9 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Apr  7 17:42:33 2020 by
+  Generated on Mon Aug 10 10:51:06 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.6.3).
 </div>
 
 <!-- BEGIN-SECTION -->
