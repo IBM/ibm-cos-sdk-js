@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.8.0
+
+### Content
+
+#### Features
+
+* Static Website
+
+#### Defect Fixes
+
+* COSSDK-76237: <https://github.com/IBM/ibm-cos-sdk-js/issues/73>
+* COSSDK-76238: <https://github.com/IBM/ibm-cos-sdk-js/issues/75>
+* Add language support policy
+
 ## 1.7.0
 
 ### Content
