@@ -3,6 +3,10 @@
 This package allows Node.js developers to write software that interacts with [IBM
 Cloud Object Storage](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html). It is a fork of [the ``AWS SDK for Javascript`` library](https://github.com/aws/aws-sdk-js).
 
+## Notice
+
+IBM has added a [Language Support Policy](#language-support-policy). Language versions will be deprecated on the published schedule without additional notice.
+
 ## Documentation
 
 * [Core documentation for IBM COS](https://cloud.ibm.com/docs/services/cloud-object-storage/getting-started.html)
@@ -11,8 +15,8 @@ Cloud Object Storage](https://cloud.ibm.com/docs/services/cloud-object-storage/a
 
 For release notes, see the [CHANGELOG](CHANGELOG.md).
 
-* [Example code](#example-code)
-* [Getting help](#getting-help)
+* [Example Code](#example-code)
+* [Getting Help](#getting-help)
 
 ## Quick start
 
@@ -23,7 +27,6 @@ You'll need:
 * The ID of the instance of COS that you are working with.
 * Token acquisition endpoint
 * Service endpoint
-* **Node 4.0++**.
 
 These values can be found in the IBM Cloud Console by [generating a 'service credential'](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/service-credentials.html).
 
@@ -41,7 +44,7 @@ npm install ibm-cos-sdk
 
 You can source credentials directly from a [Service Credential](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/service-credentials.html) JSON document generated in the IBM Cloud console saved to `~/.bluemix/cos_credentials`. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain [HMAC keys](https://cloud.ibm.com/docs/services/cloud-object-storage/hmac/credentials.html) the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.
 
-## Example code
+## Example Code
 
 ```javascript
 var ibm = require('ibm-cos-sdk');
@@ -124,6 +127,10 @@ Feel free to use GitHub issues for tracking bugs and feature requests, but for h
 * Ask a question on [Stack Overflow](https://stackoverflow.com/) and tag it with ``ibm`` and ``object-storage``.
 * Open a support ticket with [IBM Cloud Support](https://cloud.ibm.com/unifiedsupport/supportcenter)
 * If it turns out that you may have found a bug, please [open an issue](https://github.com/ibm/ibm-cos-sdk-js/issues/new).
+
+## Language Support Policy
+
+IBM supports [current LTS releases](https://nodejs.org/en/about/releases/). IBM will deprecate language versions 90 days after a version reaches end-of-life. All clients will need to upgrade to a supported version before the end of the grace period.
 
 ## License
 

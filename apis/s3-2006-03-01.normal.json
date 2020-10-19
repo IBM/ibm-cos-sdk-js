@@ -180,6 +180,19 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEtagging.html",
       "documentation": "<p>Deletes the tags from the bucket.</p>"
     },
+    "DeleteBucketWebsite": {
+      "name": "DeleteBucketWebsite",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?website",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteBucketWebsiteRequest"
+      },
+      "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEwebsite.html",
+      "documentation": "<p>This operation removes the website configuration for a bucket. Amazon S3 returns a <code>200 OK</code> response upon successfully deleting a website configuration on the specified bucket. You will get a <code>200 OK</code> response if the website configuration you are trying to delete does not exist on the bucket. Amazon S3 returns a <code>404</code> response if the bucket specified in the request does not exist.</p> <p>This DELETE operation requires the <code>S3:DeleteBucketWebsite</code> permission. By default, only the bucket owner can delete the website configuration attached to a bucket. However, bucket owners can grant other users permission to delete the website configuration by writing a bucket policy granting them the <code>S3:DeleteBucketWebsite</code> permission. </p> <p>For more information about hosting websites, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html\">Hosting Websites on Amazon S3</a>. </p> <p>The following operations are related to <code>DeleteBucketWebsite</code>:</p> <ul> <li> <p> <a>GetBucketWebsite</a> </p> </li> <li> <p> <a>PutBucketWebsite</a> </p> </li> </ul>"
+    },
     "DeleteObject": {
       "name": "DeleteObject",
       "http": {
@@ -340,6 +353,21 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETversioningStatus.html",
       "documentation": "<p>Returns the versioning state of a bucket.</p>"
+    },
+    "GetBucketWebsite": {
+      "name": "GetBucketWebsite",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?website"
+      },
+      "input": {
+        "shape": "GetBucketWebsiteRequest"
+      },
+      "output": {
+        "shape": "GetBucketWebsiteOutput"
+      },
+      "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETwebsite.html",
+      "documentation": "<p>Returns the website configuration for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a website configuration. For more information about hosting websites, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html\">Hosting Websites on Amazon S3</a>. </p> <p>This GET operation requires the <code>S3:GetBucketWebsite</code> permission. By default, only the bucket owner can read the bucket website configuration. However, bucket owners can allow other users to read the website configuration by writing a bucket policy granting them the <code>S3:GetBucketWebsite</code> permission.</p> <p>The following operations are related to <code>DeleteBucketWebsite</code>:</p> <ul> <li> <p> <a>DeleteBucketWebsite</a> </p> </li> <li> <p> <a>PutBucketWebsite</a> </p> </li> </ul>"
     },
     "GetObject": {
       "name": "GetObject",
@@ -635,6 +663,19 @@
       },
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html",
       "documentation": "<p>Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.</p>"
+    },
+    "PutBucketWebsite": {
+      "name": "PutBucketWebsite",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?website"
+      },
+      "input": {
+        "shape": "PutBucketWebsiteRequest"
+      },
+      "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTwebsite.html",
+      "documentation": "<p>Sets the configuration of the website that is specified in the <code>website</code> subresource. To configure a bucket as a website, you can add this subresource on the bucket with website configuration information such as the file name of the index document and any redirect rules. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html\">Hosting Websites on Amazon S3</a>.</p> <p>This PUT operation requires the <code>S3:PutBucketWebsite</code> permission. By default, only the bucket owner can configure the website attached to a bucket; however, bucket owners can allow other users to set the website configuration by writing a bucket policy that grants them the <code>S3:PutBucketWebsite</code> permission.</p> <p>To redirect all website requests sent to the bucket's website endpoint, you add a website configuration with the following elements. Because all requests are sent to another website, you don't need to provide index document name for the bucket.</p> <ul> <li> <p> <code>WebsiteConfiguration</code> </p> </li> <li> <p> <code>RedirectAllRequestsTo</code> </p> </li> <li> <p> <code>HostName</code> </p> </li> <li> <p> <code>Protocol</code> </p> </li> </ul> <p>If you want granular control over redirects, you can use the following elements to add routing rules that describe conditions for redirecting requests and information about the redirect destination. In this case, the website configuration must provide an index document for the bucket, because some requests might not be redirected. </p> <ul> <li> <p> <code>WebsiteConfiguration</code> </p> </li> <li> <p> <code>IndexDocument</code> </p> </li> <li> <p> <code>Suffix</code> </p> </li> <li> <p> <code>ErrorDocument</code> </p> </li> <li> <p> <code>Key</code> </p> </li> <li> <p> <code>RoutingRules</code> </p> </li> <li> <p> <code>RoutingRule</code> </p> </li> <li> <p> <code>Condition</code> </p> </li> <li> <p> <code>HttpErrorCodeReturnedEquals</code> </p> </li> <li> <p> <code>KeyPrefixEquals</code> </p> </li> <li> <p> <code>Redirect</code> </p> </li> <li> <p> <code>Protocol</code> </p> </li> <li> <p> <code>HostName</code> </p> </li> <li> <p> <code>ReplaceKeyPrefixWith</code> </p> </li> <li> <p> <code>ReplaceKeyWith</code> </p> </li> <li> <p> <code>HttpRedirectCode</code> </p> </li> </ul> <p>Amazon S3 has a limitation of 50 routing rules per website configuration. If you require more than 50 routing rules, you can use object redirect. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html\">Configuring an Object Redirect</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>",
+      "httpChecksumRequired": true
     },
     "PutObject": {
       "name": "PutObject",
@@ -1440,6 +1481,12 @@
           "location": "querystring",
           "locationName": "versionId"
         },
+        "WebsiteRedirectLocation": {
+          "shape": "WebsiteRedirectLocation",
+          "documentation": "<p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p>",
+          "location": "header",
+          "locationName": "x-amz-website-redirect-location"
+        },
         "SSECustomerAlgorithm": {
           "shape": "SSECustomerAlgorithm",
           "documentation": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
@@ -1787,6 +1834,12 @@
           "location": "header",
           "locationName": "x-amz-storage-class"
         },
+        "WebsiteRedirectLocation": {
+          "shape": "WebsiteRedirectLocation",
+          "documentation": "<p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p>",
+          "location": "header",
+          "locationName": "x-amz-website-redirect-location"
+        },
         "SSECustomerAlgorithm": {
           "shape": "SSECustomerAlgorithm",
           "documentation": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
@@ -1890,6 +1943,20 @@
         "Bucket": {
           "shape": "BucketName",
           "documentation": "<p/>",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
+    "DeleteBucketWebsiteRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket name for which you want to remove the website configuration. </p>",
           "location": "uri",
           "locationName": "Bucket"
         }
@@ -2454,6 +2521,41 @@
         }
       }
     },
+    "GetBucketWebsiteOutput": {
+      "type": "structure",
+      "members": {
+        "RedirectAllRequestsTo": {
+          "shape": "RedirectAllRequestsTo",
+          "documentation": "<p>Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.</p>"
+        },
+        "IndexDocument": {
+          "shape": "IndexDocument",
+          "documentation": "<p>The name of the index document for the website (for example <code>index.html</code>).</p>"
+        },
+        "ErrorDocument": {
+          "shape": "ErrorDocument",
+          "documentation": "<p>The object key name of the website error document to use for 4XX class errors.</p>"
+        },
+        "RoutingRules": {
+          "shape": "RoutingRules",
+          "documentation": "<p>Rules that define when a redirect is applied and the redirect behavior.</p>"
+        }
+      }
+    },
+    "GetBucketWebsiteRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket name for which to get the website configuration.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
     "GetObjectAclOutput": {
       "type": "structure",
       "members": {
@@ -2593,6 +2695,12 @@
           "documentation": "The date and time at which the object is no longer cacheable.",
           "location": "header",
           "locationName": "Expires"
+        },
+        "WebsiteRedirectLocation": {
+          "shape": "WebsiteRedirectLocation",
+          "documentation": "<p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p>",
+          "location": "header",
+          "locationName": "x-amz-website-redirect-location"
         },
         "ServerSideEncryption": {
           "shape": "ServerSideEncryption",
@@ -2973,6 +3081,12 @@
           "location": "header",
           "locationName": "Expires"
         },
+        "WebsiteRedirectLocation": {
+          "shape": "WebsiteRedirectLocation",
+          "documentation": "<p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p>",
+          "location": "header",
+          "locationName": "x-amz-website-redirect-location"
+        },
         "ServerSideEncryption": {
           "shape": "ServerSideEncryption",
           "documentation": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
@@ -3186,6 +3300,19 @@
     },
     "IfUnmodifiedSince": {
       "type": "timestamp"
+    },
+    "IndexDocument": {
+      "type": "structure",
+      "required": [
+        "Suffix"
+      ],
+      "members": {
+        "Suffix": {
+          "shape": "Suffix",
+          "documentation": "<p>A suffix that is appended to a request that is for a directory on the website endpoint (for example,if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.</p>"
+        }
+      },
+      "documentation": "<p>Container for the <code>Suffix</code> element.</p>"
     },
     "Initiated":{
       "type":"timestamp"
@@ -4625,6 +4752,38 @@
       },
       "payload": "VersioningConfiguration"
     },
+    "PutBucketWebsiteRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "WebsiteConfiguration"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket name.</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "documentation": "<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC 1864</a>.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "Content-MD5 header will now be automatically computed and injected in associated operation's Http request.",
+          "location": "header",
+          "locationName": "Content-MD5"
+        },
+        "WebsiteConfiguration": {
+          "shape": "WebsiteConfiguration",
+          "documentation": "<p>Container for the request.</p>",
+          "locationName": "WebsiteConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "WebsiteConfiguration"
+    },
     "PutObjectAclOutput": {
       "type": "structure",
       "members": {
@@ -4894,6 +5053,12 @@
           "location": "header",
           "locationName": "x-amz-storage-class"
         },
+        "WebsiteRedirectLocation": {
+          "shape": "WebsiteRedirectLocation",
+          "documentation": "<p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. For information about object metadata, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html\">Object Key and Metadata</a>.</p> <p>In the following example, the request header sets the redirect to an object (anotherPage.html) in the same bucket:</p> <p> <code>x-amz-website-redirect-location: /anotherPage.html</code> </p> <p>In the following example, the request header sets the object redirect to another website:</p> <p> <code>x-amz-website-redirect-location: http://www.example.com/</code> </p> <p>For more information about website hosting in Amazon S3, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html\">Hosting Websites on Amazon S3</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html\">How to Configure Website Page Redirects</a>. </p>",
+          "location": "header",
+          "locationName": "x-amz-website-redirect-location"
+        },
         "SSECustomerAlgorithm": {
           "shape": "SSECustomerAlgorithm",
           "documentation": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
@@ -4951,6 +5116,23 @@
           "documentation": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
         }
       }
+    },
+    "RedirectAllRequestsTo": {
+      "type": "structure",
+      "required": [
+        "HostName"
+      ],
+      "members": {
+        "HostName": {
+          "shape": "HostName",
+          "documentation": "<p>Name of the host where requests are redirected.</p>"
+        },
+        "Protocol": {
+          "shape": "Protocol",
+          "documentation": "<p>Protocol to use when redirecting requests. The default is the protocol that is used in the original request.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.</p>"
     },
     "ReplaceKeyPrefixWith": {
       "type": "string"
@@ -5655,6 +5837,31 @@
         }
       },
       "documentation": "<p>Describes the versioning state of an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html\">PUT Bucket versioning</a> in the <i>Amazon Simple Storage Service API Reference</i>.</p>"
+    },
+    "WebsiteConfiguration": {
+      "type": "structure",
+      "members": {
+        "ErrorDocument": {
+          "shape": "ErrorDocument",
+          "documentation": "<p>The name of the error document for the website.</p>"
+        },
+        "IndexDocument": {
+          "shape": "IndexDocument",
+          "documentation": "<p>The name of the index document for the website.</p>"
+        },
+        "RedirectAllRequestsTo": {
+          "shape": "RedirectAllRequestsTo",
+          "documentation": "<p>The redirect behavior for every request to this bucket's website endpoint.</p> <important> <p>If you specify this property, you can't specify any other property.</p> </important>"
+        },
+        "RoutingRules": {
+          "shape": "RoutingRules",
+          "documentation": "<p>Rules that define when a redirect is applied and the redirect behavior.</p>"
+        }
+      },
+      "documentation": "<p>Specifies website configuration parameters for an Amazon S3 bucket.</p>"
+    },
+    "WebsiteRedirectLocation": {
+      "type": "string"
     },
     "IBMTransition":{
       "type":"string"

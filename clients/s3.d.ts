@@ -103,6 +103,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This operation removes the website configuration for a bucket. Amazon S3 returns a 200 OK response upon successfully deleting a website configuration on the specified bucket. You will get a 200 OK response if the website configuration you are trying to delete does not exist on the bucket. Amazon S3 returns a 404 response if the bucket specified in the request does not exist. This DELETE operation requires the S3:DeleteBucketWebsite permission. By default, only the bucket owner can delete the website configuration attached to a bucket. However, bucket owners can grant other users permission to delete the website configuration by writing a bucket policy granting them the S3:DeleteBucketWebsite permission.  For more information about hosting websites, see Hosting Websites on Amazon S3.  The following operations are related to DeleteBucketWebsite:    GetBucketWebsite     PutBucketWebsite   
+   */
+  deleteBucketWebsite(params: S3.Types.DeleteBucketWebsiteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This operation removes the website configuration for a bucket. Amazon S3 returns a 200 OK response upon successfully deleting a website configuration on the specified bucket. You will get a 200 OK response if the website configuration you are trying to delete does not exist on the bucket. Amazon S3 returns a 404 response if the bucket specified in the request does not exist. This DELETE operation requires the S3:DeleteBucketWebsite permission. By default, only the bucket owner can delete the website configuration attached to a bucket. However, bucket owners can grant other users permission to delete the website configuration by writing a bucket policy granting them the S3:DeleteBucketWebsite permission.  For more information about hosting websites, see Hosting Websites on Amazon S3.  The following operations are related to DeleteBucketWebsite:    GetBucketWebsite     PutBucketWebsite   
+   */
+  deleteBucketWebsite(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * If object versioning is not enabled, deletes an object. If versioning is enabled, removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, IBM COS does not remove any objects.
    */
   deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
@@ -190,6 +198,14 @@ declare class S3 extends S3Customizations {
    * Returns the versioning state of a bucket.
    */
   getBucketVersioning(callback?: (err: AWSError, data: S3.Types.GetBucketVersioningOutput) => void): Request<S3.Types.GetBucketVersioningOutput, AWSError>;
+  /**
+   * Returns the website configuration for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a website configuration. For more information about hosting websites, see Hosting Websites on Amazon S3.  This GET operation requires the S3:GetBucketWebsite permission. By default, only the bucket owner can read the bucket website configuration. However, bucket owners can allow other users to read the website configuration by writing a bucket policy granting them the S3:GetBucketWebsite permission. The following operations are related to DeleteBucketWebsite:    DeleteBucketWebsite     PutBucketWebsite   
+   */
+  getBucketWebsite(params: S3.Types.GetBucketWebsiteRequest, callback?: (err: AWSError, data: S3.Types.GetBucketWebsiteOutput) => void): Request<S3.Types.GetBucketWebsiteOutput, AWSError>;
+  /**
+   * Returns the website configuration for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a website configuration. For more information about hosting websites, see Hosting Websites on Amazon S3.  This GET operation requires the S3:GetBucketWebsite permission. By default, only the bucket owner can read the bucket website configuration. However, bucket owners can allow other users to read the website configuration by writing a bucket policy granting them the S3:GetBucketWebsite permission. The following operations are related to DeleteBucketWebsite:    DeleteBucketWebsite     PutBucketWebsite   
+   */
+  getBucketWebsite(callback?: (err: AWSError, data: S3.Types.GetBucketWebsiteOutput) => void): Request<S3.Types.GetBucketWebsiteOutput, AWSError>;
   /**
    * Retrieves objects from IBM COS.
    */
@@ -342,6 +358,14 @@ declare class S3 extends S3Customizations {
    * Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
    */
   putBucketVersioning(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the configuration of the website that is specified in the website subresource. To configure a bucket as a website, you can add this subresource on the bucket with website configuration information such as the file name of the index document and any redirect rules. For more information, see Hosting Websites on Amazon S3. This PUT operation requires the S3:PutBucketWebsite permission. By default, only the bucket owner can configure the website attached to a bucket; however, bucket owners can allow other users to set the website configuration by writing a bucket policy that grants them the S3:PutBucketWebsite permission. To redirect all website requests sent to the bucket's website endpoint, you add a website configuration with the following elements. Because all requests are sent to another website, you don't need to provide index document name for the bucket.    WebsiteConfiguration     RedirectAllRequestsTo     HostName     Protocol    If you want granular control over redirects, you can use the following elements to add routing rules that describe conditions for redirecting requests and information about the redirect destination. In this case, the website configuration must provide an index document for the bucket, because some requests might not be redirected.     WebsiteConfiguration     IndexDocument     Suffix     ErrorDocument     Key     RoutingRules     RoutingRule     Condition     HttpErrorCodeReturnedEquals     KeyPrefixEquals     Redirect     Protocol     HostName     ReplaceKeyPrefixWith     ReplaceKeyWith     HttpRedirectCode    Amazon S3 has a limitation of 50 routing rules per website configuration. If you require more than 50 routing rules, you can use object redirect. For more information, see Configuring an Object Redirect in the Amazon Simple Storage Service Developer Guide.
+   */
+  putBucketWebsite(params: S3.Types.PutBucketWebsiteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the configuration of the website that is specified in the website subresource. To configure a bucket as a website, you can add this subresource on the bucket with website configuration information such as the file name of the index document and any redirect rules. For more information, see Hosting Websites on Amazon S3. This PUT operation requires the S3:PutBucketWebsite permission. By default, only the bucket owner can configure the website attached to a bucket; however, bucket owners can allow other users to set the website configuration by writing a bucket policy that grants them the S3:PutBucketWebsite permission. To redirect all website requests sent to the bucket's website endpoint, you add a website configuration with the following elements. Because all requests are sent to another website, you don't need to provide index document name for the bucket.    WebsiteConfiguration     RedirectAllRequestsTo     HostName     Protocol    If you want granular control over redirects, you can use the following elements to add routing rules that describe conditions for redirecting requests and information about the redirect destination. In this case, the website configuration must provide an index document for the bucket, because some requests might not be redirected.     WebsiteConfiguration     IndexDocument     Suffix     ErrorDocument     Key     RoutingRules     RoutingRule     Condition     HttpErrorCodeReturnedEquals     KeyPrefixEquals     Redirect     Protocol     HostName     ReplaceKeyPrefixWith     ReplaceKeyWith     HttpRedirectCode    Amazon S3 has a limitation of 50 routing rules per website configuration. If you require more than 50 routing rules, you can use object redirect. For more information, see Configuring an Object Redirect in the Amazon Simple Storage Service Developer Guide.
+   */
+  putBucketWebsite(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds an object to a bucket.
    */
@@ -722,6 +746,10 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
     /**
+     * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.
+     */
+    WebsiteRedirectLocation?: WebsiteRedirectLocation;
+    /**
      * Specifies the algorithm to use to when encrypting the object (e.g., AES256).
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
@@ -915,6 +943,10 @@ declare namespace S3 {
      */
     StorageClass?: StorageClass;
     /**
+     * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.
+     */
+    WebsiteRedirectLocation?: WebsiteRedirectLocation;
+    /**
      * Specifies the algorithm to use to when encrypting the object (e.g., AES256).
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
@@ -954,6 +986,12 @@ declare namespace S3 {
   export interface DeleteBucketTaggingRequest {
     /**
      * 
+     */
+    Bucket: BucketName;
+  }
+  export interface DeleteBucketWebsiteRequest {
+    /**
+     * The bucket name for which you want to remove the website configuration. 
      */
     Bucket: BucketName;
   }
@@ -1165,6 +1203,30 @@ declare namespace S3 {
      */
     Bucket: BucketName;
   }
+  export interface GetBucketWebsiteOutput {
+    /**
+     * Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.
+     */
+    RedirectAllRequestsTo?: RedirectAllRequestsTo;
+    /**
+     * The name of the index document for the website (for example index.html).
+     */
+    IndexDocument?: IndexDocument;
+    /**
+     * The object key name of the website error document to use for 4XX class errors.
+     */
+    ErrorDocument?: ErrorDocument;
+    /**
+     * Rules that define when a redirect is applied and the redirect behavior.
+     */
+    RoutingRules?: RoutingRules;
+  }
+  export interface GetBucketWebsiteRequest {
+    /**
+     * The bucket name for which to get the website configuration.
+     */
+    Bucket: BucketName;
+  }
   export interface GetObjectAclOutput {
     Owner?: Owner;
     /**
@@ -1243,6 +1305,10 @@ declare namespace S3 {
      * The date and time at which the object is no longer cacheable.
      */
     Expires?: Expires;
+    /**
+     * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.
+     */
+    WebsiteRedirectLocation?: WebsiteRedirectLocation;
     /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
      */
@@ -1461,6 +1527,10 @@ declare namespace S3 {
      */
     Expires?: Expires;
     /**
+     * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.
+     */
+    WebsiteRedirectLocation?: WebsiteRedirectLocation;
+    /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
      */
     ServerSideEncryption?: ServerSideEncryption;
@@ -1571,6 +1641,12 @@ declare namespace S3 {
   export type IfModifiedSince = Date;
   export type IfNoneMatch = string;
   export type IfUnmodifiedSince = Date;
+  export interface IndexDocument {
+    /**
+     * A suffix that is appended to a request that is for a directory on the website endpoint (for example,if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.
+     */
+    Suffix: Suffix;
+  }
   export type Initiated = Date;
   export interface Initiator {
     /**
@@ -2295,6 +2371,20 @@ declare namespace S3 {
      */
     VersioningConfiguration: VersioningConfiguration;
   }
+  export interface PutBucketWebsiteRequest {
+    /**
+     * The bucket name.
+     */
+    Bucket: BucketName;
+    /**
+     * The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see RFC 1864.
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * Container for the request.
+     */
+    WebsiteConfiguration: WebsiteConfiguration;
+  }
   export interface PutObjectAclOutput {
     RequestCharged?: RequestCharged;
   }
@@ -2452,6 +2542,10 @@ declare namespace S3 {
      */
     StorageClass?: StorageClass;
     /**
+     * If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. For information about object metadata, see Object Key and Metadata. In the following example, the request header sets the redirect to an object (anotherPage.html) in the same bucket:  x-amz-website-redirect-location: /anotherPage.html  In the following example, the request header sets the object redirect to another website:  x-amz-website-redirect-location: http://www.example.com/  For more information about website hosting in Amazon S3, see Hosting Websites on Amazon S3 and How to Configure Website Page Redirects. 
+     */
+    WebsiteRedirectLocation?: WebsiteRedirectLocation;
+    /**
      * Specifies the algorithm to use to when encrypting the object (e.g., AES256).
      */
     SSECustomerAlgorithm?: SSECustomerAlgorithm;
@@ -2491,6 +2585,16 @@ declare namespace S3 {
      * The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.
      */
     ReplaceKeyWith?: ReplaceKeyWith;
+  }
+  export interface RedirectAllRequestsTo {
+    /**
+     * Name of the host where requests are redirected.
+     */
+    HostName: HostName;
+    /**
+     * Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
+     */
+    Protocol?: Protocol;
   }
   export type ReplaceKeyPrefixWith = string;
   export type ReplaceKeyWith = string;
@@ -2808,6 +2912,25 @@ declare namespace S3 {
      */
     Status?: BucketVersioningStatus;
   }
+  export interface WebsiteConfiguration {
+    /**
+     * The name of the error document for the website.
+     */
+    ErrorDocument?: ErrorDocument;
+    /**
+     * The name of the index document for the website.
+     */
+    IndexDocument?: IndexDocument;
+    /**
+     * The redirect behavior for every request to this bucket's website endpoint.  If you specify this property, you can't specify any other property. 
+     */
+    RedirectAllRequestsTo?: RedirectAllRequestsTo;
+    /**
+     * Rules that define when a redirect is applied and the redirect behavior.
+     */
+    RoutingRules?: RoutingRules;
+  }
+  export type WebsiteRedirectLocation = string;
   export type IBMTransition = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
