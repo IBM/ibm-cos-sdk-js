@@ -120,7 +120,7 @@ class ApiDocumentor
     ctor.property_type = :function
     ctor.parameters = [['options', '{}']]
     ctor.signature = "constructor(options = {})"
-    ctor.docstring = <<-eof
+    aws_orig_docstring = <<-eof
 Constructs a service object. This object has one method for each
 API operation.
 
@@ -141,6 +141,7 @@ API operation.
   using the IPv6 address. Note, however, that currently on Windows, the IPv4 address will be
   preferred." : ""}
 eof
+    ctor.docstring = ibm_remove_broken_link_getting_started_sentence(aws_orig_docstring)
 
     # endpoint attribute
     endpoint = YARDJS::CodeObjects::PropertyObject.new(service, 'endpoint')
@@ -265,5 +266,10 @@ eof
       json = JSON.parse(File.read(paths[0]))
       json['examples']
     end
+  end
+
+  def ibm_remove_broken_link_getting_started_sentence(docstring)
+    docstring.slice!(/\sFor more information on bound parameters,\n\s*see \["Working with Services" in the Getting Started Guide\]\(\/AWSJavaScriptSDK\/guide\/node-services.html#Bound_Parameters\)\./)
+    return docstring
   end
 end
