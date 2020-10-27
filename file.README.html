@@ -71,6 +71,10 @@
 <p>This package allows Node.js developers to write software that interacts with <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html">IBM
 Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sdk-js">the <code>AWS SDK for Javascript</code> library</a>.</p>
 
+<h2>Notice</h2>
+
+<p>IBM has added a <a href="#language-support-policy">Language Support Policy</a>. Language versions will be deprecated on the published schedule without additional notice.</p>
+
 <h2>Documentation</h2>
 
 <ul>
@@ -83,8 +87,8 @@ Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sd
 <p>For release notes, see the <a href="CHANGELOG.md">CHANGELOG</a>.</p>
 
 <ul>
-<li><a href="#example-code">Example code</a></li>
-<li><a href="#getting-help">Getting help</a></li>
+<li><a href="#example-code">Example Code</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
 </ul>
 
 
@@ -98,7 +102,6 @@ Cloud Object Storage</a>. It is a fork of <a href="https://github.com/aws/aws-sd
 <li>The ID of the instance of COS that you are working with.</li>
 <li>Token acquisition endpoint</li>
 <li>Service endpoint</li>
-<li><strong>Node 4.0++</strong>.</li>
 </ul>
 
 
@@ -117,7 +120,7 @@ into a terminal window:</p>
 
 <p>You can source credentials directly from a <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/iam/service-credentials.html">Service Credential</a> JSON document generated in the IBM Cloud console saved to <code>~/.bluemix/cos_credentials</code>. The SDK will automatically load these providing you have not explicitly set other credentials during client creation. If the Service Credential contain <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/hmac/credentials.html">HMAC keys</a> the client will use those and authenticate using a signature, otherwise the client will use the provided API key to authenticate using bearer tokens.</p>
 
-<h2>Example code</h2>
+<h2>Example Code</h2>
 
 <pre class="code javascript"><code class="javascript">var ibm = require('ibm-cos-sdk');
 var util = require('util');
@@ -196,12 +199,16 @@ doCreateBucket()
 <p>Feel free to use GitHub issues for tracking bugs and feature requests, but for help please use one of the following resources:</p>
 
 <ul>
-<li>Read a quick start guide in <a href="https://cloud.ibm.com/docs/services/cloud-object-storage/libraries/node.html#node-js">IBM Cloud Docs</a>.</li>
+<li>Read a quick start guide in <a href="https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-node">IBM Cloud Docs</a>.</li>
 <li>Ask a question on <a href="https://stackoverflow.com/">Stack Overflow</a> and tag it with <code>ibm</code> and <code>object-storage</code>.</li>
 <li>Open a support ticket with <a href="https://cloud.ibm.com/unifiedsupport/supportcenter">IBM Cloud Support</a></li>
 <li>If it turns out that you may have found a bug, please <a href="https://github.com/ibm/ibm-cos-sdk-js/issues/new">open an issue</a>.</li>
 </ul>
 
+
+<h2>Language Support Policy</h2>
+
+<p>IBM supports <a href="https://nodejs.org/en/about/releases/">current LTS releases</a>. IBM will deprecate language versions 90 days after a version reaches end-of-life. All clients will need to upgrade to a supported version before the end of the grace period.</p>
 
 <h2>License</h2>
 
@@ -212,9 +219,9 @@ see LICENSE.txt and NOTICE.txt for more information.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Aug 10 10:51:06 2020 by
+  Generated on Tue Oct 27 16:55:30 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.6.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->

@@ -559,6 +559,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deleteBucketWebsite-property" title="deleteBucketWebsite"><strong>deleteBucketWebsite</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This operation removes the website configuration for a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#deleteLegalHold-property" title="deleteLegalHold"><strong>deleteLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -851,6 +876,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the versioning state of a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getBucketWebsite-property" title="getBucketWebsite"><strong>getBucketWebsite</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the website configuration for a bucket.</p>
 </div></span>
   
 </li>
@@ -1384,6 +1434,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#putBucketWebsite-property" title="putBucketWebsite"><strong>putBucketWebsite</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the configuration of the website that is specified in the website subresource.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#putObject-property" title="putObject"><strong>putObject</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -1614,8 +1689,7 @@ API operation.</p>
           </span>
           
             &mdash; <div class='inline'><p>An optional map of parameters to bind to every
-request sent by this service object. For more information on bound parameters,
-see <a href="/AWSJavaScriptSDK/guide/node-services.html#Bound_Parameters">"Working with Services" in the Getting Started Guide</a>.</p>
+request sent by this service object.</p>
 </div>
           
         </li>
@@ -2682,7 +2756,8 @@ subsequent event callback registration.</p>
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
   StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
-  VersionId: &#39;STRING_VALUE&#39;
+  VersionId: &#39;STRING_VALUE&#39;,
+  WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
 s3.copyObject(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -2779,6 +2854,7 @@ s3.copyObject(params, function(err, data) {
 </ul>
 </li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  VersionId used to reference a specific version of the object.</li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for IBM COS to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
@@ -3224,7 +3300,8 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;
+  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
+  WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
 s3.createMultipartUpload(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -3296,6 +3373,7 @@ s3.createMultipartUpload(params, function(err, data) {
 <li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
@@ -4069,6 +4147,166 @@ s3.deleteBucketTagging(params, function(err, data) {
         &mdash;
         <div class='inline'><ul>
 <li><code>Bucket</code> &mdash; (<code>String</code>)  <p/></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deleteBucketWebsite-property">
+  
+    <strong>deleteBucketWebsite</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This operation removes the website configuration for a bucket. Amazon S3 returns a <code>200 OK</code> response upon successfully deleting a website configuration on the specified bucket. You will get a <code>200 OK</code> response if the website configuration you are trying to delete does not exist on the bucket. Amazon S3 returns a <code>404</code> response if the bucket specified in the request does not exist.</p>
+
+
+<p> <p>This DELETE operation requires the <code>S3:DeleteBucketWebsite</code> permission. By default, only the bucket owner can delete the website configuration attached to a bucket. However, bucket owners can grant other users permission to delete the website configuration by writing a bucket policy granting them the <code>S3:DeleteBucketWebsite</code> permission. </p> <p>For more information about hosting websites, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting Websites on Amazon S3</a>. </p> <p>The following operations are related to <code>DeleteBucketWebsite</code>:</p> <ul> <li> <p> <a>GetBucketWebsite</a> </p> </li> <li> <p> <a>PutBucketWebsite</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deleteBucketWebsite operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.deleteBucketWebsite(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name for which you want to remove the website configuration. </p></li>
 </ul>
 
 </div>
@@ -6436,6 +6674,226 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getBucketWebsite-property">
+  
+    <strong>getBucketWebsite</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the website configuration for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a website configuration. For more information about hosting websites, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting Websites on Amazon S3</a>. </p>
+
+
+<p> <p>This GET operation requires the <code>S3:GetBucketWebsite</code> permission. By default, only the bucket owner can read the bucket website configuration. However, bucket owners can allow other users to read the website configuration by writing a bucket policy granting them the <code>S3:GetBucketWebsite</code> permission.</p> <p>The following operations are related to <code>DeleteBucketWebsite</code>:</p> <ul> <li> <p> <a>DeleteBucketWebsite</a> </p> </li> <li> <p> <a>PutBucketWebsite</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getBucketWebsite operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.getBucketWebsite(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name for which to get the website configuration.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>RedirectAllRequestsTo</code> &mdash; (<code>map</code>)  <p>Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.</p>
+
+<ul>
+<li><code>HostName</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Name of the host where requests are redirected.</p></li>
+<li><code>Protocol</code> &mdash; (<code>String</code>)  <p>Protocol to use when redirecting requests. The default is the protocol that is used in the original request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"http"</code></li>
+<li><code>"https"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>IndexDocument</code> &mdash; (<code>map</code>)  <p>The name of the index document for the website (for example <code>index.html</code>).</p>
+
+<ul>
+<li><code>Suffix</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>A suffix that is appended to a request that is for a directory on the website endpoint (for example,if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.</p></li>
+</ul>
+</li>
+<li><code>ErrorDocument</code> &mdash; (<code>map</code>)  <p>The object key name of the website error document to use for 4XX class errors.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  The object key name to use when a 4XX class error occurs.</li>
+</ul>
+</li>
+<li><code>RoutingRules</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p>Rules that define when a redirect is applied and the redirect behavior.</p>
+
+<ul>
+<li><code>Condition</code> &mdash; (<code>map</code>)  A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.
+
+<ul>
+<li><code>HttpErrorCodeReturnedEquals</code> &mdash; (<code>String</code>)  The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.</li>
+<li><code>KeyPrefixEquals</code> &mdash; (<code>String</code>)  The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.</li>
+</ul>
+</li>
+<li><code>Redirect</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.
+
+<ul>
+<li><code>HostName</code> &mdash; (<code>String</code>)  The host name to use in the redirect request.</li>
+<li><code>HttpRedirectCode</code> &mdash; (<code>String</code>)  The HTTP redirect code to use on the response. Not required if one of the siblings is present.</li>
+<li><code>Protocol</code> &mdash; (<code>String</code>)  Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.
+ Possible values include:
+
+<ul>
+<li><code>"http"</code></li>
+<li><code>"https"</code></li>
+</ul>
+</li>
+<li><code>ReplaceKeyPrefixWith</code> &mdash; (<code>String</code>)  The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided.</li>
+<li><code>ReplaceKeyWith</code> &mdash; (<code>String</code>)  The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="getObject-property">
   
     <strong>getObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -6612,6 +7070,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>ContentRange</code> &mdash; (<code>String</code>)  The portion of the object returned in the response.</li>
 <li><code>ContentType</code> &mdash; (<code>String</code>)  A standard MIME type describing the format of the object data.</li>
 <li><code>Expires</code> &mdash; (<code>Date</code>)  The date and time at which the object is no longer cacheable.</li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -7678,6 +8137,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>ContentLanguage</code> &mdash; (<code>String</code>)  The language the content is in.</li>
 <li><code>ContentType</code> &mdash; (<code>String</code>)  A standard MIME type describing the format of the object data.</li>
 <li><code>Expires</code> &mdash; (<code>Date</code>)  The date and time at which the object is no longer cacheable.</li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -11103,6 +11563,256 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="putBucketWebsite-property">
+  
+    <strong>putBucketWebsite</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the configuration of the website that is specified in the <code>website</code> subresource. To configure a bucket as a website, you can add this subresource on the bucket with website configuration information such as the file name of the index document and any redirect rules. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting Websites on Amazon S3</a>.</p>
+
+
+<p> <p>This PUT operation requires the <code>S3:PutBucketWebsite</code> permission. By default, only the bucket owner can configure the website attached to a bucket; however, bucket owners can allow other users to set the website configuration by writing a bucket policy that grants them the <code>S3:PutBucketWebsite</code> permission.</p> <p>To redirect all website requests sent to the bucket's website endpoint, you add a website configuration with the following elements. Because all requests are sent to another website, you don't need to provide index document name for the bucket.</p> <ul> <li> <p> <code>WebsiteConfiguration</code> </p> </li> <li> <p> <code>RedirectAllRequestsTo</code> </p> </li> <li> <p> <code>HostName</code> </p> </li> <li> <p> <code>Protocol</code> </p> </li> </ul> <p>If you want granular control over redirects, you can use the following elements to add routing rules that describe conditions for redirecting requests and information about the redirect destination. In this case, the website configuration must provide an index document for the bucket, because some requests might not be redirected. </p> <ul> <li> <p> <code>WebsiteConfiguration</code> </p> </li> <li> <p> <code>IndexDocument</code> </p> </li> <li> <p> <code>Suffix</code> </p> </li> <li> <p> <code>ErrorDocument</code> </p> </li> <li> <p> <code>Key</code> </p> </li> <li> <p> <code>RoutingRules</code> </p> </li> <li> <p> <code>RoutingRule</code> </p> </li> <li> <p> <code>Condition</code> </p> </li> <li> <p> <code>HttpErrorCodeReturnedEquals</code> </p> </li> <li> <p> <code>KeyPrefixEquals</code> </p> </li> <li> <p> <code>Redirect</code> </p> </li> <li> <p> <code>Protocol</code> </p> </li> <li> <p> <code>HostName</code> </p> </li> <li> <p> <code>ReplaceKeyPrefixWith</code> </p> </li> <li> <p> <code>ReplaceKeyWith</code> </p> </li> <li> <p> <code>HttpRedirectCode</code> </p> </li> </ul> <p>Amazon S3 has a limitation of 50 routing rules per website configuration. If you require more than 50 routing rules, you can use object redirect. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html">Configuring an Object Redirect</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketWebsite operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  WebsiteConfiguration: { /* required */
+    ErrorDocument: {
+      Key: &#39;STRING_VALUE&#39; /* required */
+    },
+    IndexDocument: {
+      Suffix: &#39;STRING_VALUE&#39; /* required */
+    },
+    RedirectAllRequestsTo: {
+      HostName: &#39;STRING_VALUE&#39;, /* required */
+      Protocol: &#39;http | https&#39;
+    },
+    RoutingRules: [
+      {
+        Redirect: { /* required */
+          HostName: &#39;STRING_VALUE&#39;,
+          HttpRedirectCode: &#39;STRING_VALUE&#39;,
+          Protocol: &#39;http | https&#39;,
+          ReplaceKeyPrefixWith: &#39;STRING_VALUE&#39;,
+          ReplaceKeyWith: &#39;STRING_VALUE&#39;
+        },
+        Condition: {
+          HttpErrorCodeReturnedEquals: &#39;STRING_VALUE&#39;,
+          KeyPrefixEquals: &#39;STRING_VALUE&#39;
+        }
+      },
+      /* more items */
+    ]
+  },
+  ContentMD5: &#39;STRING_VALUE&#39;
+};
+s3.putBucketWebsite(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see <a href="http://www.ietf.org/rfc/rfc1864.txt">RFC 1864</a>.</p></li>
+<li><code>WebsiteConfiguration</code> &mdash; (<code>map</code>)  <p>Container for the request.</p>
+
+<ul>
+<li><code>ErrorDocument</code> &mdash; (<code>map</code>)  <p>The name of the error document for the website.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  The object key name to use when a 4XX class error occurs.</li>
+</ul>
+</li>
+<li><code>IndexDocument</code> &mdash; (<code>map</code>)  <p>The name of the index document for the website.</p>
+
+<ul>
+<li><code>Suffix</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>A suffix that is appended to a request that is for a directory on the website endpoint (for example,if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.</p></li>
+</ul>
+</li>
+<li><code>RedirectAllRequestsTo</code> &mdash; (<code>map</code>)  <p>The redirect behavior for every request to this bucket's website endpoint.</p> <important> <p>If you specify this property, you can't specify any other property.</p> </important>
+
+<ul>
+<li><code>HostName</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Name of the host where requests are redirected.</p></li>
+<li><code>Protocol</code> &mdash; (<code>String</code>)  <p>Protocol to use when redirecting requests. The default is the protocol that is used in the original request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"http"</code></li>
+<li><code>"https"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>RoutingRules</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p>Rules that define when a redirect is applied and the redirect behavior.</p>
+
+<ul>
+<li><code>Condition</code> &mdash; (<code>map</code>)  A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.
+
+<ul>
+<li><code>HttpErrorCodeReturnedEquals</code> &mdash; (<code>String</code>)  The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.</li>
+<li><code>KeyPrefixEquals</code> &mdash; (<code>String</code>)  The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.</li>
+</ul>
+</li>
+<li><code>Redirect</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return.
+
+<ul>
+<li><code>HostName</code> &mdash; (<code>String</code>)  The host name to use in the redirect request.</li>
+<li><code>HttpRedirectCode</code> &mdash; (<code>String</code>)  The HTTP redirect code to use on the response. Not required if one of the siblings is present.</li>
+<li><code>Protocol</code> &mdash; (<code>String</code>)  Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.
+ Possible values include:
+
+<ul>
+<li><code>"http"</code></li>
+<li><code>"https"</code></li>
+</ul>
+</li>
+<li><code>ReplaceKeyPrefixWith</code> &mdash; (<code>String</code>)  The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided.</li>
+<li><code>ReplaceKeyWith</code> &mdash; (<code>String</code>)  The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="putObject-property">
   
     <strong>putObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -11156,7 +11866,8 @@ subsequent event callback registration.</p>
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
-  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;
+  StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
+  WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
 s3.putObject(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -11234,6 +11945,7 @@ s3.putObject(params, function(err, data) {
 <li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. For information about object metadata, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a>.</p> <p>In the following example, the request header sets the redirect to an object (anotherPage.html) in the same bucket:</p> <p> <code>x-amz-website-redirect-location: /anotherPage.html</code> </p> <p>In the following example, the request header sets the object redirect to another website:</p> <p> <code>x-amz-website-redirect-location: <a href="http://www.example.com/">http://www.example.com/</a></code> </p> <p>For more information about website hosting in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting Websites on Amazon S3</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html">How to Configure Website Page Redirects</a>. </p></li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
@@ -11951,6 +12663,7 @@ s3.upload(params, options, function(err, data) {
 <li><code>"DEEP_ARCHIVE"</code></li>
 </ul>
 </li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata. For information about object metadata, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html">Object Key and Metadata</a>.</p> <p>In the following example, the request header sets the redirect to an object (anotherPage.html) in the same bucket:</p> <p> <code>x-amz-website-redirect-location: /anotherPage.html</code> </p> <p>In the following example, the request header sets the object redirect to another website:</p> <p> <code>x-amz-website-redirect-location: <a href="http://www.example.com/">http://www.example.com/</a></code> </p> <p>For more information about website hosting in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting Websites on Amazon S3</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html">How to Configure Website Page Redirects</a>. </p></li>
 <li><code>SSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use to when encrypting the object (e.g., AES256).</li>
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
@@ -13123,6 +13836,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>ContentLanguage</code> &mdash; (<code>String</code>)  The language the content is in.</li>
 <li><code>ContentType</code> &mdash; (<code>String</code>)  A standard MIME type describing the format of the object data.</li>
 <li><code>Expires</code> &mdash; (<code>Date</code>)  The date and time at which the object is no longer cacheable.</li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -13366,6 +14080,7 @@ The <code>data</code> object has the following properties:</p>
 <li><code>ContentLanguage</code> &mdash; (<code>String</code>)  The language the content is in.</li>
 <li><code>ContentType</code> &mdash; (<code>String</code>)  A standard MIME type describing the format of the object data.</li>
 <li><code>Expires</code> &mdash; (<code>Date</code>)  The date and time at which the object is no longer cacheable.</li>
+<li><code>WebsiteRedirectLocation</code> &mdash; (<code>String</code>)  <p>If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata.</p></li>
 <li><code>ServerSideEncryption</code> &mdash; (<code>String</code>)  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  Possible values include:
 
@@ -13468,9 +14183,9 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Aug 10 10:51:06 2020 by
+  Generated on Tue Oct 27 16:55:31 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.6.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->
