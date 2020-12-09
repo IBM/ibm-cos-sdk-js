@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.9.0
+
+### Content
+
+#### Features
+
+* Object Tagging
+* Block Public Anonymous Access
+
 ## 1.8.0
 
 ### Content

@@ -119,6 +119,14 @@ declare class S3 extends S3Customizations {
    */
   deleteObject(callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
+   * Removes the entire tag set from the specified object. For more information about managing object tags, see  Object Tagging. To use this operation, you must have permission to perform the s3:DeleteObjectTagging action. To delete tags of a specific object version, add the versionId query parameter in the request. You will need permission for the s3:DeleteObjectVersionTagging action. The following operations are related to DeleteBucketMetricsConfiguration:    PutObjectTagging     GetObjectTagging   
+   */
+  deleteObjectTagging(params: S3.Types.DeleteObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
+  /**
+   * Removes the entire tag set from the specified object. For more information about managing object tags, see  Object Tagging. To use this operation, you must have permission to perform the s3:DeleteObjectTagging action. To delete tags of a specific object version, add the versionId query parameter in the request. You will need permission for the s3:DeleteObjectVersionTagging action. The following operations are related to DeleteBucketMetricsConfiguration:    PutObjectTagging     GetObjectTagging   
+   */
+  deleteObjectTagging(callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
+  /**
    * This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.
    */
   deleteObjects(params: S3.Types.DeleteObjectsRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
@@ -134,6 +142,14 @@ declare class S3 extends S3Customizations {
    * This implementation of the POST operation uses the extendRetention sub-resource to extend the retention period of a protected object in a protected vault.
    */
   extendObjectRetention(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:PutBucketPublicAccessBlock permission. For more information about permissions, see Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources. The following operations are related to DeletePublicAccessBlock:    Using Amazon S3 Block Public Access     GetPublicAccessBlock     PutPublicAccessBlock     GetBucketPolicyStatus   
+   */
+  deletePublicAccessBlock(params: S3.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:PutBucketPublicAccessBlock permission. For more information about permissions, see Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources. The following operations are related to DeletePublicAccessBlock:    Using Amazon S3 Block Public Access     GetPublicAccessBlock     PutPublicAccessBlock     GetBucketPolicyStatus   
+   */
+  deletePublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Gets the access control policy for the bucket.
    */
@@ -222,6 +238,22 @@ declare class S3 extends S3Customizations {
    * Returns the access control list (ACL) of an object.
    */
   getObjectAcl(callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
+  /**
+   * Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object. To use this operation, you must have permission to perform the s3:GetObjectTagging action. By default, the GET operation returns information about current version of an object. For a versioned bucket, you can have multiple versions of an object in your bucket. To retrieve tags of any other version, use the versionId query parameter. You also need permission for the s3:GetObjectVersionTagging action.  By default, the bucket owner has this permission and can grant this permission to others.  For information about the Amazon S3 object tagging feature, see Object Tagging. The following operation is related to GetObjectTagging:    PutObjectTagging   
+   */
+  getObjectTagging(params: S3.Types.GetObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
+  /**
+   * Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object. To use this operation, you must have permission to perform the s3:GetObjectTagging action. By default, the GET operation returns information about current version of an object. For a versioned bucket, you can have multiple versions of an object in your bucket. To retrieve tags of any other version, use the versionId query parameter. You also need permission for the s3:GetObjectVersionTagging action.  By default, the bucket owner has this permission and can grant this permission to others.  For information about the Amazon S3 object tagging feature, see Object Tagging. The following operation is related to GetObjectTagging:    PutObjectTagging   
+   */
+  getObjectTagging(callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
+  /**
+   * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:GetBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.  When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or an object, it checks the PublicAccessBlock configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the PublicAccessBlock settings are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.  For more information about when Amazon S3 considers a bucket or an object public, see The Meaning of "Public". The following operations are related to GetPublicAccessBlock:    Using Amazon S3 Block Public Access     PutPublicAccessBlock     GetPublicAccessBlock     DeletePublicAccessBlock   
+   */
+  getPublicAccessBlock(params: S3.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
+  /**
+   * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:GetBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.  When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or an object, it checks the PublicAccessBlock configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the PublicAccessBlock settings are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.  For more information about when Amazon S3 considers a bucket or an object public, see The Meaning of "Public". The following operations are related to GetPublicAccessBlock:    Using Amazon S3 Block Public Access     PutPublicAccessBlock     GetPublicAccessBlock     DeletePublicAccessBlock   
+   */
+  getPublicAccessBlock(callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
@@ -382,6 +414,22 @@ declare class S3 extends S3Customizations {
    * uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
+  /**
+   * Sets the supplied tag-set to an object that already exists in a bucket A tag is a key-value pair. You can associate tags with an object by sending a PUT request against the tagging subresource that is associated with the object. You can retrieve tags by sending a GET request. For more information, see GetObjectTagging. For tagging-related restrictions related to characters and encodings, see Tag Restrictions. Note that Amazon S3 limits the maximum number of tags to 10 tags per object. To use this operation, you must have permission to perform the s3:PutObjectTagging action. By default, the bucket owner has this permission and can grant this permission to others. To put tags of any other version, use the versionId query parameter. You also need permission for the s3:PutObjectVersionTagging action. For information about the Amazon S3 object tagging feature, see Object Tagging.  Special Errors          Code: InvalidTagError      Cause: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see Object Tagging.            Code: MalformedXMLError      Cause: The XML provided does not match the schema.         Code: OperationAbortedError      Cause: A conflicting conditional operation is currently in progress against this resource. Please try again.         Code: InternalError     Cause: The service was unable to apply the provided tag to the object.       Related Resources     GetObjectTagging   
+   */
+  putObjectTagging(params: S3.Types.PutObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
+  /**
+   * Sets the supplied tag-set to an object that already exists in a bucket A tag is a key-value pair. You can associate tags with an object by sending a PUT request against the tagging subresource that is associated with the object. You can retrieve tags by sending a GET request. For more information, see GetObjectTagging. For tagging-related restrictions related to characters and encodings, see Tag Restrictions. Note that Amazon S3 limits the maximum number of tags to 10 tags per object. To use this operation, you must have permission to perform the s3:PutObjectTagging action. By default, the bucket owner has this permission and can grant this permission to others. To put tags of any other version, use the versionId query parameter. You also need permission for the s3:PutObjectVersionTagging action. For information about the Amazon S3 object tagging feature, see Object Tagging.  Special Errors          Code: InvalidTagError      Cause: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see Object Tagging.            Code: MalformedXMLError      Cause: The XML provided does not match the schema.         Code: OperationAbortedError      Cause: A conflicting conditional operation is currently in progress against this resource. Please try again.         Code: InternalError     Cause: The service was unable to apply the provided tag to the object.       Related Resources     GetObjectTagging   
+   */
+  putObjectTagging(callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
+  /**
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:PutBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.  When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or an object, it checks the PublicAccessBlock configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the PublicAccessBlock configurations are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.  For more information about when Amazon S3 considers a bucket or an object public, see The Meaning of "Public".  Related Resources     GetPublicAccessBlock     DeletePublicAccessBlock     GetBucketPolicyStatus     Using Amazon S3 Block Public Access   
+   */
+  putPublicAccessBlock(params: S3.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket. To use this operation, you must have the s3:PutBucketPublicAccessBlock permission. For more information about Amazon S3 permissions, see Specifying Permissions in a Policy.  When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or an object, it checks the PublicAccessBlock configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the PublicAccessBlock configurations are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.  For more information about when Amazon S3 considers a bucket or an object public, see The Meaning of "Public".  Related Resources     GetPublicAccessBlock     DeletePublicAccessBlock     GetBucketPolicyStatus     Using Amazon S3 Block Public Access   
+   */
+  putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Restores an archived copy of an object back into Amazon S3
    */
@@ -718,6 +766,10 @@ declare namespace S3 {
      */
     MetadataDirective?: MetadataDirective;
     /**
+     * Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request.
+     */
+    TaggingDirective?: TaggingDirective;
+    /**
      * This header controls how the Protection state of the source object is copied to the destination object.If copied, the retention period and all legal holds are copied onto the new object. The legal hold date's is set to the date of the copy.
      */
     RetentionDirective?: RetentionDirective;
@@ -777,6 +829,10 @@ declare namespace S3 {
      * Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.
      */
     CopySourceSSECustomerKeyMD5?: CopySourceSSECustomerKeyMD5;
+    /**
+     * The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters.
+     */
+    Tagging?: TaggingHeader;
   }
   export interface CopyObjectResult {
     ETag?: ETag;
@@ -962,6 +1018,10 @@ declare namespace S3 {
      * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * The tag-set for the object. The tag-set must be encoded as URL Query parameters.
+     */
+    Tagging?: TaggingHeader;
   }
   export type CreationDate = Date;
   export type _Date = Date;
@@ -1039,6 +1099,26 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
   }
+  export interface DeleteObjectTaggingOutput {
+    /**
+     * The versionId of the object the tag-set was removed from.
+     */
+    VersionId?: ObjectVersionId;
+  }
+  export interface DeleteObjectTaggingRequest {
+    /**
+     * The bucket name containing the objects from which to remove the tags.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using Access Points in the Amazon Simple Storage Service Developer Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * Name of the tag.
+     */
+    Key: ObjectKey;
+    /**
+     * The versionId of the object that the tag-set will be removed from.
+     */
+    VersionId?: ObjectVersionId;
+  }
   export interface DeleteObjectsOutput {
     Deleted?: DeletedObjects;
     Errors?: Errors;
@@ -1050,6 +1130,16 @@ declare namespace S3 {
      * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
      */
     MFA?: MFA;
+  }
+  export interface DeletePublicAccessBlockRequest {
+    /**
+     * The Amazon S3 bucket whose PublicAccessBlock configuration you want to delete. 
+     */
+    Bucket: BucketName;
+    /**
+     * The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export interface DeletedObject {
     Key?: ObjectKey;
@@ -1351,6 +1441,10 @@ declare namespace S3 {
      */
     PartsCount?: PartsCount;
     /**
+     * The number of tags, if any, on the object.
+     */
+    TagCount?: TagCount;
+    /**
      * This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
      */
     TemporaryCopyStorageClass?: StorageClass;
@@ -1427,6 +1521,46 @@ declare namespace S3 {
      * Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
      */
     PartNumber?: PartNumber;
+  }
+  export interface GetObjectTaggingOutput {
+    /**
+     * The versionId of the object for which you got the tagging information.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * Contains the tag set.
+     */
+    TagSet: TagSet;
+  }
+  export interface GetObjectTaggingRequest {
+    /**
+     * The bucket name containing the object for which to get the tagging information.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using Access Points in the Amazon Simple Storage Service Developer Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * Object key for which to get the tagging information.
+     */
+    Key: ObjectKey;
+    /**
+     * The versionId of the object for which to get the tagging information.
+     */
+    VersionId?: ObjectVersionId;
+  }
+  export interface GetPublicAccessBlockOutput {
+    /**
+     * The PublicAccessBlock configuration currently in effect for this Amazon S3 bucket.
+     */
+    PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
+  }
+  export interface GetPublicAccessBlockRequest {
+    /**
+     * The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want to retrieve. 
+     */
+    Bucket: BucketName;
+    /**
+     * The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export interface GlacierJobParameters {
     /**
@@ -1722,9 +1856,14 @@ declare namespace S3 {
   }
   export interface LifecycleRuleFilter {
     /**
-     * Empty prefix allowed only.
+     * Prefix identifying one or more objects to which the rule applies.
      */
     Prefix?: Prefix;
+    /**
+     * This tag must exist in the object's tag set in order for the rule to apply.
+     */
+    Tag?: Tag;
+    And?: LifecycleRuleAndOperator;
   }
   export type LifecycleRules = LifecycleRule[];
   export interface ListBucketsInput {
@@ -2280,6 +2419,16 @@ declare namespace S3 {
     EnablePermanentRetention?: BucketProtectionEnablePermanentRetention;
   }
   export type Protocol = "http"|"https"|string;
+  export interface PublicAccessBlockConfiguration {
+    /**
+     * Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs.
+     */
+    BlockPublicAcls?: Setting;
+    /**
+     * Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
+     */
+    IgnorePublicAcls?: Setting;
+  }
   export interface PutBucketAclRequest {
     /**
      * The canned ACL to apply to the bucket.
@@ -2561,6 +2710,56 @@ declare namespace S3 {
      * Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")
+     */
+    Tagging?: TaggingHeader;
+  }
+  export interface PutObjectTaggingOutput {
+    /**
+     * The versionId of the object the tag-set was added to.
+     */
+    VersionId?: ObjectVersionId;
+  }
+  export interface PutObjectTaggingRequest {
+    /**
+     * The bucket name containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using Access Points in the Amazon Simple Storage Service Developer Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * Name of the tag.
+     */
+    Key: ObjectKey;
+    /**
+     * The versionId of the object that the tag-set will be added to.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * The MD5 hash for the request body.
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * Container for the TagSet and Tag elements
+     */
+    Tagging: Tagging;
+  }
+  export interface PutPublicAccessBlockRequest {
+    /**
+     * The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want to set.
+     */
+    Bucket: BucketName;
+    /**
+     * The MD5 hash of the PutPublicAccessBlock request body. 
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * The PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see The Meaning of "Public" in the Amazon Simple Storage Service Developer Guide.
+     */
+    PublicAccessBlockConfiguration: PublicAccessBlockConfiguration;
+    /**
+     * The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export type Quiet = boolean;
   export type Range = string;
@@ -2700,6 +2899,7 @@ declare namespace S3 {
   export type SSECustomerKeyMD5 = string;
   export type SSEKMSKeyId = string;
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;
+  export type Setting = boolean;
   export type Size = number;
   export type StartAfter = string;
   export type StorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
@@ -2718,10 +2918,12 @@ declare namespace S3 {
   export type TagSet = Tag[];
   export interface Tagging {
     /**
-     * 
+     * A collection for a set of tags
      */
     TagSet: TagSet;
   }
+  export type TaggingDirective = "COPY"|"REPLACE"|string;
+  export type TaggingHeader = string;
   export type TargetBucket = string;
   export interface TargetGrant {
     Grantee?: Grantee;
