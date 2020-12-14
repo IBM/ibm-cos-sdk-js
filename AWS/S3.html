@@ -659,6 +659,56 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#deleteObjectTagging-property" title="deleteObjectTagging"><strong>deleteObjectTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the entire tag set from the specified object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deletePublicAccessBlock-property" title="deletePublicAccessBlock"><strong>deletePublicAccessBlock</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the PublicAccessBlock configuration for an Amazon S3 bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#extendObjectRetention-property" title="extendObjectRetention"><strong>extendObjectRetention</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -951,6 +1001,56 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>Returns the access control list (ACL) of an object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getObjectTagging-property" title="getObjectTagging"><strong>getObjectTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the tag-set of an object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getPublicAccessBlock-property" title="getPublicAccessBlock"><strong>getPublicAccessBlock</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket.</p>
 </div></span>
   
 </li>
@@ -1501,6 +1601,56 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p>uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putObjectTagging-property" title="putObjectTagging"><strong>putObjectTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the supplied tag-set to an object that already exists in a bucket A tag is a key-value pair.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putPublicAccessBlock-property" title="putPublicAccessBlock"><strong>putPublicAccessBlock</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket.</p>
 </div></span>
   
 </li>
@@ -2756,6 +2906,8 @@ subsequent event callback registration.</p>
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
   StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
+  Tagging: &#39;STRING_VALUE&#39;,
+  TaggingDirective: &#39;COPY | REPLACE&#39;,
   VersionId: &#39;STRING_VALUE&#39;,
   WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
@@ -2820,6 +2972,14 @@ s3.copyObject(params, function(err, data) {
 <li><code>"REPLACE"</code></li>
 </ul>
 </li>
+<li><code>TaggingDirective</code> &mdash; (<code>String</code>)  <p>Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"COPY"</code></li>
+<li><code>"REPLACE"</code></li>
+</ul>
+</li>
 <li><code>RetentionDirective</code> &mdash; (<code>String</code>)  This header controls how the Protection state of the source object is copied to the destination object.If copied, the retention period and all legal holds are copied onto the new object. The legal hold date's is set to the date of the copy.
  Possible values include:
 
@@ -2862,6 +3022,7 @@ s3.copyObject(params, function(err, data) {
 <li><code>CopySourceSSECustomerAlgorithm</code> &mdash; (<code>String</code>)  Specifies the algorithm to use when decrypting the source object (e.g., AES256).</li>
 <li><code>CopySourceSSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for IBM COS to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.</li>
 <li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
+<li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object destination object this value must be used in conjunction with the <code>TaggingDirective</code>. The tag-set must be encoded as URL Query parameters.</p></li>
 </ul>
 
 </div>
@@ -3301,6 +3462,7 @@ subsequent event callback registration.</p>
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
   StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
+  Tagging: &#39;STRING_VALUE&#39;,
   WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
 s3.createMultipartUpload(params, function(err, data) {
@@ -3378,6 +3540,7 @@ s3.createMultipartUpload(params, function(err, data) {
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
+<li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters.</p></li>
 </ul>
 
 </div>
@@ -4950,6 +5113,338 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="deleteObjectTagging-property">
+  
+    <strong>deleteObjectTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the entire tag set from the specified object. For more information about managing object tags, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html"> Object Tagging</a>.</p>
+
+
+<p> <p>To use this operation, you must have permission to perform the <code>s3:DeleteObjectTagging</code> action.</p> <p>To delete tags of a specific object version, add the <code>versionId</code> query parameter in the request. You will need permission for the <code>s3:DeleteObjectVersionTagging</code> action.</p> <p>The following operations are related to <code>DeleteBucketMetricsConfiguration</code>:</p> <ul> <li> <p> <a>PutObjectTagging</a> </p> </li> <li> <p> <a>GetObjectTagging</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deleteObjectTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.deleteObjectTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the objects from which to remove the tags. </p> <p>When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>Name of the tag.</p></li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object that the tag-set will be removed from.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object the tag-set was removed from.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deletePublicAccessBlock-property">
+  
+    <strong>deletePublicAccessBlock</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket. To use this operation, you must have the <code>s3:PutBucketPublicAccessBlock</code> permission. For more information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing Access Permissions to Your Amazon S3 Resources</a>.</p>
+
+
+<p> <p>The following operations are related to <code>DeletePublicAccessBlock</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using Amazon S3 Block Public Access</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html">GetBucketPolicyStatus</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the deletePublicAccessBlock operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;
+};
+s3.deletePublicAccessBlock(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The Amazon S3 bucket whose <code>PublicAccessBlock</code> configuration you want to delete. </p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="extendObjectRetention-property">
   
     <strong>extendObjectRetention</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -5845,7 +6340,27 @@ The <code>data</code> object has the following properties:</p>
 <li><code>Filter</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  The Filter is used to identify objects that a Lifecycle Rule applies to. Currently not supported.
 
 <ul>
-<li><code>Prefix</code> &mdash; (<code>String</code>)  Empty prefix allowed only.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Prefix identifying one or more objects to which the rule applies.</p></li>
+<li><code>Tag</code> &mdash; (<code>map</code>)  <p>This tag must exist in the object's tag set in order for the rule to apply.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+<li><code>And</code> &mdash; (<code>map</code>)  This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+<li><code>Tags</code> &mdash; (<code>Array&lt;map&gt;</code>)  All of these tags must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
@@ -7109,6 +7624,7 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  The count of parts this object has.</li>
+<li><code>TagCount</code> &mdash; (<code>Integer</code>)  <p>The number of tags, if any, on the object.</p></li>
 <li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
@@ -7331,6 +7847,357 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"READ_ACP"</code></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getObjectTagging-property">
+  
+    <strong>getObjectTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object.</p>
+
+
+<p> <p>To use this operation, you must have permission to perform the <code>s3:GetObjectTagging</code> action. By default, the GET operation returns information about current version of an object. For a versioned bucket, you can have multiple versions of an object in your bucket. To retrieve tags of any other version, use the versionId query parameter. You also need permission for the <code>s3:GetObjectVersionTagging</code> action.</p> <p> By default, the bucket owner has this permission and can grant this permission to others.</p> <p> For information about the Amazon S3 object tagging feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object Tagging</a>.</p> <p>The following operation is related to <code>GetObjectTagging</code>:</p> <ul> <li> <p> <a>PutObjectTagging</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getObjectTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.getObjectTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the object for which to get the tagging information. </p> <p>When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>Object key for which to get the tagging information.</p></li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object for which to get the tagging information.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object for which you got the tagging information.</p></li>
+<li><code>TagSet</code> &mdash; (<code>Array&lt;map&gt;</code>)  <p>Contains the tag set.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getPublicAccessBlock-property">
+  
+    <strong>getPublicAccessBlock</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket. To use this operation, you must have the <code>s3:GetBucketPublicAccessBlock</code> permission. For more information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying Permissions in a Policy</a>.</p>
+
+
+<p> <important> <p>When Amazon S3 evaluates the <code>PublicAccessBlock</code> configuration for a bucket or an object, it checks the <code>PublicAccessBlock</code> configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the <code>PublicAccessBlock</code> settings are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.</p> </important> <p>For more information about when Amazon S3 considers a bucket or an object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a>.</p> <p>The following operations are related to <code>GetPublicAccessBlock</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using Amazon S3 Block Public Access</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html">PutPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getPublicAccessBlock operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;
+};
+s3.getPublicAccessBlock(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The name of the Amazon S3 bucket whose <code>PublicAccessBlock</code> configuration you want to retrieve. </p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>PublicAccessBlockConfiguration</code> &mdash; (<code>map</code>)  <p>The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon S3 bucket.</p>
+
+<ul>
+<li><code>BlockPublicAcls</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn't affect existing policies or ACLs.</p></li>
+<li><code>IgnorePublicAcls</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.</p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p></li>
 </ul>
 </li>
 </ul>
@@ -10551,7 +11418,21 @@ subsequent event callback registration.</p>
     Rules: [ /* required */
       {
         Filter: { /* required */
-          Prefix: &#39;STRING_VALUE&#39;
+          And: {
+            Prefix: &#39;STRING_VALUE&#39;,
+            Tags: [
+              {
+                Key: &#39;STRING_VALUE&#39;, /* required */
+                Value: &#39;STRING_VALUE&#39; /* required */
+              },
+              /* more items */
+            ]
+          },
+          Prefix: &#39;STRING_VALUE&#39;,
+          Tag: {
+            Key: &#39;STRING_VALUE&#39;, /* required */
+            Value: &#39;STRING_VALUE&#39; /* required */
+          }
         },
         ID: &#39;STRING_VALUE&#39;, /* required */
         Status: &#39;Enabled | Disabled&#39;, /* required */
@@ -10617,7 +11498,27 @@ s3.putBucketLifecycle(params, function(err, data) {
 <li><code>Filter</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  The Filter is used to identify objects that a Lifecycle Rule applies to. Currently not supported.
 
 <ul>
-<li><code>Prefix</code> &mdash; (<code>String</code>)  Empty prefix allowed only.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Prefix identifying one or more objects to which the rule applies.</p></li>
+<li><code>Tag</code> &mdash; (<code>map</code>)  <p>This tag must exist in the object's tag set in order for the rule to apply.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+<li><code>And</code> &mdash; (<code>map</code>)  This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+<li><code>Tags</code> &mdash; (<code>Array&lt;map&gt;</code>)  All of these tags must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
@@ -10788,7 +11689,21 @@ subsequent event callback registration.</p>
     Rules: [ /* required */
       {
         Filter: { /* required */
-          Prefix: &#39;STRING_VALUE&#39;
+          And: {
+            Prefix: &#39;STRING_VALUE&#39;,
+            Tags: [
+              {
+                Key: &#39;STRING_VALUE&#39;, /* required */
+                Value: &#39;STRING_VALUE&#39; /* required */
+              },
+              /* more items */
+            ]
+          },
+          Prefix: &#39;STRING_VALUE&#39;,
+          Tag: {
+            Key: &#39;STRING_VALUE&#39;, /* required */
+            Value: &#39;STRING_VALUE&#39; /* required */
+          }
         },
         ID: &#39;STRING_VALUE&#39;, /* required */
         Status: &#39;Enabled | Disabled&#39;, /* required */
@@ -10853,7 +11768,27 @@ s3.putBucketLifecycleConfiguration(params, function(err, data) {
 <li><code>Filter</code> &mdash; <strong>required</strong> &mdash; (<code>map</code>)  The Filter is used to identify objects that a Lifecycle Rule applies to. Currently not supported.
 
 <ul>
-<li><code>Prefix</code> &mdash; (<code>String</code>)  Empty prefix allowed only.</li>
+<li><code>Prefix</code> &mdash; (<code>String</code>)  <p>Prefix identifying one or more objects to which the rule applies.</p></li>
+<li><code>Tag</code> &mdash; (<code>map</code>)  <p>This tag must exist in the object's tag set in order for the rule to apply.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+<li><code>And</code> &mdash; (<code>map</code>)  This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.
+
+<ul>
+<li><code>Prefix</code> &mdash; (<code>String</code>)</li>
+<li><code>Tags</code> &mdash; (<code>Array&lt;map&gt;</code>)  All of these tags must exist in the object's tag set in order for the rule to apply.
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Status</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
@@ -11260,7 +12195,7 @@ s3.putBucketTagging(params, function(err, data) {
 <li><code>Tagging</code> &mdash; (<code>map</code>)  <p/>
 
 <ul>
-<li><code>TagSet</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)  <p/>
+<li><code>TagSet</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)  <p>A collection for a set of tags</p>
 
 <ul>
 <li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
@@ -11867,6 +12802,7 @@ subsequent event callback registration.</p>
   SSEKMSKeyId: &#39;STRING_VALUE&#39;,
   ServerSideEncryption: &#39;AES256 | aws:kms&#39;,
   StorageClass: &#39;ACCELERATED | STANDARD | REDUCED_REDUNDANCY | STANDARD_IA | ONEZONE_IA | INTELLIGENT_TIERING | GLACIER | DEEP_ARCHIVE&#39;,
+  Tagging: &#39;STRING_VALUE&#39;,
   WebsiteRedirectLocation: &#39;STRING_VALUE&#39;
 };
 s3.putObject(params, function(err, data) {
@@ -11950,6 +12886,7 @@ s3.putObject(params, function(err, data) {
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
+<li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")</p></li>
 </ul>
 
 </div>
@@ -12340,6 +13277,374 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="putObjectTagging-property">
+  
+    <strong>putObjectTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the supplied tag-set to an object that already exists in a bucket</p>
+
+
+<p> <p>A tag is a key-value pair. You can associate tags with an object by sending a PUT request against the tagging subresource that is associated with the object. You can retrieve tags by sending a GET request. For more information, see <a>GetObjectTagging</a>.</p> <p>For tagging-related restrictions related to characters and encodings, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html">Tag Restrictions</a>. Note that Amazon S3 limits the maximum number of tags to 10 tags per object.</p> <p>To use this operation, you must have permission to perform the <code>s3:PutObjectTagging</code> action. By default, the bucket owner has this permission and can grant this permission to others.</p> <p>To put tags of any other version, use the <code>versionId</code> query parameter. You also need permission for the <code>s3:PutObjectVersionTagging</code> action.</p> <p>For information about the Amazon S3 object tagging feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object Tagging</a>.</p> <p class="title"> <b>Special Errors</b> </p> <ul> <li> <p class="title"> <b/> </p> <ul> <li> <p> <i>Code: InvalidTagError </i> </p> </li> <li> <p> <i>Cause: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object Tagging</a>.</i> </p> </li> </ul> </li> <li> <p class="title"> <b/> </p> <ul> <li> <p> <i>Code: MalformedXMLError </i> </p> </li> <li> <p> <i>Cause: The XML provided does not match the schema.</i> </p> </li> </ul> </li> <li> <ul> <li> <p> <i>Code: OperationAbortedError </i> </p> </li> <li> <p> <i>Cause: A conflicting conditional operation is currently in progress against this resource. Please try again.</i> </p> </li> </ul> </li> <li> <ul> <li> <p> <i>Code: InternalError</i> </p> </li> <li> <p> <i>Cause: The service was unable to apply the provided tag to the object.</i> </p> </li> </ul> </li> </ul> <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a>GetObjectTagging</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putObjectTagging operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  Tagging: { /* required */
+    TagSet: [ /* required */
+      {
+        Key: &#39;STRING_VALUE&#39;, /* required */
+        Value: &#39;STRING_VALUE&#39; /* required */
+      },
+      /* more items */
+    ]
+  },
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.putObjectTagging(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the object. </p> <p>When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>Name of the tag.</p></li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object that the tag-set will be added to.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The MD5 hash for the request body.</p></li>
+<li><code>Tagging</code> &mdash; (<code>map</code>)  <p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>
+
+<ul>
+<li><code>TagSet</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)  <p>A collection for a set of tags</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Name of the tag.</li>
+<li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  Value of the tag.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The versionId of the object the tag-set was added to.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putPublicAccessBlock-property">
+  
+    <strong>putPublicAccessBlock</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon S3 bucket. To use this operation, you must have the <code>s3:PutBucketPublicAccessBlock</code> permission. For more information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying Permissions in a Policy</a>.</p>
+
+
+<p> <important> <p>When Amazon S3 evaluates the <code>PublicAccessBlock</code> configuration for a bucket or an object, it checks the <code>PublicAccessBlock</code> configuration for both the bucket (or the bucket that contains the object) and the bucket owner's account. If the <code>PublicAccessBlock</code> configurations are different between the bucket and the account, Amazon S3 uses the most restrictive combination of the bucket-level and account-level settings.</p> </important> <p>For more information about when Amazon S3 considers a bucket or an object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a>.</p> <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html">DeletePublicAccessBlock</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html">GetBucketPolicyStatus</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using Amazon S3 Block Public Access</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putPublicAccessBlock operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  PublicAccessBlockConfiguration: { /* required */
+    BlockPublicAcls: true || false,
+    IgnorePublicAcls: true || false
+  },
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;
+};
+s3.putPublicAccessBlock(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The name of the Amazon S3 bucket whose <code>PublicAccessBlock</code> configuration you want to set.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The MD5 hash of the <code>PutPublicAccessBlock</code> request body. </p></li>
+<li><code>PublicAccessBlockConfiguration</code> &mdash; (<code>map</code>)  <p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
+
+<ul>
+<li><code>BlockPublicAcls</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn't affect existing policies or ACLs.</p></li>
+<li><code>IgnorePublicAcls</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.</p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p></li>
+</ul>
+</li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="restoreObject-property">
   
     <strong>restoreObject</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -12668,6 +13973,7 @@ s3.upload(params, options, function(err, data) {
 <li><code>SSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; IBM does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.</li>
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. IBM COS uses this header for a message integrity check to ensure the encryption key was transmitted without error.</li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version</a></li>
+<li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")</p></li>
 </ul>
 
 </div>
@@ -14183,7 +15489,7 @@ subsequent event callback registration.</p>
       </div>
 
       <div id="footer">
-  Generated on Tue Oct 27 16:55:31 2020 by
+  Generated on Mon Dec 14 17:42:38 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
