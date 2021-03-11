@@ -23,6 +23,12 @@ export class Credentials {
      */
     get(callback: (err?: AWSError) => void): void;
     /**
+     * Gets the existing credentials, refreshing them if necessary, and returns
+     * a promise that will be fulfilled immediately (if no refresh is necessary)
+     * or when the refresh has completed.
+     */
+    getPromise(): Promise<void>;
+    /**
      * Returns whether the credentials object should call refresh()
      */
     needsRefresh(): boolean;
@@ -34,28 +40,34 @@ export class Credentials {
      */
     refresh(callback: (err?: AWSError) => void): void;
     /**
+     * Invokes a credential refresh and returns a promise that will be fulfilled
+     * when the refresh has completed or rejected when the refresh has failed.
+     * Users should call get() before attempting to forcibly refresh credentials.
+     */
+    refreshPromise(): Promise<void>;
+    /**
      * AWS access key ID.
      */
-    accessKeyId: string
+    accessKeyId: string;
     /**
      * Whether the credentials have been expired and require a refresh.
      * Used in conjunction with expireTime.
      */
-    expired: boolean
+    expired: boolean;
     /**
      * Time when credentials should be considered expired.
      * Used in conjunction with expired.
      */
-    expireTime: Date
-    static expiryWindow: number
+    expireTime: Date;
+    static expiryWindow: number;
     /**
      * AWS secret access key.
      */
-    secretAccessKey: string
+    secretAccessKey: string;
     /**
      * AWS session token.
      */
-    sessionToken: string
+    sessionToken: string;
     /**
      * IAM API key
      */

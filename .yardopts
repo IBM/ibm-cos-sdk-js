@@ -16,7 +16,7 @@
 --tag class_abstract:"Abstract Class"
 --tag method_abstract:"Abstract Method"
 lib/core.js
-lib/**/*.js 
+lib/**/*.js
 -
 README.md
 CHANGELOG.md

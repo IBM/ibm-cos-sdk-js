@@ -1,5 +1,6 @@
 export {AnonymousCredentials} from './credentials/anonymous_credentials';
 export {Config} from './config';
+export {HTTPOptions} from './config';
 export {Credentials} from './credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
 export {EnvironmentCredentials} from './credentials/environment_credentials';
@@ -15,3 +16,4 @@ export {Request} from './request';
 export {Response} from './response';
 export {Service} from './service';
 export {AWSError} from './error';
+export {IniLoader} from './shared-ini/ini-loader';

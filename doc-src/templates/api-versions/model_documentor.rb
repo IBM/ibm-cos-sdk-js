@@ -117,6 +117,10 @@ class MethodDocumentor
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+    if klass === 'S3' && (['CreateBucket', 'ListBuckets', 'DeleteBucket'].include? operation_name)
+      desc = desc + '<p>Note: This operation cannot be used in a browser. S3 does not support CORS on this operation.</p>'
+    end
+
 
     if options[:flatten_dynamodb_attrs]
       desc = ""
@@ -127,15 +131,19 @@ class MethodDocumentor
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
-
+    @lines += shapes(api, operation['input'], {:in_output => false}.merge(options)).map {|line| "  " + line }
     if examples
       examples.each do |example|
-        @lines << "@example #{example['title']}"
-        @lines << ""
-        @lines << " /* #{example['description']} */"
-        @lines << ""
-        @lines << generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+        begin
+          sharedExample = generate_shared_example(api, example, klass, method_name(operation_name)).split("\n").map {|line| "  " + line}
+          @lines << "@example #{example['title']}"
+          @lines << ""
+          @lines << " /* #{example['description']} */"
+          @lines << ""
+          @lines << sharedExample
+        rescue => exception
+          puts "[warn]: Error encountered generating example for #{klass}.#{operation_name}: #{exception}"
+        end
       end
     end
 
@@ -158,7 +166,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(api, operation['output'], options)
+    output = shapes(api, operation['output'], {:in_output => true}.merge(options))
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -409,26 +417,31 @@ class ExampleShapeVisitor
   end
 
   def visit_map(node, required = false)
-    data = indent("someKey: " + traverse(node['value']))
+    data = indent("'<#{node['key']['shape']}>': " + traverse(node['value']))
     lines = ["{" + mark_rec_shape(node) + (required ? " /* required */" : "")]
     lines << data + ","
-    lines << "  /* anotherKey: ... */"
+    lines << "  /* '<#{node['key']['shape']}>': ... */"
     lines << "}"
     lines.join("\n")
   end
 
   def visit_string(node, required = false)
-    value = node['enum'] ? node['enum'].join(' | ') : 'STRING_VALUE'
-    "'#{value}'"
+    if node['jsonvalue']
+      "any /* This value will be JSON encoded on your behalf with JSON.stringify() */"
+    elsif node['enum']
+      node['enum'].join(' | ')
+    else
+      "'STRING_VALUE'"
+    end
   end
 
   def visit_integer(node, required = false)
-    "0"
+    "'NUMBER_VALUE'"
   end
   alias visit_long visit_integer
 
   def visit_float(node, required = false)
-    "0.0"
+    "'NUMBER_VALUE'"
   end
   alias visit_double visit_float
   alias visit_bigdecimal visit_float
@@ -477,29 +490,53 @@ class ShapeDocumentor
   attr_reader :prefix
   attr_reader :type
 
-  def self.type_for(rules)
-    type = case rules['type']
-    when 'structure' then 'map'
-    when 'list' then 'Array'
-    when 'map' then 'map'
-    when 'string', nil then 'String'
-    when 'integer' then 'Integer'
-    when 'long' then 'Integer'
-    when 'float' then 'Float'
-    when 'double' then 'Float'
-    when 'bigdecimal' then 'Float'
-    when 'boolean' then 'Boolean'
-    when 'base64' then 'Buffer, Typed Array, Blob, String'
-    when 'binary' then 'Buffer, Typed Array, Blob, String'
-    when 'blob' then 'Buffer, Typed Array, Blob, String'
-    when 'timestamp' then 'Date'
-    else raise "unhandled type: #{rules['type']}"
+  def self.type_for(rules, options={})
+    type = rules['type']
+    normalizedType = type
+
+    if type == 'structure'
+      if rules['eventstream']
+        normalizedType = 'ReadableStream<Events> | Array<Events>'
+      else
+        normalizedType = 'map'
+      end
+    elsif type == 'list'
+      normalizedType = 'Array'
+    elsif type == 'map'
+      normalizedType = 'map'
+    elsif type == 'string' || type == nil
+      normalizedType = 'String'
+    elsif type == 'integer'
+      normalizedType = 'Integer'
+    elsif type == 'long'
+      normalizedType = 'Integer'
+    elsif type == 'float'
+      normalizedType = 'Float'
+    elsif type == 'double'
+      normalizedType = 'Float'
+    elsif type == 'bigdecimal'
+      normalizedType = 'Float'
+    elsif type == 'boolean'
+      normalizedType = 'Boolean'
+    elsif type == 'binary' || type == 'blob'
+      normalizedType = "Buffer"
+      unless rules['eventpayload']
+        if !!options[:in_output]
+          normalizedType += "(Node.js), Typed Array(Browser)"
+        else
+          normalizedType += ", Typed Array, Blob, String"
+        end
+      end
+    elsif type == 'timestamp'
+      normalizedType = 'Date'
+    else
+      raise "unhandled type: #{rules['type']}"
     end
 
     # TODO : update this format description once we add streaming uploads
-    type += ', ReadableStream' if rules['streaming']
+    normalizedType += ', ReadableStream' if rules['streaming']
 
-    type
+    normalizedType
   end
 
   def initialize(api, rules, options = {})
@@ -511,7 +548,7 @@ class ShapeDocumentor
     @prefix = options[:prefix] || ''
     @required = !!options[:required]
     @visited = options[:visited] || Hash.new { 0 }
-    @type = self.class.type_for(rules)
+    @type = self.class.type_for(rules, options)
     @lines = []
     @nested_lines = []
     @flatten_dynamodb_attrs = options[:flatten_dynamodb_attrs]

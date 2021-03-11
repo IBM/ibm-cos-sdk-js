@@ -10,15 +10,25 @@ module.exports = function() {
     callback();
   });
 
+  this.Given(/^I am using the S3 us-east-1 regional endpoint$/, function(callback) {
+    this.s3 = new this.AWS.S3({region: 'us-east-1', s3UsEast1RegionalEndpoint: 'regional'});
+    callback();
+  });
+
   this.When(/^I create a bucket with the location constraint "([^"]*)"$/, function(location, callback) {
-    this.bucket = this.uniqueName('aws-sdk-js-integration');
+    var bucket = this.bucket = this.uniqueName('aws-sdk-js-integration');
     var params = {
       Bucket: this.bucket,
       CreateBucketConfiguration: {
         LocationConstraint: location
       }
     };
-    this.request('s3', 'createBucket', params, callback);
+    this.request('s3', 'createBucket', params, function(err, data) {
+      if (err) {
+        return callback(err);
+      }
+      this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+    });
   });
 
   this.Then(/^the bucket should have a location constraint of "([^"]*)"$/, function(loc, callback) {
@@ -28,6 +38,36 @@ module.exports = function() {
       self.assert.equal(data.LocationConstraint, loc);
       callback();
     });
+  });
+
+  this.When(/^I put a transition lifecycle configuration on the bucket with prefix "([^"]*)"$/, function(prefix, callback) {
+    var params = {
+      Bucket: this.bucket,
+      LifecycleConfiguration: {
+        Rules: [{
+          Prefix: prefix,
+          Status: 'Enabled',
+          Transition: {Days: 0, StorageClass: 'GLACIER'}
+        }]
+      }
+    };
+    this.request('s3', 'putBucketLifecycle', params, callback);
+  });
+
+  this.When(/^I get the transition lifecycle configuration on the bucket$/, function(callback) {
+    this.eventually(callback, function(next) {
+      this.request('s3', 'getBucketLifecycle', {Bucket: this.bucket}, next);
+    });
+  });
+
+  this.Then(/^the lifecycle configuration should have transition days of (\d+)$/, function(days, callback) {
+    this.assert.equal(this.data.Rules[0].Transition.Days, 0);
+    callback();
+  });
+
+  this.Then(/^the lifecycle configuration should have transition storage class of "([^"]*)"$/, function(value, callback) {
+    this.assert.equal(this.data.Rules[0].Transition.StorageClass, value);
+    callback();
   });
 
   this.When(/^I put a bucket CORS configuration$/, function(callback) {
@@ -75,9 +115,37 @@ module.exports = function() {
     callback();
   });
 
+  this.When(/^I put a bucket tag with key "([^"]*)" and value "([^"]*)"$/, function(key, value, callback) {
+    var params = {
+      Bucket: this.bucket,
+      Tagging: {
+        TagSet: [
+          {Key: key, Value: value}
+        ]
+      }
+    };
+
+    this.request('s3', 'putBucketTagging', params, callback);
+  });
+
+  this.When(/^I get the bucket tagging$/, function(callback) {
+    this.request('s3', 'getBucketTagging', {Bucket: this.bucket}, callback);
+  });
+
+  this.Then(/^the first tag in the tag set should have key and value "([^"]*)", "([^"]*)"$/, function(key, value, callback) {
+    this.assert.equal(this.data.TagSet[0].Key, key);
+    this.assert.equal(this.data.TagSet[0].Value, value);
+    callback();
+  });
+
   this.When(/^I create a bucket with a DNS compatible name that contains a dot$/, function(callback) {
-    this.bucket = this.uniqueName('aws-sdk-js.integration');
-    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+    var bucket = this.bucket = this.uniqueName('aws-sdk-js.integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, function(err, data) {
+      if (err) {
+        return callback(err);
+      }
+      this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+    });
   });
 
   this.Given(/^I force path style requests$/, function(callback) {

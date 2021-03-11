@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.10.0
+
+### Content
+
+#### Features
+
+* Object Versioning
+* IBM Cloud Security and Compliance Center Support
+
+#### Defect Fixes
+
+* Several bug fixes from re-applying AWS patches aligned to version v2.653.0 of the AWS NodeJS SDK
+* Top-level parameters will now be the correct type instead of strings
+* Update Dependencies
+
 ## 1.9.0
 
 ### Content
