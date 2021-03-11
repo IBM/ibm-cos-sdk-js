@@ -1171,10 +1171,13 @@ the retry delay on retryable errors. Currently supported options are:</p>
 
 <ul>
 <li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
-exponential backoff for operation retries. Defaults to 100 ms.</li>
-<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
-and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
-ignored if this option is supplied.</li>
+exponential backoff for operation retries. Defaults to 100 ms for all
+services except DynamoDB, where it defaults to 50ms.</li>
+<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a
+retry count and error and returns the amount of time to delay in
+milliseconds. If the result is a non-zero negative value, no further
+retry attempts will be made. The <code>base</code> option will be ignored if this
+option is supplied.</li>
 </ul>
 
 </div>
@@ -1199,6 +1202,10 @@ agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
 SSL connections, a special Agent object is used in order to enable
 peer certificate verification. This feature is only available in the
 Node.js environment.</li>
+<li><strong>connectTimeout</strong> [Integer] &mdash; Sets the socket to timeout after
+failing to establish a connection with the server after
+<code>connectTimeout</code> milliseconds. This timeout has no effect once a socket
+connection has been established.</li>
 <li><strong>timeout</strong> [Integer] &mdash; Sets the socket to timeout after timeout
 milliseconds of inactivity on the socket. Defaults to two minutes
 (120000).</li>
@@ -1503,13 +1510,17 @@ Currently supported options are:</p>
 <ul>
 <li><strong>proxy</strong> [String] &mdash; the URL to proxy requests through</li>
 <li><strong>agent</strong> [http.Agent, https.Agent] &mdash; the Agent object to perform
-HTTP requests with. Used for connection pooling. Defaults to the global
-agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
+HTTP requests with. Used for connection pooling. Note that for
 SSL connections, a special Agent object is used in order to enable
 peer certificate verification. This feature is only supported in the
 Node.js environment.</li>
-<li><strong>timeout</strong> [Integer] &mdash; The number of milliseconds to wait before
-giving up on a connection attempt. Defaults to two minutes (120000).</li>
+<li><strong>connectTimeout</strong> [Integer] &mdash; Sets the socket to timeout after
+failing to establish a connection with the server after
+<code>connectTimeout</code> milliseconds. This timeout has no effect once a socket
+connection has been established.</li>
+<li><strong>timeout</strong> [Integer] &mdash; Sets the socket to timeout after timeout
+milliseconds of inactivity on the socket. Defaults to two minutes
+(120000)</li>
 <li><strong>xhrAsync</strong> [Boolean] &mdash; Whether the SDK will send asynchronous
 HTTP requests. Used in the browser environment only. Set to false to
 send requests synchronously. Defaults to true (async on).</li>
@@ -1542,13 +1553,17 @@ Currently supported options are:</p>
 <ul>
 <li><strong>proxy</strong> [String] &mdash; the URL to proxy requests through</li>
 <li><strong>agent</strong> [http.Agent, https.Agent] &mdash; the Agent object to perform
-HTTP requests with. Used for connection pooling. Defaults to the global
-agent (<code>http.globalAgent</code>) for non-SSL connections. Note that for
+HTTP requests with. Used for connection pooling. Note that for
 SSL connections, a special Agent object is used in order to enable
 peer certificate verification. This feature is only supported in the
 Node.js environment.</li>
-<li><strong>timeout</strong> [Integer] &mdash; The number of milliseconds to wait before
-giving up on a connection attempt. Defaults to two minutes (120000).</li>
+<li><strong>connectTimeout</strong> [Integer] &mdash; Sets the socket to timeout after
+failing to establish a connection with the server after
+<code>connectTimeout</code> milliseconds. This timeout has no effect once a socket
+connection has been established.</li>
+<li><strong>timeout</strong> [Integer] &mdash; Sets the socket to timeout after timeout
+milliseconds of inactivity on the socket. Defaults to two minutes
+(120000)</li>
 <li><strong>xhrAsync</strong> [Boolean] &mdash; Whether the SDK will send asynchronous
 HTTP requests. Used in the browser environment only. Set to false to
 send requests synchronously. Defaults to true (async on).</li>
@@ -1835,22 +1850,18 @@ of the allowable enum values.</li>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'><p>This works with all services except DynamoDB.</p>
-</div>
-  </div>
-
-<p>Returns A set of options to configure the retry delay on retryable errors.
+    <p>Returns A set of options to configure the retry delay on retryable errors.
 Currently supported options are:</p>
 
 <ul>
-<li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
-exponential backoff for operation retries. Defaults to 100 ms.</li>
-<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
-and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
-ignored if this option is supplied.</li>
+<li><p><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
+exponential backoff for operation retries. Defaults to 100 ms for all services except
+DynamoDB, where it defaults to 50ms.</p></li>
+<li><p><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a
+retry count and error and returns the amount of time to delay in
+milliseconds. If the result is a non-zero negative value, no further
+retry attempts will be made. The <code>base</code> option will be ignored if this
+option is supplied.</p></li>
 </ul>
 
 
@@ -1873,7 +1884,7 @@ ignored if this option is supplied.</li>
         <p class="example_title"><div class='inline'><p>Set a custom backoff function to provide delay values on retries</p>
 </div></p>
       
-      <pre class="example code"><code>AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount) {
+      <pre class="example code"><code>AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount, err) {
   // returns delay in ms
 }}});</code></pre>
     
@@ -1895,11 +1906,14 @@ ignored if this option is supplied.</li>
 Currently supported options are:</p>
 
 <ul>
-<li><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
-exponential backoff for operation retries. Defaults to 100 ms.</li>
-<li><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a retry count
-and returns the amount of time to delay in milliseconds. The <code>base</code> option will be
-ignored if this option is supplied.</li>
+<li><p><strong>base</strong> [Integer] &mdash; The base number of milliseconds to use in the
+exponential backoff for operation retries. Defaults to 100 ms for all services except
+DynamoDB, where it defaults to 50ms.</p></li>
+<li><p><strong>customBackoff </strong> [function] &mdash; A custom function that accepts a
+retry count and error and returns the amount of time to delay in
+milliseconds. If the result is a non-zero negative value, no further
+retry attempts will be made. The <code>base</code> option will be ignored if this
+option is supplied.</p></li>
 </ul>
 
 </div>
@@ -2409,7 +2423,7 @@ object.</p>
       
       
         &mdash;
-        <div class='inline'><p>if this is set, credentials were not successfuly
+        <div class='inline'><p>if this is set, credentials were not successfully
 loaded and this error provides information why.</p>
 </div>
       
@@ -2675,13 +2689,12 @@ the configuration object. Defaults to <code>false</code>.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Dec 14 17:42:38 2020 by
+  Generated on Thu Mar 11 19:42:19 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->
-<script type="text/javascript" src="https://media.amazonwebservices.com/amznUrchin.js"></script>
 <!-- SiteCatalyst code version: H.25.2. Copyright 1996-2012 Adobe, Inc. All Rights Reserved.
 More info available at http://www.omniture.com -->
 <script language="JavaScript" type="text/javascript" src="https://media.amazonwebservices.com/js/sitecatalyst/s_code.min.js">
@@ -2699,6 +2712,7 @@ More info available at http://www.omniture.com -->
   <!--if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
   //-->
 </script>
+<script src="/SdkStatic/sdk-priv.js" async="true"></script>
 <noscript>
   <img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="">
 </noscript>

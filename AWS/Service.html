@@ -69,7 +69,7 @@
       <div id="content">
         <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
         <h1>Class: AWS.Service
-  <span class="abstract note title">Abstract</span>
+  
   
   
 </h1>
@@ -111,12 +111,7 @@
 </div>
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <div class="note abstract">
-  <strong>This class is abstract.</strong>
-  <div class='inline'>
-</div>
-</div>
-<p>The service class representing an AWS service.</p>
+    <p>The service class representing an AWS service.</p>
 
 
   </div>
@@ -124,6 +119,21 @@
 <div class="tags">
   
 
+<p class="tag_title">Abstract Class:</p>
+<ul class="class_abstract">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>This class is an abstract class.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
@@ -301,7 +311,7 @@
   
   
   
-  <span class="abstract note title">abstract</span>
+  
   
   
 
@@ -770,12 +780,7 @@ the request. Set to <code>null</code> if a request error occurs.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <div class="note abstract">
-  <strong>This property is abstract.</strong>
-  <div class='inline'>
-</div>
-</div>
-<p>Override this method to setup any custom request listeners for each
+    <p>Override this method to setup any custom request listeners for each
 new request to the service.</p>
 
 
@@ -784,6 +789,21 @@ new request to the service.</p>
 <div class="tags">
   
 
+<p class="tag_title">Abstract Method:</p>
+<ul class="method_abstract">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>This is an abstract method.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
 </div>
@@ -898,6 +918,57 @@ the request. Set to <code>null</code> if a request error occurs.</p>
   </ul>
 
 
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>params</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">$waiter</span>
+          <span class="type">(<tt>map</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>a map of configuration options for the waiter</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">$waiter.delay</span>
+          <span class="type">(<tt>Number</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The number of seconds to wait between
+requests</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">$waiter.maxAttempts</span>
+          <span class="type">(<tt>Number</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The maximum number of requests
+to send while waiting</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+    
+    
+
 
 </div>
 </div>
@@ -908,13 +979,12 @@ the request. Set to <code>null</code> if a request error occurs.</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Dec 14 17:42:38 2020 by
+  Generated on Thu Mar 11 19:42:19 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->
-<script type="text/javascript" src="https://media.amazonwebservices.com/amznUrchin.js"></script>
 <!-- SiteCatalyst code version: H.25.2. Copyright 1996-2012 Adobe, Inc. All Rights Reserved.
 More info available at http://www.omniture.com -->
 <script language="JavaScript" type="text/javascript" src="https://media.amazonwebservices.com/js/sitecatalyst/s_code.min.js">
@@ -932,6 +1002,7 @@ More info available at http://www.omniture.com -->
   <!--if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
   //-->
 </script>
+<script src="/SdkStatic/sdk-priv.js" async="true"></script>
 <noscript>
   <img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="">
 </noscript>

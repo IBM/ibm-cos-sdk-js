@@ -122,6 +122,9 @@
 <span class='object_link'><a href="#request-property" title="AWS.MetadataService.request (property)">request()</a></span> method, you can receieve metadata about any available resource
 on the metadata service.</p>
 
+<p>You can disable the use of the IMDS by setting the AWS_EC2_METADATA_DISABLED
+environment variable to a truthy value.</p>
+
 
   </div>
 </div>
@@ -173,6 +176,35 @@ on the metadata service.</p>
   </h2>
 
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#disableFetchToken-property" title="disableFetchToken"><strong>disableFetchToken</strong> &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">static</span>
+  
+  
+  
+    <span class="note title readonly">readwrite</span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>when enabled, metadata service will not fetch token.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -244,7 +276,7 @@ on the metadata service.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#request-property" title="request"><strong>request</strong>(path, callback) &#x21d2; void </a>
+      <a href="#request-property" title="request"><strong>request</strong>(path, options, callback) &#x21d2; void </a>
     
 
     
@@ -370,7 +402,35 @@ retry delay on retryable errors. See AWS.Config for details.</p>
     <h2>Property Details</h2>
     
       <div class="method_details first">
-  <h3 class="signature first" id="host-property">
+  <h3 class="signature first" id="disableFetchToken-property">
+  
+    <strong>disableFetchToken</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(static, readwrite)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>when enabled, metadata service will not fetch token</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Default Value:</p>
+<div class="examples">
+
+  <pre class="example code value_tag"><code>AWS.MetadataService.disableFetchToken = false</code></pre>
+
+</div>
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="host-property">
   
     <strong>host</strong> &#x21d2; <tt>String</tt>  <span class="extras">(static, readwrite)</span>
   
@@ -458,7 +518,7 @@ before aborting the connection. Set to 0 for no timeout.</li>
       <div class="method_details first">
   <h3 class="signature first" id="request-property">
   
-    <strong>request</strong>(path, callback) &#x21d2; <tt>void</tt> 
+    <strong>request</strong>(path, options, callback) &#x21d2; <tt>void</tt> 
   
 
   
@@ -486,6 +546,27 @@ before aborting the connection. Set to 0 for no timeout.</li>
       
         &mdash;
         <div class='inline'><p>the path of the resource to get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an optional map used to make request</p>
+
+<ul>
+<li><p><strong>method</strong> (String) &mdash; HTTP request method</p></li>
+<li><p><strong>headers</strong> (map&lt;String,String>) &mdash; a map of response header keys and their respective values</p></li>
+</ul>
+
 </div>
       
     </li>
@@ -558,13 +639,12 @@ the response</p>
       </div>
 
       <div id="footer">
-  Generated on Mon Dec 14 17:42:39 2020 by
+  Generated on Thu Mar 11 19:42:19 2021 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.1).
 </div>
 
 <!-- BEGIN-SECTION -->
-<script type="text/javascript" src="https://media.amazonwebservices.com/amznUrchin.js"></script>
 <!-- SiteCatalyst code version: H.25.2. Copyright 1996-2012 Adobe, Inc. All Rights Reserved.
 More info available at http://www.omniture.com -->
 <script language="JavaScript" type="text/javascript" src="https://media.amazonwebservices.com/js/sitecatalyst/s_code.min.js">
@@ -582,6 +662,7 @@ More info available at http://www.omniture.com -->
   <!--if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
   //-->
 </script>
+<script src="/SdkStatic/sdk-priv.js" async="true"></script>
 <noscript>
   <img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="">
 </noscript>
