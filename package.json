@@ -1,7 +1,7 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "author": {
     "name": "IBM",
     "email": "",
@@ -10,30 +10,29 @@
   "homepage": "https://github.com/IBM/ibm-cos-sdk-js",
   "contributors": [],
   "devDependencies": {
-    "@types/node": "^6.0.92",
-    "browserify": "^16.2.3",
-    "chai": "^3.0",
-    "codecov": "^3.6.5",
-
+    "@types/node": "^6.14.13",
+    "browserify": "^16.5.2",
+    "chai": "^3.5.0",
+    "codecov": "^3.8.2",
     "coffeescript": "^1.12.7",
-    "coveralls": "^3.0.2",
-    "cucumber": "^5.0.2",
-    "eslint": "^5.9.0",
-    "insert-module-globals": "^7.2.0",
+    "coveralls": "^3.1.1",
+    "cucumber": "^5.1.0",
+    "eslint": "^5.16.0",
+    "insert-module-globals": "^7.2.1",
     "istanbul": "*",
-    "karma": "^4.3.0",
+    "karma": "^4.4.1",
     "karma-jasmine": "^1.1.2",
     "mocha": "^5.2.0",
-    "typescript": "^3.1.6",
-    "uglify-js": "^3.4.9"
+    "typescript": "^3.9.10",
+    "uglify-js": "^3.13.10"
   },
   "dependencies": {
-    "buffer": "^4.9.1",
+    "buffer": "^4.9.2",
     "crypto-browserify": "^3.12.0",
     "jmespath": "^0.15.0",
     "url": "^0.10.3",
-    "uuid": "^3.3.2",
-    "xml2js": "^0.4.19",
+    "uuid": "^3.4.0",
+    "xml2js": "^0.4.23",
     "xmlbuilder": "^10.1.1"
   },
   "main": "lib/aws.js",
