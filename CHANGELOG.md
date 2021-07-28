@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.10.2
+
+### Content
+
+#### Defect Fixes
+
+* COSSDK-82096: <https://github.com/IBM/ibm-cos-sdk-js/issues/83>
+
 ## 1.10.1
 
 ### Content
