@@ -3806,7 +3806,6 @@
     "LifecycleRule": {
       "type": "structure",
       "required": [
-        "ID",
         "Status",
         "Filter"
       ],
@@ -3833,8 +3832,14 @@
         },
         "Transitions": {
           "shape": "TransitionList",
-          "locationName": "Transition",
-          "documentation": "Currently only one Transition allowed, also Date and Days fields are mutually exclusive."
+          "documentation": "Currently only one Transition allowed, also Date and Days fields are mutually exclusive.",
+          "locationName": "Transition"
+        },
+        "NoncurrentVersionExpiration": {
+          "shape": "NoncurrentVersionExpiration"
+        },
+        "AbortIncompleteMultipartUpload": {
+          "shape": "AbortIncompleteMultipartUpload"
         }
       },
       "documentation": "<p>A lifecycle rule for individual objects in an Amazon S3 bucket.</p>"

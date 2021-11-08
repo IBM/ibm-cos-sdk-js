@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 1.11.0
+
+### Content
+
+#### Features
+
+* Versioning Support with Object Expiration
+* Abort Multipart Upload Expiration Support
+
+#### Defect Fixes
+
+* COSSDK-83709: <https://github.com/IBM/ibm-cos-sdk-js/issues/88>
+
 ## 1.10.2
 
 ### Content

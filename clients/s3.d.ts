@@ -2059,7 +2059,7 @@ declare namespace S3 {
     /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
      */
-    ID: ID;
+    ID?: ID;
     /**
      * Prefix identifying one or more objects to which the rule applies. This is No longer used; use Filter instead.
      */
@@ -2073,6 +2073,8 @@ declare namespace S3 {
      * Currently only one Transition allowed, also Date and Days fields are mutually exclusive.
      */
     Transitions?: TransitionList;
+    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
+    AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export interface LifecycleRuleAndOperator {
     /**
