@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.12.0
+
+### Content
+
+#### Features
+
+* Cloud Object Storage Replication
+
+#### Defect Fixes
+
+* COSSDK-82228: <https://github.com/IBM/ibm-cos-sdk-js/issues/85>
+* COSSDK-85307: <https://github.com/IBM/ibm-cos-sdk-js/issues/89>
+* COSSDK-85306: <https://github.com/IBM/ibm-cos-sdk-js/issues/89>
+* Update Dependencies
+
 ## 1.11.0
 
 ### Content

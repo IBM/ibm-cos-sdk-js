@@ -4,9 +4,9 @@ gem 'rake'
 
 group :documentation do
   gem 'rdiscount'
-  gem 'yard', github: 'lsegal/yard'
+  gem 'yard', git: 'https://github.com/lsegal/yard.git', branch: 'main'
   gem 'yard-sitemap', '~> 1.0'
-  gem 'yard-js', github: 'lsegal/yard-js'
+  gem 'yard-js', git: 'https://github.com/lsegal/yard-js.git'
 	gem 'parsejs', path: './doc-src/parsejs'
 end
 

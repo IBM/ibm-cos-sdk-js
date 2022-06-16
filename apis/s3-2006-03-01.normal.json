@@ -172,6 +172,18 @@
       "documentationUrl": "http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETElifecycle.html",
       "documentation": "<p>Deletes the lifecycle configuration from the specified bucket. Amazon S3 removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration.</p> <p>To use this operation, you must have permission to perform the <code>s3:PutLifecycleConfiguration</code> action. By default, the bucket owner has this permission and the bucket owner can grant this permission to others.</p> <p>There is usually some time lag before lifecycle configuration deletion is fully propagated to all the Amazon S3 systems.</p> <p>For more information about the object expiration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions\">Elements to Describe Lifecycle Actions</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a>PutBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a>GetBucketLifecycleConfiguration</a> </p> </li> </ul>"
     },
+    "DeleteBucketReplication": {
+      "name": "DeleteBucketReplication",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?replication",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteBucketReplicationRequest"
+      },
+      "documentation": "<p> Deletes the replication configuration from the bucket.</p> <p>To use this operation, you must have permissions to perform the <code>s3:PutReplicationConfiguration</code> action. The bucket owner has these permissions by default and can grant it to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>. </p> <note> <p>It can take a while for the deletion of a replication configuration to fully propagate.</p> </note> <p> For information about replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following operations are related to <code>DeleteBucketReplication</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html\">PutBucketReplication</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a> </p> </li> </ul>"
+    },
     "DeleteBucketTagging": {
       "name": "DeleteBucketTagging",
       "http": {
@@ -356,6 +368,20 @@
         "shape": "GetBucketProtectionConfigurationOutput"
       },
       "documentation": "Returns the protection configuration of a bucket."
+    },
+    "GetBucketReplication": {
+      "name": "GetBucketReplication",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?replication"
+      },
+      "input": {
+        "shape": "GetBucketReplicationRequest"
+      },
+      "output": {
+        "shape": "GetBucketReplicationOutput"
+      },
+      "documentation": "<p>Returns the replication configuration of a bucket.</p> <note> <p> It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result. </p> </note> <p> For information about replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This action requires permissions for the <code>s3:GetReplicationConfiguration</code> action. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>If you include the <code>Filter</code> element in a replication configuration, you must also include the <code>DeleteMarkerReplication</code> and <code>Priority</code> elements. The response also returns those elements.</p> <p>For information about <code>GetBucketReplication</code> errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList\">List of replication-related error codes</a> </p> <p>The following operations are related to <code>GetBucketReplication</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html\">PutBucketReplication</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html\">DeleteBucketReplication</a> </p> </li> </ul>"
     },
     "GetBucketTagging": {
       "name": "GetBucketTagging",
@@ -700,6 +726,17 @@
         "shape": "PutBucketLifecycleConfigurationRequest"
       },
       "documentation": "<p>Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration. For information about lifecycle configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <note> <p>Bucket lifecycle configuration now supports specifying a lifecycle rule using an object key name prefix, one or more object tags, or a combination of both. Accordingly, this section describes the latest API. The previous version of the API supported filtering based only on an object key name prefix, which is supported for backward compatibility. For the related API description, see <a>PutBucketLifecycle</a>.</p> </note> <p> <b>Rules</b> </p> <p>You specify the lifecycle configuration in your request body. The lifecycle configuration is specified as XML consisting of one or more rules. Each rule consists of the following:</p> <ul> <li> <p>Filter identifying a subset of objects to which the rule applies. The filter can be based on a key name prefix, object tags, or a combination of both.</p> </li> <li> <p>Status whether the rule is in effect.</p> </li> <li> <p>One or more lifecycle transition and expiration actions that you want Amazon S3 to perform on the objects identified by the filter. If the state of your bucket is versioning-enabled or versioning-suspended, you can have many versions of the same object (one current version and zero or more noncurrent versions). Amazon S3 provides predefined actions that you can specify for current and noncurrent object versions.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html\">Object Lifecycle Management</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html\">Lifecycle Configuration Elements</a>.</p> <p> <b>Permissions</b> </p> <p>By default, all Amazon S3 resources are private, including buckets, objects, and related subresources (for example, lifecycle configuration and website configuration). Only the resource owner (that is, the AWS account that created it) can access the resource. The resource owner can optionally grant access permissions to others by writing an access policy. For this operation, a user must get the s3:PutLifecycleConfiguration permission.</p> <p>You can also explicitly deny permissions. Explicit deny also supersedes any other permissions. If you want to block users or accounts from removing or deleting objects from your bucket, you must deny them permissions for the following actions:</p> <ul> <li> <p>s3:DeleteObject</p> </li> <li> <p>s3:DeleteObjectVersion</p> </li> <li> <p>s3:PutLifecycleConfiguration</p> </li> </ul> <p>For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <p>The following are related to <code>PutBucketLifecycleConfiguration</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-configuration-examples.html\">Examples of Lifecycle Configuration</a> </p> </li> <li> <p> <a>GetBucketLifecycleConfiguration</a> </p> </li> <li> <p> <a>DeleteBucketLifecycle</a> </p> </li> </ul>"
+    },
+    "PutBucketReplication": {
+      "name": "PutBucketReplication",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?replication"
+      },
+      "input": {
+        "shape": "PutBucketReplicationRequest"
+      },
+      "documentation": "<p> Creates a replication configuration or replaces an existing one. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>. </p> <p>Specify the replication configuration in the request body. In the replication configuration, you provide the name of the destination bucket or buckets where you want Amazon S3 to replicate objects, the IAM role that Amazon S3 can assume to replicate objects on your behalf, and other relevant information.</p> <p>A replication configuration must include at least one rule, and can contain a maximum of 1,000. Each rule identifies a subset of objects to replicate by filtering the objects in the source bucket. To choose additional subsets of objects to replicate, add a rule for each subset.</p> <p>To specify a subset of the objects in the source bucket to apply a replication rule to, add the Filter element as a child of the Rule element. You can filter objects based on an object key prefix, one or more object tags, or both. When you add the Filter element in the configuration, you must also add the following elements: <code>DeleteMarkerReplication</code>, <code>Status</code>, and <code>Priority</code>.</p> <note> <p>If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p> </note> <p>For information about enabling versioning on a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html\">Using Versioning</a>.</p> <p> <b>Handling Replication of Encrypted Objects</b> </p> <p>By default, Amazon S3 doesn't replicate objects that are stored at rest using server-side encryption with KMS keys. To replicate Amazon Web Services KMS-encrypted objects, add the following: <code>SourceSelectionCriteria</code>, <code>SseKmsEncryptedObjects</code>, <code>Status</code>, <code>EncryptionConfiguration</code>, and <code>ReplicaKmsKeyID</code>. For information about replication configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html\">Replicating Objects Created with SSE Using KMS keys</a>.</p> <p>For information on <code>PutBucketReplication</code> errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList\">List of replication-related error codes</a> </p> <p> <b>Permissions</b> </p> <p>To create a <code>PutBucketReplication</code> request, you must have <code>s3:PutReplicationConfiguration</code> permissions for the bucket. </p> <p>By default, a resource owner, in this case the Amazon Web Services account that created the bucket, can perform this operation. The resource owner can also grant others permissions to perform the operation. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3 Resources</a>.</p> <note> <p>To perform this operation, the user or role performing the action must have the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> permission.</p> </note> <p>The following operations are related to <code>PutBucketReplication</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html\">DeleteBucketReplication</a> </p> </li> </ul>"
     },
     "PutBucketTagging": {
       "name": "PutBucketTagging",
@@ -2096,6 +2133,20 @@
         }
       }
     },
+    "DeleteBucketReplicationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p> The bucket name. </p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
     "DeleteBucketRequest": {
       "type": "structure",
       "required": [
@@ -2166,6 +2217,26 @@
         }
       },
       "documentation": "<p>Information about the delete marker.</p>"
+    },
+    "DeleteMarkerReplication": {
+      "type": "structure",
+      "required":[
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DeleteMarkerReplicationStatus",
+          "documentation": "<p>Indicates whether to replicate delete markers.</p> <note> <p>Indicates whether to replicate delete markers.</p> </note>"
+        }
+      },
+      "documentation": "<p>Specifies whether Amazon S3 replicates delete markers. If you specify a <code>Filter</code> in your replication configuration, you must also include a <code>DeleteMarkerReplication</code> element. If your <code>Filter</code> includes a <code>Tag</code> element, the <code>DeleteMarkerReplication</code> <code>Status</code> must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config\">Basic Rule Configuration</a>. </p> <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html\">Basic Rule Configuration</a>. </p> <note> <p>If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p> </note>"
+    },
+    "DeleteMarkerReplicationStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     },
     "DeleteMarkerVersionId": {
       "type": "string"
@@ -2734,6 +2805,29 @@
       "members": {
         "Bucket": {
           "shape": "BucketName",
+          "location": "uri",
+          "locationName": "Bucket"
+        }
+      }
+    },
+    "GetBucketReplicationOutput": {
+      "type": "structure",
+      "members": {
+        "ReplicationConfiguration": {
+          "shape": "ReplicationConfiguration"
+        }
+      },
+      "payload": "ReplicationConfiguration"
+    },
+    "GetBucketReplicationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The bucket name for which to get the replication information.</p>",
           "location": "uri",
           "locationName": "Bucket"
         }
@@ -5146,6 +5240,35 @@
       },
       "payload": "LifecycleConfiguration"
     },
+    "PutBucketReplicationRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket",
+        "ReplicationConfiguration"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket</p>",
+          "location": "uri",
+          "locationName": "Bucket"
+        },
+        "ContentMD5": {
+          "shape": "ContentMD5",
+          "documentation": "<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC 1864</a>.</p> <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>",
+          "location": "header",
+          "locationName": "Content-MD5"
+        },
+        "ReplicationConfiguration": {
+          "shape": "ReplicationConfiguration",
+          "locationName": "ReplicationConfiguration",
+          "xmlNamespace": {
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "ReplicationConfiguration"
+    },
     "PutBucketTaggingRequest": {
       "type": "structure",
       "required": [
@@ -5719,13 +5842,12 @@
     "ReplicationConfiguration": {
       "type": "structure",
       "required": [
-        "Role",
         "Rules"
       ],
       "members": {
         "Role": {
           "shape": "Role",
-          "documentation": "Name of an IAM role for IBM COS to assume when replicating the objects."
+          "documentation": "Not supported by COS"
         },
         "Rules": {
           "shape": "ReplicationRules",
@@ -5738,7 +5860,9 @@
     "ReplicationRule": {
       "type": "structure",
       "required": [
-        "Prefix",
+        "DeleteMarkerReplication",
+        "Filter",
+        "Priority",
         "Status",
         "Destination"
       ],
@@ -5747,9 +5871,17 @@
           "shape": "ID",
           "documentation": "<p>A unique identifier for the rule. The maximum value is 255 characters.</p>"
         },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The priority indicates which rule has precedence whenever two or more replication rules conflict. Amazon S3 will attempt to replicate objects according to all replication rules. However, if there are two or more rules with the same destination bucket, then objects will be replicated according to the rule with the highest priority. The higher the number, the higher the priority. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        },
         "Prefix": {
           "shape": "Prefix",
-          "documentation": "<p>An object key name prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string. </p>"
+          "documentation": "<p>An object key name prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string. </p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\"> XML related object key constraints</a>.</p> </important>",
+          "deprecated": true
+        },
+        "Filter": {
+          "shape": "ReplicationRuleFilter"
         },
         "Status": {
           "shape": "ReplicationRuleStatus",
@@ -5758,8 +5890,46 @@
         "Destination": {
           "shape": "Destination",
           "documentation": "<p>A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).</p>"
+        },
+        "DeleteMarkerReplication": {
+          "shape": "DeleteMarkerReplication"
         }
-      }
+      },
+      "documentation": "<p>Specifies which Amazon S3 objects to replicate and where to store the replicas.</p>"
+    },
+    "ReplicationRuleAndOperator": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule applies.</p>"
+        },
+        "Tags": {
+          "shape": "TagSet",
+          "documentation": "<p>An array of tags containing key and value pairs.</p>",
+          "flattened": true,
+          "locationName": "Tag"
+        }
+      },
+      "documentation": "<p>A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. </p> <p>For example:</p> <ul> <li> <p>If you specify both a <code>Prefix</code> and a <code>Tag</code> filter, wrap these filters in an <code>And</code> tag. </p> </li> <li> <p>If you specify a filter based on multiple tags, wrap the <code>Tag</code> elements in an <code>And</code> tag.</p> </li> </ul>"
+    },
+    "ReplicationRuleFilter": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "Prefix",
+          "documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule applies.</p> <important> <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\"> XML related object key constraints</a>.</p> </important>"
+        },
+        "Tag": {
+          "shape": "Tag",
+          "documentation": "<p>A container for specifying a tag key and value. </p> <p>The rule applies only to objects that have the tag in their tag set.</p>"
+        },
+        "And": {
+          "shape": "ReplicationRuleAndOperator",
+          "documentation": "<p>A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: </p> <ul> <li> <p>If you specify both a <code>Prefix</code> and a <code>Tag</code> filter, wrap these filters in an <code>And</code> tag.</p> </li> <li> <p>If you specify a filter based on multiple tags, wrap the <code>Tag</code> elements in an <code>And</code> tag.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>A filter that identifies the subset of objects to which the replication rule applies. A <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, or an <code>And</code> child element.</p>"
     },
     "ReplicationRuleStatus": {
       "type": "string",

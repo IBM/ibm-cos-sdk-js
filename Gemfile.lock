@@ -1,14 +1,16 @@
 GIT
-  remote: git://github.com/lsegal/yard-js.git
-  revision: c76decbd26c9fe82889d72e10ce50c12cdbe51ff
+  remote: https://github.com/lsegal/yard-js.git
+  revision: e939fd66152115462036b3ce27334baf5386bd92
   specs:
     yard-js (0.1.3)
 
 GIT
-  remote: git://github.com/lsegal/yard.git
-  revision: 106c5d0987d4414247d246dae3d4c588235c5dde
+  remote: https://github.com/lsegal/yard.git
+  revision: 92bf2dc02cb331734c26b2601efdb7e2e51954bc
+  branch: main
   specs:
-    yard (0.8.7.6)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
 
 PATH
   remote: doc-src/parsejs
@@ -25,6 +27,7 @@ GEM
     rdiscount (2.1.7)
     redcarpet (3.5.1)
     samus (1.4.1)
+    webrick (1.7.0)
     yard-sitemap (1.0.1)
 
 PLATFORMS
