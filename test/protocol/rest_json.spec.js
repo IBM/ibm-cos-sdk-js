@@ -215,12 +215,12 @@
           });
           build();
           expect(request.httpRequest.headers['x-amz-meta-foo']).to.equal('bar');
-          return expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz');
+          expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz');
         });
       });
       return describe('body', function() {
         ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
-          return it('does not populate a body on a ' + method + ' request', function() {
+          it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
             };
@@ -237,9 +237,10 @@
                 }
               }
             });
-            return expect(build().httpRequest.body).to.equal('');
+            expect(build().httpRequest.body).to.equal('');
           });
         });
+
         it('builds root element if rules contains root', function() {
           request.params = {
             Config: {

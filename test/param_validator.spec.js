@@ -98,6 +98,12 @@
           string3: 'xyz'
         });
       });
+      it('accepts null and undefined values for params not described in the input', function() {
+        return expectValid({
+          string3: null,
+          string4: undefined
+        });
+      });
       return it('rejects nested params that are not described in the input', function() {
         expectValid({
           hash: {
@@ -228,6 +234,11 @@
                       type: 'integer'
                     }
                   }
+                },
+                hash3: {
+                  type: 'structure',
+                  members: {},
+                  document: true
                 }
               }
             }
@@ -276,6 +287,21 @@
           }
         });
       });
+      for (const documentMember of [
+        'string',
+        1,
+        true,
+        { foo: 'foo', bar: ['bar'] },
+        [1, 'array', false, { baz: 'baz' }]
+      ]) {
+        it('accepts document type member of ' + JSON.stringify(documentMember), function () {
+          return expectValid({
+            hash1: {
+              hash3: documentMember
+            }
+          });
+        });
+      }
       return it('does not check inherited properties on parameters', function() {
         var cls, obj;
         cls = function() {

@@ -21,45 +21,6 @@ describe('AWS.S3', function() {
     return done();
   });
 
-  describe('dnsCompatibleBucketName', function() {
-    it('must be at least 3 characters', function() {
-      expect(s3.dnsCompatibleBucketName('aa')).to.equal(false);
-    });
-
-    it('must not be longer than 63 characters', function() {
-      var b;
-      b = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-      expect(s3.dnsCompatibleBucketName(b)).to.equal(false);
-    });
-
-    it('must start with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('Abc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('-bc')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
-    });
-
-    it('must end with a lower-cased letter or number', function() {
-      expect(s3.dnsCompatibleBucketName('abC')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('ab-')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
-    });
-
-    it('may not contain multiple contiguous dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc.123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc..123')).to.equal(false);
-    });
-
-    it('may only contain letters numbers and dots', function() {
-      expect(s3.dnsCompatibleBucketName('abc123')).to.equal(true);
-      expect(s3.dnsCompatibleBucketName('abc_123')).to.equal(false);
-    });
-
-    it('must not look like an ip address', function() {
-      expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false);
-      expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true);
-    });
-  });
-
   describe('constructor', function() {
     it('requires endpoint if s3BucketEndpoint is passed', function() {
       expect(function() {
@@ -102,15 +63,21 @@ describe('AWS.S3', function() {
     it('sets a region-specific dualstack endpoint when dualstack enabled', function() {
       s3 = new AWS.S3({
         region: 'us-west-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-west-1.amazonaws.com');
 
       s3 = new AWS.S3({
         region: 'us-east-1',
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       expect(s3.endpoint.hostname).to.equal('s3.dualstack.us-east-1.amazonaws.com');
+
+      s3 = new AWS.S3({
+        region: 'cn-north-1',
+        useDualstackEndpoint: true
+      });
+      expect(s3.endpoint.hostname).to.equal('s3.dualstack.cn-north-1.amazonaws.com.cn');
     });
   });
 
@@ -692,7 +659,7 @@ describe('AWS.S3', function() {
       beforeEach(function() {
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true
+          useDualstackEndpoint: true
         });
       });
 
@@ -708,7 +675,7 @@ describe('AWS.S3', function() {
         var req;
         s3 = new AWS.S3({
           useAccelerateEndpoint: true,
-          useDualstack: true,
+          useDualstackEndpoint: true,
           s3BucketEndpoint: true,
           endpoint: 'foo.region.amazonaws.com'
         });
@@ -1055,7 +1022,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1090,7 +1057,7 @@ describe('AWS.S3', function() {
             sslEnabled: true,
             s3ForcePathStyle: true,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = build('listObjects', {
             Bucket: 'bucket-name'
@@ -1113,7 +1080,7 @@ describe('AWS.S3', function() {
           s3 = new AWS.S3({
             sslEnabled: false,
             region: void 0,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
         });
 
@@ -1808,7 +1775,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1829,7 +1796,7 @@ describe('AWS.S3', function() {
             region: 'eu-west-1'
           };
           s3 = new AWS.S3({
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1853,7 +1820,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'test',
@@ -1875,7 +1842,7 @@ describe('AWS.S3', function() {
           };
           s3 = new AWS.S3({
             useAccelerateEndpoint: true,
-            useDualstack: true
+            useDualstackEndpoint: true
           });
           var req = request('putObject', {
             Bucket: 'foo',
@@ -1957,7 +1924,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        useDualstack: true
+        useDualstackEndpoint: true
       });
       var req = request('operation', {
         Bucket: 'name'
@@ -2192,6 +2159,32 @@ describe('AWS.S3', function() {
         done();
       });
     });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
   });
 
   describe('copyObject', function() {
@@ -2221,6 +2214,32 @@ describe('AWS.S3', function() {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.copyObject(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.copyObject(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -2260,6 +2279,32 @@ describe('AWS.S3', function() {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -2454,19 +2499,6 @@ describe('AWS.S3', function() {
     });
   });
 
-  AWS.util.each(AWS.S3.prototype.computableChecksumOperations, function(operation) {
-    describe(operation, function() {
-      it('forces Content-MD5 header parameter', function() {
-        var req = s3[operation]({
-          Bucket: 'bucket',
-          ContentMD5: '000'
-        }).build();
-        var hash = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
-        expect(req.httpRequest.headers['Content-MD5']).to.equal(hash);
-      });
-    });
-  });
-
   describe('willComputeChecksums', function() {
     var willCompute = function(operation, opts) {
       var compute = opts.computeChecksums;
@@ -2491,66 +2523,6 @@ describe('AWS.S3', function() {
       }
     };
 
-    it('computes checksums if the operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: true
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: true
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: true
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: true
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: true
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: true
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: true
-      });
-    });
-
-    it('computes checksums if computeChecksums is off and operation requires it', function() {
-      willCompute('deleteObjects', {
-        computeChecksums: false
-      });
-      willCompute('putBucketCors', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycle', {
-        computeChecksums: false
-      });
-      willCompute('putBucketLifecycleConfiguration', {
-        computeChecksums: false
-      });
-      willCompute('putBucketTagging', {
-        computeChecksums: false
-      });
-      willCompute('putBucketReplication', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLegalHold', {
-        computeChecksums: false
-      });
-      willCompute('putObjectRetention', {
-        computeChecksums: false
-      });
-      willCompute('putObjectLockConfiguration', {
-        computeChecksums: false
-      });
-    });
-
     it('does not compute checksums if computeChecksums is off', function() {
       willCompute('putObject', {
         computeChecksums: false,
@@ -2567,7 +2539,8 @@ describe('AWS.S3', function() {
 
     it('computes checksums if computeChecksums is on and ContentMD5 is not provided', function() {
       willCompute('putBucketAcl', {
-        computeChecksums: true
+        computeChecksums: true,
+        hash: '1B2M2Y8AsgTpgAmY7PhCfg=='
       });
     });
 
@@ -2972,7 +2945,6 @@ describe('AWS.S3', function() {
         );
         done();
       });
-
       invocationDeferred = true;
     });
   });

@@ -13,9 +13,9 @@ function TSGenerator(options) {
     this._apiRootDir = path.join(this._sdkRootDir, 'apis');
     this._metadataPath = path.join(this._apiRootDir, 'metadata.json');
     this._clientsDir = path.join(this._sdkRootDir, 'clients');
+    // Lazy loading values on usage to avoid side-effects in constructor
     this.metadata = null;
     this.typings = {};
-    this.fillApiModelFileNames(this._apiRootDir);
 }
 
 /**
@@ -30,8 +30,8 @@ TSGenerator.prototype.loadMetadata = function loadMetadata() {
 /**
  * Modifies metadata to include api model filenames.
  */
-TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames(apisPath) {
-    var modelPaths = fs.readdirSync(apisPath);
+TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames() {
+    var modelPaths = fs.readdirSync(this._apiRootDir);
     if (!this.metadata) {
         this.loadMetadata();
     }
@@ -241,6 +241,9 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     var tabs = this.tabs;
     var type = shape.type;
     if (type === 'structure') {
+        if (shape.isDocument) {
+            return code += tabs(tabCount) + 'export type ' + shapeKey + ' = DocumentType;\n'
+        }
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
         // cycle through members
@@ -423,6 +426,16 @@ TSGenerator.prototype.generateCustomNamespaceTypes = function generateCustomName
     };
 };
 
+TSGenerator.prototype.containsDocumentType = function containsDocumentType(model) {
+    var shapeNames = Object.keys(model.shapes);
+    for (var name of shapeNames) {
+        if (model.shapes[name].isDocument) {
+            return true;
+        }
+    }
+    return false;
+};
+
 /**
  * Generates the typings for a service based on the serviceIdentifier.
  */
@@ -449,13 +462,17 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
     var hasCustomConfig = !!customConfig.length;
     var customConfigTypes = ['ServiceConfigurationOptions'];
-    code += 'import {ConfigBase as Config} from \'../lib/config\';\n';
+    code += 'import {ConfigBase as Config} from \'../lib/config-base\';\n';
     if (hasCustomConfig) {
         // generate import statements and custom config type
         customConfig.forEach(function(config) {
             code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
             customConfigTypes.push(config.INTERFACE);
         });
+    }
+
+    if (this.containsDocumentType(model)) {
+        code += 'import {DocumentType} from \'../lib/model\';\n';
     }
     // import custom namespaces
     if (customNamespaces) {
@@ -531,6 +548,7 @@ TSGenerator.prototype.writeTypingsFile = function writeTypingsFile(name, directo
  * Create the typescript definition files for every service.
  */
 TSGenerator.prototype.generateAllClientTypings = function generateAllClientTypings() {
+    this.fillApiModelFileNames();
     var self = this;
     var metadata = this.metadata;
     // Iterate over every service

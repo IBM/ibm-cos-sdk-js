@@ -26,3 +26,4 @@ if (core.Config) {
 } else if (core.Response) {
 
 }
+const document: core.DocumentType = {}

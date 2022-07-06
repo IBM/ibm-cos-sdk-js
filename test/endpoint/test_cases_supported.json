@@ -1,0 +1,9 @@
+[
+  {
+    "endpointPrefix": "s3",
+    "clientName": "S3",
+    "region": "af-south-1",
+    "useDualstackEndpoint": true,
+    "hostname": "s3.dualstack.af-south-1.amazonaws.com"
+  }
+]

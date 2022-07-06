@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.12.1
+
+### Content
+
+#### Defect Fixes
+
+* AWS Patches aligned to version v2.1103.0 of the AWS NodeJS SDK
+
 ## 1.12.0
 
 ### Content

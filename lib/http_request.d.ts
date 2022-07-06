@@ -14,7 +14,7 @@ export class HttpRequest {
     /**
      * The request body payload.
      */
-    body: string;
+    body: string | Buffer;
     /**
      * The endpoint for the request.
      */
