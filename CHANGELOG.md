@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.12.2
+
+### Content
+
+#### Defect Fixes
+
+* Fixes to AWS patch in v2.1103.0
+
 ## 1.12.1
 
 ### Content
