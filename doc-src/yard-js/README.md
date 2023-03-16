@@ -12,7 +12,7 @@ this.
 
 Documenting with `yard-js` should be similar to documenting with YARD.
 Information on how to document with YARD can be found in YARD's
-[Getting Started Guide](http://rubydoc.org/docs/yard/file/docs/GettingStarted.md).
+[Getting Started Guide](https://rubydoc.info/gems/yard/file/docs/GettingStarted.md).
 Just like in Ruby, you will document methods or classes by adding docstrings
 above the definition. Unlike jsdoc, you do not need to explicitly denote the
 class name or details, as these will be automatically detected by YARD. For
@@ -44,7 +44,7 @@ inherit(IO, {
 });
 ```
 
-All [macros and tags](http://rubydoc.org/docs/yard/file/docs/Tags.md) available
+All [macros and tags](https://rubydoc.info/gems/yard/file/docs/Tags.md) available
 in YARD are available in `yard-js`.
 
 ## Requirements

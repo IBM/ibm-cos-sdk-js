@@ -255,6 +255,30 @@ declare class S3 extends S3Customizations {
    */
   getObjectAcl(callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
   /**
+   * Gets an object's current legal hold status. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts. The following action is related to GetObjectLegalHold:    GetObjectAttributes   
+   */
+  getObjectLegalHold(params: S3.Types.GetObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
+  /**
+   * Gets an object's current legal hold status. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts. The following action is related to GetObjectLegalHold:    GetObjectAttributes   
+   */
+  getObjectLegalHold(callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
+  /**
+   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see Locking Objects. The following action is related to GetObjectLockConfiguration:    GetObjectAttributes   
+   */
+  getObjectLockConfiguration(params: S3.Types.GetObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see Locking Objects. The following action is related to GetObjectLockConfiguration:    GetObjectAttributes   
+   */
+  getObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Retrieves an object's retention settings. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts. The following action is related to GetObjectRetention:    GetObjectAttributes   
+   */
+  getObjectRetention(params: S3.Types.GetObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
+  /**
+   * Retrieves an object's retention settings. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts. The following action is related to GetObjectRetention:    GetObjectAttributes   
+   */
+  getObjectRetention(callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
+  /**
    * Returns the tag-set of an object. You send the GET request against the tagging subresource associated with the object. To use this operation, you must have permission to perform the s3:GetObjectTagging action. By default, the GET action returns information about current version of an object. For a versioned bucket, you can have multiple versions of an object in your bucket. To retrieve tags of any other version, use the versionId query parameter. You also need permission for the s3:GetObjectVersionTagging action.  By default, the bucket owner has this permission and can grant this permission to others.  For information about the Amazon S3 object tagging feature, see Object Tagging. The following actions are related to GetObjectTagging:    DeleteObjectTagging     GetObjectAttributes     PutObjectTagging   
    */
   getObjectTagging(params: S3.Types.GetObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
@@ -439,6 +463,30 @@ declare class S3 extends S3Customizations {
    */
   putObjectAcl(callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
   /**
+   * Applies a legal hold configuration to the specified object. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts.
+   */
+  putObjectLegalHold(params: S3.Types.PutObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
+  /**
+   * Applies a legal hold configuration to the specified object. For more information, see Locking Objects. This action is not supported by Amazon S3 on Outposts.
+   */
+  putObjectLegalHold(callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
+  /**
+   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see Locking Objects.     The DefaultRetention settings require both a mode and a period.   The DefaultRetention period can be either Days or Years but you must select one. You cannot specify Days and Years at the same time.   You can only enable Object Lock for new buckets. If you want to turn on Object Lock for an existing bucket, contact Amazon Web Services Support.   
+   */
+  putObjectLockConfiguration(params: S3.Types.PutObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see Locking Objects.     The DefaultRetention settings require both a mode and a period.   The DefaultRetention period can be either Days or Years but you must select one. You cannot specify Days and Years at the same time.   You can only enable Object Lock for new buckets. If you want to turn on Object Lock for an existing bucket, contact Amazon Web Services Support.   
+   */
+  putObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
+  /**
+   * Places an Object Retention configuration on an object. For more information, see Locking Objects. Users or accounts require the s3:PutObjectRetention permission in order to place an Object Retention configuration on objects. Bypassing a Governance Retention configuration requires the s3:BypassGovernanceRetention permission.  This action is not supported by Amazon S3 on Outposts.
+   */
+  putObjectRetention(params: S3.Types.PutObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
+  /**
+   * Places an Object Retention configuration on an object. For more information, see Locking Objects. Users or accounts require the s3:PutObjectRetention permission in order to place an Object Retention configuration on objects. Bypassing a Governance Retention configuration requires the s3:BypassGovernanceRetention permission.  This action is not supported by Amazon S3 on Outposts.
+   */
+  putObjectRetention(callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
+  /**
    * Sets the supplied tag-set to an object that already exists in a bucket. A tag is a key-value pair. You can associate tags with an object by sending a PUT request against the tagging subresource that is associated with the object. You can retrieve tags by sending a GET request. For more information, see GetObjectTagging. For tagging-related restrictions related to characters and encodings, see Tag Restrictions. Note that Amazon S3 limits the maximum number of tags to 10 tags per object. To use this operation, you must have permission to perform the s3:PutObjectTagging action. By default, the bucket owner has this permission and can grant this permission to others. To put tags of any other version, use the versionId query parameter. You also need permission for the s3:PutObjectVersionTagging action. For information about the Amazon S3 object tagging feature, see Object Tagging.  Special Errors       Code: InvalidTagError      Cause: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see Object Tagging.         Code: MalformedXMLError      Cause: The XML provided does not match the schema.         Code: OperationAbortedError      Cause: A conflicting conditional action is currently in progress against this resource. Please try again.         Code: InternalError     Cause: The service was unable to apply the provided tag to the object.       Related Resources     GetObjectTagging     DeleteObjectTagging   
    */
   putObjectTagging(params: S3.Types.PutObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
@@ -598,6 +646,7 @@ declare namespace S3 {
   export type BucketProtectionEnablePermanentRetention = boolean;
   export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
   export type Buckets = Bucket[];
+  export type BypassGovernanceRetention = boolean;
   export interface CORSConfiguration {
     /**
      * A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.
@@ -927,6 +976,18 @@ declare namespace S3 {
      * The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters.
      */
     Tagging?: TaggingHeader;
+    /**
+     * The Object Lock mode that you want to apply to the copied object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when you want the copied object's Object Lock to expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether you want to apply a legal hold to the copied object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface CopyObjectResult {
     /**
@@ -1003,6 +1064,10 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable bucket.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+     */
+    ObjectLockEnabledForBucket?: ObjectLockEnabledForBucket;
     /**
      * The storage account who will be the owner of the bucket.
      */
@@ -1137,12 +1202,38 @@ declare namespace S3 {
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters.
      */
     Tagging?: TaggingHeader;
+    /**
+     * Specifies the Object Lock mode that you want to apply to the uploaded object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * Specifies the date and time when you want the Object Lock to expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether you want to apply a legal hold to the uploaded object.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export type CreationDate = Date;
   export type CreationTemplateId = string;
   export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
+  export interface DefaultRetention {
+    /**
+     * The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Must be used with either Days or Years.
+     */
+    Mode?: ObjectLockRetentionMode;
+    /**
+     * The number of days that you want to specify for the default retention period. Must be used with Mode.
+     */
+    Days?: Days;
+    /**
+     * The number of years that you want to specify for the default retention period. Must be used with Mode.
+     */
+    Years?: Years;
+  }
   export interface Delete {
     /**
      * The objects to delete.
@@ -1248,6 +1339,10 @@ declare namespace S3 {
      * VersionId used to reference a specific version of the object.
      */
     VersionId?: ObjectVersionId;
+    /**
+     * Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation. To use this header, you must have the s3:BypassGovernanceRetention permission.
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
   }
   export interface DeleteObjectTaggingOutput {
     /**
@@ -1292,6 +1387,10 @@ declare namespace S3 {
      * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device. Required to permanently delete a versioned object if versioning is configured with MFA delete enabled.
      */
     MFA?: MFA;
+    /**
+     * Specifies whether you want to delete this object even if it has a Governance-type Object Lock in place. To use this header, you must have the s3:BypassGovernanceRetention permission.
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
   }
   export interface DeletePublicAccessBlockRequest {
     /**
@@ -1576,6 +1675,46 @@ declare namespace S3 {
      */
     VersionId?: ObjectVersionId;
   }
+  export interface GetObjectLegalHoldOutput {
+    /**
+     * The current legal hold status for the specified object.
+     */
+    LegalHold?: ObjectLockLegalHold;
+  }
+  export interface GetObjectLegalHoldRequest {
+    /**
+     * The bucket name containing the object whose legal hold status you want to retrieve.  When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object whose legal hold status you want to retrieve.
+     */
+    Key: ObjectKey;
+    /**
+     * The version ID of the object whose legal hold status you want to retrieve.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
+  }
+  export interface GetObjectLockConfigurationOutput {
+    /**
+     * The specified bucket's Object Lock configuration.
+     */
+    ObjectLockConfiguration?: ObjectLockConfiguration;
+  }
+  export interface GetObjectLockConfigurationRequest {
+    /**
+     * The bucket whose Object Lock configuration you want to retrieve. When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
+  }
   export interface GetObjectOutput {
     /**
      * Object data.
@@ -1694,6 +1833,18 @@ declare namespace S3 {
      */
     TagCount?: TagCount;
     /**
+     * The Object Lock mode currently in place for this object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when this object's Object Lock will expire.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status. 
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
+    /**
      * This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
      */
     TemporaryCopyStorageClass?: StorageClass;
@@ -1776,6 +1927,30 @@ declare namespace S3 {
      * Part number of the object being read. This is a positive integer between 1 and 10,000. Effectively performs a 'ranged' GET request for the part specified. Useful for downloading just a part of an object.
      */
     PartNumber?: PartNumber;
+  }
+  export interface GetObjectRetentionOutput {
+    /**
+     * The container element for an object's retention settings.
+     */
+    Retention?: ObjectLockRetention;
+  }
+  export interface GetObjectRetentionRequest {
+    /**
+     * The bucket name containing the object whose retention settings you want to retrieve.  When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object whose retention settings you want to retrieve.
+     */
+    Key: ObjectKey;
+    /**
+     * The version ID for the object whose retention settings you want to retrieve.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export interface GetObjectTaggingOutput {
     /**
@@ -1972,6 +2147,18 @@ declare namespace S3 {
      * The count of parts this object has. This value is only returned if you specify partNumber in your request and the object was uploaded as a multipart upload.
      */
     PartsCount?: PartsCount;
+    /**
+     * The Object Lock mode, if any, that's in effect for this object. This header is only returned if the requester has the s3:GetObjectRetention permission. For more information about S3 Object Lock, see Object Lock. 
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when the Object Lock retention period expires. This header is only returned if the requester has the s3:GetObjectRetention permission.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether a legal hold is in effect for this object. This header is only returned if the requester has the s3:GetObjectLegalHold permission. This header is not returned if the specified version of this object has never had a legal hold applied. For more information about S3 Object Lock, see Object Lock.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
     /**
      * This header is only included if an object has transition metadata.  This header will indicate the transition storage class and time of transition.  If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
      */
@@ -2695,6 +2882,45 @@ declare namespace S3 {
   export type ObjectIdentifierList = ObjectIdentifier[];
   export type ObjectKey = string;
   export type ObjectList = Object[];
+  export interface ObjectLockConfiguration {
+    /**
+     * Indicates whether this bucket has an Object Lock configuration enabled. Enable ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket. 
+     */
+    ObjectLockEnabled?: ObjectLockEnabled;
+    /**
+     * Specifies the Object Lock rule for the specified object. Enable the this rule when you apply ObjectLockConfiguration to a bucket. Bucket settings require both a mode and a period. The period can be either Days or Years but you must select one. You cannot specify Days and Years at the same time.
+     */
+    Rule?: ObjectLockRule;
+  }
+  export type ObjectLockEnabled = "Enabled"|string;
+  export type ObjectLockEnabledForBucket = boolean;
+  export interface ObjectLockLegalHold {
+    /**
+     * Indicates whether the specified object has a legal hold in place.
+     */
+    Status?: ObjectLockLegalHoldStatus;
+  }
+  export type ObjectLockLegalHoldStatus = "ON"|"OFF"|string;
+  export type ObjectLockMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export type ObjectLockRetainUntilDate = Date;
+  export interface ObjectLockRetention {
+    /**
+     * Indicates the Retention mode for the specified object.
+     */
+    Mode?: ObjectLockRetentionMode;
+    /**
+     * The date on which this Object Lock Retention will expire.
+     */
+    RetainUntilDate?: _Date;
+  }
+  export type ObjectLockRetentionMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export interface ObjectLockRule {
+    /**
+     * The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. Bucket settings require both a mode and a period. The period can be either Days or Years but you must select one. You cannot specify Days and Years at the same time.
+     */
+    DefaultRetention?: DefaultRetention;
+  }
+  export type ObjectLockToken = string;
   export type ObjectStorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export interface ObjectVersion {
     /**
@@ -2895,6 +3121,10 @@ declare namespace S3 {
      */
     ContentMD5?: ContentMD5;
     ReplicationConfiguration: ReplicationConfiguration;
+    /**
+     * Ignored by COS if present.
+     */
+    Token?: ObjectLockToken;
   }
   export interface PutBucketTaggingRequest {
     /**
@@ -2990,6 +3220,60 @@ declare namespace S3 {
      * VersionId used to reference a specific version of the object.
      */
     VersionId?: ObjectVersionId;
+  }
+  export interface PutObjectLegalHoldOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectLegalHoldRequest {
+    /**
+     * The bucket name containing the object that you want to place a legal hold on.  When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object that you want to place a legal hold on.
+     */
+    Key: ObjectKey;
+    /**
+     * Container element for the legal hold configuration you want to apply to the specified object.
+     */
+    LegalHold?: ObjectLockLegalHold;
+    /**
+     * The version ID of the object that you want to place a legal hold on.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * The MD5 hash for the request body. For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
+  }
+  export interface PutObjectLockConfigurationOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectLockConfigurationRequest {
+    /**
+     * The bucket whose Object Lock configuration you want to create or replace.
+     */
+    Bucket: BucketName;
+    /**
+     * The Object Lock configuration that you want to apply to the specified bucket.
+     */
+    ObjectLockConfiguration?: ObjectLockConfiguration;
+    /**
+     * Ignored by COS if present.
+     */
+    Token?: ObjectLockToken;
+    /**
+     * The MD5 hash for the request body. For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export interface PutObjectOutput {
     /**
@@ -3134,6 +3418,51 @@ declare namespace S3 {
      * The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")
      */
     Tagging?: TaggingHeader;
+    /**
+     * The Object Lock mode that you want to apply to this object.
+     */
+    ObjectLockMode?: ObjectLockMode;
+    /**
+     * The date and time when you want this object's Object Lock to expire. Must be formatted as a timestamp parameter.
+     */
+    ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
+    /**
+     * Specifies whether a legal hold will be applied to this object. For more information about S3 Object Lock, see Object Lock.
+     */
+    ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
+  }
+  export interface PutObjectRetentionOutput {
+    RequestCharged?: RequestCharged;
+  }
+  export interface PutObjectRetentionRequest {
+    /**
+     * The bucket name that contains the object you want to apply this Object Retention configuration to.  When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see Using access points in the Amazon S3 User Guide.
+     */
+    Bucket: BucketName;
+    /**
+     * The key name for the object that you want to apply this Object Retention configuration to.
+     */
+    Key: ObjectKey;
+    /**
+     * The container element for the Object Retention configuration.
+     */
+    Retention?: ObjectLockRetention;
+    /**
+     * The version ID for the object that you want to apply this Object Retention configuration to.
+     */
+    VersionId?: ObjectVersionId;
+    /**
+     * Ignored by COS if present.
+     */
+    BypassGovernanceRetention?: BypassGovernanceRetention;
+    /**
+     * The MD5 hash for the request body. For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+     */
+    ContentMD5?: ContentMD5;
+    /**
+     * Ignored by COS if present.
+     */
+    ExpectedBucketOwner?: AccountId;
   }
   export interface PutObjectTaggingOutput {
     /**
