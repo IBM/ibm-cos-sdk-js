@@ -1113,6 +1113,81 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#getObjectLegalHold-property" title="getObjectLegalHold"><strong>getObjectLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Gets an object's current legal hold status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getObjectLockConfiguration-property" title="getObjectLockConfiguration"><strong>getObjectLockConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Gets the Object Lock configuration for a bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getObjectRetention-property" title="getObjectRetention"><strong>getObjectRetention</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Retrieves an object's retention settings.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#getObjectTagging-property" title="getObjectTagging"><strong>getObjectTagging</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -1736,6 +1811,81 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p><p>Uses the <code>acl</code> subresource to set the access control list (ACL) permissions for a new or existing object in an S3 bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putObjectLegalHold-property" title="putObjectLegalHold"><strong>putObjectLegalHold</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Applies a legal hold configuration to the specified object.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putObjectLockConfiguration-property" title="putObjectLockConfiguration"><strong>putObjectLockConfiguration</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Places an Object Lock configuration on the specified bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putObjectRetention-property" title="putObjectRetention"><strong>putObjectRetention</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><p>Places an Object Retention configuration on an object.</p>
 </div></span>
   
 </li>
@@ -3162,6 +3312,9 @@ subsequent event callback registration.</p>
     /* &#39;&lt;MetadataKey&gt;&#39;: ... */
   },
   MetadataDirective: COPY | REPLACE,
+  ObjectLockLegalHoldStatus: ON | OFF,
+  ObjectLockMode: GOVERNANCE | COMPLIANCE,
+  ObjectLockRetainUntilDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   RetentionDirective: COPY | REPLACE,
   RetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
@@ -3289,6 +3442,23 @@ s3.copyObject(params, function(err, data) {
 <li><code>CopySourceSSECustomerKey</code> &mdash; (<code>Buffer, Typed Array, Blob, String</code>)  <p>Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.</p></li>
 <li><code>CopySourceSSECustomerKeyMD5</code> &mdash; (<code>String</code>)  <p>Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.</p></li>
 <li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object destination object this value must be used in conjunction with the <code>TaggingDirective</code>. The tag-set must be encoded as URL Query parameters.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode that you want to apply to the copied object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when you want the copied object's Object Lock to expire.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether you want to apply a legal hold to the copied object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -3496,7 +3666,7 @@ subsequent event callback registration.</p>
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   ACL: private | public-read | public-read-write | authenticated-read,
   CreateBucketConfiguration: {
-    LocationConstraint: us-standard | us-vault | us-cold | us-flex | us-east-standard | us-east-vault | us-east-cold | us-east-flex | us-south-standard | us-south-vault | us-south-cold | us-south-flex | eu-standard | eu-vault | eu-cold | eu-flex | eu-gb-standard | eu-gb-vault | eu-gb-cold | eu-gb-flex | eu-de-standard | eu-de-vault | eu-de-cold | eu-de-flex | ap-standard | ap-vault | ap-cold | ap-flex | ams03-standard | ams03-vault | ams03-cold | ams03-flex | che01-standard | che01-vault | che01-cold | che01-flex | mel01-standard | mel01-vault | mel01-cold | mel01-flex | osl01-standard | osl01-vault | osl01-cold | osl01-flex | sao01-standard | sao01-vault | sao01-cold | sao01-flex | tor01-standard | tor01-vault | tor01-cold | tor01-flex
+    LocationConstraint: au-syd-onerate_active | ca-tor-onerate_active | br-sao-onerate_active | jp-osa-onerate_active | jp-tok-onerate_active | us-standard | us-vault | us-cold | us-flex | us-east-standard | us-east-vault | us-east-cold | us-east-flex | us-east-onerate_active | us-south-standard | us-south-vault | us-south-cold | us-south-flex | us-south-onerate_active | eu-standard | eu-vault | eu-cold | eu-flex | eu-gb-standard | eu-gb-vault | eu-gb-cold | eu-gb-flex | eu-gb-onerate_active | eu-de-standard | eu-de-vault | eu-de-cold | eu-de-flex | eu-de-onerate_active | ap-standard | ap-vault | ap-cold | ap-flex | ams03-standard | ams03-vault | ams03-cold | ams03-flex | ams03-onerate_active | che01-standard | che01-vault | che01-cold | che01-flex | che01-onerate_active | mel01-standard | mel01-vault | mel01-cold | mel01-flex | mil01-onerate_active | mon01-onerate_active | osl01-standard | osl01-vault | osl01-cold | osl01-flex | par01-onerate_active | sao01-standard | sao01-vault | sao01-cold | sao01-flex | sjc04-onerate_active | sng01-onerate_active | tor01-standard | tor01-vault | tor01-cold | tor01-flex
   },
   GrantFullControl: &#39;STRING_VALUE&#39;,
   GrantRead: &#39;STRING_VALUE&#39;,
@@ -3505,7 +3675,8 @@ subsequent event callback registration.</p>
   GrantWriteACP: &#39;STRING_VALUE&#39;,
   IBMSSEKPCustomerRootKeyCrn: &#39;STRING_VALUE&#39;,
   IBMSSEKPEncryptionAlgorithm: &#39;STRING_VALUE&#39;,
-  IBMServiceInstanceId: &#39;STRING_VALUE&#39;
+  IBMServiceInstanceId: &#39;STRING_VALUE&#39;,
+  ObjectLockEnabledForBucket: true || false
 };
 s3.createBucket(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -3545,6 +3716,11 @@ s3.createBucket(params, function(err, data) {
  Possible values include:
 
 <ul>
+<li><code>"au-syd-onerate_active"</code></li>
+<li><code>"ca-tor-onerate_active"</code></li>
+<li><code>"br-sao-onerate_active"</code></li>
+<li><code>"jp-osa-onerate_active"</code></li>
+<li><code>"jp-tok-onerate_active"</code></li>
 <li><code>"us-standard"</code></li>
 <li><code>"us-vault"</code></li>
 <li><code>"us-cold"</code></li>
@@ -3553,10 +3729,12 @@ s3.createBucket(params, function(err, data) {
 <li><code>"us-east-vault"</code></li>
 <li><code>"us-east-cold"</code></li>
 <li><code>"us-east-flex"</code></li>
+<li><code>"us-east-onerate_active"</code></li>
 <li><code>"us-south-standard"</code></li>
 <li><code>"us-south-vault"</code></li>
 <li><code>"us-south-cold"</code></li>
 <li><code>"us-south-flex"</code></li>
+<li><code>"us-south-onerate_active"</code></li>
 <li><code>"eu-standard"</code></li>
 <li><code>"eu-vault"</code></li>
 <li><code>"eu-cold"</code></li>
@@ -3565,10 +3743,12 @@ s3.createBucket(params, function(err, data) {
 <li><code>"eu-gb-vault"</code></li>
 <li><code>"eu-gb-cold"</code></li>
 <li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-gb-onerate_active"</code></li>
 <li><code>"eu-de-standard"</code></li>
 <li><code>"eu-de-vault"</code></li>
 <li><code>"eu-de-cold"</code></li>
 <li><code>"eu-de-flex"</code></li>
+<li><code>"eu-de-onerate_active"</code></li>
 <li><code>"ap-standard"</code></li>
 <li><code>"ap-vault"</code></li>
 <li><code>"ap-cold"</code></li>
@@ -3577,22 +3757,29 @@ s3.createBucket(params, function(err, data) {
 <li><code>"ams03-vault"</code></li>
 <li><code>"ams03-cold"</code></li>
 <li><code>"ams03-flex"</code></li>
+<li><code>"ams03-onerate_active"</code></li>
 <li><code>"che01-standard"</code></li>
 <li><code>"che01-vault"</code></li>
 <li><code>"che01-cold"</code></li>
 <li><code>"che01-flex"</code></li>
+<li><code>"che01-onerate_active"</code></li>
 <li><code>"mel01-standard"</code></li>
 <li><code>"mel01-vault"</code></li>
 <li><code>"mel01-cold"</code></li>
 <li><code>"mel01-flex"</code></li>
+<li><code>"mil01-onerate_active"</code></li>
+<li><code>"mon01-onerate_active"</code></li>
 <li><code>"osl01-standard"</code></li>
 <li><code>"osl01-vault"</code></li>
 <li><code>"osl01-cold"</code></li>
 <li><code>"osl01-flex"</code></li>
+<li><code>"par01-onerate_active"</code></li>
 <li><code>"sao01-standard"</code></li>
 <li><code>"sao01-vault"</code></li>
 <li><code>"sao01-cold"</code></li>
 <li><code>"sao01-flex"</code></li>
+<li><code>"sjc04-onerate_active"</code></li>
+<li><code>"sng01-onerate_active"</code></li>
 <li><code>"tor01-standard"</code></li>
 <li><code>"tor01-vault"</code></li>
 <li><code>"tor01-cold"</code></li>
@@ -3606,6 +3793,7 @@ s3.createBucket(params, function(err, data) {
 <li><code>GrantReadACP</code> &mdash; (<code>String</code>)  <p>Allows grantee to read the bucket ACL.</p></li>
 <li><code>GrantWrite</code> &mdash; (<code>String</code>)  <p>Allows grantee to create new objects in the bucket.</p> <p>For the bucket and object owners of existing objects, also allows deletions and overwrites of those objects.</p></li>
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  <p>Allows grantee to write the ACL for the applicable bucket.</p></li>
+<li><code>ObjectLockEnabledForBucket</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p></li>
 <li><code>IBMServiceInstanceId</code> &mdash; (<code>String</code>)  The storage account who will be the owner of the bucket.</li>
 <li><code>IBMSSEKPEncryptionAlgorithm</code> &mdash; (<code>String</code>)</li>
 <li><code>IBMSSEKPCustomerRootKeyCrn</code> &mdash; (<code>String</code>)</li>
@@ -3790,6 +3978,9 @@ subsequent event callback registration.</p>
     &#39;&lt;MetadataKey&gt;&#39;: &#39;STRING_VALUE&#39;,
     /* &#39;&lt;MetadataKey&gt;&#39;: ... */
   },
+  ObjectLockLegalHoldStatus: ON | OFF,
+  ObjectLockMode: GOVERNANCE | COMPLIANCE,
+  ObjectLockRetainUntilDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   SSECustomerAlgorithm: &#39;STRING_VALUE&#39;,
   SSECustomerKey: Buffer.from(&#39;...&#39;) || &#39;STRING_VALUE&#39; /* Strings will be Base-64 encoded on your behalf */,
   SSECustomerKeyMD5: &#39;STRING_VALUE&#39;,
@@ -3875,6 +4066,23 @@ s3.createMultipartUpload(params, function(err, data) {
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  <p>Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.</p></li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  <p>Specifies the ID of the symmetric customer managed key to use for object encryption. All GET and PUT requests for an object protected by Amazon Web Services KMS will fail if not made via SSL or using SigV4. For information about configuring using any of the officially supported Amazon Web Services SDKs and Amazon Web Services CLI, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version">Specifying the Signature Version in Request Authentication</a> in the <i>Amazon S3 User Guide</i>.</p></li>
 <li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>Specifies the Object Lock mode that you want to apply to the uploaded object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>Specifies the date and time when you want the Object Lock to expire.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether you want to apply a legal hold to the uploaded object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -5596,6 +5804,7 @@ subsequent event callback registration.</p>
       <pre class="example code"><code>var params = {
   Bucket: &#39;STRING_VALUE&#39;, /* required */
   Key: &#39;STRING_VALUE&#39;, /* required */
+  BypassGovernanceRetention: true || false,
   MFA: &#39;STRING_VALUE&#39;,
   VersionId: &#39;STRING_VALUE&#39;
 };
@@ -5625,6 +5834,7 @@ s3.deleteObject(params, function(err, data) {
 <li><code>Key</code> &mdash; (<code>String</code>)  <p>Key name of the object to delete.</p></li>
 <li><code>MFA</code> &mdash; (<code>String</code>)  <p>The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device. Required to permanently delete a versioned object if versioning is configured with MFA delete enabled.</p></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  <p>VersionId used to reference a specific version of the object.</p></li>
+<li><code>BypassGovernanceRetention</code> &mdash; (<code>Boolean</code>)  <p>Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation. To use this header, you must have the <code>s3:BypassGovernanceRetention</code> permission.</p></li>
 </ul>
 
 </div>
@@ -5862,6 +6072,7 @@ subsequent event callback registration.</p>
     ],
     Quiet: true || false
   },
+  BypassGovernanceRetention: true || false,
   MFA: &#39;STRING_VALUE&#39;
 };
 s3.deleteObjects(params, function(err, data) {
@@ -5901,6 +6112,7 @@ s3.deleteObjects(params, function(err, data) {
 </ul>
 </li>
 <li><code>MFA</code> &mdash; (<code>String</code>)  <p>The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device. Required to permanently delete a versioned object if versioning is configured with MFA delete enabled.</p></li>
+<li><code>BypassGovernanceRetention</code> &mdash; (<code>Boolean</code>)  <p>Specifies whether you want to delete this object even if it has a Governance-type Object Lock in place. To use this header, you must have the <code>s3:BypassGovernanceRetention</code> permission.</p></li>
 </ul>
 
 </div>
@@ -7657,6 +7869,11 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"au-syd-onerate_active"</code></li>
+<li><code>"ca-tor-onerate_active"</code></li>
+<li><code>"br-sao-onerate_active"</code></li>
+<li><code>"jp-osa-onerate_active"</code></li>
+<li><code>"jp-tok-onerate_active"</code></li>
 <li><code>"us-standard"</code></li>
 <li><code>"us-vault"</code></li>
 <li><code>"us-cold"</code></li>
@@ -7665,10 +7882,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"us-east-vault"</code></li>
 <li><code>"us-east-cold"</code></li>
 <li><code>"us-east-flex"</code></li>
+<li><code>"us-east-onerate_active"</code></li>
 <li><code>"us-south-standard"</code></li>
 <li><code>"us-south-vault"</code></li>
 <li><code>"us-south-cold"</code></li>
 <li><code>"us-south-flex"</code></li>
+<li><code>"us-south-onerate_active"</code></li>
 <li><code>"eu-standard"</code></li>
 <li><code>"eu-vault"</code></li>
 <li><code>"eu-cold"</code></li>
@@ -7677,10 +7896,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"eu-gb-vault"</code></li>
 <li><code>"eu-gb-cold"</code></li>
 <li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-gb-onerate_active"</code></li>
 <li><code>"eu-de-standard"</code></li>
 <li><code>"eu-de-vault"</code></li>
 <li><code>"eu-de-cold"</code></li>
 <li><code>"eu-de-flex"</code></li>
+<li><code>"eu-de-onerate_active"</code></li>
 <li><code>"ap-standard"</code></li>
 <li><code>"ap-vault"</code></li>
 <li><code>"ap-cold"</code></li>
@@ -7689,22 +7910,29 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"ams03-vault"</code></li>
 <li><code>"ams03-cold"</code></li>
 <li><code>"ams03-flex"</code></li>
+<li><code>"ams03-onerate_active"</code></li>
 <li><code>"che01-standard"</code></li>
 <li><code>"che01-vault"</code></li>
 <li><code>"che01-cold"</code></li>
 <li><code>"che01-flex"</code></li>
+<li><code>"che01-onerate_active"</code></li>
 <li><code>"mel01-standard"</code></li>
 <li><code>"mel01-vault"</code></li>
 <li><code>"mel01-cold"</code></li>
 <li><code>"mel01-flex"</code></li>
+<li><code>"mil01-onerate_active"</code></li>
+<li><code>"mon01-onerate_active"</code></li>
 <li><code>"osl01-standard"</code></li>
 <li><code>"osl01-vault"</code></li>
 <li><code>"osl01-cold"</code></li>
 <li><code>"osl01-flex"</code></li>
+<li><code>"par01-onerate_active"</code></li>
 <li><code>"sao01-standard"</code></li>
 <li><code>"sao01-vault"</code></li>
 <li><code>"sao01-cold"</code></li>
 <li><code>"sao01-flex"</code></li>
+<li><code>"sjc04-onerate_active"</code></li>
+<li><code>"sng01-onerate_active"</code></li>
 <li><code>"tor01-standard"</code></li>
 <li><code>"tor01-vault"</code></li>
 <li><code>"tor01-cold"</code></li>
@@ -9143,6 +9371,23 @@ The <code>data</code> object has the following properties:</p>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  <p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code> in your request and the object was uploaded as a multipart upload.</p></li>
 <li><code>TagCount</code> &mdash; (<code>Integer</code>)  <p>The number of tags, if any, on the object.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode currently in place for this object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when this object's Object Lock will expire.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status. </p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 <li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
@@ -9426,6 +9671,574 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"READ_ACP"</code></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getObjectLegalHold-property">
+  
+    <strong>getObjectLegalHold</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets an object's current legal hold status. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>.</p>
+
+
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>The following action is related to <code>GetObjectLegalHold</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html">GetObjectAttributes</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getObjectLegalHold operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;,
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.getObjectLegalHold(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the object whose legal hold status you want to retrieve. </p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>The key name for the object whose legal hold status you want to retrieve.</p></li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The version ID of the object whose legal hold status you want to retrieve.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>LegalHold</code> &mdash; (<code>map</code>)  <p>The current legal hold status for the specified object.</p>
+
+<ul>
+<li><code>Status</code> &mdash; (<code>String</code>)  <p>Indicates whether the specified object has a legal hold in place.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getObjectLockConfiguration-property">
+  
+    <strong>getObjectLockConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>.</p>
+
+
+<p> <p>The following action is related to <code>GetObjectLockConfiguration</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html">GetObjectAttributes</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getObjectLockConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;
+};
+s3.getObjectLockConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket whose Object Lock configuration you want to retrieve.</p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>ObjectLockConfiguration</code> &mdash; (<code>map</code>)  <p>The specified bucket's Object Lock configuration.</p>
+
+<ul>
+<li><code>ObjectLockEnabled</code> &mdash; (<code>String</code>)  <p>Indicates whether this bucket has an Object Lock configuration enabled. Enable <code>ObjectLockEnabled</code> when you apply <code>ObjectLockConfiguration</code> to a bucket. </p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+</ul>
+</li>
+<li><code>Rule</code> &mdash; (<code>map</code>)  <p>Specifies the Object Lock rule for the specified object. Enable the this rule when you apply <code>ObjectLockConfiguration</code> to a bucket. Bucket settings require both a mode and a period. The period can be either <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same time.</p>
+
+<ul>
+<li><code>DefaultRetention</code> &mdash; (<code>map</code>)  <p>The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. Bucket settings require both a mode and a period. The period can be either <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same time.</p>
+
+<ul>
+<li><code>Mode</code> &mdash; (<code>String</code>)  <p>The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Must be used with either <code>Days</code> or <code>Years</code>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  <p>The number of days that you want to specify for the default retention period. Must be used with <code>Mode</code>.</p></li>
+<li><code>Years</code> &mdash; (<code>Integer</code>)  <p>The number of years that you want to specify for the default retention period. Must be used with <code>Mode</code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="getObjectRetention-property">
+  
+    <strong>getObjectRetention</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves an object's retention settings. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>.</p>
+
+
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>The following action is related to <code>GetObjectRetention</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html">GetObjectAttributes</a> </p> </li> </ul></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the getObjectRetention operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;,
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.getObjectRetention(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the object whose retention settings you want to retrieve. </p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>The key name for the object whose retention settings you want to retrieve.</p></li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The version ID for the object whose retention settings you want to retrieve.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>Retention</code> &mdash; (<code>map</code>)  <p>The container element for an object's retention settings.</p>
+
+<ul>
+<li><code>Mode</code> &mdash; (<code>String</code>)  <p>Indicates the Retention mode for the specified object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>RetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date on which this Object Lock Retention will expire.</p></li>
 </ul>
 </li>
 </ul>
@@ -10741,6 +11554,23 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  <p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code> in your request and the object was uploaded as a multipart upload.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode, if any, that's in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>. </p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when the Object Lock retention period expires. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether a legal hold is in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectLegalHold</code> permission. This header is not returned if the specified version of this object has never had a legal hold applied. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 <li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
@@ -10994,6 +11824,11 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"au-syd-onerate_active"</code></li>
+<li><code>"ca-tor-onerate_active"</code></li>
+<li><code>"br-sao-onerate_active"</code></li>
+<li><code>"jp-osa-onerate_active"</code></li>
+<li><code>"jp-tok-onerate_active"</code></li>
 <li><code>"us-standard"</code></li>
 <li><code>"us-vault"</code></li>
 <li><code>"us-cold"</code></li>
@@ -11002,10 +11837,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"us-east-vault"</code></li>
 <li><code>"us-east-cold"</code></li>
 <li><code>"us-east-flex"</code></li>
+<li><code>"us-east-onerate_active"</code></li>
 <li><code>"us-south-standard"</code></li>
 <li><code>"us-south-vault"</code></li>
 <li><code>"us-south-cold"</code></li>
 <li><code>"us-south-flex"</code></li>
+<li><code>"us-south-onerate_active"</code></li>
 <li><code>"eu-standard"</code></li>
 <li><code>"eu-vault"</code></li>
 <li><code>"eu-cold"</code></li>
@@ -11014,10 +11851,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"eu-gb-vault"</code></li>
 <li><code>"eu-gb-cold"</code></li>
 <li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-gb-onerate_active"</code></li>
 <li><code>"eu-de-standard"</code></li>
 <li><code>"eu-de-vault"</code></li>
 <li><code>"eu-de-cold"</code></li>
 <li><code>"eu-de-flex"</code></li>
+<li><code>"eu-de-onerate_active"</code></li>
 <li><code>"ap-standard"</code></li>
 <li><code>"ap-vault"</code></li>
 <li><code>"ap-cold"</code></li>
@@ -11026,22 +11865,29 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"ams03-vault"</code></li>
 <li><code>"ams03-cold"</code></li>
 <li><code>"ams03-flex"</code></li>
+<li><code>"ams03-onerate_active"</code></li>
 <li><code>"che01-standard"</code></li>
 <li><code>"che01-vault"</code></li>
 <li><code>"che01-cold"</code></li>
 <li><code>"che01-flex"</code></li>
+<li><code>"che01-onerate_active"</code></li>
 <li><code>"mel01-standard"</code></li>
 <li><code>"mel01-vault"</code></li>
 <li><code>"mel01-cold"</code></li>
 <li><code>"mel01-flex"</code></li>
+<li><code>"mil01-onerate_active"</code></li>
+<li><code>"mon01-onerate_active"</code></li>
 <li><code>"osl01-standard"</code></li>
 <li><code>"osl01-vault"</code></li>
 <li><code>"osl01-cold"</code></li>
 <li><code>"osl01-flex"</code></li>
+<li><code>"par01-onerate_active"</code></li>
 <li><code>"sao01-standard"</code></li>
 <li><code>"sao01-vault"</code></li>
 <li><code>"sao01-cold"</code></li>
 <li><code>"sao01-flex"</code></li>
+<li><code>"sjc04-onerate_active"</code></li>
+<li><code>"sng01-onerate_active"</code></li>
 <li><code>"tor01-standard"</code></li>
 <li><code>"tor01-vault"</code></li>
 <li><code>"tor01-cold"</code></li>
@@ -11237,6 +12083,11 @@ The <code>data</code> object has the following properties:</p>
  Possible values include:
 
 <ul>
+<li><code>"au-syd-onerate_active"</code></li>
+<li><code>"ca-tor-onerate_active"</code></li>
+<li><code>"br-sao-onerate_active"</code></li>
+<li><code>"jp-osa-onerate_active"</code></li>
+<li><code>"jp-tok-onerate_active"</code></li>
 <li><code>"us-standard"</code></li>
 <li><code>"us-vault"</code></li>
 <li><code>"us-cold"</code></li>
@@ -11245,10 +12096,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"us-east-vault"</code></li>
 <li><code>"us-east-cold"</code></li>
 <li><code>"us-east-flex"</code></li>
+<li><code>"us-east-onerate_active"</code></li>
 <li><code>"us-south-standard"</code></li>
 <li><code>"us-south-vault"</code></li>
 <li><code>"us-south-cold"</code></li>
 <li><code>"us-south-flex"</code></li>
+<li><code>"us-south-onerate_active"</code></li>
 <li><code>"eu-standard"</code></li>
 <li><code>"eu-vault"</code></li>
 <li><code>"eu-cold"</code></li>
@@ -11257,10 +12110,12 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"eu-gb-vault"</code></li>
 <li><code>"eu-gb-cold"</code></li>
 <li><code>"eu-gb-flex"</code></li>
+<li><code>"eu-gb-onerate_active"</code></li>
 <li><code>"eu-de-standard"</code></li>
 <li><code>"eu-de-vault"</code></li>
 <li><code>"eu-de-cold"</code></li>
 <li><code>"eu-de-flex"</code></li>
+<li><code>"eu-de-onerate_active"</code></li>
 <li><code>"ap-standard"</code></li>
 <li><code>"ap-vault"</code></li>
 <li><code>"ap-cold"</code></li>
@@ -11269,22 +12124,29 @@ The <code>data</code> object has the following properties:</p>
 <li><code>"ams03-vault"</code></li>
 <li><code>"ams03-cold"</code></li>
 <li><code>"ams03-flex"</code></li>
+<li><code>"ams03-onerate_active"</code></li>
 <li><code>"che01-standard"</code></li>
 <li><code>"che01-vault"</code></li>
 <li><code>"che01-cold"</code></li>
 <li><code>"che01-flex"</code></li>
+<li><code>"che01-onerate_active"</code></li>
 <li><code>"mel01-standard"</code></li>
 <li><code>"mel01-vault"</code></li>
 <li><code>"mel01-cold"</code></li>
 <li><code>"mel01-flex"</code></li>
+<li><code>"mil01-onerate_active"</code></li>
+<li><code>"mon01-onerate_active"</code></li>
 <li><code>"osl01-standard"</code></li>
 <li><code>"osl01-vault"</code></li>
 <li><code>"osl01-cold"</code></li>
 <li><code>"osl01-flex"</code></li>
+<li><code>"par01-onerate_active"</code></li>
 <li><code>"sao01-standard"</code></li>
 <li><code>"sao01-vault"</code></li>
 <li><code>"sao01-cold"</code></li>
 <li><code>"sao01-flex"</code></li>
+<li><code>"sjc04-onerate_active"</code></li>
+<li><code>"sng01-onerate_active"</code></li>
 <li><code>"tor01-standard"</code></li>
 <li><code>"tor01-vault"</code></li>
 <li><code>"tor01-cold"</code></li>
@@ -14410,7 +15272,8 @@ subsequent event callback registration.</p>
     ],
     Role: &#39;STRING_VALUE&#39;
   },
-  ContentMD5: &#39;STRING_VALUE&#39;
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  Token: &#39;STRING_VALUE&#39;
 };
 s3.putBucketReplication(params, function(err, data) {
   if (err) console.log(err, err.stack); // an error occurred
@@ -14517,6 +15380,7 @@ s3.putBucketReplication(params, function(err, data) {
 </li>
 </ul>
 </li>
+<li><code>Token</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
 </ul>
 
 </div>
@@ -15537,6 +16401,9 @@ subsequent event callback registration.</p>
     &#39;&lt;MetadataKey&gt;&#39;: &#39;STRING_VALUE&#39;,
     /* &#39;&lt;MetadataKey&gt;&#39;: ... */
   },
+  ObjectLockLegalHoldStatus: ON | OFF,
+  ObjectLockMode: GOVERNANCE | COMPLIANCE,
+  ObjectLockRetainUntilDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   RetentionExpirationDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789,
   RetentionLegalHoldId: &#39;STRING_VALUE&#39;,
   RetentionPeriod: &#39;NUMBER_VALUE&#39;,
@@ -15631,6 +16498,23 @@ s3.putObject(params, function(err, data) {
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  <p>Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.</p></li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  <p>If <code>x-amz-server-side-encryption</code> is present and has the value of <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetrical customer managed key that was used for the object. If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but do not provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services managed key to protect the data. If the KMS key does not exist in the same account issuing the command, you must use the full ARN and not just the ID. </p></li>
 <li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode that you want to apply to this object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when you want this object's Object Lock to expire. Must be formatted as a timestamp parameter.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether a legal hold will be applied to this object. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -15770,7 +16654,7 @@ subsequent event callback registration.</p>
     <p>Uses the <code>acl</code> subresource to set the access control list (ACL) permissions for a new or existing object in an S3 bucket. You must have <code>WRITE&#95;ACP</code> permission to set the ACL of an object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions">What permissions can I grant?</a> in the <i>Amazon S3 User Guide</i>.</p>
 
 
-<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <p> <b>Access Permissions</b> </p> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#120;&#x79;&#x7a;&#64;&#x61;&#109;&#x61;&#122;&#111;&#110;&#46;&#99;&#111;&#109;">&#120;&#x79;&#122;&#64;&#97;&#109;&#97;&#x7a;&#111;&#x6e;&#46;&#x63;&#111;&#109;</a>", emailAddress="<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#97;&#98;&#99;&#64;&#97;&#x6d;&#97;&#122;&#x6f;&#x6e;&#46;&#99;&#x6f;&#109;">&#x61;&#x62;&#x63;&#64;&#x61;&#109;&#97;&#122;&#111;&#110;&#x2e;&#99;&#x6f;&#109;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> <p> <b>Grantee Values</b> </p> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p> <b>Versioning</b> </p> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <p> <b>Access Permissions</b> </p> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#120;&#x79;&#122;&#64;&#x61;&#x6d;&#97;&#x7a;&#x6f;&#x6e;&#x2e;&#x63;&#x6f;&#109;">&#x78;&#121;&#122;&#64;&#x61;&#109;&#x61;&#x7a;&#111;&#110;&#x2e;&#99;&#x6f;&#109;</a>", emailAddress="<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x61;&#98;&#x63;&#64;&#x61;&#109;&#x61;&#122;&#x6f;&#110;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#98;&#x63;&#64;&#x61;&#x6d;&#97;&#x7a;&#x6f;&#110;&#46;&#x63;&#x6f;&#x6d;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> <p> <b>Grantee Values</b> </p> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p> <b>Versioning</b> </p> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
 
 
   </div>
@@ -15929,6 +16813,622 @@ s3.putObjectAcl(params, function(err, data) {
 <li><code>GrantWriteACP</code> &mdash; (<code>String</code>)  <p>Allows grantee to write the ACL for the applicable bucket.</p> <p>This action is not supported by Amazon S3 on Outposts.</p></li>
 <li><code>Key</code> &mdash; (<code>String</code>)  <p>Key for which the PUT action was initiated.</p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code> <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p></li>
 <li><code>VersionId</code> &mdash; (<code>String</code>)  <p>VersionId used to reference a specific version of the object.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>RequestCharged</code> &mdash; (<code>String</code>)  <p>If present, indicates that the requester was successfully charged for the request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"requester"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putObjectLegalHold-property">
+  
+    <strong>putObjectLegalHold</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Applies a legal hold configuration to the specified object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>.</p>
+
+
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putObjectLegalHold operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;,
+  LegalHold: {
+    Status: ON | OFF
+  },
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.putObjectLegalHold(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name containing the object that you want to place a legal hold on. </p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>The key name for the object that you want to place a legal hold on.</p></li>
+<li><code>LegalHold</code> &mdash; (<code>map</code>)  <p>Container element for the legal hold configuration you want to apply to the specified object.</p>
+
+<ul>
+<li><code>Status</code> &mdash; (<code>String</code>)  <p>Indicates whether the specified object has a legal hold in place.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The version ID of the object that you want to place a legal hold on.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The MD5 hash for the request body.</p> <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>RequestCharged</code> &mdash; (<code>String</code>)  <p>If present, indicates that the requester was successfully charged for the request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"requester"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putObjectLockConfiguration-property">
+  
+    <strong>putObjectLockConfiguration</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>. </p>
+
+
+<p> <div class="note"><strong>Note:</strong> <ul> <li> The <code>DefaultRetention</code> settings require both a mode and a period. </li> <li> The <code>DefaultRetention</code> period can be either <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same time. </li> <li> You can only enable Object Lock for new buckets. If you want to turn on Object Lock for an existing bucket, contact Amazon Web Services Support. </li> </ul> </div></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putObjectLockConfiguration operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;,
+  ObjectLockConfiguration: {
+    ObjectLockEnabled: Enabled,
+    Rule: {
+      DefaultRetention: {
+        Days: &#39;NUMBER_VALUE&#39;,
+        Mode: GOVERNANCE | COMPLIANCE,
+        Years: &#39;NUMBER_VALUE&#39;
+      }
+    }
+  },
+  Token: &#39;STRING_VALUE&#39;
+};
+s3.putObjectLockConfiguration(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket whose Object Lock configuration you want to create or replace.</p></li>
+<li><code>ObjectLockConfiguration</code> &mdash; (<code>map</code>)  <p>The Object Lock configuration that you want to apply to the specified bucket.</p>
+
+<ul>
+<li><code>ObjectLockEnabled</code> &mdash; (<code>String</code>)  <p>Indicates whether this bucket has an Object Lock configuration enabled. Enable <code>ObjectLockEnabled</code> when you apply <code>ObjectLockConfiguration</code> to a bucket. </p>
+ Possible values include:
+
+<ul>
+<li><code>"Enabled"</code></li>
+</ul>
+</li>
+<li><code>Rule</code> &mdash; (<code>map</code>)  <p>Specifies the Object Lock rule for the specified object. Enable the this rule when you apply <code>ObjectLockConfiguration</code> to a bucket. Bucket settings require both a mode and a period. The period can be either <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same time.</p>
+
+<ul>
+<li><code>DefaultRetention</code> &mdash; (<code>map</code>)  <p>The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. Bucket settings require both a mode and a period. The period can be either <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code> and <code>Years</code> at the same time.</p>
+
+<ul>
+<li><code>Mode</code> &mdash; (<code>String</code>)  <p>The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Must be used with either <code>Days</code> or <code>Years</code>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>Days</code> &mdash; (<code>Integer</code>)  <p>The number of days that you want to specify for the default retention period. Must be used with <code>Mode</code>.</p></li>
+<li><code>Years</code> &mdash; (<code>Integer</code>)  <p>The number of years that you want to specify for the default retention period. Must be used with <code>Mode</code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Token</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The MD5 hash for the request body.</p> <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>RequestCharged</code> &mdash; (<code>String</code>)  <p>If present, indicates that the requester was successfully charged for the request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"requester"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="putObjectRetention-property">
+  
+    <strong>putObjectRetention</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Places an Object Retention configuration on an object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking Objects</a>. Users or accounts require the <code>s3:PutObjectRetention</code> permission in order to place an Object Retention configuration on objects. Bypassing a Governance Retention configuration requires the <code>s3:BypassGovernanceRetention</code> permission. </p>
+
+
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putObjectRetention operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  Key: &#39;STRING_VALUE&#39;, /* required */
+  BypassGovernanceRetention: true || false,
+  ContentMD5: &#39;STRING_VALUE&#39;,
+  ExpectedBucketOwner: &#39;STRING_VALUE&#39;,
+  Retention: {
+    Mode: GOVERNANCE | COMPLIANCE,
+    RetainUntilDate: new Date || &#39;Wed Dec 31 1969 16:00:00 GMT-0800 (PST)&#39; || 123456789
+  },
+  VersionId: &#39;STRING_VALUE&#39;
+};
+s3.putObjectRetention(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name that contains the object you want to apply this Object Retention configuration to. </p> <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>Key</code> &mdash; (<code>String</code>)  <p>The key name for the object that you want to apply this Object Retention configuration to.</p></li>
+<li><code>Retention</code> &mdash; (<code>map</code>)  <p>The container element for the Object Retention configuration.</p>
+
+<ul>
+<li><code>Mode</code> &mdash; (<code>String</code>)  <p>Indicates the Retention mode for the specified object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>RetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date on which this Object Lock Retention will expire.</p></li>
+</ul>
+</li>
+<li><code>VersionId</code> &mdash; (<code>String</code>)  <p>The version ID for the object that you want to apply this Object Retention configuration to.</p></li>
+<li><code>BypassGovernanceRetention</code> &mdash; (<code>Boolean</code>)  <p>Ignored by COS if present.</p></li>
+<li><code>ContentMD5</code> &mdash; (<code>String</code>)  <p>The MD5 hash for the request body.</p> <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p></li>
+<li><code>ExpectedBucketOwner</code> &mdash; (<code>String</code>)  <p>Ignored by COS if present.</p></li>
 </ul>
 
 </div>
@@ -16807,6 +18307,23 @@ s3.upload(params, options, function(err, data) {
 <li><code>SSECustomerKeyMD5</code> &mdash; (<code>String</code>)  <p>Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.</p></li>
 <li><code>SSEKMSKeyId</code> &mdash; (<code>String</code>)  <p>If <code>x-amz-server-side-encryption</code> is present and has the value of <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetrical customer managed key that was used for the object. If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but do not provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services managed key to protect the data. If the KMS key does not exist in the same account issuing the command, you must use the full ARN and not just the ID. </p></li>
 <li><code>Tagging</code> &mdash; (<code>String</code>)  <p>The tag-set for the object. The tag-set must be encoded as URL Query parameters. (For example, "Key1=Value1")</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode that you want to apply to this object.</p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when you want this object's Object Lock to expire. Must be formatted as a timestamp parameter.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether a legal hold will be applied to this object. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -18151,6 +19668,23 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  <p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code> in your request and the object was uploaded as a multipart upload.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode, if any, that's in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>. </p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when the Object Lock retention period expires. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether a legal hold is in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectLegalHold</code> permission. This header is not returned if the specified version of this object has never had a legal hold applied. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 <li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
@@ -18395,6 +19929,23 @@ The <code>data</code> object has the following properties:</p>
 </ul>
 </li>
 <li><code>PartsCount</code> &mdash; (<code>Integer</code>)  <p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code> in your request and the object was uploaded as a multipart upload.</p></li>
+<li><code>ObjectLockMode</code> &mdash; (<code>String</code>)  <p>The Object Lock mode, if any, that's in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>. </p>
+ Possible values include:
+
+<ul>
+<li><code>"GOVERNANCE"</code></li>
+<li><code>"COMPLIANCE"</code></li>
+</ul>
+</li>
+<li><code>ObjectLockRetainUntilDate</code> &mdash; (<code>Date</code>)  <p>The date and time when the Object Lock retention period expires. This header is only returned if the requester has the <code>s3:GetObjectRetention</code> permission.</p></li>
+<li><code>ObjectLockLegalHoldStatus</code> &mdash; (<code>String</code>)  <p>Specifies whether a legal hold is in effect for this object. This header is only returned if the requester has the <code>s3:GetObjectLegalHold</code> permission. This header is not returned if the specified version of this object has never had a legal hold applied. For more information about S3 Object Lock, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Object Lock</a>.</p>
+ Possible values include:
+
+<ul>
+<li><code>"ON"</code></li>
+<li><code>"OFF"</code></li>
+</ul>
+</li>
 <li><code>TemporaryCopyStorageClass</code> &mdash; (<code>String</code>)  This header is only included if an object has transition metadata. This header will indicate the transition storage class and time of transition. If this header and the x-amz-restore header are both included, this header will indicate the time at which the object was originally archived.
  Possible values include:
 
@@ -18460,7 +20011,7 @@ subsequent event callback registration.</p>
 
       <div id="footer">
   <div>
-    Generated on Mon Jul 11 16:53:18 2022 by
+    Generated on Thu Mar 16 08:11:33 2023 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
     0.9.26 (ruby-2.7.0).
   </div>
