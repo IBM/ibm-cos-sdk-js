@@ -958,15 +958,15 @@
         "output": {
           "Buckets": [
             {
-              "CreationDate": "2012-02-15T21: 03: 02.000Z",
+              "CreationDate": "2012-02-15T21:03:02.000Z",
               "Name": "examplebucket"
             },
             {
-              "CreationDate": "2011-07-24T19: 33: 50.000Z",
+              "CreationDate": "2011-07-24T19:33:50.000Z",
               "Name": "examplebucket2"
             },
             {
-              "CreationDate": "2010-12-17T00: 56: 49.000Z",
+              "CreationDate": "2010-12-17T00:56:49.000Z",
               "Name": "examplebucket3"
             }
           ],
@@ -981,9 +981,9 @@
           "output": {
           }
         },
-        "description": "The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.",
-        "id": "to-list-object-versions-1481910996058",
-        "title": "To list object versions"
+        "description": "The following example returns all the buckets owned by the sender of this request.",
+        "id": "to-list-buckets-1481910996058",
+        "title": "To list all buckets"
       }
     ],
     "ListMultipartUploads": [
@@ -1184,7 +1184,7 @@
     "ListObjectsV2": [
       {
         "input": {
-          "Bucket": "examplebucket",
+          "Bucket": "DOC-EXAMPLE-BUCKET",
           "MaxKeys": "2"
         },
         "output": {
@@ -1207,7 +1207,7 @@
           "IsTruncated": true,
           "KeyCount": "2",
           "MaxKeys": "2",
-          "Name": "examplebucket",
+          "Name": "DOC-EXAMPLE-BUCKET",
           "NextContinuationToken": "1w41l63U0xa8q7smH50vCxyTQqdxo69O3EmK28Bi5PcROI4wI/EyIJg==",
           "Prefix": ""
         },
@@ -1626,7 +1626,7 @@
           "output": {
           }
         },
-        "description": "The following example uploads and object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
+        "description": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
         "id": "to-upload-an-object-and-specify-server-side-encryption-and-object-tags-1483398331831",
         "title": "To upload an object and specify server-side encryption and object tags"
       },
