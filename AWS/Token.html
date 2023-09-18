@@ -6,7 +6,7 @@
     <script type="text/javascript" src="/assets/js/awsdocs-boot.js"></script>
     <meta charset="utf-8">
 <title>
-  Class: AWS.Credentials
+  Class: AWS.Token
   
     &mdash; IBM COS SDK for JavaScript
   
@@ -31,7 +31,7 @@
       charset="utf-8"
       src="../js/app.js"
       id="app-script"
-      pathid="AWS.Credentials"
+      pathid="AWS.Token"
       relpath='../'></script>
   
 
@@ -54,10 +54,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (C)</a> &raquo;
+    <a href="../_index.html">Index (T)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span></span>
      &raquo; 
-    <span class="title">Credentials</span>
+    <span class="title">Token</span>
   
 </div>
 
@@ -91,7 +91,7 @@
 	</div>
 </div>
         <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
-        <h1>Class: AWS.Credentials
+        <h1>Class: AWS.Token
   
   
   
@@ -106,7 +106,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">AWS.Credentials</li>
+            <li class="next">AWS.Token</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -128,34 +128,34 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/credentials.js</dd>
+    <dd>lib/token.js</dd>
   </dl>
   
 </div>
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Represents your AWS security credentials, specifically the
-<span class='object_link'><a href="#accessKeyId-property" title="AWS.Credentials.accessKeyId (property)">accessKeyId</a></span>, <span class='object_link'><a href="#secretAccessKey-property" title="AWS.Credentials.secretAccessKey (property)">secretAccessKey</a></span>, and optional <span class='object_link'><a href="#sessionToken-property" title="AWS.Credentials.sessionToken (property)">sessionToken</a></span>.
-Creating a <code>Credentials</code> object allows you to pass around your
-security information to configuration and service objects.</p>
+    <p>Represents AWS token object, which contains <span class='object_link'><a href="#token-property" title="AWS.Token.token (property)">token</a></span>, and optional
+<span class='object_link'><a href="#expireTime-property" title="AWS.Token.expireTime (property)">expireTime</a></span>.
+Creating a <code>Token</code> object allows you to pass around your
+token to configuration and service objects.</p>
 
 <p>Note that this class typically does not need to be constructed manually,
 as the <span class='object_link'><a href="Config.html" title="AWS.Config (class)">AWS.Config</a></span> and <span class='object_link'><a href="Service.html" title="AWS.Service (class)">AWS.Service</a></span> classes both accept simple
-options hashes with the three keys. These structures will be converted
-into Credentials objects automatically.</p>
+options hashes with the two keys. The token from this object will be used
+automatically in operations which require them.</p>
 
-<h2>Expiring and Refreshing Credentials</h2>
+<h2>Expiring and Refreshing Token</h2>
 
-<p>Occasionally credentials can expire in the middle of a long-running
+<p>Occasionally token can expire in the middle of a long-running
 application. In this case, the SDK will automatically attempt to
-refresh the credentials from the storage location if the Credentials
-class implements the <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span> method.</p>
+refresh the token from the storage location if the Token
+class implements the <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span> method.</p>
 
-<p>If you are implementing a credential storage location, you
-will want to create a subclass of the <code>Credentials</code> class and
-override the <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span> method. This method allows credentials to be
+<p>If you are implementing a token storage location, you
+will want to create a subclass of the <code>Token</code> class and
+override the <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span> method. This method allows token to be
 retrieved from the backing store, be it a file system, database, or
-some network storage. The method should reset the credential attributes
+some network storage. The method should reset the token attributes
 on the object.</p>
 
 
@@ -167,7 +167,7 @@ on the object.</p>
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="AnonymousCredentials.html" title="AWS.AnonymousCredentials (class)">AWS.AnonymousCredentials</a></span>, <span class='object_link'><a href="CredentialProviderChain.html" title="AWS.CredentialProviderChain (class)">AWS.CredentialProviderChain</a></span>, <span class='object_link'><a href="EnvironmentCredentials.html" title="AWS.EnvironmentCredentials (class)">AWS.EnvironmentCredentials</a></span>, <span class='object_link'><a href="FileSystemCredentials.html" title="AWS.FileSystemCredentials (class)">AWS.FileSystemCredentials</a></span>, <span class='object_link'><a href="SharedIniFileCredentials.html" title="AWS.SharedIniFileCredentials (class)">AWS.SharedIniFileCredentials</a></span>, <span class='object_link'><a href="SharedJSONFileCredentials.html" title="AWS.SharedJSONFileCredentials (class)">AWS.SharedJSONFileCredentials</a></span></p>
+  <p class="children"><span class='object_link'><a href="StaticTokenProvider.html" title="AWS.StaticTokenProvider (class)">AWS.StaticTokenProvider</a></span>, <span class='object_link'><a href="TokenProviderChain.html" title="AWS.TokenProviderChain (class)">AWS.TokenProviderChain</a></span></p>
 </div>
 
 
@@ -181,7 +181,7 @@ on the object.</p>
     <li class="public ">
   <span class="summary_signature">
     
-      <a href="#constructor-property" title="AWS.Credentials">new <strong>AWS.Credentials</strong>() &#x21d2; void </a>
+      <a href="#constructor-property" title="AWS.Token">new <strong>AWS.Token</strong>(options) &#x21d2; void </a>
     
 
     
@@ -199,7 +199,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A credentials object can be created using positional arguments or an options hash.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a Token object with a given set of information in options hash.</p>
 </div></span>
   
 </li>
@@ -213,33 +213,6 @@ on the object.</p>
   </h2>
 
   <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#accessKeyId-property" title="accessKeyId"><strong>accessKeyId</strong> &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    <span class="note title readonly">readwrite</span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>The AWS access key ID.</p>
-</div></span>
-  
-</li>
-
     
       <li class="public ">
   <span class="summary_signature">
@@ -262,7 +235,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Whether the credentials have been expired and require a refresh.</p>
+    <span class="summary_desc"><div class='inline'><p>Whether the token is expired and require a refresh.</p>
 </div></span>
   
 </li>
@@ -289,7 +262,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A time when credentials should be considered expired.</p>
+    <span class="summary_desc"><div class='inline'><p>A time when token should be considered expired.</p>
 </div></span>
   
 </li>
@@ -327,7 +300,7 @@ on the object.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#secretAccessKey-property" title="secretAccessKey"><strong>secretAccessKey</strong> &#x21d2; String </a>
+      <a href="#token-property" title="token"><strong>token</strong> &#x21d2; String </a>
     
 
     
@@ -345,34 +318,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The AWS secret access key.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#sessionToken-property" title="sessionToken"><strong>sessionToken</strong> &#x21d2; String </a>
-    
-
-    
-  </span>
-  
-  
-  
-    <span class="note title readonly">readwrite</span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>An optional AWS session token.</p>
+    <span class="summary_desc"><div class='inline'><p>Represents the literal token string.</p>
 </div></span>
   
 </li>
@@ -408,7 +354,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the existing credentials, refreshing them if they are not yet loaded or have expired.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the existing token, refreshing them if they are not yet loaded or have expired.</p>
 </div></span>
   
 </li>
@@ -458,7 +404,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Whether the credentials object should call <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Whether the Token object should call <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span>.</p>
 </div></span>
   
 </li>
@@ -483,7 +429,7 @@ on the object.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Refreshes the credentials.</p>
+    <span class="summary_desc"><div class='inline'><p>Refreshes the token.</p>
 </div></span>
   
 </li>
@@ -524,13 +470,7 @@ on the object.</p>
     <div class="method_details first">
   <h3 class="signature first" id="constructor-property">
   
-    
-      <span class="overload">new <strong>AWS.Credentials</strong>(accessKeyId, secretAccessKey, sessionToken = null) &#x21d2; <tt>void</tt> </span>
-    
-      <span class="overload">new <strong>AWS.Credentials</strong>(apiKeyId) &#x21d2; <tt>void</tt> </span>
-    
-      <span class="overload">new <strong>AWS.Credentials</strong>(options) &#x21d2; <tt>void</tt> </span>
-    
+    new <strong>AWS.Token</strong>(options) &#x21d2; <tt>void</tt> 
   
 
   
@@ -538,24 +478,7 @@ on the object.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A credentials object can be created using positional arguments or an options
-hash.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <p class="tag_title">Overloads:</p>
-  <ul class="overload">
-    
-      
-      <li class="overload_item">
-        <span class="signature">new <strong>AWS.Credentials</strong>(accessKeyId, secretAccessKey, sessionToken = null) &#x21d2; <tt>void</tt> </span>
-        <div class="docstring">
-  <div class="discussion">
-    <p>Creates a Credentials object with a given set of credential information
-as positional arguments.</p>
+    <p>Creates a Token object with a given set of information in options hash.</p>
 
 
   </div>
@@ -566,140 +489,10 @@ as positional arguments.</p>
     <p class="tag_title">Examples:</p>
     
       
-        <p class="example_title"><div class='inline'><p>Create a credentials object with AWS credentials</p>
+        <p class="example_title"><div class='inline'><p>Create a token object</p>
 </div></p>
       
-      <pre class="example code"><code>var creds = new AWS.Credentials(&#39;akid&#39;, &#39;secret&#39;, &#39;session&#39;);</code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>accessKeyId</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>the AWS access key ID</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>secretAccessKey</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>the AWS secret access key</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>sessionToken</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>null</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'><p>the optional AWS session token</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-
-</div>
-      </li>
-    
-      
-      <li class="overload_item">
-        <span class="signature">new <strong>AWS.Credentials</strong>(apiKeyId) &#x21d2; <tt>void</tt> </span>
-        <div class="docstring">
-  <div class="discussion">
-    <p>Creates a Credentials object with a BlueMix API key as the only positional
-argument.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-        <p class="example_title"><div class='inline'><p>Create a credential object with BlueMix API key to access AWS services (s3, etc.)</p>
-</div></p>
-      
-      <pre class="example code"><code></code></pre>
-    
-  </div>
-<p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>apiKeyId</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>the BlueMix API Key ID</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-
-
-</div>
-      </li>
-    
-      
-      <li class="overload_item">
-        <span class="signature">new <strong>AWS.Credentials</strong>(options) &#x21d2; <tt>void</tt> </span>
-        <div class="docstring">
-  <div class="discussion">
-    <p>Creates a Credentials object with a given set of credential information
-as an options hash.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-        <p class="example_title"><div class='inline'><p>Create a credentials object with AWS credentials</p>
-</div></p>
-      
-      <pre class="example code"><code>var creds = new AWS.Credentials({
-  accessKeyId: &#39;akid&#39;, secretAccessKey: &#39;secret&#39;, sessionToken: &#39;session&#39;
-});</code></pre>
+      <pre class="example code"><code>var token = new AWS.Token({ token: &#39;token&#39; });</code></pre>
     
   </div>
 
@@ -711,50 +504,32 @@ as an options hash.</p>
     <ul class="option">
       
         <li>
-          <span class="name">accessKeyId</span>
+          <span class="name">token</span>
           <span class="type">(<tt>String</tt>)</span>
           <span class="default">
             
           </span>
           
-            &mdash; <div class='inline'><p>the AWS access key ID</p>
+            &mdash; <div class='inline'><p>represents the literal token string.</p>
 </div>
           
         </li>
       
         <li>
-          <span class="name">secretAccessKey</span>
-          <span class="type">(<tt>String</tt>)</span>
+          <span class="name">expireTime</span>
+          <span class="type">(<tt>Date</tt>)</span>
           <span class="default">
             
           </span>
           
-            &mdash; <div class='inline'><p>the AWS secret access key</p>
-</div>
-          
-        </li>
-      
-        <li>
-          <span class="name">sessionToken</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-            &mdash; <div class='inline'><p>the optional AWS session token</p>
+            &mdash; <div class='inline'><p>field representing the time at which
+the token expires.</p>
 </div>
           
         </li>
       
     </ul>
   
-
-
-</div>
-      </li>
-    
-  </ul>
-
 
 
 </div>
@@ -767,47 +542,7 @@ as an options hash.</p>
     <h2>Property Details</h2>
     
       <div class="method_details first">
-  <h3 class="signature first" id="accessKeyId-property">
-  
-    <strong>accessKeyId</strong> &#x21d2; <tt>String</tt>  <span class="extras">(readwrite)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns the AWS access key ID.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>the AWS access key ID</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="expired-property">
+  <h3 class="signature first" id="expired-property">
   
     <strong>expired</strong> &#x21d2; <tt>Boolean</tt>  <span class="extras">(readwrite)</span>
   
@@ -817,8 +552,8 @@ as an options hash.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the credentials have been expired and
-require a refresh. Used in conjunction with <span class='object_link'><a href="#expireTime-property" title="AWS.Credentials.expireTime (property)">expireTime</a></span>.</p>
+    <p>Returns whether the token is expired and require a refresh. Used
+in conjunction with <span class='object_link'><a href="#expireTime-property" title="AWS.Token.expireTime (property)">expireTime</a></span>.</p>
 
 
   </div>
@@ -837,8 +572,8 @@ require a refresh. Used in conjunction with <span class='object_link'><a href="#
       
       
         &mdash;
-        <div class='inline'><p>whether the credentials have been expired and
-require a refresh. Used in conjunction with <span class='object_link'><a href="#expireTime-property" title="AWS.Credentials.expireTime (property)">expireTime</a></span>.</p>
+        <div class='inline'><p>whether the token is expired and require a refresh. Used
+in conjunction with <span class='object_link'><a href="#expireTime-property" title="AWS.Token.expireTime (property)">expireTime</a></span>.</p>
 </div>
       
     </li>
@@ -859,8 +594,8 @@ require a refresh. Used in conjunction with <span class='object_link'><a href="#
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a time when credentials should be considered expired. Used
-in conjunction with <span class='object_link'><a href="#expired-property" title="AWS.Credentials.expired (property)">expired</a></span>.</p>
+    <p>Returns a time when token should be considered expired. Used
+in conjunction with <span class='object_link'><a href="#expired-property" title="AWS.Token.expired (property)">expired</a></span>.</p>
 
 
   </div>
@@ -879,8 +614,8 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
       
       
         &mdash;
-        <div class='inline'><p>a time when credentials should be considered expired. Used
-in conjunction with <span class='object_link'><a href="#expired-property" title="AWS.Credentials.expired (property)">expired</a></span>.</p>
+        <div class='inline'><p>a time when token should be considered expired. Used
+in conjunction with <span class='object_link'><a href="#expired-property" title="AWS.Token.expired (property)">expired</a></span>.</p>
 </div>
       
     </li>
@@ -910,7 +645,7 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
   <p class="tag_title">Default Value:</p>
 <div class="examples">
 
-  <pre class="example code value_tag"><code>AWS.Credentials.expiryWindow = 15</code></pre>
+  <pre class="example code value_tag"><code>AWS.Token.expiryWindow = 15</code></pre>
 
 </div>
 
@@ -919,9 +654,9 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="secretAccessKey-property">
+  <h3 class="signature " id="token-property">
   
-    <strong>secretAccessKey</strong> &#x21d2; <tt>String</tt>  <span class="extras">(readwrite)</span>
+    <strong>token</strong> &#x21d2; <tt>String</tt>  <span class="extras">(readwrite)</span>
   
 
   
@@ -929,7 +664,8 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns the AWS secret access key.</p>
+    <p>Returns represents the literal token string. This will typically
+be a base64 encoded string.</p>
 
 
   </div>
@@ -948,47 +684,8 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
       
       
         &mdash;
-        <div class='inline'><p>the AWS secret access key</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="sessionToken-property">
-  
-    <strong>sessionToken</strong> &#x21d2; <tt>String</tt>  <span class="extras">(readwrite)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Returns an optional AWS session token.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>an optional AWS session token</p>
+        <div class='inline'><p>represents the literal token string. This will typically
+be a base64 encoded string.</p>
 </div>
       
     </li>
@@ -1015,9 +712,9 @@ in conjunction with <span class='object_link'><a href="#expired-property" title=
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the existing credentials, refreshing them if they are not yet loaded
-or have expired. Users should call this method before using <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span>,
-as this will not attempt to reload credentials when they are already
+    <p>Gets the existing token, refreshing them if they are not yet loaded
+or have expired. Users should call this method before using <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span>,
+as this will not attempt to reload token when they are already
 loaded into the object.</p>
 
 
@@ -1032,10 +729,9 @@ loaded into the object.</p>
       <span class="signature"><strong>function</strong>(err) { ... } </span>
       <div class="docstring">
   <div class="discussion">
-    <p>When this callback is called with no error, it means either credentials
-do not need to be refreshed or refreshed credentials information has
-been loaded into the object (as the <code>accessKeyId</code>, <code>secretAccessKey</code>,
-and <code>sessionToken</code> properties).</p>
+    <p>When this callback is called with no error, it means either token
+do not need to be refreshed or refreshed token information has
+been loaded into the object (as the <code>token</code> property).</p>
 
 
   </div>
@@ -1084,9 +780,9 @@ and <code>sessionToken</code> properties).</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a 'thenable' promise.
-Gets the existing credentials, refreshing them if they are not yet loaded
-or have expired. Users should call this method before using <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span>,
-as this will not attempt to reload credentials when they are already
+Gets the existing token, refreshing it if it's not yet loaded
+or have expired. Users should call this method before using <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span>,
+as this will not attempt to reload token when it's already
 loaded into the object.</p>
 
 <p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
@@ -1105,7 +801,7 @@ callback will be called if the promise is rejected.</p>
         <p class="example_title"><div class='inline'><p>Calling the <code>getPromise</code> method.</p>
 </div></p>
       
-      <pre class="example code"><code>var promise = credProvider.getPromise();
+      <pre class="example code"><code>var promise = tokenProvider.getPromise();
 promise.then(function() { ... }, function(err) { ... });</code></pre>
     
   </div>
@@ -1118,10 +814,9 @@ promise.then(function() { ... }, function(err) { ... });</code></pre>
         <span class="signature"><strong>function</strong>() { ... } </span>
         <div class="docstring">
   <div class="discussion">
-    <p>Called if the promise is fulfilled. When this callback is called, it
-means either credentials do not need to be refreshed or refreshed
-credentials information has been loaded into the object (as the
-<code>accessKeyId</code>, <code>secretAccessKey</code>, and <code>sessionToken</code> properties).</p>
+    <p>Called if the promise is fulfilled. When this callback is called, it means
+either token does not need to be refreshed or refreshed token information
+has been loaded into the object (as the <code>token</code> property).</p>
 
 
   </div>
@@ -1157,7 +852,7 @@ credentials information has been loaded into the object (as the
       
       
         &mdash;
-        <div class='inline'><p>if an error occurred, this value will be filled</p>
+        <div class='inline'><p>if an error occurred, this value will be filled.</p>
 </div>
       
     </li>
@@ -1212,7 +907,7 @@ logic.</p>
 </div>
   </div>
 
-<p>Returns whether the credentials object should call <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span>.</p>
+<p>Returns whether the Token object should call <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span>.</p>
 
 
   </div>
@@ -1231,7 +926,7 @@ logic.</p>
       
       
         &mdash;
-        <div class='inline'><p>whether the credentials object should call <span class='object_link'><a href="#refresh-property" title="AWS.Credentials.refresh (property)">refresh()</a></span></p>
+        <div class='inline'><p>whether the Token object should call <span class='object_link'><a href="#refresh-property" title="AWS.Token.refresh (property)">refresh()</a></span></p>
 </div>
       
     </li>
@@ -1256,14 +951,13 @@ logic.</p>
   <div class="note notetag">
     <strong>Note:</strong>
     <div class='inline'><p>Subclasses should override this class to reset the
-<span class='object_link'><a href="#accessKeyId-property" title="AWS.Credentials.accessKeyId (property)">accessKeyId</a></span>, <span class='object_link'><a href="#secretAccessKey-property" title="AWS.Credentials.secretAccessKey (property)">secretAccessKey</a></span> and optional <span class='object_link'><a href="#sessionToken-property" title="AWS.Credentials.sessionToken (property)">sessionToken</a></span>
-on the credentials object and then call the callback with
+<span class='object_link'><a href="#token-property" title="AWS.Token.token (property)">token</a></span> on the token object and then call the callback with
 any error information.</p>
 </div>
   </div>
 
-<p>Refreshes the credentials. Users should call <span class='object_link'><a href="#get-property" title="AWS.Credentials.get (property)">get()</a></span> before attempting
-to forcibly refresh credentials.</p>
+<p>Refreshes the token. Users should call <span class='object_link'><a href="#get-property" title="AWS.Token.get (property)">get()</a></span> before attempting
+to forcibly refresh token.</p>
 
 
   </div>
@@ -1278,8 +972,8 @@ to forcibly refresh credentials.</p>
       <div class="docstring">
   <div class="discussion">
     <p>When this callback is called with no error, it means refreshed
-credentials information has been loaded into the object (as the
-<code>accessKeyId</code>, <code>secretAccessKey</code>, and <code>sessionToken</code> properties).</p>
+token information has been loaded into the object (as the
+<code>token</code> property).</p>
 
 
   </div>
@@ -1316,7 +1010,7 @@ credentials information has been loaded into the object (as the
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="#get-property" title="AWS.Credentials.get (property)">get()</a></span></li>
+      <li><span class='object_link'><a href="#get-property" title="AWS.Token.get (property)">get()</a></span></li>
     
   </ul>
 
@@ -1335,8 +1029,8 @@ credentials information has been loaded into the object (as the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a 'thenable' promise.
-Refreshes the credentials. Users should call <span class='object_link'><a href="#get-property" title="AWS.Credentials.get (property)">get()</a></span> before attempting
-to forcibly refresh credentials.</p>
+Refreshes the token. Users should call <span class='object_link'><a href="#get-property" title="AWS.Token.get (property)">get()</a></span> before attempting
+to forcibly refresh token.</p>
 
 <p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
 The first callback will be called if the promise is fulfilled, and the second
@@ -1354,7 +1048,7 @@ callback will be called if the promise is rejected.</p>
         <p class="example_title"><div class='inline'><p>Calling the <code>refreshPromise</code> method.</p>
 </div></p>
       
-      <pre class="example code"><code>var promise = credProvider.refreshPromise();
+      <pre class="example code"><code>var promise = tokenProvider.refreshPromise();
 promise.then(function() { ... }, function(err) { ... });</code></pre>
     
   </div>
@@ -1368,8 +1062,8 @@ promise.then(function() { ... }, function(err) { ... });</code></pre>
         <div class="docstring">
   <div class="discussion">
     <p>Called if the promise is fulfilled. When this callback is called, it
-means refreshed credentials information has been loaded into the object
-(as the <code>accessKeyId</code>, <code>secretAccessKey</code>, and <code>sessionToken</code> properties).</p>
+means refreshed token information has been loaded into the object
+(as the <code>token</code> property).</p>
 
 
   </div>
@@ -1405,7 +1099,7 @@ means refreshed credentials information has been loaded into the object
       
       
         &mdash;
-        <div class='inline'><p>if an error occurred, this value will be filled</p>
+        <div class='inline'><p>if an error occurred, this value will be filled.</p>
 </div>
       
     </li>

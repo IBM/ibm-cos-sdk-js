@@ -253,6 +253,31 @@ this class.</p>
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadSsoSessionsFrom-property" title="loadSsoSessionsFrom"><strong>loadSsoSessionsFrom</strong>(options) &#x21d2; map&lt;String,String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Load sso sessions from config/credentials files and cache them for later use.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -325,8 +350,7 @@ this class.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Load configurations from config/credentials files and cache them
-for later use. If no file is specified it will try to load default
-files.</p>
+for later use. If no file is specified it will try to load default files.</p>
 
 
   </div>
@@ -416,6 +440,89 @@ pairs.</p>
 </div>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="loadSsoSessionsFrom-property">
+  
+    <strong>loadSsoSessionsFrom</strong>(options) &#x21d2; <tt>map&lt;String,String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Load sso sessions from config/credentials files and cache them
+for later use. If no file is specified it will try to load default file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>map</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>information describing the file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  
+    
+    
+    <p class="tag_title">Options Hash (<tt>options</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">filename</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>&#39;~/.aws/config&#39; or defined by
+AWS_CONFIG_FILE process env var</tt>
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>map&lt;String,String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>object containing contents from file in key-value
+pairs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
   </div>
 
 
@@ -423,7 +530,7 @@ pairs.</p>
 
       <div id="footer">
   <div>
-    Generated on Tue Apr 11 16:31:36 2023 by
+    Generated on Fri Sep 15 08:38:55 2023 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
     0.9.26 (ruby-2.7.0).
   </div>

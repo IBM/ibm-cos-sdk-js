@@ -853,6 +853,31 @@ be assigned to the global <span class='object_link'><a href="../AWS.html#config-
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getToken-property" title="getToken"><strong>getToken</strong>(callback) &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Loads token from the configuration object.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
   <h2>Loading and Setting Configuration Options
@@ -2662,6 +2687,104 @@ loaded and this error provides information why.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="getToken-property">
+  
+    <strong>getToken</strong>(callback) &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If you configure the SDK with static token, the token data should
+already be present in AWS.Config.token attribute. This method is primarily necessary
+to load token from asynchronous sources, or sources that can refresh
+token periodically.</p>
+</div>
+  </div>
+
+<p>Loads token from the configuration object. This is used internally
+by the SDK to ensure that refreshable <span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span> objects are properly
+refreshed and loaded when sending a request. If you want to ensure that
+your token is loaded prior to a request, you can use this method
+directly to provide accurate token data stored in the object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Getting your access token</p>
+</div></p>
+      
+      <pre class="example code"><code>AWS.config.getToken(function(err) {
+  if (err) console.log(err.stack); // token not loaded
+  else console.log(&quot;Token:&quot;, AWS.config.token.token);
+})</code></pre>
+    
+  </div>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when the AWS.Config.token have been properly set on the configuration object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if this is set, token was not successfully loaded and
+this error provides information why.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>AWS.Config.token</li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="loadFromPath-property">
   
     <strong>loadFromPath</strong>(path) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.Config (class)">Config</a></span></tt> 
@@ -2877,7 +3000,7 @@ the configuration object. Defaults to <code>false</code>.</p>
 
       <div id="footer">
   <div>
-    Generated on Tue Apr 11 16:31:36 2023 by
+    Generated on Fri Sep 15 08:38:55 2023 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
     0.9.26 (ruby-2.7.0).
   </div>

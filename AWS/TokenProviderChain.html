@@ -6,7 +6,7 @@
     <script type="text/javascript" src="/assets/js/awsdocs-boot.js"></script>
     <meta charset="utf-8">
 <title>
-  Class: AWS.CredentialProviderChain
+  Class: AWS.TokenProviderChain
   
     &mdash; IBM COS SDK for JavaScript
   
@@ -31,7 +31,7 @@
       charset="utf-8"
       src="../js/app.js"
       id="app-script"
-      pathid="AWS.CredentialProviderChain"
+      pathid="AWS.TokenProviderChain"
       relpath='../'></script>
   
 
@@ -54,10 +54,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (C)</a> &raquo;
+    <a href="../_index.html">Index (T)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span></span>
      &raquo; 
-    <span class="title">CredentialProviderChain</span>
+    <span class="title">TokenProviderChain</span>
   
 </div>
 
@@ -91,7 +91,7 @@
 	</div>
 </div>
         <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
-        <h1>Class: AWS.CredentialProviderChain
+        <h1>Class: AWS.TokenProviderChain
   
   
   
@@ -101,14 +101,14 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span></span>
+      <span class="inheritName"><span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next"><span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span></li>
+            <li class="next"><span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span></li>
           
-            <li class="next">AWS.CredentialProviderChain</li>
+            <li class="next">AWS.TokenProviderChain</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -130,42 +130,40 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/credentials/credential_provider_chain.js</dd>
+    <dd>lib/token/token_provider_chain.js</dd>
   </dl>
   
 </div>
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Creates a credential provider chain that searches for AWS credentials
-in a list of credential providers specified by the <span class='object_link'><a href="#providers-property" title="AWS.CredentialProviderChain.providers (property)">providers</a></span> property.</p>
+    <p>Creates a token provider chain that searches for token in a list of
+token providers specified by the <span class='object_link'><a href="#providers-property" title="AWS.TokenProviderChain.providers (property)">providers</a></span> property.</p>
 
-<p>By default, the chain will use the <span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span> to resolve credentials.
-These providers will look in the environment using the
-<span class='object_link'><a href="EnvironmentCredentials.html" title="AWS.EnvironmentCredentials (class)">AWS.EnvironmentCredentials</a></span> class with the 'AWS' and 'AMAZON' prefixes.</p>
+<p>By default, the chain will use the <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span> to resolve token.</p>
 
 <h2>Setting Providers</h2>
 
-<p>Each provider in the <span class='object_link'><a href="#providers-property" title="AWS.CredentialProviderChain.providers (property)">providers</a></span> list should be a function that returns
-a <span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span> object, or a hardcoded credentials object. The function
-form allows for delayed execution of the credential construction.</p>
+<p>Each provider in the <span class='object_link'><a href="#providers-property" title="AWS.TokenProviderChain.providers (property)">providers</a></span> list should be a function that returns
+a <span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span> object, or a hardcoded token object. The function
+form allows for delayed execution of the Token construction.</p>
 
-<h2>Resolving Credentials from a Chain</h2>
+<h2>Resolving Token from a Chain</h2>
 
-<p>Call <span class='object_link'><a href="#resolve-property" title="AWS.CredentialProviderChain.resolve (property)">resolve()</a></span> to return the first valid credential object that can be
+<p>Call <span class='object_link'><a href="#resolve-property" title="AWS.TokenProviderChain.resolve (property)">resolve()</a></span> to return the first valid token object that can be
 loaded by the provider chain.</p>
 
 <p>For example, to resolve a chain with a custom provider that checks a file
-on disk after the set of <span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span>:</p>
+on disk after the set of <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span>:</p>
 
-<pre class="code javascript"><code class="javascript">var diskProvider = new AWS.FileSystemCredentials('./creds.json');
-var chain = new AWS.CredentialProviderChain();
+<pre class="code javascript"><code class="javascript">var diskProvider = new FileTokenProvider('./token.json');
+var chain = new AWS.TokenProviderChain();
 chain.providers.push(diskProvider);
 chain.resolve();
 </code></pre>
 
 <p>The above code will return the <code>diskProvider</code> object if the
-file contains credentials and the <code>defaultProviders</code> do not contain
-any credential settings.</p>
+file contains token and the <code>defaultProviders</code> do not contain
+any token.</p>
 
 
   </div>
@@ -186,7 +184,7 @@ any credential settings.</p>
     <li class="public ">
   <span class="summary_signature">
     
-      <a href="#constructor-property" title="AWS.CredentialProviderChain">new <strong>AWS.CredentialProviderChain</strong>(providers) &#x21d2; void </a>
+      <a href="#constructor-property" title="AWS.TokenProviderChain">new <strong>AWS.TokenProviderChain</strong>(providers) &#x21d2; void </a>
     
 
     
@@ -204,7 +202,7 @@ any credential settings.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new CredentialProviderChain with a default set of providers specified by <span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a new TokenProviderChain with a default set of providers specified by <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
 </div></span>
   
 </li>
@@ -242,7 +240,7 @@ any credential settings.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>credentials/credential_provider_chain.js.</p>
+    <span class="summary_desc"><div class='inline'><p>The default set of providers used by a vanilla TokenProviderChain.</p>
 </div></span>
   
 </li>
@@ -251,7 +249,7 @@ any credential settings.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#providers-property" title="providers"><strong>providers</strong> &#x21d2; Array&lt;AWS.Credentials, Function&gt; </a>
+      <a href="#providers-property" title="providers"><strong>providers</strong> &#x21d2; Array&lt;AWS.Token, Function&gt; </a>
     
 
     
@@ -269,7 +267,7 @@ any credential settings.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A list of credentials objects or functions that return credentials objects.</p>
+    <span class="summary_desc"><div class='inline'><p>A list of token objects or functions that return token objects.</p>
 </div></span>
   
 </li>
@@ -282,8 +280,8 @@ any credential settings.</p>
   
   
   <h3 class="inherited">Properties inherited
-     from <span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Credentials.html#expired-property" title="AWS.Credentials.expired (property)">expired</a></span>, <span class='object_link'><a href="Credentials.html#expireTime-property" title="AWS.Credentials.expireTime (property)">expireTime</a></span>, <span class='object_link'><a href="Credentials.html#accessKeyId-property" title="AWS.Credentials.accessKeyId (property)">accessKeyId</a></span>, <span class='object_link'><a href="Credentials.html#secretAccessKey-property" title="AWS.Credentials.secretAccessKey (property)">secretAccessKey</a></span>, <span class='object_link'><a href="Credentials.html#sessionToken-property" title="AWS.Credentials.sessionToken (property)">sessionToken</a></span>, <span class='object_link'><a href="Credentials.html#expiryWindow-property" title="AWS.Credentials.expiryWindow (property)">expiryWindow</a></span></p>
+     from <span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Token.html#token-property" title="AWS.Token.token (property)">token</a></span>, <span class='object_link'><a href="Token.html#expireTime-property" title="AWS.Token.expireTime (property)">expireTime</a></span>, <span class='object_link'><a href="Token.html#expired-property" title="AWS.Token.expired (property)">expired</a></span>, <span class='object_link'><a href="Token.html#expiryWindow-property" title="AWS.Token.expiryWindow (property)">expiryWindow</a></span></p>
 
 
   <h2> Method Summary
@@ -295,7 +293,7 @@ any credential settings.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolve-property" title="resolve"><strong>resolve</strong>(callback) &#x21d2; AWS.CredentialProviderChain </a>
+      <a href="#resolve-property" title="resolve"><strong>resolve</strong>(callback) &#x21d2; AWS.TokenProviderChain </a>
     
 
     
@@ -311,7 +309,7 @@ any credential settings.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Resolves the provider chain by searching for the first set of credentials in <span class='object_link'><a href="#providers-property" title="AWS.CredentialProviderChain.providers (property)">providers</a></span>.</p>
+    <span class="summary_desc"><div class='inline'><p>Resolves the provider chain by searching for the first token in <span class='object_link'><a href="#providers-property" title="AWS.TokenProviderChain.providers (property)">providers</a></span>.</p>
 </div></span>
   
 </li>
@@ -349,8 +347,8 @@ any credential settings.</p>
   
   
   <h3 class="inherited">Methods inherited
-     from <span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">AWS.Credentials</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Credentials.html#needsRefresh-property" title="AWS.Credentials.needsRefresh (property)">needsRefresh</a></span>, <span class='object_link'><a href="Credentials.html#get-property" title="AWS.Credentials.get (property)">get</a></span>, <span class='object_link'><a href="Credentials.html#getPromise-property" title="AWS.Credentials.getPromise (property)">getPromise</a></span>, <span class='object_link'><a href="Credentials.html#refreshPromise-property" title="AWS.Credentials.refreshPromise (property)">refreshPromise</a></span>, <span class='object_link'><a href="Credentials.html#refresh-property" title="AWS.Credentials.refresh (property)">refresh</a></span></p>
+     from <span class='object_link'><a href="Token.html" title="AWS.Token (class)">AWS.Token</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Token.html#needsRefresh-property" title="AWS.Token.needsRefresh (property)">needsRefresh</a></span>, <span class='object_link'><a href="Token.html#get-property" title="AWS.Token.get (property)">get</a></span>, <span class='object_link'><a href="Token.html#getPromise-property" title="AWS.Token.getPromise (property)">getPromise</a></span>, <span class='object_link'><a href="Token.html#refreshPromise-property" title="AWS.Token.refreshPromise (property)">refreshPromise</a></span>, <span class='object_link'><a href="Token.html#refresh-property" title="AWS.Token.refresh (property)">refresh</a></span></p>
 
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
@@ -358,7 +356,7 @@ any credential settings.</p>
     <div class="method_details first">
   <h3 class="signature first" id="constructor-property">
   
-    new <strong>AWS.CredentialProviderChain</strong>(providers) &#x21d2; <tt>void</tt> 
+    new <strong>AWS.TokenProviderChain</strong>(providers) &#x21d2; <tt>void</tt> 
   
 
   
@@ -366,8 +364,8 @@ any credential settings.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new CredentialProviderChain with a default set of providers
-specified by <span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
+    <p>Creates a new TokenProviderChain with a default set of providers
+specified by <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
 
 
   </div>
@@ -396,7 +394,19 @@ specified by <span class='object_link'><a href="#defaultProviders-property" titl
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>credentials/credential_provider_chain.js</p>
+    <p>The default set of providers used by a vanilla TokenProviderChain.</p>
+
+<p>In the browser:</p>
+
+<pre class="code javascript"><code class="javascript">AWS.TokenProviderChain.defaultProviders = []
+</code></pre>
+
+<p>In Node.js:</p>
+
+<pre class="code javascript"><code class="javascript">AWS.TokenProviderChain.defaultProviders = [
+  function () { return new AWS.SSOTokenProvider(); },
+]
+</code></pre>
 
 
   </div>
@@ -405,15 +415,7 @@ specified by <span class='object_link'><a href="#defaultProviders-property" titl
   <p class="tag_title">Default Value:</p>
 <div class="examples">
 
-  <pre class="example code value_tag"><code>AWS.CredentialProviderChain.defaultProviders = [function () {
-  return new AWS.EnvironmentCredentials(&#39;AWS&#39;);
-}, function () {
-  return new AWS.EnvironmentCredentials(&#39;AMAZON&#39;);
-}, function () {
-  return new AWS.SharedJSONFileCredentials();
-}, function () {
-  return new AWS.SharedIniFileCredentials();
-}]</code></pre>
+  <pre class="example code value_tag"><code>AWS.TokenProviderChain.defaultProviders = []</code></pre>
 
 </div>
 
@@ -424,7 +426,7 @@ specified by <span class='object_link'><a href="#defaultProviders-property" titl
       <div class="method_details ">
   <h3 class="signature " id="providers-property">
   
-    <strong>providers</strong> &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span>, Function&gt;</tt>  <span class="extras">(readwrite)</span>
+    <strong>providers</strong> &#x21d2; <tt>Array&lt;<span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Token.html" title="AWS.Token (class)">Token</a></span>, Function&gt;</tt>  <span class="extras">(readwrite)</span>
   
 
   
@@ -432,11 +434,10 @@ specified by <span class='object_link'><a href="#defaultProviders-property" titl
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a list of credentials objects or functions that return credentials
+    <p>Returns a list of token objects or functions that return token
 objects. If the provider is a function, the function will be
 executed lazily when the provider needs to be checked for valid
-credentials. By default, this object will be set to the
-<span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
+token. By default, this object will be set to the <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
 
 
   </div>
@@ -450,16 +451,15 @@ credentials. By default, this object will be set to the
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span>, Function&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Token.html" title="AWS.Token (class)">Token</a></span>, Function&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>a list of credentials objects or functions that return credentials
+        <div class='inline'><p>a list of token objects or functions that return token
 objects. If the provider is a function, the function will be
 executed lazily when the provider needs to be checked for valid
-credentials. By default, this object will be set to the
-<span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
+token. By default, this object will be set to the <span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span>.</p>
 </div>
       
     </li>
@@ -469,7 +469,7 @@ credentials. By default, this object will be set to the
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="#defaultProviders-property" title="AWS.CredentialProviderChain.defaultProviders (property)">defaultProviders</a></span></li>
+      <li><span class='object_link'><a href="#defaultProviders-property" title="AWS.TokenProviderChain.defaultProviders (property)">defaultProviders</a></span></li>
     
   </ul>
 
@@ -485,7 +485,7 @@ credentials. By default, this object will be set to the
       <div class="method_details first">
   <h3 class="signature first" id="resolve-property">
   
-    <strong>resolve</strong>(callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.CredentialProviderChain (class)">CredentialProviderChain</a></span></tt> 
+    <strong>resolve</strong>(callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.TokenProviderChain (class)">TokenProviderChain</a></span></tt> 
   
 
   
@@ -493,8 +493,7 @@ credentials. By default, this object will be set to the
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Resolves the provider chain by searching for the first set of
-credentials in <span class='object_link'><a href="#providers-property" title="AWS.CredentialProviderChain.providers (property)">providers</a></span>.</p>
+    <p>Resolves the provider chain by searching for the first token in <span class='object_link'><a href="#providers-property" title="AWS.TokenProviderChain.providers (property)">providers</a></span>.</p>
 
 
   </div>
@@ -505,11 +504,11 @@ credentials in <span class='object_link'><a href="#providers-property" title="AW
   <p class="tag_title">Callback (<tt>callback</tt>):</p>
   <ul class="callback">
     <li class="callback_item">
-      <span class="signature"><strong>function</strong>(err, credentials) { ... } </span>
+      <span class="signature"><strong>function</strong>(err, token) { ... } </span>
       <div class="docstring">
   <div class="discussion">
-    <p>Called when the provider resolves the chain to a credentials object
-or null if no credentials can be found.</p>
+    <p>Called when the provider resolves the chain to a token object
+or null if no token can be found.</p>
 
 
   </div>
@@ -528,24 +527,22 @@ or null if no credentials can be found.</p>
       
       
         &mdash;
-        <div class='inline'><p>the error object returned if no credentials are
-found.</p>
+        <div class='inline'><p>the error object returned if no token is found.</p>
 </div>
       
     </li>
   
     <li>
       
-        <span class='name'>credentials</span>
+        <span class='name'>token</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Token.html" title="AWS.Token (class)">Token</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the credentials object resolved
-by the provider chain.</p>
+        <div class='inline'><p>the token object resolved by the provider chain.</p>
 </div>
       
     </li>
@@ -565,7 +562,7 @@ by the provider chain.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.CredentialProviderChain (class)">CredentialProviderChain</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="" title="AWS.TokenProviderChain (class)">TokenProviderChain</a></span></tt>)</span>
       
       
       
@@ -592,8 +589,7 @@ by the provider chain.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a 'thenable' promise.
-Resolves the provider chain by searching for the first set of
-credentials in <span class='object_link'><a href="#providers-property" title="AWS.CredentialProviderChain.providers (property)">providers</a></span>.</p>
+Resolves the provider chain by searching for the first token in <span class='object_link'><a href="#providers-property" title="AWS.TokenProviderChain.providers (property)">providers</a></span>.</p>
 
 <p>Two callbacks can be provided to the <code>then</code> method on the returned promise.
 The first callback will be called if the promise is fulfilled, and the second
@@ -612,7 +608,7 @@ callback will be called if the promise is rejected.</p>
 </div></p>
       
       <pre class="example code"><code>var promise = chain.resolvePromise();
-promise.then(function(credentials) { ... }, function(err) { ... });</code></pre>
+promise.then(function(token) { ... }, function(err) { ... });</code></pre>
     
   </div>
 
@@ -621,11 +617,11 @@ promise.then(function(credentials) { ... }, function(err) { ... });</code></pre>
     
       
       <li class="callback_item">
-        <span class="signature"><strong>function</strong>(credentials) { ... } </span>
+        <span class="signature"><strong>function</strong>(token) { ... } </span>
         <div class="docstring">
   <div class="discussion">
     <p>Called if the promise is fulfilled and the provider resolves the chain
-to a credentials object</p>
+to a token object</p>
 
 
   </div>
@@ -636,16 +632,15 @@ to a credentials object</p>
   
     <li>
       
-        <span class='name'>credentials</span>
+        <span class='name'>token</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Credentials.html" title="AWS.Credentials (class)">Credentials</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Token.html" title="AWS.Token (class)">Token</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>the credentials object resolved
-by the provider chain.</p>
+        <div class='inline'><p>the token object resolved by the provider chain.</p>
 </div>
       
     </li>
@@ -681,7 +676,7 @@ by the provider chain.</p>
       
       
         &mdash;
-        <div class='inline'><p>the error object returned if no credentials are found.</p>
+        <div class='inline'><p>the error object returned if no token is found.</p>
 </div>
       
     </li>
