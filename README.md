@@ -130,7 +130,7 @@ Feel free to use GitHub issues for tracking bugs and feature requests, but for h
 
 ## Language Support Policy
 
-IBM supports [current LTS releases](https://nodejs.org/en/about/releases/). IBM will deprecate language versions 90 days after a version reaches end-of-life. All clients will need to upgrade to a supported version before the end of the grace period.
+IBM supports [current LTS releases](https://nodejs.org/en/about/previous-releases). IBM will deprecate language versions 90 days after a version reaches end-of-life. All clients will need to upgrade to a supported version before the end of the grace period.
 
 ## License
 

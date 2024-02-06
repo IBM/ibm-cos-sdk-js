@@ -3102,6 +3102,12 @@
         "EnablePermanentRetention":{
           "shape":"BucketProtectionEnablePermanentRetention",
           "documentation":"Enable permanent retention for an object."
+        },
+        "IbmProtectionManagementState":{
+          "shape":"IbmProtectionManagementState",
+          "documentation":"<p>Indicates whether this bucket has an active protection management state. This header is only included if protection management is activated on a bucket</p>",
+          "location":"header",
+          "locationName":"x-ibm-protection-management-state"
         }
       }
     },
@@ -3343,6 +3349,12 @@
         "ObjectLockConfiguration": {
           "shape": "ObjectLockConfiguration",
           "documentation": "<p>The specified bucket's Object Lock configuration.</p>"
+        },
+        "IbmProtectionManagementState":{
+          "shape":"IbmProtectionManagementState",
+          "documentation":"<p>Indicates whether this bucket has an active protection management state. This header is only included if protection management is activated on a bucket</p>",
+          "location":"header",
+          "locationName":"x-ibm-protection-management-state"
         }
       },
       "payload": "ObjectLockConfiguration"
@@ -5403,6 +5415,12 @@
         }
       },
       "documentation": "<p>The container element for Object Lock configuration parameters.</p>"
+    },
+    "IbmProtectionManagementState":{
+      "type":"string",
+      "enum":[
+        "active"
+      ]
     },
     "ObjectLockEnabled": {
       "type": "string",

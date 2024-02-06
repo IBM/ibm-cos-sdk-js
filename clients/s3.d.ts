@@ -1584,6 +1584,10 @@ declare namespace S3 {
      * Enable permanent retention for an object.
      */
     EnablePermanentRetention?: BucketProtectionEnablePermanentRetention;
+    /**
+     * Indicates whether this bucket has an active protection management state. This header is only included if protection management is activated on a bucket
+     */
+    IbmProtectionManagementState?: IbmProtectionManagementState;
   }
   export interface GetBucketProtectionConfigurationRequest {
     Bucket: BucketName;
@@ -1704,6 +1708,10 @@ declare namespace S3 {
      * The specified bucket's Object Lock configuration.
      */
     ObjectLockConfiguration?: ObjectLockConfiguration;
+    /**
+     * Indicates whether this bucket has an active protection management state. This header is only included if protection management is activated on a bucket
+     */
+    IbmProtectionManagementState?: IbmProtectionManagementState;
   }
   export interface GetObjectLockConfigurationRequest {
     /**
@@ -2892,6 +2900,7 @@ declare namespace S3 {
      */
     Rule?: ObjectLockRule;
   }
+  export type IbmProtectionManagementState = "active"|string;
   export type ObjectLockEnabled = "Enabled"|string;
   export type ObjectLockEnabledForBucket = boolean;
   export interface ObjectLockLegalHold {
