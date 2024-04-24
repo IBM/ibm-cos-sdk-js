@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.13.4
+
+### Content
+
+#### Defect Fixes
+
+* COSSDK-100623: <https://github.com/IBM/ibm-cos-sdk-js/issues/96>
+* Internal fixes and improvements
+
 ## 1.13.3
 
 ### Content
