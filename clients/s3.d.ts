@@ -2335,6 +2335,14 @@ declare namespace S3 {
      * All of these tags must exist in the object's tag set in order for the rule to apply.
      */
     Tags?: TagSet;
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export interface LifecycleRuleFilter {
     /**
@@ -2345,6 +2353,14 @@ declare namespace S3 {
      * This tag must exist in the object's tag set in order for the rule to apply.
      */
     Tag?: Tag;
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
     And?: LifecycleRuleAndOperator;
   }
   export type LifecycleRules = LifecycleRule[];
@@ -2838,6 +2854,10 @@ declare namespace S3 {
      * Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. The value must be a non-zero positive integer. For information about the noncurrent days calculations, see How Amazon S3 Calculates When an Object Became Noncurrent in the Amazon S3 User Guide.
      */
     NoncurrentDays?: Days;
+    /**
+     * Specifies how many noncurrent versions Amazon S3 will retain. You can specify up to 100 noncurrent versions to retain. Amazon S3 will permanently delete any additional noncurrent versions beyond the specified number to retain. For more information about noncurrent versions, see Lifecycle configuration elements in the Amazon S3 User Guide.
+     */
+    NewerNoncurrentVersions?: VersionCount;
   }
   export interface NoncurrentVersionTransition {
     /**
@@ -2930,6 +2950,8 @@ declare namespace S3 {
     DefaultRetention?: DefaultRetention;
   }
   export type ObjectLockToken = string;
+  export type ObjectSizeGreaterThanBytes = number;
+  export type ObjectSizeLessThanBytes = number;
   export type ObjectStorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export interface ObjectVersion {
     /**
@@ -3694,6 +3716,7 @@ declare namespace S3 {
      * Specifies when an object transitions to a specified storage class. For more information about Amazon S3 lifecycle configuration rules, see Transitioning Objects Using Amazon S3 Lifecycle in the Amazon S3 User Guide.
      */
     Transition?: Transition;
+    NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export type Rules = Rule[];
@@ -3921,6 +3944,7 @@ declare namespace S3 {
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
   }
   export type Value = string;
+  export type VersionCount = number;
   export type VersionIdMarker = string;
   export interface VersioningConfiguration {
     /**
