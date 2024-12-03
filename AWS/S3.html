@@ -7395,6 +7395,13 @@ The <code>data</code> object has the following properties:</p>
 </li>
 </ul>
 </li>
+<li><code>NoncurrentVersionExpiration</code> &mdash; (<code>map</code>)  <p>Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime.</p>
+
+<ul>
+<li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  <p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. The value must be a non-zero positive integer. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>NewerNoncurrentVersions</code> &mdash; (<code>Integer</code>)  <p>Specifies how many noncurrent versions Amazon S3 will retain. You can specify up to 100 noncurrent versions to retain. Amazon S3 will permanently delete any additional noncurrent versions beyond the specified number to retain. For more information about noncurrent versions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html">Lifecycle configuration elements</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+</ul>
+</li>
 <li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  <p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in the <i>Amazon S3 User Guide</i>.</p>
 
 <ul>
@@ -7624,6 +7631,8 @@ The <code>data</code> object has the following properties:</p>
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 <li><code>And</code> &mdash; (<code>map</code>)  <p>This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.</p>
 
 <ul>
@@ -7635,6 +7644,8 @@ The <code>data</code> object has the following properties:</p>
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 </ul>
 </li>
 </ul>
@@ -7670,6 +7681,7 @@ The <code>data</code> object has the following properties:</p>
 
 <ul>
 <li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  <p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. The value must be a non-zero positive integer. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>NewerNoncurrentVersions</code> &mdash; (<code>Integer</code>)  <p>Specifies how many noncurrent versions Amazon S3 will retain. You can specify up to 100 noncurrent versions to retain. Amazon S3 will permanently delete any additional noncurrent versions beyond the specified number to retain. For more information about noncurrent versions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html">Lifecycle configuration elements</a> in the <i>Amazon S3 User Guide</i>.</p></li>
 </ul>
 </li>
 <li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  <p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in the <i>Amazon S3 User Guide</i>.</p>
@@ -14407,6 +14419,8 @@ subsequent event callback registration.</p>
       {
         Filter: { /* required */
           And: {
+            ObjectSizeGreaterThan: &#39;NUMBER_VALUE&#39;,
+            ObjectSizeLessThan: &#39;NUMBER_VALUE&#39;,
             Prefix: &#39;STRING_VALUE&#39;,
             Tags: [
               {
@@ -14416,6 +14430,8 @@ subsequent event callback registration.</p>
               /* more items */
             ]
           },
+          ObjectSizeGreaterThan: &#39;NUMBER_VALUE&#39;,
+          ObjectSizeLessThan: &#39;NUMBER_VALUE&#39;,
           Prefix: &#39;STRING_VALUE&#39;,
           Tag: {
             Key: &#39;STRING_VALUE&#39;, /* required */
@@ -14433,6 +14449,7 @@ subsequent event callback registration.</p>
         },
         ID: &#39;STRING_VALUE&#39;,
         NoncurrentVersionExpiration: {
+          NewerNoncurrentVersions: &#39;NUMBER_VALUE&#39;,
           NoncurrentDays: &#39;NUMBER_VALUE&#39;
         },
         Prefix: &#39;STRING_VALUE&#39;,
@@ -14500,6 +14517,8 @@ s3.putBucketLifecycle(params, function(err, data) {
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 <li><code>And</code> &mdash; (<code>map</code>)  <p>This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.</p>
 
 <ul>
@@ -14511,6 +14530,8 @@ s3.putBucketLifecycle(params, function(err, data) {
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 </ul>
 </li>
 </ul>
@@ -14546,6 +14567,7 @@ s3.putBucketLifecycle(params, function(err, data) {
 
 <ul>
 <li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  <p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. The value must be a non-zero positive integer. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>NewerNoncurrentVersions</code> &mdash; (<code>Integer</code>)  <p>Specifies how many noncurrent versions Amazon S3 will retain. You can specify up to 100 noncurrent versions to retain. Amazon S3 will permanently delete any additional noncurrent versions beyond the specified number to retain. For more information about noncurrent versions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html">Lifecycle configuration elements</a> in the <i>Amazon S3 User Guide</i>.</p></li>
 </ul>
 </li>
 <li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  <p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in the <i>Amazon S3 User Guide</i>.</p>
@@ -14734,6 +14756,8 @@ subsequent event callback registration.</p>
       {
         Filter: { /* required */
           And: {
+            ObjectSizeGreaterThan: &#39;NUMBER_VALUE&#39;,
+            ObjectSizeLessThan: &#39;NUMBER_VALUE&#39;,
             Prefix: &#39;STRING_VALUE&#39;,
             Tags: [
               {
@@ -14743,6 +14767,8 @@ subsequent event callback registration.</p>
               /* more items */
             ]
           },
+          ObjectSizeGreaterThan: &#39;NUMBER_VALUE&#39;,
+          ObjectSizeLessThan: &#39;NUMBER_VALUE&#39;,
           Prefix: &#39;STRING_VALUE&#39;,
           Tag: {
             Key: &#39;STRING_VALUE&#39;, /* required */
@@ -14760,6 +14786,7 @@ subsequent event callback registration.</p>
         },
         ID: &#39;STRING_VALUE&#39;,
         NoncurrentVersionExpiration: {
+          NewerNoncurrentVersions: &#39;NUMBER_VALUE&#39;,
           NoncurrentDays: &#39;NUMBER_VALUE&#39;
         },
         Prefix: &#39;STRING_VALUE&#39;,
@@ -14826,6 +14853,8 @@ s3.putBucketLifecycleConfiguration(params, function(err, data) {
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 <li><code>And</code> &mdash; (<code>map</code>)  <p>This is used in a Lifecycle Rule Filter to apply a logical AND to two or more predicates. The Lifecycle Rule will apply to any object matching all of the predicates configured inside the And operator.</p>
 
 <ul>
@@ -14837,6 +14866,8 @@ s3.putBucketLifecycleConfiguration(params, function(err, data) {
 <li><code>Value</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Value of the tag.</p></li>
 </ul>
 </li>
+<li><code>ObjectSizeGreaterThan</code> &mdash; (<code>Integer</code>)  <p>Minimum object size to which the rule applies.</p></li>
+<li><code>ObjectSizeLessThan</code> &mdash; (<code>Integer</code>)  <p>Maximum object size to which the rule applies.</p></li>
 </ul>
 </li>
 </ul>
@@ -14872,6 +14903,7 @@ s3.putBucketLifecycleConfiguration(params, function(err, data) {
 
 <ul>
 <li><code>NoncurrentDays</code> &mdash; (<code>Integer</code>)  <p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. The value must be a non-zero positive integer. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p></li>
+<li><code>NewerNoncurrentVersions</code> &mdash; (<code>Integer</code>)  <p>Specifies how many noncurrent versions Amazon S3 will retain. You can specify up to 100 noncurrent versions to retain. Amazon S3 will permanently delete any additional noncurrent versions beyond the specified number to retain. For more information about noncurrent versions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html">Lifecycle configuration elements</a> in the <i>Amazon S3 User Guide</i>.</p></li>
 </ul>
 </li>
 <li><code>AbortIncompleteMultipartUpload</code> &mdash; (<code>map</code>)  <p>Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config"> Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration</a> in the <i>Amazon S3 User Guide</i>.</p>
@@ -16667,7 +16699,7 @@ subsequent event callback registration.</p>
     <p>Uses the <code>acl</code> subresource to set the access control list (ACL) permissions for a new or existing object in an S3 bucket. You must have <code>WRITE&#95;ACP</code> permission to set the ACL of an object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions">What permissions can I grant?</a> in the <i>Amazon S3 User Guide</i>.</p>
 
 
-<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <dl> <dt>Permissions</dt> <dd> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#120;&#121;&#x7a;&#x40;&#97;&#109;&#97;&#122;&#x6f;&#x6e;&#x2e;&#x63;&#x6f;&#109;">&#120;&#x79;&#122;&#x40;&#x61;&#109;&#x61;&#122;&#111;&#x6e;&#46;&#99;&#x6f;&#x6d;</a>", emailAddress="<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x61;&#x62;&#x63;&#x40;&#97;&#109;&#x61;&#122;&#x6f;&#x6e;&#46;&#x63;&#x6f;&#x6d;">&#97;&#x62;&#99;&#64;&#x61;&#109;&#97;&#122;&#x6f;&#110;&#x2e;&#99;&#111;&#x6d;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> </dd> <dt>Grantee Values</dt> <dd> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> </dd> <dt>Versioning</dt> <dd> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> </dd> </dl> <p>The following operations are related to <code>PutObjectAcl</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
+<p> <p>This action is not supported by Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <dl> <dt>Permissions</dt> <dd> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#120;&#x79;&#x7a;&#x40;&#x61;&#x6d;&#97;&#122;&#x6f;&#x6e;&#46;&#x63;&#111;&#x6d;">&#x78;&#x79;&#122;&#64;&#97;&#109;&#97;&#122;&#x6f;&#110;&#46;&#99;&#111;&#109;</a>", emailAddress="<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#97;&#x62;&#x63;&#64;&#97;&#109;&#x61;&#x7a;&#111;&#110;&#46;&#99;&#111;&#x6d;">&#97;&#98;&#x63;&#64;&#x61;&#x6d;&#97;&#122;&#x6f;&#110;&#46;&#x63;&#x6f;&#x6d;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> </dd> <dt>Grantee Values</dt> <dd> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> </dd> <dt>Versioning</dt> <dd> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> </dd> </dl> <p>The following operations are related to <code>PutObjectAcl</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
 
 
   </div>
@@ -20024,7 +20056,7 @@ subsequent event callback registration.</p>
 
       <div id="footer">
   <div>
-    Generated on Mon Apr 22 14:57:02 2024 by
+    Generated on Tue Dec  3 06:21:57 2024 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
     0.9.36 (ruby-2.7.0).
   </div>
