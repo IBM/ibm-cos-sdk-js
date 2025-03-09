@@ -13637,7 +13637,7 @@ var util = {
 
   uuid: {
     v4: function uuidV4() {
-      return require('uuid').v4();
+      return require('crypto').randomUUID();
     }
   },
 
