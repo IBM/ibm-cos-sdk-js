@@ -1320,6 +1320,31 @@ var s3 = new AWS.S3();
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#listBucketReplicationFailures-property" title="listBucketReplicationFailures"><strong>listBucketReplicationFailures</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><note> <p>List long-term replication failures for a given bucket.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#listBuckets-property" title="listBuckets"><strong>listBuckets</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
     
 
@@ -1665,6 +1690,31 @@ var s3 = new AWS.S3();
 
   
     <span class="summary_desc"><div class='inline'><p><div class="note"><strong>Note:</strong> This operation is not supported by directory buckets.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#putBucketReplicationReattempt-property" title="putBucketReplicationReattempt"><strong>putBucketReplicationReattempt</strong>(params = {}, callback) &#x21d2; AWS.Request </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p><note> <p>Schedules reattempt of cold replication failures on the next reattempt cycle.</p>.</p>
 </div></span>
   
 </li>
@@ -11656,6 +11706,212 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="listBucketReplicationFailures-property">
+  
+    <strong>listBucketReplicationFailures</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p><note> <p>List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.</p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the listBucketReplicationFailures operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39;, /* required */
+  ContinuationToken: &#39;STRING_VALUE&#39;,
+  EncodingType: url,
+  FirstSyncAttemptedBefore: &#39;STRING_VALUE&#39;,
+  MaxKeys: &#39;NUMBER_VALUE&#39;
+};
+s3.listBucketReplicationFailures(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.</p></li>
+<li><code>ContinuationToken</code> &mdash; (<code>String</code>)  <p>Obfuscated string token for pagination. This is returned on incomplete listing responses.</p></li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p>Maximum number of entries to return (default 1000).</p></li>
+<li><code>FirstSyncAttemptedBefore</code> &mdash; (<code>String</code>)  <p>Epoch ms time from which to start the listing (inclusive if time exactly matches an entry). The failures are sorted by the time at which the syncs were originally triggered on the source bucket.</p></li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  <p>Encoding type to use for Key. Only valid value is url.</p>
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.
+The <code>data</code> object has the following properties:</p>
+
+<ul>
+<li><code>ListReplicationFailureResult</code> &mdash; (<code>map</code>)
+
+<ul>
+<li><code>Name</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Name of bucket being listed.</p></li>
+<li><code>FirstSyncAttemptedBefore</code> &mdash; (<code>String</code>)  <p>Value provided via the <code> first-sync-attempted-before </code> request param.</p></li>
+<li><code>MaxKeys</code> &mdash; (<code>Integer</code>)  <p>Value provided via the <code> max-keys </code> request param. Maximum accepted value is 1000.</p></li>
+<li><code>IsTruncated</code> &mdash; <strong>required</strong> &mdash; (<code>Boolean</code>)  <p>Whether or not the results are truncated.</p></li>
+<li><code>EncodingType</code> &mdash; (<code>String</code>)  <p>Encoding type, if specified in the request.</p>
+ Possible values include:
+
+<ul>
+<li><code>"url"</code></li>
+</ul>
+</li>
+<li><code>KeyCount</code> &mdash; <strong>required</strong> &mdash; (<code>Integer</code>)  <p> <code>KeyCount</code> is the number of keys returned with this request. <code>KeyCount</code> will always be less than or equal to the <code>MaxKeys</code> field. For example, if you ask for 50 keys, your result will include 50 keys or fewer.</p></li>
+<li><code>ContinuationToken</code> &mdash; (<code>String</code>)  <p>If <code>ContinuationToken</code> was sent with the request, it is included in the response. You can use the returned <code>ContinuationToken</code> for pagination of the list response. You can use this <code>ContinuationToken</code> for pagination of the list results.</p></li>
+<li><code>NextContinuationToken</code> &mdash; (<code>String</code>)  <p> <code> NextContinuationToken</code> is sent when <code>isTruncated</code> is true, Next continuation token. Present if this result was truncated.</p></li>
+<li><code>Contents</code> &mdash; <strong>required</strong> &mdash; (<code>Array&lt;map&gt;</code>)  <p>Metadata about each object returned.</p>
+
+<ul>
+<li><code>Key</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>Name of object that has failed sync.</p></li>
+<li><code>VersionId</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>UUID of object version that has failed sync.</p></li>
+<li><code>SyncType</code> &mdash; <strong>required</strong> &mdash; (<code>String</code>)  <p>The type of sync that has failed. This shall be either <code> content </code> , <code> metadata </code> or <code> objectLock </code>.</p></li>
+<li><code>FirstSyncAttempted</code> &mdash; <strong>required</strong> &mdash; (<code>Date</code>)  <p>Timestamp of last sync attempt from primary sync queue.</p></li>
+<li><code>LastSyncAttempted</code> &mdash; <strong>required</strong> &mdash; (<code>Date</code>)  <p>Timestamp of most recent sync attempt from failure sync queue.</p></li>
+<li><code>SyncFailureCause</code> &mdash; (<code>String</code>)  <p>Descriptive message regarding the cause of the most recent sync attempt failure.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="listBuckets-property">
   
     <strong>listBuckets</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -15516,6 +15772,163 @@ subsequent event callback registration.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="putBucketReplicationReattempt-property">
+  
+    <strong>putBucketReplicationReattempt</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p><note> <p>Schedules reattempt of cold replication failures on the next reattempt cycle.</p></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Calling the putBucketReplicationReattempt operation</p>
+</div></p>
+      
+      <pre class="example code"><code>var params = {
+  Bucket: &#39;STRING_VALUE&#39; /* required */
+};
+s3.putBucketReplicationReattempt(params, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li><code>Bucket</code> &mdash; (<code>String</code>)  <p>The bucket name.</p></li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+  <p class="tag_title">Callback (<tt>callback</tt>):</p>
+  <ul class="callback">
+    <li class="callback_item">
+      <span class="signature"><strong>function</strong>(err, data) { ... } </span>
+      <div class="docstring">
+  <div class="discussion">
+    <p>Called when a response from the service is returned. If a
+callback is not supplied, you must call <span class='object_link'><a href="Request.html#send-property" title="AWS.Request.send (property)">AWS.Request.send()</a></span>
+on the returned request object to initiate the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Context (<tt>this</tt>):</p>
+<ul class="context">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Response.html" title="AWS.Response (class)">Response</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the response object containing error, data properties, and the original request object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>err</span>
+      
+      
+        <span class='type'>(<tt>Error</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the error object returned from the request.
+Set to <code>null</code> if the request is successful.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the de-serialized data returned from
+the request. Set to <code>null</code> if a request error occurs.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div>
+    </li>
+  </ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handle to the operation request for
+subsequent event callback registration.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="putBucketTagging-property">
   
     <strong>putBucketTagging</strong>(params = {}, callback) &#x21d2; <tt><span class='object_link'><a href="../AWS.html" title="AWS (module)">AWS</a></span>.<span class='object_link'><a href="Request.html" title="AWS.Request (class)">Request</a></span></tt> 
@@ -16684,7 +17097,7 @@ subsequent event callback registration.</p>
     <div class="note"><strong>Note:</strong> This operation is not supported by directory buckets. </div>
 
 
-<p> <p>Uses the <code>acl</code> subresource to set the access control list (ACL) permissions for a new or existing object in an S3 bucket. You must have the <code>WRITE&#95;ACP</code> permission to set the ACL of an object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions">What permissions can I grant?</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This functionality is not supported for Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <dl> <dt>Permissions</dt> <dd> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#x78;&#x79;&#122;&#x40;&#97;&#109;&#x61;&#x7a;&#111;&#x6e;&#46;&#99;&#111;&#x6d;">&#120;&#x79;&#122;&#64;&#97;&#x6d;&#x61;&#x7a;&#111;&#x6e;&#x2e;&#x63;&#x6f;&#109;</a>", emailAddress="<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x61;&#98;&#x63;&#64;&#97;&#109;&#97;&#x7a;&#111;&#110;&#x2e;&#99;&#111;&#x6d;">&#97;&#x62;&#99;&#64;&#x61;&#x6d;&#x61;&#122;&#x6f;&#110;&#x2e;&#x63;&#111;&#x6d;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> </dd> <dt>Grantee Values</dt> <dd> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> </dd> <dt>Versioning</dt> <dd> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> </dd> </dl> <p>The following operations are related to <code>PutObjectAcl</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
+<p> <p>Uses the <code>acl</code> subresource to set the access control list (ACL) permissions for a new or existing object in an S3 bucket. You must have the <code>WRITE&#95;ACP</code> permission to set the ACL of an object. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions">What permissions can I grant?</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This functionality is not supported for Amazon S3 on Outposts.</p> <p>Depending on your application needs, you can choose to set the ACL on an object using either the request body or the headers. For example, if you have an existing application that updates a bucket ACL using the request body, you can continue to use that approach. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a> in the <i>Amazon S3 User Guide</i>.</p> <important> <p>If your bucket uses the bucket owner enforced setting for S3 Object Ownership, ACLs are disabled and no longer affect permissions. You must use policies to grant access to your bucket and the objects in it. Requests to set ACLs or update ACLs fail and return the <code>AccessControlListNotSupported</code> error code. Requests to read ACLs are still supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling object ownership</a> in the <i>Amazon S3 User Guide</i>.</p> </important> <dl> <dt>Permissions</dt> <dd> <p>You can set access permissions using one of the following methods:</p> <ul> <li> <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify the canned ACL name as the value of <code>x-amz-ac</code>l. If you use this header, you cannot use other access control-specific headers in your request. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code> headers. When using these headers, you specify explicit access permissions and grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the permission. If you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header to set a canned ACL. These parameters map to the set of permissions that Amazon S3 supports in an ACL. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code> – if the value specified is the canonical user ID of an Amazon Web Services account</p> </li> <li> <p> <code>uri</code> – if you are granting permissions to a predefined group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is the email address of an Amazon Web Services account</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> <p>For example, the following <code>x-amz-grant-read</code> header grants list objects permission to the two Amazon Web Services accounts identified by their email addresses.</p> <p> <code>x-amz-grant-read: emailAddress="<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#120;&#x79;&#x7a;&#64;&#97;&#x6d;&#x61;&#122;&#x6f;&#110;&#46;&#99;&#111;&#x6d;">&#x78;&#121;&#x7a;&#64;&#97;&#109;&#97;&#x7a;&#x6f;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;</a>", emailAddress="<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#97;&#98;&#99;&#64;&#x61;&#109;&#97;&#122;&#111;&#x6e;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#x62;&#x63;&#64;&#97;&#x6d;&#x61;&#x7a;&#111;&#110;&#46;&#x63;&#x6f;&#109;</a>" </code> </p> </li> </ul> <p>You can use either a canned ACL or specify access permissions explicitly. You cannot do both.</p> </dd> <dt>Grantee Values</dt> <dd> <p>You can specify the person (grantee) to whom you're assigning access rights (using request elements) in the following ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="CanonicalUser"&gt;&lt;ID&gt;&lt;&gt;ID&lt;&gt;&lt;/ID&gt;&lt;DisplayName&gt;&lt;&gt;GranteesEmail&lt;&gt;&lt;/DisplayName&gt; &lt;/Grantee&gt;</code> </p> <p>DisplayName is optional and ignored in the request.</p> </li> <li> <p>By URI:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="Group"&gt;&lt;URI&gt;&lt;&gt;<a href="http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;">http://acs.amazonaws.com/groups/global/AuthenticatedUsers&amp;lt;&amp;gt;&amp;lt;/URI&amp;gt;&amp;lt;/Grantee&amp;gt;</a></code> </p> </li> <li> <p>By Email address:</p> <p> <code>&lt;Grantee xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>" xsi:type="AmazonCustomerByEmail"&gt;&lt;EmailAddress&gt;&lt;&gt;Grantees@email.com&lt;&gt;&lt;/EmailAddress&gt;lt;/Grantee&gt;</code> </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET Object acl request, appears as the CanonicalUser.</p> <div class="note"><strong>Note:</strong> Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: <ul> <li> US East (N. Virginia) </li> <li> US West (N. California) </li> <li> US West (Oregon) </li> <li> Asia Pacific (Singapore) </li> <li> Asia Pacific (Sydney) </li> <li> Asia Pacific (Tokyo) </li> <li> Europe (Ireland) </li> <li> South America (São Paulo) </li> </ul> For a list of all the Amazon S3 supported Regions and endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </div> </li> </ul> </dd> <dt>Versioning</dt> <dd> <p>The ACL of an object is set at the object version level. By default, PUT sets the ACL of the current version of an object. To set the ACL of a different version, use the <code>versionId</code> subresource.</p> </dd> </dl> <p>The following operations are related to <code>PutObjectAcl</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html">CopyObject</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> </p> </li> </ul></p>
 
 
   </div>
@@ -20044,9 +20457,9 @@ subsequent event callback registration.</p>
 
       <div id="footer">
   <div>
-    Generated on Mon Mar 24 09:16:58 2025 by
+    Generated on Wed Dec  3 07:02:35 2025 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-    0.9.36 (ruby-2.7.0).
+    0.9.36 (ruby-3.1.2).
   </div>
   <div id="awsdocs-legal-zone-copyright"></div>
 </div>
