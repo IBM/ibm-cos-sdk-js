@@ -1,7 +1,7 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.14.1",
+  "version": "1.14.2",
   "author": {
     "name": "IBM",
     "email": "",
@@ -24,7 +24,7 @@
     "karma-jasmine": "^1.1.2",
     "mocha": "^5.2.0",
     "typescript": "^3.9.10",
-    "uglify-js": "^3.17.4"
+    "uglify-js": "^3.19.3"
   },
   "dependencies": {
     "buffer": "^4.9.2",

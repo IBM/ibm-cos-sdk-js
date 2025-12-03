@@ -423,6 +423,22 @@ declare class S3 extends S3Customizations {
    */
   putBucketReplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   *  Schedules reattempt of cold replication failures on the next reattempt cycle.
+   */
+  putBucketReplicationReattempt(params: S3.Types.PutBucketReplicationReattemptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Schedules reattempt of cold replication failures on the next reattempt cycle.
+   */
+  putBucketReplicationReattempt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.
+   */
+  listBucketReplicationFailures(params: S3.Types.ListBucketReplicationFailuresRequest, callback?: (err: AWSError, data: S3.Types.ListBucketReplicationFailuresOutput) => void): Request<S3.Types.ListBucketReplicationFailuresOutput, AWSError>;
+  /**
+   *  List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.
+   */
+  listBucketReplicationFailures(callback?: (err: AWSError, data: S3.Types.ListBucketReplicationFailuresOutput) => void): Request<S3.Types.ListBucketReplicationFailuresOutput, AWSError>;
+  /**
    *  This operation is not supported by directory buckets.  Sets the tags for a bucket. Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost Allocation and Tagging and Using Cost Allocation in Amazon S3 Bucket Tags.   When this operation sets the tags for a bucket, it will overwrite any current tags the bucket already has. You cannot use this operation to add tags to an existing list of tags.  To use this operation, you must have permissions to perform the s3:PutBucketTagging action. The bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see Permissions Related to Bucket Subresource Operations and Managing Access Permissions to Your Amazon S3 Resources.  PutBucketTagging has the following special errors. For more Amazon S3 errors see, Error Responses.    InvalidTag - The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For more information, see Using Cost Allocation in Amazon S3 Bucket Tags.    MalformedXML - The XML provided does not match the schema.    OperationAborted - A conflicting conditional action is currently in progress against this resource. Please try again.    InternalError - The service was unable to apply the provided tag to the bucket.   The following operations are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
    */
   putBucketTagging(params: S3.Types.PutBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -3174,6 +3190,37 @@ declare namespace S3 {
      */
     Token?: ObjectLockToken;
   }
+  export interface PutBucketReplicationReattemptRequest {
+    /**
+     * The bucket name.
+     */
+    Bucket: BucketName;
+  }
+  export interface ListBucketReplicationFailuresRequest {
+    /**
+     * List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.
+     */
+    Bucket: BucketName;
+    /**
+     * Obfuscated string token for pagination. This is returned on incomplete listing responses.
+     */
+    ContinuationToken?: Token;
+    /**
+     * Maximum number of entries to return (default 1000).
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * Epoch ms time from which to start the listing (inclusive if time exactly matches an entry). The failures are sorted by the time at which the syncs were originally triggered on the source bucket.
+     */
+    FirstSyncAttemptedBefore?: FirstSyncAttemptedBefore;
+    /**
+     * Encoding type to use for Key. Only valid value is url.
+     */
+    EncodingType?: EncodingType;
+  }
+  export interface ListBucketReplicationFailuresOutput {
+    ListReplicationFailureResult?: ListReplicationFailureResult;
+  }
   export interface PutBucketTaggingRequest {
     /**
      * The bucket name.
@@ -3664,6 +3711,75 @@ declare namespace S3 {
   export type ReplicationRules = ReplicationRule[];
   export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|string;
   export type RequestCharged = "requester"|string;
+  export interface ListReplicationFailureResult {
+    /**
+     * Name of bucket being listed.
+     */
+    Name: BucketName;
+    /**
+     * Value provided via the  first-sync-attempted-before  request param.
+     */
+    FirstSyncAttemptedBefore?: FirstSyncAttemptedBefore;
+    /**
+     * Value provided via the  max-keys  request param. Maximum accepted value is 1000.
+     */
+    MaxKeys?: MaxKeys;
+    /**
+     * Whether or not the results are truncated.
+     */
+    IsTruncated: IsTruncated;
+    /**
+     * Encoding type, if specified in the request.
+     */
+    EncodingType?: EncodingType;
+    /**
+     *  KeyCount is the number of keys returned with this request. KeyCount will always be less than or equal to the MaxKeys field. For example, if you ask for 50 keys, your result will include 50 keys or fewer.
+     */
+    KeyCount: KeyCount;
+    /**
+     * If ContinuationToken was sent with the request, it is included in the response. You can use the returned ContinuationToken for pagination of the list response. You can use this ContinuationToken for pagination of the list results.
+     */
+    ContinuationToken?: Token;
+    /**
+     *   NextContinuationToken is sent when isTruncated is true, Next continuation token. Present if this result was truncated.
+     */
+    NextContinuationToken?: NextToken;
+    /**
+     * Metadata about each object returned.
+     */
+    Contents: ContentsList;
+  }
+  export type ContentsList = ObjectSyncAttempted[];
+  export interface ObjectSyncAttempted {
+    /**
+     * Name of object that has failed sync.
+     */
+    Key: ObjectKey;
+    /**
+     * UUID of object version that has failed sync.
+     */
+    VersionId: ObjectVersionId;
+    /**
+     * The type of sync that has failed. This shall be either  content  ,  metadata   or  objectLock .
+     */
+    SyncType: SyncType;
+    /**
+     * Timestamp of last sync attempt from primary sync queue.
+     */
+    FirstSyncAttempted: FirstSyncAttempted;
+    /**
+     * Timestamp of most recent sync attempt from failure sync queue.
+     */
+    LastSyncAttempted: LastSyncAttempted;
+    /**
+     * Descriptive message regarding the cause of the most recent sync attempt failure.
+     */
+    SyncFailureCause?: SyncFailureCause;
+  }
+  export type SyncType = string;
+  export type FirstSyncAttempted = Date;
+  export type LastSyncAttempted = Date;
+  export type SyncFailureCause = string;
   export type ResponseCacheControl = string;
   export type ResponseContentDisposition = string;
   export type ResponseContentEncoding = string;
@@ -3753,6 +3869,7 @@ declare namespace S3 {
   export type Setting = boolean;
   export type Size = number;
   export type StartAfter = string;
+  export type FirstSyncAttemptedBefore = string;
   export type StorageClass = "ACCELERATED"|"STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export type Suffix = string;
   export interface Tag {

@@ -810,6 +810,37 @@
         "requestChecksumRequired": true
       }
     },
+    "PutBucketReplicationReattempt":{
+      "name":"PutBucketReplicationReattempt",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/{Bucket}?ibm-replication-reattempt"
+      },
+      "input":{
+        "shape":"PutBucketReplicationReattemptRequest"
+      },
+      "documentation":"<note> <p>Schedules reattempt of cold replication failures on the next reattempt cycle.</p>",
+      "httpChecksum": {
+        "requestChecksumRequired": true
+      }
+    },
+    "ListBucketReplicationFailures": {
+      "name": "ListBucketReplicationFailures",
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?ibm-replication-failures"
+      },
+      "input": {
+        "shape": "ListBucketReplicationFailuresRequest"
+      },
+      "output": {
+        "shape": "ListBucketReplicationFailuresOutput"
+      },
+      "documentation": "<note> <p>List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.</p>",
+      "httpChecksum": {
+        "requestChecksumRequired": true
+      }
+    },
     "PutBucketTagging": {
       "name": "PutBucketTagging",
       "http": {
@@ -6024,6 +6055,71 @@
       },
       "payload": "ReplicationConfiguration"
     },
+    "PutBucketReplicationReattemptRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "documentation":"<p>The bucket name.</p>",
+          "location":"uri",
+          "locationName":"Bucket"
+        }
+      }
+    },
+    "ListBucketReplicationFailuresRequest": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket":{
+          "shape":"BucketName",
+          "documentation":"<p>List long-term replication failures for a given bucket. Specifically, this lists failures from the per-bucket failure queue and does not list short-term failures from the global replication queue that are pending once-per-hour retries.</p>",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "ContinuationToken":{
+          "shape":"Token",
+          "documentation":"<p>Obfuscated string token for pagination. This is returned on incomplete listing responses.</p>",
+          "location":"querystring",
+          "locationName":"continuation-token"
+        },
+        "MaxKeys":{
+          "shape":"MaxKeys",
+          "documentation":"<p>Maximum number of entries to return (default 1000).</p>",
+          "location":"querystring",
+          "locationName":"max-keys"
+        },
+        "FirstSyncAttemptedBefore":{
+          "shape":"FirstSyncAttemptedBefore",
+          "documentation":"<p>Epoch ms time from which to start the listing (inclusive if time exactly matches an entry). The failures are sorted by the time at which the syncs were originally triggered on the source bucket.</p>",
+          "location":"querystring",
+          "locationName":"first-sync-attempted-before"
+        },
+        "EncodingType":{
+          "shape":"EncodingType",
+          "documentation":"<p>Encoding type to use for Key. Only valid value is url.</p>",
+          "location":"querystring",
+          "locationName":"encoding-type"
+        }
+      }
+    },
+    "ListBucketReplicationFailuresOutput":{
+      "type":"structure",
+      "members":{
+        "ListReplicationFailureResult":{
+          "shape":"ListReplicationFailureResult",
+          "locationName": "ListReplicationFailureResult",
+          "xmlNamespace": { 
+            "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+          }
+        }
+      },
+      "payload": "ListReplicationFailureResult"
+    },
     "PutBucketTaggingRequest": {
       "type": "structure",
       "required": [
@@ -6953,6 +7049,111 @@
         "requester"
       ]
     },
+    "ListReplicationFailureResult":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "IsTruncated",
+        "KeyCount",
+        "Contents"
+      ],
+      "members":{
+        "Name":{
+          "shape":"BucketName",
+          "documentation":"<p>Name of bucket being listed.</p>"
+        },
+        "FirstSyncAttemptedBefore":{
+          "shape":"FirstSyncAttemptedBefore",
+          "documentation":"<p>Value provided via the <code> first-sync-attempted-before </code> request param.</p>"
+        },
+        "MaxKeys":{
+          "shape":"MaxKeys",
+          "documentation":"<p>Value provided via the <code> max-keys </code> request param. Maximum accepted value is 1000.</p>"
+        },
+        "IsTruncated":{
+          "shape":"IsTruncated",
+          "documentation":"<p>Whether or not the results are truncated.</p>"
+        },
+        "EncodingType":{
+          "shape":"EncodingType",
+          "documentation":"<p>Encoding type, if specified in the request.</p>"
+        },
+        "KeyCount":{
+          "shape":"KeyCount",
+          "documentation":"<p> <code>KeyCount</code> is the number of keys returned with this request. <code>KeyCount</code> will always be less than or equal to the <code>MaxKeys</code> field. For example, if you ask for 50 keys, your result will include 50 keys or fewer.</p>"
+        },
+        "ContinuationToken":{
+          "shape":"Token",
+          "documentation":"<p>If <code>ContinuationToken</code> was sent with the request, it is included in the response. You can use the returned <code>ContinuationToken</code> for pagination of the list response. You can use this <code>ContinuationToken</code> for pagination of the list results.</p>"
+        },
+        "NextContinuationToken":{
+          "shape":"NextToken",
+          "documentation":"<p> <code> NextContinuationToken</code> is sent when <code>isTruncated</code> is true, Next continuation token. Present if this result was truncated.</p>"
+        },
+        "Contents":{
+          "shape":"ContentsList",
+          "documentation":"<p>Metadata about each object returned.</p>"
+        }
+      }
+    },
+    "ContentsList": {
+      "type": "list",
+      "member": {
+        "shape": "ObjectSyncAttempted",
+        "locationName": "Contents"
+      },
+      "flattened": true,
+      "documentation":"<p>Metadata about each object returned.</p>"
+    },
+    "ObjectSyncAttempted":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "VersionId",
+        "SyncType",
+        "FirstSyncAttempted",
+        "LastSyncAttempted"
+      ],
+      "members":{
+        "Key":{
+          "shape":"ObjectKey",
+          "documentation":"<p>Name of object that has failed sync.</p>"
+        },
+        "VersionId":{
+          "shape":"ObjectVersionId",
+          "documentation":"<p>UUID of object version that has failed sync.</p>"
+        },
+        "SyncType":{
+          "shape":"SyncType",
+          "documentation":"<p>The type of sync that has failed. This shall be either <code> content </code> , <code> metadata </code>  or <code> objectLock </code>.</p>"
+        },
+        "FirstSyncAttempted":{
+          "shape":"FirstSyncAttempted",
+          "documentation":"<p>Timestamp of last sync attempt from primary sync queue.</p>"
+        },
+        "LastSyncAttempted":{
+          "shape":"LastSyncAttempted",
+          "documentation":"<p>Timestamp of most recent sync attempt from failure sync queue.</p>"
+        },
+        "SyncFailureCause":{
+          "shape":"SyncFailureCause",
+          "documentation":"<p>Descriptive message regarding the cause of the most recent sync attempt failure.</p>"
+        }
+      },
+      "documentation":"<p>Container.</p>"
+    },
+    "SyncType": {
+      "type": "string"
+    },
+    "FirstSyncAttempted": {
+      "type": "timestamp"
+    },
+    "LastSyncAttempted": {
+      "type": "timestamp"
+    },
+    "SyncFailureCause": {
+      "type": "string"
+    },
     "ResponseCacheControl": {
       "type": "string"
     },
@@ -7177,6 +7378,9 @@
       "box": true
     },
     "StartAfter": {
+      "type": "string"
+    },
+    "FirstSyncAttemptedBefore":{
       "type": "string"
     },
     "StorageClass": {
