@@ -1373,7 +1373,8 @@
       }
     },
     "BypassGovernanceRetention": {
-      "type": "boolean"
+      "type": "boolean",
+      "box": true
     },
     "CORSConfiguration": {
       "type": "structure",
@@ -6736,7 +6737,7 @@
         },
         "BypassGovernanceRetention": {
           "shape": "BypassGovernanceRetention",
-          "documentation": "<p>Ignored by COS if present.</p>",
+          "documentation": "<p>Indicates whether this action should bypass Governance-mode restrictions.</p>",
           "location": "header",
           "locationName": "x-amz-bypass-governance-retention"
         },

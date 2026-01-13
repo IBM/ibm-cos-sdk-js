@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.15.0
+
+### Content
+
+#### Features
+
+* S3 Compatible Object Lock Governance Mode Support
+
+#### Defect Fixes
+
+* Update Dependencies
+
 ## 1.14.2
 
 ### Content

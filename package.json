@@ -1,16 +1,25 @@
 {
   "name": "ibm-cos-sdk",
   "description": "IBM SDK for JavaScript",
-  "version": "1.14.2",
+  "version": "1.15.0",
   "author": {
     "name": "IBM",
-    "email": "",
+    "email": "cossdk@us.ibm.com",
     "url": "https://www.ibm.com/cloud/"
   },
+  "maintainers": [
+    {
+      "name": "cos-sdk",
+      "email": "cossdk@us.ibm.com"
+    }
+  ],
   "homepage": "https://github.com/IBM/ibm-cos-sdk-js",
+  "publishConfig": {
+    "access": "public"
+  },
   "contributors": [],
   "devDependencies": {
-    "@cucumber/cucumber": "^11.2.0",
+    "@cucumber/cucumber": "^11.3.0",
     "@types/node": "^6.14.13",
     "browserify": "^16.5.2",
     "chai": "^3.5.0",
