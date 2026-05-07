@@ -15,10 +15,10 @@ GEM
   specs:
     kpeg (1.1.0)
     rake (13.0.6)
-    rdiscount (2.2.0.2)
+    rdiscount (2.2.7.4)
     redcarpet (3.5.1)
     samus (3.0.9)
-    yard (0.9.36)
+    yard (0.9.42)
     yard-sitemap (1.0.1)
 
 PLATFORMS
