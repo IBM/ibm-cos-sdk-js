@@ -128,7 +128,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/request.js</dd>
+    <dd>lib/request.js
+</dd>
   </dl>
   
 </div>
@@ -806,11 +807,11 @@ should throw an error if the request should not be sent.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Ensuring that a certain parameter is set before sending a request</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Ensuring that a certain parameter is set before sending a request</p>
+</div></h5>
       
       <pre class="example code"><code>var req = s3.putObject(params);
 req.on(&#39;validate&#39;, function() {
@@ -871,11 +872,11 @@ over HTTP.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Add a custom HTTP header to a request</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Add a custom HTTP header to a request</p>
+</div></h5>
       
       <pre class="example code"><code>var req = s3.putObject(params);
 req.on(&#39;build&#39;, function() {
@@ -1055,11 +1056,11 @@ Similarly, a request that is redirected will only redirect at most
 </ul>
 
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Adding a custom retry for a 404 response</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Adding a custom retry for a 404 response</p>
+</div></h5>
       
       <pre class="example code"><code>request.on(&#39;retry&#39;, function(response) {
   // this resource is not yet available, wait 10 seconds to get it again
@@ -1965,11 +1966,11 @@ sent by the service.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Aborting a request after sending</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Aborting a request after sending</p>
+</div></h5>
       
       <pre class="example code"><code>var params = {
   Bucket: &#39;bucket&#39;, Key: &#39;key&#39;,
@@ -2059,19 +2060,19 @@ that can be read from or piped into a writable stream.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Manually reading from a stream</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Manually reading from a stream</p>
+</div></h5>
       
       <pre class="example code"><code>request.createReadStream().on(&#39;data&#39;, function(data) {
   console.log(&quot;Got data:&quot;, data.toString());
 });</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Piping a request body into a file</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Piping a request body into a file</p>
+</div></h5>
       
       <pre class="example code"><code>var out = fs.createWriteStream(&#39;/path/to/outfile.jpg&#39;);
 s3.service.getObject(params).createReadStream().pipe(out);</code></pre>
@@ -2172,11 +2173,11 @@ retrieved, the callback is called with <code>null</code> data.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Iterating over multiple pages of objects in an S3 bucket</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Iterating over multiple pages of objects in an S3 bucket</p>
+</div></h5>
       
       <pre class="example code"><code>var pages = 1;
 s3.listObjects().eachPage(function(err, data) {
@@ -2186,8 +2187,8 @@ s3.listObjects().eachPage(function(err, data) {
 });</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Iterating over multiple pages with an asynchronous callback</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Iterating over multiple pages with an asynchronous callback</p>
+</div></h5>
       
       <pre class="example code"><code>s3.listObjects(params).eachPage(function(err, data, done) {
   doSomethingAsyncAndOrExpensive(function() {
@@ -2407,11 +2408,11 @@ callback will be called if the promise is rejected.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Sending a request using promises.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Sending a request using promises.</p>
+</div></h5>
       
       <pre class="example code"><code>var request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
 var result = request.promise();
@@ -2546,18 +2547,18 @@ result.then(function(data) { ... }, function(error) { ... });</code></pre>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Sending a request with a callback</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Sending a request with a callback</p>
+</div></h5>
       
       <pre class="example code"><code>request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
 request.send(function(err, data) { console.log(err, data); });</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Sending a request with no callback (using event handlers)</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Sending a request with no callback (using event handlers)</p>
+</div></h5>
       
       <pre class="example code"><code>request = s3.putObject({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;});
 request.on(&#39;complete&#39;, function(response) { ... }); // register a callback
@@ -2655,9 +2656,9 @@ the request. Set to <code>null</code> if a request error occurs.</p>
 
       <div id="footer">
   <div>
-    Generated on Mon Jan  5 10:22:38 2026 by
+    Generated on Fri May  8 05:32:54 2026 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-    0.9.36 (ruby-3.1.2).
+    0.9.42 (ruby-3.1.2).
   </div>
   <div id="awsdocs-legal-zone-copyright"></div>
 </div>

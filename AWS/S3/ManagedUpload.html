@@ -122,7 +122,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/s3/managed_upload.js</dd>
+    <dd>lib/s3/managed_upload.js
+</dd>
   </dl>
   
 </div>
@@ -412,19 +413,19 @@ by the managed upload object.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Creating a default uploader for a stream object</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Creating a default uploader for a stream object</p>
+</div></h5>
       
       <pre class="example code"><code>var upload = new AWS.S3.ManagedUpload({
   params: {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Body: stream}
 });</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Creating an uploader with concurrency of 1 and partSize of 10mb</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Creating an uploader with concurrency of 1 and partSize of 10mb</p>
+</div></h5>
       
       <pre class="example code"><code>var upload = new AWS.S3.ManagedUpload({
   partSize: 10 * 1024 * 1024, queueSize: 1,
@@ -432,8 +433,8 @@ by the managed upload object.</p>
 });</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Creating an uploader with tags</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Creating an uploader with tags</p>
+</div></h5>
       
       <pre class="example code"><code>var upload = new AWS.S3.ManagedUpload({
   params: {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Body: stream},
@@ -755,11 +756,11 @@ not yet uploaded will not be sent, and the multipart upload will be cleaned up.<
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Aborting an upload</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Aborting an upload</p>
+</div></h5>
       
       <pre class="example code"><code>var params = {
   Bucket: &#39;bucket&#39;, Key: &#39;key&#39;,
@@ -804,11 +805,11 @@ callback will be called if the promise is rejected.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Sending an upload request using promises.</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Sending an upload request using promises.</p>
+</div></h5>
       
       <pre class="example code"><code>var upload = s3.upload({Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Body: stream});
 var promise = upload.promise();
@@ -938,11 +939,11 @@ promise.then(function(data) { ... }, function(err) { ... });</code></pre>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Sending a managed upload object</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Sending a managed upload object</p>
+</div></h5>
       
       <pre class="example code"><code>var params = {Bucket: &#39;bucket&#39;, Key: &#39;key&#39;, Body: stream};
 var upload = new AWS.S3.ManagedUpload({params: params});
@@ -1022,9 +1023,9 @@ upload.send(function(err, data) {
 
       <div id="footer">
   <div>
-    Generated on Mon Jan  5 10:22:38 2026 by
+    Generated on Fri May  8 05:32:54 2026 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-    0.9.36 (ruby-3.1.2).
+    0.9.42 (ruby-3.1.2).
   </div>
   <div id="awsdocs-legal-zone-copyright"></div>
 </div>

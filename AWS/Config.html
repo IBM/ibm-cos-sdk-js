@@ -128,7 +128,8 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/config.js</dd>
+    <dd>lib/config.js
+</dd>
   </dl>
   
 </div>
@@ -1016,11 +1017,11 @@ region information, and some service specific settings.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Creating a new configuration object with credentials and region</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Creating a new configuration object with credentials and region</p>
+</div></h5>
       
       <pre class="example code"><code>var config = new AWS.Config({
   accessKeyId: &#39;AKID&#39;, secretAccessKey: &#39;SECRET&#39;, region: &#39;us-west-2&#39;
@@ -1932,11 +1933,11 @@ of the allowable enum values.</li>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Set the global region setting to us-west-2</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Set the global region setting to us-west-2</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.update({region: &#39;us-west-2&#39;});</code></pre>
     
@@ -2003,18 +2004,18 @@ option is supplied. The function is only called for retryable errors.</p></li>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Set the base retry delay for all services to 300 ms</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Set the base retry delay for all services to 300 ms</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.update({retryDelayOptions: {base: 300}});
 // Delays with maxRetries = 3: 300, 600, 1200</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Set a custom backoff function to provide delay values on retries</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Set a custom backoff function to provide delay values on retries</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount, err) {
   // returns delay in ms
@@ -2076,23 +2077,23 @@ option is supplied. The function is only called for retryable errors.</p></li>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Bind parameters to all newly created S3 objects</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Bind parameters to all newly created S3 objects</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.s3 = { params: { /* ... */ } };</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Override default endpoint URI for all newly created S3 objects</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Override default endpoint URI for all newly created S3 objects</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.s3 = { endpoint: &#39;https://{service}.{region}.amazonaws.com&#39; };</code></pre>
     
       
-        <p class="example_title"><div class='inline'><p>Use IPv6/IPv4 dualstack endpoint for all newly created S3 objects</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Use IPv6/IPv4 dualstack endpoint for all newly created S3 objects</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.s3 = { useDualstack: true };</code></pre>
     
@@ -2595,11 +2596,11 @@ directly to provide accurate credential data stored in the object.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Getting your access key</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Getting your access key</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.getCredentials(function(err) {
   if (err) console.log(err.stack); // credentials not loaded
@@ -2719,11 +2720,11 @@ directly to provide accurate token data stored in the object.</p>
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Getting your access token</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Getting your access token</p>
+</div></h5>
       
       <pre class="example code"><code>AWS.config.getToken(function(err) {
   if (err) console.log(err.stack); // token not loaded
@@ -2930,11 +2931,11 @@ If native Promises are not available, passing <code>null</code> will have no eff
 <div class="tags">
   
   <div class="examples">
-    <p class="tag_title">Examples:</p>
+    <h4 class="tag_title">Examples:</h4>
     
       
-        <p class="example_title"><div class='inline'><p>Update maxRetries property of a configuration object</p>
-</div></p>
+        <h5 class="example_title"><div class='inline'><p>Update maxRetries property of a configuration object</p>
+</div></h5>
       
       <pre class="example code"><code>config.update({maxRetries: 10});</code></pre>
     
@@ -3000,9 +3001,9 @@ the configuration object. Defaults to <code>false</code>.</p>
 
       <div id="footer">
   <div>
-    Generated on Mon Jan  5 10:22:38 2026 by
+    Generated on Fri May  8 05:32:54 2026 by
     <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-    0.9.36 (ruby-3.1.2).
+    0.9.42 (ruby-3.1.2).
   </div>
   <div id="awsdocs-legal-zone-copyright"></div>
 </div>
