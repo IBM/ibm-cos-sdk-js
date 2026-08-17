@@ -3,6 +3,16 @@
 This package allows Node.js developers to write software that interacts with [IBM
 Cloud Object Storage](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html). It is a fork of [the ``AWS SDK for Javascript`` library](https://github.com/aws/aws-sdk-js).
 
+## IBM COS SDK JS V1 End-of-Support on August 6, 2027
+
+The IBM COS SDK for JS V1 is in maintenance mode and will reach end-of-support on August 6, 2027. After end-of-support, the SDK will no longer receive updates or releases. Previously published releases will continue to be available via public package managers and the code will remain on GitHub.
+
+We recommend that you [migrate to the IBM COS SDK for JS V2](https://github.com/IBM/ibm-cos-sdk-js-v2/blob/main/MIGRATION_GUIDE_V2.md). The IBM COS SDK for JS V2 provides improved features, enhanced performance, and continued support from IBM. By adopting the latest version of the SDK, developers can ensure the security, compatibility, and stability of their solutions on IBM Cloud.
+
+## IBM COS SDK For JS V2
+
+The V2 version of IBM COS SDK JS is generally available. For more information see the [IBM COS SDK JS V2 documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-node-v2) or check the project [repository](https://github.com/IBM/ibm-cos-sdk-js-v2).
+
 ## Notice
 
 IBM has added a [Language Support Policy](#language-support-policy). Language versions will be deprecated on the published schedule without additional notice.

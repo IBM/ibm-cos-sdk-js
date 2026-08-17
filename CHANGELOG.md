@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.15.2
+
+### Content
+
+#### Defect Fixes
+
+* Deprecation notice for IBM COS SDK JS V1
+
 ## 1.15.1
 
 ### Content
